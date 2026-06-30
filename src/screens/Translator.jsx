@@ -142,18 +142,24 @@ export default function Translator({ country, onCountry }) {
       <p className="subtitle">Order bread with confidence — anywhere.</p>
 
       {/* country / target language picker */}
-      <div className="chips" style={{ marginBottom: 16, flexWrap: 'nowrap', overflowX: 'auto' }}>
+      <label
+        className="muted"
+        style={{ fontSize: 13, fontWeight: 700, display: 'block', marginBottom: 6 }}
+      >
+        Translate to
+      </label>
+      <select
+        className="input"
+        style={{ marginBottom: 16, fontWeight: 600 }}
+        value={country}
+        onChange={(e) => onCountry(e.target.value)}
+      >
         {COUNTRIES.map((c) => (
-          <button
-            key={c.code}
-            className={`chip ${c.code === country ? 'on' : ''}`}
-            style={{ flex: '0 0 auto' }}
-            onClick={() => onCountry(c.code)}
-          >
+          <option key={c.code} value={c.code}>
             {c.flag} {c.name}
-          </button>
+          </option>
         ))}
-      </div>
+      </select>
 
       {/* sub-tabs */}
       <div className="chips" style={{ marginBottom: 16 }}>
