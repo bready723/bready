@@ -1,0 +1,28 @@
+schema: spec-driven
+
+context: |
+  bready — 빵집 추천/기록 개인 PWA.
+  Tech stack: React 18, Vite 6, JavaScript (no TypeScript). Test: Vitest.
+  Data: localStorage (offline-first PWA); next step = Supabase + Vercel.
+  Structure: src/screens/* (UI), src/lib/* (logic + *.test.js).
+  Conventions: conventional commits; keep changes small; write/maintain tests so
+  coverage stays above the pre-commit threshold.
+
+# Project context (optional)
+# This is shown to AI when creating artifacts.
+# Add your tech stack, conventions, style guides, domain knowledge, etc.
+# Example:
+#   context: |
+#     Tech stack: TypeScript, React, Node.js
+#     We use conventional commits
+#     Domain: e-commerce platform
+
+# Per-artifact rules (optional)
+# Add custom rules for specific artifacts.
+# Example:
+#   rules:
+#     proposal:
+#       - Keep proposals under 500 words
+#       - Always include a "Non-goals" section
+#     tasks:
+#       - Break tasks into chunks of max 2 hours
