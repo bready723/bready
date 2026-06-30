@@ -17,20 +17,27 @@ export default function Translator({ country, onCountry }) {
   const [status, setStatus] = useState('idle') // idle | loading | done | error
   const [listening, setListening] = useState(false)
   const recRef = useRef(null)
+  const reqRef = useRef(0) // guards against out-of-order translation responses
 
   const voiceOk = !!speechRecognitionSupported()
 
   async function doTranslate(value) {
     const phrase = (value ?? text).trim()
     if (!phrase) return
+    const myReq = ++reqRef.current
     setStatus('loading')
     setOutput('')
     try {
-      const out = await translateText(phrase, dest.lang, inputLang)
+      // Auto-detect Korean vs English from the text itself, so a wrong toggle
+      // setting can't silently mistranslate (the input toggle now only drives
+      // which language the mic listens for).
+      const out = await translateText(phrase, dest.lang)
+      if (myReq !== reqRef.current) return // a newer request already superseded this
       setOutput(out)
       setStatus('done')
       speak(out, dest.bcp)
     } catch (e) {
+      if (myReq !== reqRef.current) return
       setStatus('error')
     }
   }

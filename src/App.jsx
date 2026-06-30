@@ -40,12 +40,16 @@ export default function App() {
 
   // Finished logging a visit -> adopt the new ranked list and clear it off the
   // want-to-try list if it was there.
-  function handleLogged({ bakeries, loggedName }) {
+  function handleLogged({ bakeries, loggedName, wishlistId }) {
     setState((s) => ({
       ...s,
       bakeries,
+      // Clear the wishlist entry by its id (survives renaming the prefilled
+      // name) and also by name match for manually-typed logs.
       wantToTry: s.wantToTry.filter(
-        (w) => w.name.trim().toLowerCase() !== loggedName.trim().toLowerCase(),
+        (w) =>
+          w.id !== wishlistId &&
+          w.name.trim().toLowerCase() !== loggedName.trim().toLowerCase(),
       ),
     }))
     setLogging(false)

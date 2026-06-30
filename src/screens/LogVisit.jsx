@@ -25,8 +25,12 @@ export default function LogVisit({ bakeries, prefill, onComplete, onCancel }) {
     setBreads((b) => (b.includes(key) ? b.filter((x) => x !== key) : [...b, key]))
 
   function onInfoNext() {
+    // Treat it as a repeat visit only when BOTH name and area match — otherwise
+    // two different "Boulangerie"s (Paris vs Lyon) would wrongly merge.
     const match = bakeries.find(
-      (b) => b.name.trim().toLowerCase() === name.trim().toLowerCase(),
+      (b) =>
+        b.name.trim().toLowerCase() === name.trim().toLowerCase() &&
+        (b.area || '').trim().toLowerCase() === area.trim().toLowerCase(),
     )
     if (match) {
       setExisting(match)
@@ -79,7 +83,7 @@ export default function LogVisit({ bakeries, prefill, onComplete, onCancel }) {
           ? { ...b, breads: merged, lastVisit: visit.date, visits: [...(b.visits || []), visit] }
           : b,
       )
-      onComplete({ bakeries: list, loggedName: name })
+      onComplete({ bakeries: list, loggedName: name, wishlistId: prefill?.id || null })
       return
     }
     const list = result.list.map((b) =>
@@ -87,7 +91,7 @@ export default function LogVisit({ bakeries, prefill, onComplete, onCancel }) {
         ? { ...b, breads, lastVisit: visit.date, visits: [visit], createdAt: visit.date }
         : b,
     )
-    onComplete({ bakeries: list, loggedName: name })
+    onComplete({ bakeries: list, loggedName: name, wishlistId: prefill?.id || null })
   }
 
   return (

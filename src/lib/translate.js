@@ -1,5 +1,22 @@
 // Browser-native speech + a free translation API. No keys, no cost.
 
+// Voices load asynchronously — getVoices() is often empty on the first call,
+// so we warm a cache up front and refresh it when the browser fires the event.
+// Without this, the very first phrase plays in the default (usually English)
+// voice instead of the target language.
+let _voices = []
+function loadVoices() {
+  try {
+    _voices = window.speechSynthesis.getVoices() || []
+  } catch (e) {
+    _voices = []
+  }
+}
+if (typeof window !== 'undefined' && window.speechSynthesis) {
+  loadVoices()
+  window.speechSynthesis.onvoiceschanged = loadVoices
+}
+
 // --- Play a phrase aloud (well supported, even on iPhone Safari) ---
 export function speak(text, bcpLang) {
   try {
@@ -10,7 +27,7 @@ export function speak(text, bcpLang) {
     u.lang = bcpLang
     u.rate = 0.92
     // Prefer a voice that matches the language if one is installed.
-    const voices = synth.getVoices()
+    const voices = _voices.length ? _voices : synth.getVoices()
     const match = voices.find((v) => v.lang && v.lang.toLowerCase().startsWith(bcpLang.slice(0, 2)))
     if (match) u.voice = match
     synth.speak(u)
@@ -38,8 +55,15 @@ export async function translateText(text, targetLang, sourceLang) {
   const res = await fetch(url)
   if (!res.ok) throw new Error('translation service unavailable')
   const data = await res.json()
+  // MyMemory returns HTTP 200 even for quota/error cases, signalling the real
+  // outcome in responseStatus and stuffing a warning into translatedText. Guard
+  // against speaking "MYMEMORY WARNING: YOU USED ALL FREE TRANSLATIONS…" aloud.
+  const status = Number(data?.responseStatus)
   const out = data?.responseData?.translatedText
-  if (!out) throw new Error('no translation returned')
+  if (status && status !== 200) throw new Error('translation unavailable')
+  if (!out || /MYMEMORY WARNING|INVALID|PLEASE SELECT/i.test(out)) {
+    throw new Error('translation unavailable')
+  }
   return out
 }
 
