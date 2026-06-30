@@ -1,0 +1,70 @@
+// Countries bready supports out of the box (sets the target language).
+export const COUNTRIES = [
+  { code: 'FR', flag: '🇫🇷', name: 'France', lang: 'fr', bcp: 'fr-FR' },
+  { code: 'JP', flag: '🇯🇵', name: 'Japan', lang: 'ja', bcp: 'ja-JP' },
+  { code: 'IT', flag: '🇮🇹', name: 'Italy', lang: 'it', bcp: 'it-IT' },
+  { code: 'ES', flag: '🇪🇸', name: 'Spain', lang: 'es', bcp: 'es-ES' },
+  { code: 'DE', flag: '🇩🇪', name: 'Germany', lang: 'de', bcp: 'de-DE' },
+  { code: 'CN', flag: '🇨🇳', name: 'China', lang: 'zh', bcp: 'zh-CN' },
+  { code: 'KR', flag: '🇰🇷', name: 'Korea', lang: 'ko', bcp: 'ko-KR' },
+  { code: 'US', flag: '🇺🇸', name: 'USA', lang: 'en', bcp: 'en-US' },
+]
+
+export const countryByCode = (code) => COUNTRIES.find((c) => c.code === code) || COUNTRIES[0]
+
+// Curated bakery phrases — work offline, no API needed. `ko` is shown as Sara's
+// reference; `t[lang]` is what she shows/plays at the counter.
+export const PHRASES = [
+  {
+    en: 'Hello!',
+    ko: '안녕하세요!',
+    t: { fr: 'Bonjour !', ja: 'こんにちは！', it: 'Buongiorno!', es: '¡Hola!', de: 'Hallo!', zh: '你好！', ko: '안녕하세요!', en: 'Hello!' },
+  },
+  {
+    en: 'Do you have fresh croissants?',
+    ko: '갓 구운 크루아상 있나요?',
+    t: { fr: 'Avez-vous des croissants frais ?', ja: '焼きたてのクロワッサンはありますか？', it: 'Avete dei cornetti freschi?', es: '¿Tienen cruasanes frescos?', de: 'Haben Sie frische Croissants?', zh: '有新鲜的可颂吗？', ko: '갓 구운 크루아상 있나요?', en: 'Do you have fresh croissants?' },
+  },
+  {
+    en: 'One sourdough loaf, please.',
+    ko: '사워도우 한 덩어리 주세요.',
+    t: { fr: 'Un pain au levain, s’il vous plaît.', ja: 'サワードウのパンを一つください。', it: 'Una pagnotta a lievito madre, per favore.', es: 'Una hogaza de masa madre, por favor.', de: 'Ein Sauerteigbrot, bitte.', zh: '请给我一个酸面包。', ko: '사워도우 한 덩어리 주세요.', en: 'One sourdough loaf, please.' },
+  },
+  {
+    en: 'What time is the next bake?',
+    ko: '다음 빵은 몇 시에 나오나요?',
+    t: { fr: 'À quelle heure est la prochaine fournée ?', ja: '次に焼き上がるのは何時ですか？', it: 'A che ora è la prossima infornata?', es: '¿A qué hora es la próxima horneada?', de: 'Wann kommt die nächste Charge aus dem Ofen?', zh: '下一炉几点出炉？', ko: '다음 빵은 몇 시에 나오나요?', en: 'What time is the next bake?' },
+  },
+  {
+    en: 'What do you recommend?',
+    ko: '무엇을 추천하시나요?',
+    t: { fr: 'Que recommandez-vous ?', ja: 'おすすめは何ですか？', it: 'Cosa mi consiglia?', es: '¿Qué me recomienda?', de: 'Was empfehlen Sie?', zh: '你推荐什么？', ko: '무엇을 추천하시나요?', en: 'What do you recommend?' },
+  },
+  {
+    en: 'Is this baked fresh today?',
+    ko: '오늘 구운 건가요?',
+    t: { fr: 'Est-ce que c’est cuit du jour ?', ja: 'これは今日焼いたものですか？', it: 'È sfornato oggi?', es: '¿Esto es recién horneado hoy?', de: 'Ist das heute frisch gebacken?', zh: '这是今天新鲜烤的吗？', ko: '오늘 구운 건가요?', en: 'Is this baked fresh today?' },
+  },
+  {
+    en: 'How much is this?',
+    ko: '이거 얼마예요?',
+    t: { fr: 'Combien ça coûte ?', ja: 'これはいくらですか？', it: 'Quanto costa?', es: '¿Cuánto cuesta?', de: 'Was kostet das?', zh: '这个多少钱？', ko: '이거 얼마예요?', en: 'How much is this?' },
+  },
+  {
+    en: 'Thank you, it looks delicious!',
+    ko: '감사합니다, 맛있어 보여요!',
+    t: { fr: 'Merci, ça a l’air délicieux !', ja: 'ありがとう、美味しそう！', it: 'Grazie, sembra delizioso!', es: '¡Gracias, se ve delicioso!', de: 'Danke, das sieht köstlich aus!', zh: '谢谢，看起来很好吃！', ko: '감사합니다, 맛있어 보여요!', en: 'Thank you, it looks delicious!' },
+  },
+]
+
+// Bread/baking words across languages — a quick reference glossary.
+export const GLOSSARY = [
+  { en: 'Croissant', emoji: '🥐', t: { fr: 'Croissant', ja: 'クロワッサン', it: 'Cornetto', es: 'Cruasán', de: 'Croissant', zh: '可颂', ko: '크루아상', en: 'Croissant' } },
+  { en: 'Sourdough', emoji: '🥖', t: { fr: 'Levain', ja: 'サワードウ', it: 'Lievito madre', es: 'Masa madre', de: 'Sauerteig', zh: '酸面团', ko: '사워도우', en: 'Sourdough' } },
+  { en: 'Bagel', emoji: '🥯', t: { fr: 'Bagel', ja: 'ベーグル', it: 'Bagel', es: 'Bagel', de: 'Bagel', zh: '贝果', ko: '베이글', en: 'Bagel' } },
+  { en: 'Bread', emoji: '🍞', t: { fr: 'Pain', ja: 'パン', it: 'Pane', es: 'Pan', de: 'Brot', zh: '面包', ko: '빵', en: 'Bread' } },
+  { en: 'Pastry', emoji: '🧁', t: { fr: 'Viennoiserie', ja: 'ペストリー', it: 'Pasticceria', es: 'Bollería', de: 'Gebäck', zh: '糕点', ko: '페이스트리', en: 'Pastry' } },
+  { en: 'Baguette', emoji: '🥖', t: { fr: 'Baguette', ja: 'バゲット', it: 'Baguette', es: 'Baguette', de: 'Baguette', zh: '法棍', ko: '바게트', en: 'Baguette' } },
+  { en: 'Fresh', emoji: '✨', t: { fr: 'Frais', ja: '焼きたて', it: 'Fresco', es: 'Fresco', de: 'Frisch', zh: '新鲜', ko: '신선한', en: 'Fresh' } },
+  { en: 'Gluten-free', emoji: '🌾', t: { fr: 'Sans gluten', ja: 'グルテンフリー', it: 'Senza glutine', es: 'Sin gluten', de: 'Glutenfrei', zh: '无麸质', ko: '글루텐 프리', en: 'Gluten-free' } },
+]
