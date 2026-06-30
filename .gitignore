@@ -4,6 +4,7 @@ dist-ssr
 *.local
 .DS_Store
 .vite
+coverage
 
 # secrets / env (e.g. Supabase keys) — never commit
 .env
