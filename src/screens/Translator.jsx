@@ -1,12 +1,22 @@
-import { useRef, useState } from 'react'
-import { COUNTRIES, countryByCode, PHRASES, GLOSSARY } from '../lib/phrasebook.js'
+import { useEffect, useRef, useState } from 'react'
+import { COUNTRIES, countryByCode, CURATED_LANGS, PHRASES, GLOSSARY } from '../lib/phrasebook.js'
 import {
   speak,
   translateText,
   detectSource,
   speechRecognitionSupported,
   startListening,
+  micErrorMessage,
 } from '../lib/translate.js'
+
+const AUTO_KEY = 'bready.autoT.v1'
+const loadAuto = () => {
+  try {
+    return JSON.parse(localStorage.getItem(AUTO_KEY)) || {}
+  } catch (e) {
+    return {}
+  }
+}
 
 export default function Translator({ country, onCountry }) {
   const dest = countryByCode(country)
@@ -16,8 +26,49 @@ export default function Translator({ country, onCountry }) {
   const [output, setOutput] = useState('')
   const [status, setStatus] = useState('idle') // idle | loading | done | error
   const [listening, setListening] = useState(false)
+  const [auto, setAuto] = useState(loadAuto) // cache of auto-translated phrasebooks by lang
+  const [autoLoading, setAutoLoading] = useState(false)
+  const [micMsg, setMicMsg] = useState('') // feedback while/after using the mic
   const recRef = useRef(null)
+  const micTimer = useRef(null)
   const reqRef = useRef(0) // guards against out-of-order translation responses
+
+  const isCurated = CURATED_LANGS.has(dest.lang)
+
+  // For non-curated languages, translate the phrasebook + glossary once and
+  // cache it (localStorage), so it's instant next time and works offline after.
+  useEffect(() => {
+    if (isCurated || auto[dest.lang]) return
+    let cancelled = false
+    setAutoLoading(true)
+    const tr = (s) => translateText(s, dest.lang, 'en').catch(() => s)
+    Promise.all([
+      Promise.all(PHRASES.map((p) => tr(p.en))),
+      Promise.all(GLOSSARY.map((w) => tr(w.en))),
+    ])
+      .then(([phrases, glossary]) => {
+        if (cancelled) return
+        setAuto((prev) => {
+          const next = { ...prev, [dest.lang]: { phrases, glossary } }
+          try {
+            localStorage.setItem(AUTO_KEY, JSON.stringify(next))
+          } catch (e) {
+            /* quota - keep it in memory only */
+          }
+          return next
+        })
+      })
+      .finally(() => !cancelled && setAutoLoading(false))
+    return () => {
+      cancelled = true
+    }
+  }, [dest.lang, isCurated]) // eslint-disable-line react-hooks/exhaustive-deps
+
+  // Resolve a phrase/glossary entry's text in the current target language.
+  const phraseText = (p, i) =>
+    isCurated ? p.t[dest.lang] || p.en : auto[dest.lang]?.phrases[i] ?? p.en
+  const wordText = (w, i) =>
+    isCurated ? w.t[dest.lang] || w.en : auto[dest.lang]?.glossary[i] ?? w.en
 
   const voiceOk = !!speechRecognitionSupported()
 
@@ -42,25 +93,47 @@ export default function Translator({ country, onCountry }) {
     }
   }
 
+  function stopMicTimer() {
+    if (micTimer.current) {
+      clearTimeout(micTimer.current)
+      micTimer.current = null
+    }
+  }
+
   function toggleMic() {
     if (listening) {
       recRef.current && recRef.current.stop()
+      stopMicTimer()
       setListening(false)
       return
     }
+    setMicMsg('🔴 Listening… speak now')
     setListening(true)
     recRef.current = startListening({
       lang: inputLang === 'ko' ? 'ko-KR' : 'en-US',
       onResult: (said) => {
+        stopMicTimer()
+        setListening(false)
+        setMicMsg('')
         setText(said)
         doTranslate(said)
       },
-      onError: () => {
+      onError: (e) => {
+        stopMicTimer()
         setListening(false)
-        setStatus('idle')
+        setMicMsg(micErrorMessage(e))
       },
-      onEnd: () => setListening(false),
+      onEnd: (heard) => {
+        stopMicTimer()
+        setListening(false)
+        if (!heard) setMicMsg((m) => m || "Didn't catch anything — try again, or type below.")
+      },
     })
+    // Safety net: some browsers leave recognition open silently. Stop after 8s.
+    stopMicTimer()
+    micTimer.current = setTimeout(() => {
+      recRef.current && recRef.current.stop()
+    }, 8000)
   }
 
   return (
@@ -138,6 +211,18 @@ export default function Translator({ country, onCountry }) {
               🎤 Voice input isn’t available in this browser — typing works perfectly.
             </p>
           )}
+          {voiceOk && micMsg && (
+            <p
+              style={{
+                fontSize: 13,
+                marginTop: 8,
+                color: listening ? '#e0218a' : 'var(--ink-soft)',
+                fontWeight: listening ? 700 : 400,
+              }}
+            >
+              {micMsg}
+            </p>
+          )}
 
           {status === 'done' && output && (
             <div className="phrase" style={{ marginTop: 16 }}>
@@ -161,11 +246,22 @@ export default function Translator({ country, onCountry }) {
         </div>
       )}
 
+      {/* auto-translation status for non-curated languages */}
+      {!isCurated && sub !== 'translate' && (
+        <p className="muted" style={{ fontSize: 12, marginTop: -6, marginBottom: 12 }}>
+          {autoLoading
+            ? `Auto-translating to ${dest.name}…`
+            : auto[dest.lang]
+              ? `✨ Auto-translated to ${dest.name} (saved offline)`
+              : `Showing English — connect to translate to ${dest.name}.`}
+        </p>
+      )}
+
       {/* ---------- PHRASEBOOK ---------- */}
       {sub === 'phrases' && (
         <div>
           {PHRASES.map((p, i) => {
-            const dst = p.t[dest.lang] || p.en
+            const dst = phraseText(p, i)
             return (
               <div key={i} className="phrase">
                 <div className="txt">
@@ -187,7 +283,7 @@ export default function Translator({ country, onCountry }) {
       {sub === 'words' && (
         <div>
           {GLOSSARY.map((w, i) => {
-            const dst = w.t[dest.lang] || w.en
+            const dst = wordText(w, i)
             return (
               <div key={i} className="phrase">
                 <div className="txt">

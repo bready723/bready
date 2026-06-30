@@ -73,6 +73,27 @@ export function speechRecognitionSupported() {
     (window.SpeechRecognition || window.webkitSpeechRecognition)
 }
 
+// Human-readable reason for a recognition failure, so the UI can guide the user
+// instead of silently doing nothing (the #1 "the mic doesn't work" complaint).
+export function micErrorMessage(err) {
+  const code = (err && (err.error || err.message)) || ''
+  switch (code) {
+    case 'not-allowed':
+    case 'service-not-allowed':
+      return 'Microphone is blocked. Allow mic access for this site in your browser settings, then try again.'
+    case 'no-speech':
+      return "Didn't catch anything — try again, or just type it below."
+    case 'audio-capture':
+      return 'No microphone found on this device.'
+    case 'network':
+      return 'Voice needs an internet connection. Type it instead.'
+    case 'voice not supported':
+      return "This browser's voice input is unavailable — typing always works."
+    default:
+      return "Voice didn't work here — no problem, typing always works."
+  }
+}
+
 export function startListening({ lang = 'en-US', onResult, onError, onEnd }) {
   const Ctor = window.SpeechRecognition || window.webkitSpeechRecognition
   if (!Ctor) {
@@ -81,14 +102,21 @@ export function startListening({ lang = 'en-US', onResult, onError, onEnd }) {
   }
   const rec = new Ctor()
   rec.lang = lang
+  rec.continuous = false
   rec.interimResults = false
   rec.maxAlternatives = 1
+  let got = false
   rec.onresult = (e) => {
+    got = true
     const said = e.results?.[0]?.[0]?.transcript || ''
     onResult && onResult(said)
   }
+  rec.onnomatch = () => onError && onError(new Error('no-speech'))
   rec.onerror = (e) => onError && onError(e)
-  rec.onend = () => onEnd && onEnd()
+  rec.onend = () => {
+    if (!got) onEnd && onEnd(false) // ended without hearing anything
+    else onEnd && onEnd(true)
+  }
   try {
     rec.start()
   } catch (e) {

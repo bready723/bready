@@ -1,4 +1,6 @@
-// Countries bready supports out of the box (sets the target language).
+// Countries bready supports (sets the target language). The first 8 have a
+// hand-curated offline phrasebook; the rest auto-translate on first use and
+// cache, so every language still works.
 export const COUNTRIES = [
   { code: 'FR', flag: '🇫🇷', name: 'France', lang: 'fr', bcp: 'fr-FR' },
   { code: 'JP', flag: '🇯🇵', name: 'Japan', lang: 'ja', bcp: 'ja-JP' },
@@ -8,7 +10,31 @@ export const COUNTRIES = [
   { code: 'CN', flag: '🇨🇳', name: 'China', lang: 'zh', bcp: 'zh-CN' },
   { code: 'KR', flag: '🇰🇷', name: 'Korea', lang: 'ko', bcp: 'ko-KR' },
   { code: 'US', flag: '🇺🇸', name: 'USA', lang: 'en', bcp: 'en-US' },
+  // --- auto-translated languages ---
+  { code: 'BR', flag: '🇧🇷', name: 'Brazil', lang: 'pt', bcp: 'pt-BR' },
+  { code: 'NL', flag: '🇳🇱', name: 'Netherlands', lang: 'nl', bcp: 'nl-NL' },
+  { code: 'TR', flag: '🇹🇷', name: 'Türkiye', lang: 'tr', bcp: 'tr-TR' },
+  { code: 'VN', flag: '🇻🇳', name: 'Vietnam', lang: 'vi', bcp: 'vi-VN' },
+  { code: 'TH', flag: '🇹🇭', name: 'Thailand', lang: 'th', bcp: 'th-TH' },
+  { code: 'SA', flag: '🇸🇦', name: 'Arabic', lang: 'ar', bcp: 'ar-SA' },
+  { code: 'IN', flag: '🇮🇳', name: 'India', lang: 'hi', bcp: 'hi-IN' },
+  { code: 'PL', flag: '🇵🇱', name: 'Poland', lang: 'pl', bcp: 'pl-PL' },
+  { code: 'SE', flag: '🇸🇪', name: 'Sweden', lang: 'sv', bcp: 'sv-SE' },
+  { code: 'GR', flag: '🇬🇷', name: 'Greece', lang: 'el', bcp: 'el-GR' },
+  { code: 'RU', flag: '🇷🇺', name: 'Russia', lang: 'ru', bcp: 'ru-RU' },
+  { code: 'ID', flag: '🇮🇩', name: 'Indonesia', lang: 'id', bcp: 'id-ID' },
+  { code: 'DK', flag: '🇩🇰', name: 'Denmark', lang: 'da', bcp: 'da-DK' },
+  { code: 'NO', flag: '🇳🇴', name: 'Norway', lang: 'no', bcp: 'nb-NO' },
+  { code: 'FI', flag: '🇫🇮', name: 'Finland', lang: 'fi', bcp: 'fi-FI' },
+  { code: 'CZ', flag: '🇨🇿', name: 'Czechia', lang: 'cs', bcp: 'cs-CZ' },
+  { code: 'UA', flag: '🇺🇦', name: 'Ukraine', lang: 'uk', bcp: 'uk-UA' },
+  { code: 'PH', flag: '🇵🇭', name: 'Philippines', lang: 'tl', bcp: 'tl-PH' },
+  { code: 'MY', flag: '🇲🇾', name: 'Malaysia', lang: 'ms', bcp: 'ms-MY' },
+  { code: 'PT', flag: '🇵🇹', name: 'Portugal', lang: 'pt', bcp: 'pt-PT' },
 ]
+
+// Languages with a hand-curated offline phrasebook (the rest auto-translate).
+export const CURATED_LANGS = new Set(['fr', 'ja', 'it', 'es', 'de', 'zh', 'ko', 'en'])
 
 export const countryByCode = (code) => COUNTRIES.find((c) => c.code === code) || COUNTRIES[0]
 

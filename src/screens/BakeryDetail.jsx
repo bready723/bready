@@ -1,5 +1,6 @@
 import { TIERS } from '../lib/ranking.js'
 import { breadEmoji, breadLabel } from '../lib/breads.js'
+import { googleMapsUrl } from '../lib/maps.js'
 
 export default function BakeryDetail({ bakery, onClose }) {
   const tier = TIERS[bakery.tier]
@@ -26,6 +27,12 @@ export default function BakeryDetail({ bakery, onClose }) {
             {tier.emoji} <strong>{tier.label}</strong>
           </p>
         )}
+
+        <a href={googleMapsUrl(bakery)} target="_blank" rel="noopener noreferrer">
+          <button className="btn ghost" style={{ marginTop: 4 }}>
+            📍 View on Google Maps
+          </button>
+        </a>
 
         <div className="label">Breads you've had</div>
         <div className="chips">

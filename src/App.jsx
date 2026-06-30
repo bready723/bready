@@ -38,6 +38,13 @@ export default function App() {
 
   const update = (patch) => setState((s) => ({ ...s, ...patch }))
 
+  // Merge a patch into one bakery (used to cache geocoded coordinates).
+  const updateBakery = (id, patch) =>
+    setState((s) => ({
+      ...s,
+      bakeries: s.bakeries.map((b) => (b.id === id ? { ...b, ...patch } : b)),
+    }))
+
   // Finished logging a visit -> adopt the new ranked list and clear it off the
   // want-to-try list if it was there.
   function handleLogged({ bakeries, loggedName, wishlistId }) {
@@ -74,7 +81,12 @@ export default function App() {
       </header>
 
       {tab === 'rankings' && (
-        <Rankings bakeries={state.bakeries} onOpen={(id) => setDetailId(id)} onLog={() => openLog()} />
+        <Rankings
+          bakeries={state.bakeries}
+          onOpen={(id) => setDetailId(id)}
+          onLog={() => openLog()}
+          onUpdateBakery={updateBakery}
+        />
       )}
       {tab === 'want' && (
         <WantToTry
