@@ -1,0 +1,4 @@
+# bready commit gate — blocks the commit if tests fail OR coverage drops
+# below the threshold in vite.config.js (test.coverage.thresholds).
+# "Trust the gate": let this decide, don't eyeball test output.
+npm run test:coverage

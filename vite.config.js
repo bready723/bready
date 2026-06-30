@@ -30,5 +30,19 @@ export default defineConfig({
   test: {
     environment: 'node',
     include: ['src/**/*.test.js'],
+    coverage: {
+      provider: 'v8',
+      include: ['src/lib/**'],
+      // Commit gate: enforce 70% only where tests exist today; add more globs as
+      // coverage grows. A commit that drops a tracked file below 70% is blocked.
+      thresholds: {
+        'src/lib/ranking.js': {
+          statements: 70,
+          branches: 70,
+          functions: 70,
+          lines: 70,
+        },
+      },
+    },
   },
 })
