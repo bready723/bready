@@ -38,3 +38,6 @@ Engine + tests live in `src/lib/ranking.js`.
 - Supabase cloud save + login (so data is backed up and synced)
 - Deploy to Vercel for a live URL
 - Map view, friends/social feed, public "best of" pages
+
+## AI-dev workflow (trial)
+This repo uses `/intake`, OpenSpec (`openspec/`), and a husky pre-commit coverage gate.
