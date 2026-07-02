@@ -3,28 +3,10 @@ import { loadState, saveState } from './lib/storage.js'
 import Rankings from './screens/Rankings.jsx'
 import WantToTry from './screens/WantToTry.jsx'
 import Translator from './screens/Translator.jsx'
+import Search from './screens/Search.jsx'
 import LogVisit from './screens/LogVisit.jsx'
 import BakeryDetail from './screens/BakeryDetail.jsx'
-import { IconRank, IconPlus, IconBookmark, IconGlobe } from './components/Icons.jsx'
-
-export function Croissant({ size = 26 }) {
-  return (
-    <svg viewBox="0 0 100 100" width={size} height={size} className="croissant" aria-hidden="true">
-      <defs>
-        <linearGradient id="bgrad" x1="0" y1="0" x2="1" y2="0.4">
-          <stop offset="0" stopColor="#1aa7e8" />
-          <stop offset="0.5" stopColor="#5b3fd6" />
-          <stop offset="1" stopColor="#e0218a" />
-        </linearGradient>
-      </defs>
-      <g fill="url(#bgrad)" stroke="#2a1a4a" strokeWidth="1.2" strokeLinejoin="round">
-        <path d="M14 62 C16 46 28 35 41 32 L45 50 L30 60 Z" />
-        <path d="M40 31 C46 30 54 30 60 31 L58 50 L42 50 Z" />
-        <path d="M61 32 C74 36 84 47 86 62 L70 60 L56 50 Z" />
-      </g>
-    </svg>
-  )
-}
+import { IconRank, IconPlus, IconBookmark, IconGlobe, IconSearch } from './components/Icons.jsx'
 
 export default function App() {
   const [state, setState] = useState(loadState)
@@ -39,7 +21,7 @@ export default function App() {
 
   const update = (patch) => setState((s) => ({ ...s, ...patch }))
 
-  // Merge a patch into one bakery (used to cache geocoded coordinates).
+  // Merge a patch into one bakery (used to cache geocoded coordinates + photos).
   const updateBakery = (id, patch) =>
     setState((s) => ({
       ...s,
@@ -52,8 +34,6 @@ export default function App() {
     setState((s) => ({
       ...s,
       bakeries,
-      // Clear the wishlist entry by its id (survives renaming the prefilled
-      // name) and also by name match for manually-typed logs.
       wantToTry: s.wantToTry.filter(
         (w) =>
           w.id !== wishlistId &&
@@ -74,7 +54,6 @@ export default function App() {
   return (
     <div className="app">
       <header className="appbar">
-        <Croissant size={26} />
         <span className="wordmark">bready</span>
         {tab === 'rankings' && state.bakeries.length > 0 && (
           <span className="sub">{state.bakeries.length} ranked</span>
@@ -99,25 +78,37 @@ export default function App() {
       {tab === 'translate' && (
         <Translator country={state.country} onCountry={(country) => update({ country })} />
       )}
+      {tab === 'search' && (
+        <Search
+          bakeries={state.bakeries}
+          wantToTry={state.wantToTry}
+          onOpen={(id) => setDetailId(id)}
+          onWent={(entry) => openLog(entry)}
+        />
+      )}
 
       <nav className="tabbar">
         <button className={tab === 'rankings' ? 'active' : ''} onClick={() => setTab('rankings')}>
           <IconRank />
           Rankings
         </button>
-        <button className="fab" onClick={() => openLog()}>
-          <span className="fab-circle">
-            <IconPlus width={26} height={26} />
-          </span>
-          Log
-        </button>
         <button className={tab === 'want' ? 'active' : ''} onClick={() => setTab('want')}>
           <IconBookmark />
           Want to try
         </button>
+        <button className="fab" onClick={() => openLog()}>
+          <span className="fab-circle">
+            <IconPlus width={17} height={17} />
+          </span>
+          Add
+        </button>
         <button className={tab === 'translate' ? 'active' : ''} onClick={() => setTab('translate')}>
           <IconGlobe />
           Translate
+        </button>
+        <button className={tab === 'search' ? 'active' : ''} onClick={() => setTab('search')}>
+          <IconSearch />
+          Search
         </button>
       </nav>
 
@@ -134,7 +125,11 @@ export default function App() {
       )}
 
       {detailBakery && (
-        <BakeryDetail bakery={detailBakery} onClose={() => setDetailId(null)} />
+        <BakeryDetail
+          bakery={detailBakery}
+          onClose={() => setDetailId(null)}
+          onUpdateBakery={updateBakery}
+        />
       )}
     </div>
   )

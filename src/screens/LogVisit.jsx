@@ -3,6 +3,13 @@ import { BREADS } from '../lib/breads.js'
 import { uid, todayISO } from '../lib/storage.js'
 import { TIERS, TIER_ORDER, createInsertion, insertAtTier, tierItems } from '../lib/ranking.js'
 
+// Short subtitles for each gut tier (the score band, in plain terms).
+const TIER_DESC = {
+  loved: '8.0 and up',
+  fine: '5.0 – 7.9',
+  disliked: 'Below 5.0',
+}
+
 // Multi-step log flow: info -> tier -> compare -> result.
 // Re-logging a place you've already ranked just appends a visit (no re-rank).
 export default function LogVisit({ bakeries, prefill, onComplete, onCancel }) {
@@ -25,8 +32,8 @@ export default function LogVisit({ bakeries, prefill, onComplete, onCancel }) {
     setBreads((b) => (b.includes(key) ? b.filter((x) => x !== key) : [...b, key]))
 
   function onInfoNext() {
-    // Treat it as a repeat visit only when BOTH name and area match — otherwise
-    // two different "Boulangerie"s (Paris vs Lyon) would wrongly merge.
+    // Repeat visit only when BOTH name and area match — so two different
+    // "Boulangerie"s (Paris vs Lyon) don't wrongly merge.
     const match = bakeries.find(
       (b) =>
         b.name.trim().toLowerCase() === name.trim().toLowerCase() &&
@@ -97,11 +104,14 @@ export default function LogVisit({ bakeries, prefill, onComplete, onCancel }) {
   return (
     <div className="sheet-backdrop" onClick={onCancel}>
       <div className="sheet" onClick={(e) => e.stopPropagation()}>
+        <div className="grabber" />
+
         {/* ---------- STEP 1: bakery + breads ---------- */}
         {step === 'info' && (
           <>
-            <h2>Log a bakery</h2>
-            <div className="label">Bakery name</div>
+            <div className="step-eyebrow">LOG A VISIT · 1 OF 3</div>
+            <h2>Where did you go?</h2>
+            <div className="label">Bakery</div>
             <input
               className="input"
               placeholder="e.g. Bagel Nook"
@@ -109,10 +119,12 @@ export default function LogVisit({ bakeries, prefill, onComplete, onCancel }) {
               autoFocus
               onChange={(e) => setName(e.target.value)}
             />
-            <div className="label">Area (optional)</div>
+            <div className="label">
+              Neighborhood <span className="opt">— optional</span>
+            </div>
             <input
               className="input"
-              placeholder="e.g. Princeton, NJ"
+              placeholder="e.g. Palmer Square"
               value={area}
               onChange={(e) => setArea(e.target.value)}
             />
@@ -124,59 +136,63 @@ export default function LogVisit({ bakeries, prefill, onComplete, onCancel }) {
                   className={`chip ${breads.includes(b.key) ? 'on' : ''}`}
                   onClick={() => toggleBread(b.key)}
                 >
-                  {b.emoji} {b.label}
+                  {b.label}
                 </button>
               ))}
             </div>
-            <div style={{ marginTop: 22 }}>
-              <button className="btn" disabled={!name.trim()} onClick={onInfoNext}>
-                Next
-              </button>
-              <button className="btn ghost" style={{ marginTop: 10 }} onClick={onCancel}>
-                Cancel
-              </button>
-            </div>
+            <button className="btn" style={{ marginTop: 26 }} disabled={!name.trim()} onClick={onInfoNext}>
+              Next
+            </button>
+            <button className="btn ghost" onClick={onCancel}>
+              Cancel
+            </button>
           </>
         )}
 
         {/* ---------- STEP 2: gut tier ---------- */}
         {step === 'tier' && (
           <>
+            <div className="step-eyebrow">LOG A VISIT · 2 OF 3</div>
             <h2>How was {name.trim()}?</h2>
-            <p className="muted" style={{ marginTop: -6 }}>
-              Go with your gut — you'll fine-tune next.
-            </p>
+            <p className="hint">Gut call — you'll fine-tune next.</p>
             {TIER_ORDER.map((k) => (
-              <button
-                key={k}
-                className="btn ghost"
-                style={{ marginTop: 10, textAlign: 'left', fontSize: 17 }}
-                onClick={() => pickTier(k)}
-              >
-                {TIERS[k].emoji} &nbsp;{TIERS[k].label}
+              <button key={k} className="tier-row" onClick={() => pickTier(k)}>
+                <span style={{ flex: 1 }}>
+                  <span className="t-label">{TIERS[k].label}</span>
+                  <span className="t-desc">{TIER_DESC[k]}</span>
+                </span>
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="var(--faint)" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                  <path d="M9 6l6 6-6 6" />
+                </svg>
               </button>
             ))}
+            <button className="btn ghost" onClick={() => setStep('info')}>
+              Back
+            </button>
           </>
         )}
 
         {/* ---------- STEP 3: comparisons ---------- */}
         {step === 'compare' && candidate && (
           <>
-            <h2>Which did you prefer?</h2>
-            <p className="muted" style={{ marginTop: -6 }}>
-              Just a couple of quick taps.
-            </p>
-            <div className="versus">
-              <button onClick={() => choose(true)}>{name.trim()}</button>
-              <button onClick={() => choose(false)}>{candidate.name}</button>
-            </div>
-            <div className="vs-or">— or —</div>
+            <div className="step-eyebrow">LOG A VISIT · 3 OF 3</div>
+            <h2>Which was better?</h2>
+            <p className="hint">A couple of taps places it exactly.</p>
+            <button className="versus-card" onClick={() => choose(true)}>
+              <span className="vc-name">{name.trim()}</span>
+              <span className="vc-sub">The one you just had</span>
+            </button>
+            <button className="versus-card" onClick={() => choose(false)}>
+              <span className="vc-name">{candidate.name}</span>
+              <span className="vc-sub">{candidate.area || 'Already ranked'}</span>
+            </button>
+            <div className="vs-or">or</div>
             <button
-              className="chip"
-              style={{ display: 'block', margin: '0 auto' }}
+              className="btn ghost"
+              style={{ marginTop: 0 }}
               onClick={() => choose(Math.random() < 0.5)}
             >
-              🤷 Too close to call
+              Too close to call
             </button>
           </>
         )}
@@ -184,30 +200,30 @@ export default function LogVisit({ bakeries, prefill, onComplete, onCancel }) {
         {/* ---------- STEP 4: result + optional details ---------- */}
         {step === 'result' && (
           <>
-            <h2 style={{ textAlign: 'center' }}>
-              {existing ? `Another visit to ${existing.name}` : name.trim()}
-            </h2>
-            <div style={{ textAlign: 'center', margin: '8px 0 4px' }}>
-              <span
-                className="score-pill"
-                style={{ fontSize: 30, padding: '12px 20px', display: 'inline-block' }}
+            <div style={{ textAlign: 'center', marginTop: 22 }}>
+              <div style={{ fontSize: 13.5, fontWeight: 600, color: 'var(--soft)' }}>
+                {existing ? `Another visit to ${existing.name}` : name.trim()}
+              </div>
+              <div
+                style={{
+                  fontFamily: 'var(--display)',
+                  fontWeight: 'var(--disp-weight)',
+                  fontSize: 60,
+                  lineHeight: 1.1,
+                  color: 'var(--ink)',
+                  marginTop: 4,
+                }}
               >
                 {(existing ? existing.score : result?.score ?? 0).toFixed(1)}
-              </span>
+              </div>
+              <p className="muted" style={{ fontSize: 13, margin: '2px 0 0' }}>
+                {existing ? "You've ranked this one before — saving today's visit." : 'out of 10 · added to your rankings'}
+              </p>
             </div>
-            <p className="muted" style={{ textAlign: 'center' }}>
-              {existing
-                ? "You've ranked this one before — saving today's visit."
-                : 'out of 10 · added to your rankings'}
-            </p>
 
             {!showDetails ? (
-              <button
-                className="btn ghost"
-                style={{ marginTop: 14 }}
-                onClick={() => setShowDetails(true)}
-              >
-                + Add details (photo notes, freshness)
+              <button className="btn ghost" style={{ marginTop: 14 }} onClick={() => setShowDetails(true)}>
+                + Add details (freshness, notes)
               </button>
             ) : (
               <>
@@ -219,7 +235,7 @@ export default function LogVisit({ bakeries, prefill, onComplete, onCancel }) {
                   onChange={(e) => setFreshness(e.target.value)}
                 />
                 <p className="muted" style={{ fontSize: 12, margin: '6px 2px 0' }}>
-                  A croissant at 7am ≠ 4pm — freshness matters. ⏰
+                  A croissant at 7am ≠ 4pm — freshness matters.
                 </p>
                 <div className="label">Notes</div>
                 <textarea
