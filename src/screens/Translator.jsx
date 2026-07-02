@@ -138,8 +138,8 @@ export default function Translator({ country, onCountry }) {
 
   return (
     <main className="screen">
-      <h1 className="title">Translator 🌍</h1>
-      <p className="subtitle">Order bread with confidence — anywhere.</p>
+      <h1 className="title">Translator</h1>
+      <p className="subtitle">Order bread with confidence, anywhere.</p>
 
       {/* country / target language picker */}
       <label

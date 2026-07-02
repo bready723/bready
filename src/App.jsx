@@ -5,6 +5,7 @@ import WantToTry from './screens/WantToTry.jsx'
 import Translator from './screens/Translator.jsx'
 import LogVisit from './screens/LogVisit.jsx'
 import BakeryDetail from './screens/BakeryDetail.jsx'
+import { IconRank, IconPlus, IconBookmark, IconGlobe } from './components/Icons.jsx'
 
 export function Croissant({ size = 26 }) {
   return (
@@ -101,19 +102,21 @@ export default function App() {
 
       <nav className="tabbar">
         <button className={tab === 'rankings' ? 'active' : ''} onClick={() => setTab('rankings')}>
-          <span className="ico">🏆</span>
+          <IconRank />
           Rankings
         </button>
         <button className="fab" onClick={() => openLog()}>
-          <span className="ico">+</span>
+          <span className="fab-circle">
+            <IconPlus width={26} height={26} />
+          </span>
           Log
         </button>
         <button className={tab === 'want' ? 'active' : ''} onClick={() => setTab('want')}>
-          <span className="ico">🔖</span>
+          <IconBookmark />
           Want to try
         </button>
         <button className={tab === 'translate' ? 'active' : ''} onClick={() => setTab('translate')}>
-          <span className="ico">🌍</span>
+          <IconGlobe />
           Translate
         </button>
       </nav>

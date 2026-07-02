@@ -100,7 +100,7 @@ export default function LogVisit({ bakeries, prefill, onComplete, onCancel }) {
         {/* ---------- STEP 1: bakery + breads ---------- */}
         {step === 'info' && (
           <>
-            <h2>Log a bakery 🥐</h2>
+            <h2>Log a bakery</h2>
             <div className="label">Bakery name</div>
             <input
               className="input"
