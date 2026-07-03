@@ -1,0 +1,281 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>bready — v4 mockup</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400..700;1,6..72,400..700&family=Instrument+Sans:ital,wght@0,400..700;1,400..700&display=swap" rel="stylesheet" />
+<style>
+:root{
+  --paper:#ece8e0; --canvas:#faf9f6; --surface:#fff; --surface-2:#fbfaf7;
+  --ink:#211a11; --ink-2:#3b3327; --soft:#9a9080; --faint:#b3a992;
+  --line:#ece7dc; --line-2:#e4ddd0; --accent:#1d5bce; --accent-soft:#1d5bce66;
+  --accent-tint:#1d5bce14; --tag-fill:#f4e9dc; --green:#1c7c54;
+  --brand-gradient:linear-gradient(100deg,#1aa7e8 0%,#5b3fd6 50%,#e0218a 100%);
+  --display:'Newsreader',Georgia,serif; --sans:'Instrument Sans',-apple-system,sans-serif;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:var(--sans);background:var(--paper);color:var(--ink);-webkit-font-smoothing:antialiased;padding:40px 20px 80px}
+.page-head{max-width:1200px;margin:0 auto 8px}
+.page-head h1{font-family:var(--display);font-weight:600;font-size:30px;color:var(--accent)}
+.page-head p{color:#6b6350;font-size:14px;margin-top:6px;line-height:1.5}
+.gallery{max-width:1200px;margin:28px auto 0;display:flex;flex-wrap:wrap;gap:36px 30px;justify-content:center}
+.frame{width:340px}
+.frame .cap{font-size:12px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:#8a8069;margin:0 0 10px 4px}
+.phone{width:340px;height:720px;background:var(--canvas);border-radius:30px;overflow:hidden;position:relative;
+  box-shadow:0 12px 40px rgba(40,30,15,.16),0 0 0 8px #14100b,0 0 0 9px #2a2018;}
+.scr{position:absolute;inset:0;display:flex;flex-direction:column}
+.appbar{display:flex;align-items:center;gap:9px;padding:14px 20px 11px;background:rgba(250,249,246,.95);border-bottom:1px solid var(--line)}
+.wordmark{font-size:18px;font-weight:700;letter-spacing:-.01em;background:var(--brand-gradient);-webkit-background-clip:text;background-clip:text;color:transparent}
+.appbar .sub{margin-left:auto;font-size:12px;color:var(--soft);font-weight:500}
+.body{flex:1;overflow:hidden;padding:16px 18px}
+.title{font-family:var(--display);font-weight:500;font-size:27px;line-height:1.05;color:var(--accent)}
+.subtitle{color:var(--soft);font-size:12.5px;margin-top:5px}
+.searchbar{display:flex;align-items:center;gap:9px;margin-top:14px;border:1px solid var(--line-2);background:var(--surface);border-radius:11px;padding:9px 12px;color:var(--soft);font-size:13.5px}
+.filter-row{display:flex;gap:7px;overflow:hidden;margin:14px 0 2px}
+.chip{flex-shrink:0;font-size:10.5px;font-weight:600;letter-spacing:.07em;text-transform:uppercase;padding:7px 11px;border-radius:7px;border:1px solid var(--line-2);background:var(--surface);color:#5c5442;white-space:nowrap}
+.chip.on{border-color:var(--accent);background:var(--accent);color:#fdfbf7}
+.rank-row{display:flex;align-items:center;gap:13px;padding:13px 0;border-bottom:1px solid var(--line)}
+.num{width:18px;text-align:center;font-family:var(--display);font-style:italic;font-size:15px;color:var(--faint)}
+.thumb{width:48px;height:48px;border-radius:10px;background:var(--tag-fill);display:flex;align-items:center;justify-content:center;font-size:22px;flex-shrink:0}
+.meta{flex:1;min-width:0}
+.nm{font-size:15px;font-weight:600}
+.tg{font-size:12px;color:var(--soft);margin-top:3px}
+.score-circle{width:44px;height:44px;border-radius:50%;border:1.5px solid var(--line-2);background:var(--surface);display:flex;align-items:center;justify-content:center;font-family:var(--display);font-weight:500;font-size:15px;color:var(--green);flex-shrink:0}
+.score-circle.big{width:64px;height:64px;font-size:23px;border-width:2px}
+.segment{display:flex;border:1px solid var(--line-2);border-radius:8px;overflow:hidden;margin-top:14px}
+.segment div{flex:1;text-align:center;font-size:12.5px;font-weight:600;padding:9px 0;background:var(--surface);color:var(--soft)}
+.segment div.on{background:var(--accent);color:#fdfbf7}
+.city-head{display:flex;align-items:center;justify-content:space-between;font-family:var(--display);font-weight:500;font-size:17px;color:var(--accent);padding:12px 0 6px}
+.city-head .count{font-family:var(--sans);font-size:11.5px;color:var(--soft);font-weight:600}
+.disc-row{display:flex;align-items:center;gap:10px;padding:11px 0;border-bottom:1px solid var(--line)}
+.disc-row .info{flex:1;min-width:0}
+.btn{font-family:var(--sans);font-size:12px;font-weight:600;border-radius:8px;padding:8px 12px;border:0;white-space:nowrap}
+.btn.fill{background:var(--accent);color:#fdfbf7}
+.btn.out{background:none;color:var(--accent);border:1px solid var(--accent-soft)}
+.tabbar{display:flex;padding:9px 2px 14px;background:rgba(250,249,246,.97);border-top:1px solid var(--line)}
+.tabbar div{flex:1;display:flex;flex-direction:column;align-items:center;gap:5px;font-size:10px;font-weight:600;color:var(--soft)}
+.tabbar div.on{color:var(--accent)}
+.tabbar svg{width:22px;height:22px;stroke:currentColor;fill:none;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round}
+.fab-circle{width:24px;height:24px;border-radius:50%;background:var(--brand-gradient);display:flex;align-items:center;justify-content:center}
+.fab-circle svg{width:14px;height:14px;stroke:#fff;stroke-width:2}
+/* detail */
+.hero{height:150px;background:linear-gradient(120deg,#f4e9dc,#ece8e0);display:flex;align-items:center;justify-content:center;color:var(--faint);font-family:var(--display);font-style:italic;font-size:12.5px;position:relative}
+.hero.map{background:linear-gradient(135deg,#e9efe6,#e3e9f2);color:#7d8a96}
+.back{position:absolute;top:14px;left:14px;width:32px;height:32px;border-radius:50%;background:rgba(253,251,247,.94);border:1px solid var(--line-2);display:flex;align-items:center;justify-content:center}
+.back svg{width:15px;height:15px;stroke:var(--ink);fill:none;stroke-width:2}
+.d-body{padding:16px 18px}
+.d-name{font-family:var(--display);font-weight:500;font-size:25px;color:var(--accent);line-height:1.1}
+.area{font-size:12.5px;color:var(--soft);margin-top:5px}
+.cat-row{display:flex;gap:14px;margin-top:11px}
+.cat{font-size:12.5px;font-weight:600;color:var(--accent)}
+.score-block{display:flex;align-items:center;gap:15px;margin-top:16px}
+.tier-info{border-left:1px solid var(--line-2);padding-left:15px}
+.tier-name{font-size:13px;font-weight:600}
+.visit-meta{font-size:11.5px;color:var(--soft);margin-top:2px}
+.actions{display:flex;gap:8px;margin-top:16px}
+.pill{flex:1;display:flex;align-items:center;justify-content:center;gap:5px;border:1px solid var(--line-2);background:var(--surface);border-radius:11px;padding:10px 6px;color:var(--accent);font-size:12px;font-weight:600}
+.label{font-size:10.5px;font-weight:600;color:var(--soft);text-transform:uppercase;letter-spacing:.1em;margin:16px 0 8px}
+.platform-grid{display:grid;grid-template-columns:1fr 1fr;gap:9px}
+.platform-btn{display:flex;align-items:center;justify-content:space-between;border:1px solid var(--line-2);background:var(--surface);border-radius:11px;padding:12px 13px;color:var(--accent);font-size:13px;font-weight:600}
+.divider{height:1px;background:var(--line);margin:18px 0}
+/* translator */
+.tr-grid{display:grid;grid-template-columns:1fr auto 1.2fr;gap:8px;align-items:end;margin-top:16px}
+.tr-lab{font-size:10.5px;font-weight:600;color:var(--soft);text-transform:uppercase;letter-spacing:.1em;margin-bottom:7px}
+.tr-select{display:flex;align-items:center;justify-content:space-between;font-family:var(--display);font-style:italic;font-size:14px;font-weight:500;padding:10px 11px;border:1px solid var(--line-2);border-radius:10px;background:var(--surface)}
+.tr-arrow{height:40px;display:flex;align-items:center;color:var(--faint)}
+.subtabs{display:flex;gap:7px;margin-top:16px}
+.subtab{font-size:11.5px;font-weight:600;padding:8px 11px;border-radius:9px;border:1px solid var(--line-2);background:var(--surface);color:var(--soft)}
+.subtab.on{border-color:var(--accent);background:var(--accent);color:#fdfbf7}
+.ta{border:1px solid var(--line-2);border-radius:10px;background:var(--surface);padding:12px;color:var(--faint);font-size:14px;margin-top:14px;height:78px}
+.big-btn{margin-top:10px;background:var(--accent);color:#fdfbf7;border-radius:11px;padding:13px;text-align:center;font-size:14px;font-weight:600}
+/* explore */
+.inspire-banner{margin-top:14px;text-align:center;border:2px solid var(--ink);border-radius:4px;padding:14px 16px;background:var(--surface);box-shadow:3px 3px 0 var(--line-2)}
+.inspire-banner .eb{font-size:9.5px;font-weight:700;letter-spacing:.24em;text-transform:uppercase;color:var(--soft)}
+.inspire-banner .ln{display:block;margin-top:7px;font-family:var(--display);font-weight:500;font-size:19px;text-transform:uppercase;letter-spacing:.02em;line-height:1.2}
+.sec{font-family:var(--display);font-weight:500;font-size:17px;margin:20px 0 4px}
+.note-add{display:flex;gap:8px;margin-top:8px}
+.note-add .in{flex:1;border:1px solid var(--line-2);border-radius:10px;background:var(--surface);padding:11px;color:var(--faint);font-size:13px}
+.note-add .sv{background:var(--accent);color:#fff;border-radius:10px;padding:0 16px;display:flex;align-items:center;font-size:13px;font-weight:600}
+.stat-card{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:16px;margin-top:10px}
+.stat-card .b{font-family:var(--display);font-weight:500;font-size:22px;color:var(--accent)}
+.stat-card .r{display:flex;gap:16px;margin-top:12px;flex-wrap:wrap}
+.stat-card .k{font-size:10px;text-transform:uppercase;letter-spacing:.08em;color:var(--soft);font-weight:600}
+.stat-card .v{font-size:14px;font-weight:600;margin-top:3px}
+.gstrip{display:flex;gap:9px;margin-top:12px}
+.gcard{width:70px;text-align:center;border:1px solid var(--line-2);background:var(--surface);border-radius:12px;padding:11px 5px}
+.gcard .e{font-size:22px}
+.gcard .l{font-size:10.5px;color:var(--soft);margin-top:5px;font-weight:600}
+.note-txt{font-size:14px;color:var(--ink-2);padding:11px 0;border-bottom:1px solid var(--line)}
+.note-txt .w{font-size:10.5px;color:var(--faint);margin-top:4px}
+@media (prefers-color-scheme:dark){body{background:#14110c}.page-head p{color:#b8ad97}}
+</style>
+</head>
+<body>
+<div class="page-head">
+  <h1>bready — v4 visual reference</h1>
+  <p>The current app look for handing back to Claude Design. Six representative screens; real fonts, colors, and components. Preview in Safari, or attach alongside <em>bready-ui-for-claude-design.md</em>.</p>
+</div>
+
+<div class="gallery">
+
+  <!-- RANKINGS -->
+  <div class="frame">
+    <div class="cap">Rankings</div>
+    <div class="phone"><div class="scr">
+      <div class="appbar"><span class="wordmark">bready</span><span class="sub">3 ranked</span></div>
+      <div class="body">
+        <div class="title">My rankings</div>
+        <div class="subtitle">Every bakery, in order.</div>
+        <div class="searchbar"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><circle cx="11" cy="11" r="7"/><path d="M16.8 16.8L21 21"/></svg>Search your bakeries…</div>
+        <div class="filter-row"><span class="chip on">All</span><span class="chip">Croissant</span><span class="chip">Sourdough</span><span class="chip">Bagel</span></div>
+        <div class="rank-row"><div class="num">1</div><div class="thumb">🥐</div><div class="meta"><div class="nm">Terra Momo Bread Co.</div><div class="tg">Witherspoon St · Croissant, Sourdough</div></div><div class="score-circle">9.2</div></div>
+        <div class="rank-row"><div class="num">2</div><div class="thumb">🥯</div><div class="meta"><div class="nm">Olives</div><div class="tg">Witherspoon St · Bagel</div></div><div class="score-circle">6.4</div></div>
+        <div class="rank-row"><div class="num">3</div><div class="thumb">🥖</div><div class="meta"><div class="nm">Small World Coffee</div><div class="tg">Witherspoon St · Sourdough</div></div><div class="score-circle">5.8</div></div>
+      </div>
+      <div class="tabbar">
+        <div class="on"><svg viewBox="0 0 24 24"><path d="M5 20v-9M12 20V4M19 20v-6"/></svg>Rankings</div>
+        <div><svg viewBox="0 0 24 24"><path d="M7 3.5h10V21l-5-4.2L7 21V3.5z"/></svg>Want to try</div>
+        <div><span class="fab-circle"><svg viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></svg></span>Add</div>
+        <div><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M3 12h18"/><ellipse cx="12" cy="12" rx="4" ry="9"/></svg>Translate</div>
+        <div><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M15.5 8.5l-2.2 5-5 2.2 2.2-5 5-2.2z"/></svg>Explore</div>
+      </div>
+    </div></div>
+  </div>
+
+  <!-- WANT TO TRY / DISCOVER -->
+  <div class="frame">
+    <div class="cap">Want to try — Discover</div>
+    <div class="phone"><div class="scr">
+      <div class="appbar"><span class="wordmark">bready</span></div>
+      <div class="body">
+        <div class="title">Want to try</div>
+        <div class="subtitle">Your wishlist — and famous spots to discover.</div>
+        <div class="segment"><div>My list</div><div class="on">Discover</div></div>
+        <div class="searchbar" style="margin-top:14px"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><circle cx="11" cy="11" r="7"/><path d="M16.8 16.8L21 21"/></svg>Search famous bakeries…</div>
+        <div class="city-head"><span>Princeton, NJ</span><span class="count">10 spots</span></div>
+        <div class="disc-row"><div class="info"><div class="nm">Terra Momo Bread Company</div><div class="tg">Witherspoon St</div></div><span class="btn out">+ Add</span><span class="btn fill">Rank it</span></div>
+        <div class="disc-row"><div class="info"><div class="nm">The Bent Spoon</div><div class="tg">Palmer Square</div></div><span class="btn out">+ Add</span><span class="btn fill">Rank it</span></div>
+        <div class="city-head"><span>New York City</span><span class="count">18 spots</span></div>
+        <div class="disc-row"><div class="info"><div class="nm">Levain Bakery</div><div class="tg">Upper West Side</div></div><span class="btn out">+ Add</span><span class="btn fill">Rank it</span></div>
+      </div>
+      <div class="tabbar">
+        <div><svg viewBox="0 0 24 24"><path d="M5 20v-9M12 20V4M19 20v-6"/></svg>Rankings</div>
+        <div class="on"><svg viewBox="0 0 24 24"><path d="M7 3.5h10V21l-5-4.2L7 21V3.5z"/></svg>Want to try</div>
+        <div><span class="fab-circle"><svg viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></svg></span>Add</div>
+        <div><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M3 12h18"/><ellipse cx="12" cy="12" rx="4" ry="9"/></svg>Translate</div>
+        <div><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M15.5 8.5l-2.2 5-5 2.2 2.2-5 5-2.2z"/></svg>Explore</div>
+      </div>
+    </div></div>
+  </div>
+
+  <!-- BAKERY DETAIL -->
+  <div class="frame">
+    <div class="cap">Bakery detail (ranked)</div>
+    <div class="phone"><div class="scr">
+      <div class="hero">Drop a photo — the storefront, the haul, the crumb<div class="back"><svg viewBox="0 0 24 24"><path d="M14 6l-6 6 6 6"/></svg></div></div>
+      <div class="d-body">
+        <div class="d-name">Terra Momo Bread Company</div>
+        <div class="area">Witherspoon St</div>
+        <div class="cat-row"><span class="cat">Croissant</span><span class="cat">Sourdough</span></div>
+        <div class="score-block"><div class="score-circle big">9.2</div><div class="tier-info"><div class="tier-name">Loved it</div><div class="visit-meta">1 visit · last 2026-07-01</div></div></div>
+        <div class="actions">
+          <span class="pill"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M12 21s-6-5.1-6-10a6 6 0 1112 0c0 4.9-6 10-6 10z"/><circle cx="12" cy="11" r="2.2"/></svg>Directions</span>
+          <span class="pill"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><circle cx="12" cy="12" r="9"/><path d="M3 12h18"/></svg>Website</span>
+          <span class="pill"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><path d="M8.6 13.5l6.8 4M15.4 6.5l-6.8 4"/></svg>Share</span>
+        </div>
+        <div class="divider"></div>
+        <div class="label">Breads you've had</div>
+        <div class="cat-row" style="gap:8px"><span class="btn out">Croissant</span><span class="btn out">Sourdough</span></div>
+        <div class="label">Visits</div>
+        <div class="note-txt">2026-07-01 · 07:30<div class="w">Croissant — blistered crust, superb.</div></div>
+      </div>
+    </div></div>
+  </div>
+
+  <!-- DISCOVER DETAIL -->
+  <div class="frame">
+    <div class="cap">Discover detail (famous)</div>
+    <div class="phone"><div class="scr">
+      <div class="hero map">◍ live Google Maps embed<div class="back"><svg viewBox="0 0 24 24"><path d="M14 6l-6 6 6 6"/></svg></div></div>
+      <div class="d-body">
+        <div class="d-name">Levain Bakery</div>
+        <div class="area">Upper West Side</div>
+        <div class="actions">
+          <span class="pill"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9"><path d="M12 5v14M5 12h14"/></svg>Add to list</span>
+          <span class="pill"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M5 20v-9M12 20V4M19 20v-6"/></svg>Rank it</span>
+        </div>
+        <div class="divider"></div>
+        <div class="label">Ratings &amp; reviews</div>
+        <div class="platform-grid">
+          <span class="platform-btn">Google Maps ↗</span>
+          <span class="platform-btn">Yelp ↗</span>
+          <span class="platform-btn">Tripadvisor ↗</span>
+          <span class="platform-btn">OpenTable ↗</span>
+          <span class="platform-btn">Resy ↗</span>
+          <span class="platform-btn">Beli ↗</span>
+        </div>
+        <div style="font-size:11.5px;color:var(--soft);line-height:1.5;margin-top:11px">Tap a platform to see its live rating. In-app star scores from every platform arrive with the cloud version.</div>
+      </div>
+    </div></div>
+  </div>
+
+  <!-- TRANSLATOR -->
+  <div class="frame">
+    <div class="cap">Translator</div>
+    <div class="phone"><div class="scr">
+      <div class="appbar"><span class="wordmark">bready</span></div>
+      <div class="body">
+        <div class="title">Translator</div>
+        <div class="subtitle">Order with confidence, anywhere.</div>
+        <div class="tr-grid">
+          <div><div class="tr-lab">From</div><div class="tr-select">🇺🇸 English <span style="color:var(--faint)">▾</span></div></div>
+          <div class="tr-arrow">→</div>
+          <div><div class="tr-lab">To</div><div class="tr-select">🇭🇰 廣東話 <span style="color:var(--faint)">▾</span></div></div>
+        </div>
+        <div class="subtabs"><span class="subtab on">Translate</span><span class="subtab">Phrasebook</span><span class="subtab">Bread words</span><span class="subtab">Script</span></div>
+        <div style="font-size:11px;color:var(--soft);line-height:1.5;margin-top:10px">廣東話: written text shows standard Chinese, but 🔊 plays in Cantonese.</div>
+        <div class="ta">e.g. One sourdough loaf, please</div>
+        <div class="big-btn">Translate → 🇭🇰</div>
+      </div>
+      <div class="tabbar">
+        <div><svg viewBox="0 0 24 24"><path d="M5 20v-9M12 20V4M19 20v-6"/></svg>Rankings</div>
+        <div><svg viewBox="0 0 24 24"><path d="M7 3.5h10V21l-5-4.2L7 21V3.5z"/></svg>Want to try</div>
+        <div><span class="fab-circle"><svg viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></svg></span>Add</div>
+        <div class="on"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M3 12h18"/><ellipse cx="12" cy="12" rx="4" ry="9"/></svg>Translate</div>
+        <div><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M15.5 8.5l-2.2 5-5 2.2 2.2-5 5-2.2z"/></svg>Explore</div>
+      </div>
+    </div></div>
+  </div>
+
+  <!-- EXPLORE -->
+  <div class="frame">
+    <div class="cap">Explore — Bread World</div>
+    <div class="phone"><div class="scr">
+      <div class="appbar"><span class="wordmark">bready</span></div>
+      <div class="body">
+        <div class="title">Explore</div>
+        <div class="subtitle">Your bread world.</div>
+        <div class="inspire-banner"><span class="eb">bready kitchen</span><span class="ln">Every second counts.</span></div>
+        <div class="sec">Quick notes</div>
+        <div class="note-add"><span class="in">Jot something down — at the bakery…</span><span class="sv">Save</span></div>
+        <div class="sec">Your bread stats</div>
+        <div class="stat-card"><div class="b">You've ranked 3 bakeries.</div><div class="r"><div><div class="k">Top bread</div><div class="v">🥐 Croissant</div></div><div><div class="k">Hoods</div><div class="v">1</div></div><div><div class="k">Best</div><div class="v">9.2 · Terra Momo</div></div></div></div>
+        <div class="sec">Best by bread</div>
+        <div class="gstrip"><div class="gcard"><div class="e">🥐</div><div class="l">Croissant</div></div><div class="gcard"><div class="e">🥖</div><div class="l">Sourdough</div></div><div class="gcard"><div class="e">🥯</div><div class="l">Bagel</div></div></div>
+      </div>
+      <div class="tabbar">
+        <div><svg viewBox="0 0 24 24"><path d="M5 20v-9M12 20V4M19 20v-6"/></svg>Rankings</div>
+        <div><svg viewBox="0 0 24 24"><path d="M7 3.5h10V21l-5-4.2L7 21V3.5z"/></svg>Want to try</div>
+        <div><span class="fab-circle"><svg viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></svg></span>Add</div>
+        <div><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M3 12h18"/><ellipse cx="12" cy="12" rx="4" ry="9"/></svg>Translate</div>
+        <div class="on"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M15.5 8.5l-2.2 5-5 2.2 2.2-5 5-2.2z"/></svg>Explore</div>
+      </div>
+    </div></div>
+  </div>
+
+</div>
+</body>
+</html>
