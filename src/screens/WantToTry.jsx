@@ -1,19 +1,9 @@
 import { useState } from 'react'
 import { uid } from '../lib/storage.js'
 import { SEED_CITIES } from '../lib/seed.js'
-import { googleMapsUrl } from '../lib/maps.js'
 import { IconSearch } from '../components/Icons.jsx'
 
-function MapsPin() {
-  return (
-    <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round">
-      <path d="M12 21s-6-5.1-6-10a6 6 0 1112 0c0 4.9-6 10-6 10z" />
-      <circle cx="12" cy="11" r="2.2" />
-    </svg>
-  )
-}
-
-export default function WantToTry({ wantToTry, onChange, onWent }) {
+export default function WantToTry({ wantToTry, onChange, onWent, onOpenDiscover }) {
   const [mode, setMode] = useState('mine') // mine | discover
   const [name, setName] = useState('')
   const [area, setArea] = useState('')
@@ -183,28 +173,29 @@ export default function WantToTry({ wantToTry, onChange, onWent }) {
                 {open &&
                   c.matches.map((b) => {
                     const added = savedNames.has(b.name.trim().toLowerCase())
+                    const withCity = { ...b, city: c.city }
                     return (
                       <div key={b.name} className="discover-row">
-                        <div className="info">
+                        <div
+                          className="info"
+                          style={{ cursor: 'pointer' }}
+                          onClick={() => onOpenDiscover(withCity)}
+                        >
                           <div className="nm">{b.name}</div>
                           <div className="ar">{b.area}</div>
                         </div>
-                        <a
-                          className="maps"
-                          href={googleMapsUrl(b)}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          title="Open in Google Maps"
-                        >
-                          <MapsPin />
-                        </a>
-                        {added ? (
-                          <span className="added">✓ Added</span>
-                        ) : (
-                          <button className="btn outline row" onClick={() => addFromDiscover(b)}>
-                            + Add
+                        <div className="disc-btns">
+                          {added ? (
+                            <span className="added">✓ Added</span>
+                          ) : (
+                            <button className="btn outline row" onClick={() => addFromDiscover(b)}>
+                              + Add
+                            </button>
+                          )}
+                          <button className="btn row" onClick={() => onWent(withCity)}>
+                            Rank it
                           </button>
-                        )}
+                        </div>
                       </div>
                     )
                   })}

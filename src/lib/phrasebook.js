@@ -39,23 +39,26 @@ export const COUNTRIES = [
 export const CURATED_LANGS = new Set(['fr', 'ja', 'it', 'es', 'de', 'zh', 'ko', 'en'])
 
 // Input ("From") languages — what Sara speaks/types. Kept balanced with the
-// "To" list (both ≥10). `bcp` drives the voice-input recognizer.
+// "To" list (both ≥10), each with a flag. `id` is unique (Mandarin vs Cantonese
+// share lang 'zh' but differ by voice); `lang` is the translation source code;
+// `bcp` drives the voice-input recognizer.
 export const INPUT_LANGS = [
-  { lang: 'en', label: 'English', bcp: 'en-US' },
-  { lang: 'ko', label: '한국어', bcp: 'ko-KR' },
-  { lang: 'ja', label: '日本語', bcp: 'ja-JP' },
-  { lang: 'zh', label: '中文', bcp: 'zh-CN' },
-  { lang: 'fr', label: 'Français', bcp: 'fr-FR' },
-  { lang: 'es', label: 'Español', bcp: 'es-ES' },
-  { lang: 'it', label: 'Italiano', bcp: 'it-IT' },
-  { lang: 'de', label: 'Deutsch', bcp: 'de-DE' },
-  { lang: 'pt', label: 'Português', bcp: 'pt-PT' },
-  { lang: 'vi', label: 'Tiếng Việt', bcp: 'vi-VN' },
-  { lang: 'th', label: 'ไทย', bcp: 'th-TH' },
-  { lang: 'ru', label: 'Русский', bcp: 'ru-RU' },
+  { id: 'en', lang: 'en', label: 'English', flag: '🇺🇸', bcp: 'en-US' },
+  { id: 'ko', lang: 'ko', label: '한국어', flag: '🇰🇷', bcp: 'ko-KR' },
+  { id: 'ja', lang: 'ja', label: '日本語', flag: '🇯🇵', bcp: 'ja-JP' },
+  { id: 'zh-CN', lang: 'zh', label: '中文 (Mandarin)', flag: '🇨🇳', bcp: 'zh-CN' },
+  { id: 'zh-HK', lang: 'zh', label: '廣東話 (Cantonese)', flag: '🇭🇰', bcp: 'zh-HK' },
+  { id: 'fr', lang: 'fr', label: 'Français', flag: '🇫🇷', bcp: 'fr-FR' },
+  { id: 'es', lang: 'es', label: 'Español', flag: '🇪🇸', bcp: 'es-ES' },
+  { id: 'it', lang: 'it', label: 'Italiano', flag: '🇮🇹', bcp: 'it-IT' },
+  { id: 'de', lang: 'de', label: 'Deutsch', flag: '🇩🇪', bcp: 'de-DE' },
+  { id: 'pt', lang: 'pt', label: 'Português', flag: '🇵🇹', bcp: 'pt-PT' },
+  { id: 'vi', lang: 'vi', label: 'Tiếng Việt', flag: '🇻🇳', bcp: 'vi-VN' },
+  { id: 'th', lang: 'th', label: 'ไทย', flag: '🇹🇭', bcp: 'th-TH' },
+  { id: 'ru', lang: 'ru', label: 'Русский', flag: '🇷🇺', bcp: 'ru-RU' },
 ]
 
-export const inputByLang = (lang) => INPUT_LANGS.find((l) => l.lang === lang) || INPUT_LANGS[0]
+export const inputById = (id) => INPUT_LANGS.find((l) => l.id === id) || INPUT_LANGS[0]
 
 export const countryByCode = (code) => COUNTRIES.find((c) => c.code === code) || COUNTRIES[0]
 

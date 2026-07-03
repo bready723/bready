@@ -2,8 +2,7 @@ import { useState } from 'react'
 import { BREADS, breadEmoji, breadLabel } from '../lib/breads.js'
 import { IconSearch } from '../components/Icons.jsx'
 
-export default function Rankings({ bakeries, onOpen, onLog }) {
-  const [filter, setFilter] = useState('all')
+export default function Rankings({ bakeries, filter, onFilter, onOpen, onLog }) {
   const [q, setQ] = useState('')
 
   const query = q.trim().toLowerCase()
@@ -51,7 +50,7 @@ export default function Rankings({ bakeries, onOpen, onLog }) {
           <div className="filter-row">
             <button
               className={`filter-chip ${filter === 'all' ? 'on' : ''}`}
-              onClick={() => setFilter('all')}
+              onClick={() => onFilter('all')}
             >
               All
             </button>
@@ -59,7 +58,7 @@ export default function Rankings({ bakeries, onOpen, onLog }) {
               <button
                 key={b.key}
                 className={`filter-chip ${filter === b.key ? 'on' : ''}`}
-                onClick={() => setFilter(b.key)}
+                onClick={() => onFilter(b.key)}
               >
                 {b.label}
               </button>

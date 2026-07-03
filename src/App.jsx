@@ -1,11 +1,12 @@
 import { useEffect, useState } from 'react'
-import { loadState, saveState } from './lib/storage.js'
+import { loadState, saveState, uid } from './lib/storage.js'
 import Rankings from './screens/Rankings.jsx'
 import WantToTry from './screens/WantToTry.jsx'
 import Translator from './screens/Translator.jsx'
 import Explore from './screens/Explore.jsx'
 import LogVisit from './screens/LogVisit.jsx'
 import BakeryDetail from './screens/BakeryDetail.jsx'
+import DiscoverDetail from './screens/DiscoverDetail.jsx'
 import { IconRank, IconPlus, IconBookmark, IconGlobe, IconExplore } from './components/Icons.jsx'
 
 export default function App() {
@@ -14,6 +15,8 @@ export default function App() {
   const [logging, setLogging] = useState(false)
   const [prefill, setPrefill] = useState(null) // { name, area } when logging from Want-to-try
   const [detailId, setDetailId] = useState(null)
+  const [discoverItem, setDiscoverItem] = useState(null) // famous bakery opened from Discover
+  const [rankFilter, setRankFilter] = useState('all') // bread filter for the Rankings list
 
   useEffect(() => {
     saveState(state)
@@ -63,9 +66,10 @@ export default function App() {
       {tab === 'rankings' && (
         <Rankings
           bakeries={state.bakeries}
+          filter={rankFilter}
+          onFilter={setRankFilter}
           onOpen={(id) => setDetailId(id)}
           onLog={() => openLog()}
-          onUpdateBakery={updateBakery}
         />
       )}
       {tab === 'want' && (
@@ -73,6 +77,7 @@ export default function App() {
           wantToTry={state.wantToTry}
           onChange={(wantToTry) => update({ wantToTry })}
           onWent={(entry) => openLog(entry)}
+          onOpenDiscover={(b) => setDiscoverItem(b)}
         />
       )}
       {tab === 'translate' && (
@@ -85,6 +90,10 @@ export default function App() {
           onChangeNotes={(notes) => update({ notes })}
           onOpen={(id) => setDetailId(id)}
           onUpdateBakery={updateBakery}
+          onPickBread={(key) => {
+            setRankFilter(key)
+            setTab('rankings')
+          }}
         />
       )}
 
@@ -130,6 +139,26 @@ export default function App() {
           bakery={detailBakery}
           onClose={() => setDetailId(null)}
           onUpdateBakery={updateBakery}
+        />
+      )}
+
+      {discoverItem && (
+        <DiscoverDetail
+          bakery={discoverItem}
+          added={state.wantToTry.some(
+            (w) => w.name.trim().toLowerCase() === discoverItem.name.trim().toLowerCase(),
+          )}
+          onClose={() => setDiscoverItem(null)}
+          onAdd={(b) =>
+            setState((s) => ({
+              ...s,
+              wantToTry: [{ id: uid(), name: b.name, area: b.area }, ...s.wantToTry],
+            }))
+          }
+          onWent={(b) => {
+            setDiscoverItem(null)
+            openLog({ name: b.name, area: b.area })
+          }}
         />
       )}
     </div>

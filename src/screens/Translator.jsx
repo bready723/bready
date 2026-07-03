@@ -4,7 +4,7 @@ import {
   countryByCode,
   CURATED_LANGS,
   INPUT_LANGS,
-  inputByLang,
+  inputById,
   PHRASES,
   GLOSSARY,
 } from '../lib/phrasebook.js'
@@ -87,12 +87,13 @@ export default function Translator({ country, onCountry }) {
   const reqRef = useRef(0)
 
   const isCurated = CURATED_LANGS.has(dest.lang)
-  const fromLabel = inputByLang(inputLang).label
+  const fromCur = inputById(inputLang)
+  const fromLabel = `${fromCur.flag} ${fromCur.label}`
 
   function logScript(source, translated) {
     setScript((prev) => {
       const next = [
-        { ts: Date.now(), fromLang: inputByLang(inputLang).label, toLang: dest.name, source, translated },
+        { ts: Date.now(), fromLang: inputById(inputLang).label, toLang: dest.name, source, translated },
         ...prev,
       ].slice(0, 200)
       saveScript(next)
@@ -174,7 +175,7 @@ export default function Translator({ country, onCountry }) {
     setStatus('loading')
     setOutput('')
     try {
-      const out = await translateText(phrase, dest.lang, inputLang)
+      const out = await translateText(phrase, dest.lang, inputById(inputLang).lang)
       if (myReq !== reqRef.current) return
       setOutput(out)
       setStatus('done')
@@ -203,7 +204,7 @@ export default function Translator({ country, onCountry }) {
     setMicMsg('🔴 Listening… speak now')
     setListening(true)
     recRef.current = startListening({
-      lang: inputByLang(inputLang).bcp,
+      lang: inputById(inputLang).bcp,
       onResult: (said) => {
         stopMicTimer()
         setListening(false)
@@ -266,14 +267,14 @@ export default function Translator({ country, onCountry }) {
               <div className="dd-menu" style={{ maxHeight: 280, overflowY: 'auto' }}>
                 {INPUT_LANGS.map((l) => (
                   <button
-                    key={l.lang}
+                    key={l.id}
                     className="dd-item"
                     onClick={() => {
-                      setInputLang(l.lang)
+                      setInputLang(l.id)
                       setFromOpen(false)
                     }}
                   >
-                    {l.label}
+                    {l.flag} {l.label}
                   </button>
                 ))}
               </div>
@@ -355,7 +356,7 @@ export default function Translator({ country, onCountry }) {
           <textarea
             className="input"
             style={{ marginTop: 18 }}
-            placeholder={inputLang === 'ko' ? '예: 사워도우 한 덩어리 주세요' : 'e.g. One sourdough loaf, please'}
+            placeholder={inputById(inputLang).lang === 'ko' ? '예: 사워도우 한 덩어리 주세요' : 'e.g. One sourdough loaf, please'}
             value={text}
             onChange={(e) => setText(e.target.value)}
           />

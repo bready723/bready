@@ -1,7 +1,6 @@
 import { useState } from 'react'
 import MapView from './MapView.jsx'
-import { GLOSSARY } from '../lib/phrasebook.js'
-import { breadEmoji, breadLabel } from '../lib/breads.js'
+import { BREADS, breadEmoji, breadLabel } from '../lib/breads.js'
 import { uid } from '../lib/storage.js'
 
 // A few "The Bear"-style lines — one shows at random each time you open Explore.
@@ -46,7 +45,7 @@ function computeStats(bakeries) {
   }
 }
 
-export default function Explore({ bakeries, notes, onChangeNotes, onOpen, onUpdateBakery }) {
+export default function Explore({ bakeries, notes, onChangeNotes, onOpen, onUpdateBakery, onPickBread }) {
   const [draft, setDraft] = useState('')
   const [editingId, setEditingId] = useState(null)
   const [editText, setEditText] = useState('')
@@ -76,6 +75,12 @@ export default function Explore({ bakeries, notes, onChangeNotes, onOpen, onUpda
     <main className="screen">
       <h1 className="title">Explore</h1>
       <p className="subtitle">Your bread world.</p>
+
+      {/* ---------- INSPIRATION BANNER (The Bear frame) ---------- */}
+      <div className="inspire-banner">
+        <span className="eyebrow">bready kitchen</span>
+        <span className="line">{quote}</span>
+      </div>
 
       {/* ---------- QUICK NOTES ---------- */}
       <div className="explore-section-label">Quick notes</div>
@@ -176,18 +181,19 @@ export default function Explore({ bakeries, notes, onChangeNotes, onOpen, onUpda
         </>
       )}
 
-      {/* ---------- BREAD GUIDE ---------- */}
-      <div className="explore-section-label">Bread guide</div>
+      {/* ---------- BEST BY BREAD (tap to filter your rankings) ---------- */}
+      <div className="explore-section-label">Best by bread</div>
+      <p className="muted" style={{ fontSize: 12.5, margin: '0 2px 4px' }}>
+        Tap a bread to see your top spots for it.
+      </p>
       <div className="glossary-strip">
-        {GLOSSARY.map((g) => (
-          <div key={g.en} className="gcard">
-            <div className="emoji">{g.emoji}</div>
-            <div className="lbl">{g.en}</div>
-          </div>
+        {BREADS.map((b) => (
+          <button key={b.key} className="gcard" onClick={() => onPickBread(b.key)}>
+            <div className="emoji">{b.emoji}</div>
+            <div className="lbl">{b.label}</div>
+          </button>
         ))}
       </div>
-
-      <p className="inspire">“{quote}”</p>
     </main>
   )
 }
