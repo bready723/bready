@@ -53,6 +53,16 @@ export function IconSearch(props) {
   )
 }
 
+export function IconExplore(props) {
+  // compass: circle + needle
+  return (
+    <svg {...base} strokeWidth="1.7" {...props}>
+      <circle cx="12" cy="12" r="9" />
+      <path d="M15.5 8.5l-2.2 5-5 2.2 2.2-5 5-2.2z" />
+    </svg>
+  )
+}
+
 export function IconPin(props) {
   return (
     <svg {...base} strokeWidth="1.8" {...props}>

@@ -7,7 +7,9 @@ export const COUNTRIES = [
   { code: 'IT', flag: '🇮🇹', name: 'Italy', lang: 'it', bcp: 'it-IT' },
   { code: 'ES', flag: '🇪🇸', name: 'Spain', lang: 'es', bcp: 'es-ES' },
   { code: 'DE', flag: '🇩🇪', name: 'Germany', lang: 'de', bcp: 'de-DE' },
-  { code: 'CN', flag: '🇨🇳', name: 'China', lang: 'zh', bcp: 'zh-CN' },
+  // Chinese: same written characters, different spoken voice.
+  { code: 'CN', flag: '🇨🇳', name: '中文 (Mandarin)', lang: 'zh', bcp: 'zh-CN' },
+  { code: 'HK', flag: '🇭🇰', name: '廣東話 (Cantonese)', lang: 'zh', bcp: 'zh-HK' },
   { code: 'KR', flag: '🇰🇷', name: 'Korea', lang: 'ko', bcp: 'ko-KR' },
   { code: 'US', flag: '🇺🇸', name: 'USA', lang: 'en', bcp: 'en-US' },
   // --- auto-translated languages ---
@@ -35,6 +37,25 @@ export const COUNTRIES = [
 
 // Languages with a hand-curated offline phrasebook (the rest auto-translate).
 export const CURATED_LANGS = new Set(['fr', 'ja', 'it', 'es', 'de', 'zh', 'ko', 'en'])
+
+// Input ("From") languages — what Sara speaks/types. Kept balanced with the
+// "To" list (both ≥10). `bcp` drives the voice-input recognizer.
+export const INPUT_LANGS = [
+  { lang: 'en', label: 'English', bcp: 'en-US' },
+  { lang: 'ko', label: '한국어', bcp: 'ko-KR' },
+  { lang: 'ja', label: '日本語', bcp: 'ja-JP' },
+  { lang: 'zh', label: '中文', bcp: 'zh-CN' },
+  { lang: 'fr', label: 'Français', bcp: 'fr-FR' },
+  { lang: 'es', label: 'Español', bcp: 'es-ES' },
+  { lang: 'it', label: 'Italiano', bcp: 'it-IT' },
+  { lang: 'de', label: 'Deutsch', bcp: 'de-DE' },
+  { lang: 'pt', label: 'Português', bcp: 'pt-PT' },
+  { lang: 'vi', label: 'Tiếng Việt', bcp: 'vi-VN' },
+  { lang: 'th', label: 'ไทย', bcp: 'th-TH' },
+  { lang: 'ru', label: 'Русский', bcp: 'ru-RU' },
+]
+
+export const inputByLang = (lang) => INPUT_LANGS.find((l) => l.lang === lang) || INPUT_LANGS[0]
 
 export const countryByCode = (code) => COUNTRIES.find((c) => c.code === code) || COUNTRIES[0]
 

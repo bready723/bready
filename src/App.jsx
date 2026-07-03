@@ -3,10 +3,10 @@ import { loadState, saveState } from './lib/storage.js'
 import Rankings from './screens/Rankings.jsx'
 import WantToTry from './screens/WantToTry.jsx'
 import Translator from './screens/Translator.jsx'
-import Search from './screens/Search.jsx'
+import Explore from './screens/Explore.jsx'
 import LogVisit from './screens/LogVisit.jsx'
 import BakeryDetail from './screens/BakeryDetail.jsx'
-import { IconRank, IconPlus, IconBookmark, IconGlobe, IconSearch } from './components/Icons.jsx'
+import { IconRank, IconPlus, IconBookmark, IconGlobe, IconExplore } from './components/Icons.jsx'
 
 export default function App() {
   const [state, setState] = useState(loadState)
@@ -78,12 +78,13 @@ export default function App() {
       {tab === 'translate' && (
         <Translator country={state.country} onCountry={(country) => update({ country })} />
       )}
-      {tab === 'search' && (
-        <Search
+      {tab === 'explore' && (
+        <Explore
           bakeries={state.bakeries}
-          wantToTry={state.wantToTry}
+          notes={state.notes}
+          onChangeNotes={(notes) => update({ notes })}
           onOpen={(id) => setDetailId(id)}
-          onWent={(entry) => openLog(entry)}
+          onUpdateBakery={updateBakery}
         />
       )}
 
@@ -98,7 +99,7 @@ export default function App() {
         </button>
         <button className="fab" onClick={() => openLog()}>
           <span className="fab-circle">
-            <IconPlus width={17} height={17} />
+            <IconPlus width={15} height={15} />
           </span>
           Add
         </button>
@@ -106,9 +107,9 @@ export default function App() {
           <IconGlobe />
           Translate
         </button>
-        <button className={tab === 'search' ? 'active' : ''} onClick={() => setTab('search')}>
-          <IconSearch />
-          Search
+        <button className={tab === 'explore' ? 'active' : ''} onClick={() => setTab('explore')}>
+          <IconExplore />
+          Explore
         </button>
       </nav>
 

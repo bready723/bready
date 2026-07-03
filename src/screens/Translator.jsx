@@ -1,5 +1,13 @@
 import { useEffect, useRef, useState } from 'react'
-import { COUNTRIES, countryByCode, CURATED_LANGS, PHRASES, GLOSSARY } from '../lib/phrasebook.js'
+import {
+  COUNTRIES,
+  countryByCode,
+  CURATED_LANGS,
+  INPUT_LANGS,
+  inputByLang,
+  PHRASES,
+  GLOSSARY,
+} from '../lib/phrasebook.js'
 import {
   speak,
   translateText,
@@ -14,6 +22,24 @@ const loadAuto = () => {
     return JSON.parse(localStorage.getItem(AUTO_KEY)) || {}
   } catch (e) {
     return {}
+  }
+}
+
+// Persist every translation so nothing spoken/typed is lost — Sara can copy or
+// download the whole script as a .txt file.
+const SCRIPT_KEY = 'bready.script.v1'
+const loadScript = () => {
+  try {
+    return JSON.parse(localStorage.getItem(SCRIPT_KEY)) || []
+  } catch (e) {
+    return []
+  }
+}
+const saveScript = (list) => {
+  try {
+    localStorage.setItem(SCRIPT_KEY, JSON.stringify(list))
+  } catch (e) {
+    /* quota — keep in memory only */
   }
 }
 
@@ -55,12 +81,57 @@ export default function Translator({ country, onCountry }) {
   const [auto, setAuto] = useState(loadAuto)
   const [autoLoading, setAutoLoading] = useState(false)
   const [micMsg, setMicMsg] = useState('')
+  const [script, setScript] = useState(loadScript)
   const recRef = useRef(null)
   const micTimer = useRef(null)
   const reqRef = useRef(0)
 
   const isCurated = CURATED_LANGS.has(dest.lang)
-  const fromLabel = inputLang === 'ko' ? '한국어' : 'English'
+  const fromLabel = inputByLang(inputLang).label
+
+  function logScript(source, translated) {
+    setScript((prev) => {
+      const next = [
+        { ts: Date.now(), fromLang: inputByLang(inputLang).label, toLang: dest.name, source, translated },
+        ...prev,
+      ].slice(0, 200)
+      saveScript(next)
+      return next
+    })
+  }
+
+  function scriptToText() {
+    return script
+      .map((s) => {
+        const when = (() => {
+          try {
+            return new Date(s.ts).toLocaleString()
+          } catch (e) {
+            return ''
+          }
+        })()
+        return `[${when}] ${s.fromLang} → ${s.toLang}\n${s.source}\n${s.translated}\n`
+      })
+      .join('\n')
+  }
+  function copyScript() {
+    if (navigator.clipboard) navigator.clipboard.writeText(scriptToText()).catch(() => {})
+  }
+  function downloadScript() {
+    const blob = new Blob([scriptToText()], { type: 'text/plain;charset=utf-8' })
+    const url = URL.createObjectURL(blob)
+    const a = document.createElement('a')
+    a.href = url
+    a.download = 'bready-translation-script.txt'
+    document.body.appendChild(a)
+    a.click()
+    document.body.removeChild(a)
+    setTimeout(() => URL.revokeObjectURL(url), 0)
+  }
+  function clearScript() {
+    setScript([])
+    saveScript([])
+  }
 
   useEffect(() => {
     if (isCurated || auto[dest.lang]) return
@@ -103,11 +174,12 @@ export default function Translator({ country, onCountry }) {
     setStatus('loading')
     setOutput('')
     try {
-      const out = await translateText(phrase, dest.lang)
+      const out = await translateText(phrase, dest.lang, inputLang)
       if (myReq !== reqRef.current) return
       setOutput(out)
       setStatus('done')
       speak(out, dest.bcp)
+      logScript(phrase, out)
     } catch (e) {
       if (myReq !== reqRef.current) return
       setStatus('error')
@@ -131,7 +203,7 @@ export default function Translator({ country, onCountry }) {
     setMicMsg('🔴 Listening… speak now')
     setListening(true)
     recRef.current = startListening({
-      lang: inputLang === 'ko' ? 'ko-KR' : 'en-US',
+      lang: inputByLang(inputLang).bcp,
       onResult: (said) => {
         stopMicTimer()
         setListening(false)
@@ -151,9 +223,11 @@ export default function Translator({ country, onCountry }) {
       },
     })
     stopMicTimer()
+    // Safari caps a single utterance around a minute; give a generous window and
+    // stop on a pause. Type-to-translate stays as the always-reliable fallback.
     micTimer.current = setTimeout(() => {
       recRef.current && recRef.current.stop()
-    }, 8000)
+    }, 45000)
   }
 
   const anyDdOpen = fromOpen || toOpen
@@ -189,17 +263,17 @@ export default function Translator({ country, onCountry }) {
               <Chevron />
             </button>
             {fromOpen && (
-              <div className="dd-menu">
-                {[['en', 'English'], ['ko', '한국어']].map(([v, label]) => (
+              <div className="dd-menu" style={{ maxHeight: 280, overflowY: 'auto' }}>
+                {INPUT_LANGS.map((l) => (
                   <button
-                    key={v}
+                    key={l.lang}
                     className="dd-item"
                     onClick={() => {
-                      setInputLang(v)
+                      setInputLang(l.lang)
                       setFromOpen(false)
                     }}
                   >
-                    {label}
+                    {l.label}
                   </button>
                 ))}
               </div>
@@ -262,7 +336,18 @@ export default function Translator({ country, onCountry }) {
           <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round"><path d="M4 15a8 7 0 0116 0v3H4v-3z" /><path d="M9 11.2l-1.2 1.8M13.2 10.6L12 12.4M17 11.6l-1.2 1.8" /></svg>
           Bread words
         </button>
+        <button className={`subtab ${sub === 'script' ? 'on' : ''}`} onClick={() => setSub('script')}>
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round"><path d="M8 6h11M8 12h11M8 18h11" /><path d="M3.5 6h.01M3.5 12h.01M3.5 18h.01" /></svg>
+          Script
+        </button>
       </div>
+
+      {/* Cantonese caveat: written text falls back to standard Chinese; the voice is real Cantonese. */}
+      {dest.code === 'HK' && sub !== 'script' && (
+        <p className="muted" style={{ fontSize: 12, lineHeight: 1.5, margin: '12px 2px 0' }}>
+          廣東話: the written text shows standard Chinese, but 🔊 <strong>plays in Cantonese</strong>.
+        </p>
+      )}
 
       {/* ---------- TRANSLATE ---------- */}
       {sub === 'translate' && (
@@ -333,7 +418,7 @@ export default function Translator({ country, onCountry }) {
       )}
 
       {/* auto-translation note for non-curated languages */}
-      {!isCurated && sub !== 'translate' && (
+      {!isCurated && (sub === 'phrases' || sub === 'words') && (
         <p className="muted" style={{ fontSize: 12, margin: '12px 2px 0' }}>
           {autoLoading
             ? `Auto-translating to ${dest.name}…`
@@ -376,6 +461,32 @@ export default function Translator({ country, onCountry }) {
               </div>
             )
           })}
+        </div>
+      )}
+
+      {/* ---------- SCRIPT (saved translations) ---------- */}
+      {sub === 'script' && (
+        <div style={{ marginTop: 14 }}>
+          {script.length === 0 ? (
+            <p className="muted" style={{ fontSize: 13, margin: '8px 2px 0', lineHeight: 1.55 }}>
+              Nothing saved yet. Every translation you make gets kept here — copy it or download the whole thing as a text file.
+            </p>
+          ) : (
+            <>
+              <div className="script-tools">
+                <button className="btn outline row" onClick={copyScript}>Copy all</button>
+                <button className="btn outline row" onClick={downloadScript}>Download .txt</button>
+                <button className="btn ghost row" onClick={clearScript}>Clear</button>
+              </div>
+              {script.map((s, i) => (
+                <div key={i} className="script-row">
+                  <div className="langs">{s.fromLang} → {s.toLang}</div>
+                  <div className="s">{s.source}</div>
+                  <div className="t">{s.translated}</div>
+                </div>
+              ))}
+            </>
+          )}
         </div>
       )}
     </main>

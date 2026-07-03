@@ -3,6 +3,23 @@ import { TIERS } from '../lib/ranking.js'
 import { breadLabel } from '../lib/breads.js'
 import { googleMapsUrl } from '../lib/maps.js'
 
+// A keyless web-search link (no bakery website stored yet — this always works).
+function webSearchUrl(bakery) {
+  const q = [bakery.name, bakery.area, 'bakery'].filter(Boolean).join(' ')
+  return `https://www.google.com/search?q=${encodeURIComponent(q)}`
+}
+
+function shareBakery(bakery) {
+  const title = bakery.name
+  const text = `${bakery.name}${bakery.area ? ` — ${bakery.area}` : ''} (${bakery.score.toFixed(1)}/10 on bready)`
+  const url = googleMapsUrl(bakery)
+  if (navigator.share) {
+    navigator.share({ title, text, url }).catch(() => {})
+  } else if (navigator.clipboard) {
+    navigator.clipboard.writeText(`${text} ${url}`).catch(() => {})
+  }
+}
+
 // Downscale a picked image to a small data URL so it fits comfortably in
 // localStorage (real cloud photo storage comes with the Supabase step).
 function fileToThumb(file, onDone) {
@@ -67,24 +84,46 @@ export default function BakeryDetail({ bakery, onClose, onUpdateBakery }) {
         <h2>{bakery.name}</h2>
         {bakery.area && <div className="area">{bakery.area}</div>}
 
+        {(bakery.breads || []).length > 0 && (
+          <div className="cat-row">
+            {bakery.breads.map((k) => (
+              <span key={k} className="cat">{breadLabel(k)}</span>
+            ))}
+          </div>
+        )}
+
         <div className="score-block">
-          <div className="score-big">{bakery.score.toFixed(1)}</div>
+          <div className="score-circle big">{bakery.score.toFixed(1)}</div>
           <div className="tier-info">
             <div className="tier-name">{tier ? tier.label : '—'}</div>
             <div className="visit-meta">{visitMeta}</div>
           </div>
         </div>
 
-        <a className="maps-link" href={googleMapsUrl(bakery)} target="_blank" rel="noopener noreferrer">
-          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round">
-            <path d="M12 21s-6-5.1-6-10a6 6 0 1112 0c0 4.9-6 10-6 10z" />
-            <circle cx="12" cy="11" r="2.2" />
-          </svg>
-          View on Google Maps
-          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-            <path d="M7 17L17 7M9 7h8v8" />
-          </svg>
-        </a>
+        <div className="actions">
+          <a className="action-pill" href={googleMapsUrl(bakery)} target="_blank" rel="noopener noreferrer">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round">
+              <path d="M12 21s-6-5.1-6-10a6 6 0 1112 0c0 4.9-6 10-6 10z" />
+              <circle cx="12" cy="11" r="2.2" />
+            </svg>
+            Directions
+          </a>
+          <a className="action-pill" href={webSearchUrl(bakery)} target="_blank" rel="noopener noreferrer">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round">
+              <circle cx="12" cy="12" r="9" />
+              <path d="M3 12h18" />
+              <ellipse cx="12" cy="12" rx="4" ry="9" />
+            </svg>
+            Website
+          </a>
+          <button className="action-pill" onClick={() => shareBakery(bakery)}>
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round">
+              <circle cx="18" cy="5" r="3" /><circle cx="6" cy="12" r="3" /><circle cx="18" cy="19" r="3" />
+              <path d="M8.6 13.5l6.8 4M15.4 6.5l-6.8 4" />
+            </svg>
+            Share
+          </button>
+        </div>
 
         <div className="divider" />
 

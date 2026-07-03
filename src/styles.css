@@ -132,14 +132,14 @@ input::placeholder, textarea::placeholder { color: #b9af9e; }
   cursor: pointer;
 }
 .tabbar button.active { color: var(--accent); }
-.tabbar button.fab { color: #5b3fd6; padding: 0; }
+/* Add tab keeps the brand gradient but is the SAME SIZE as the others
+   (no oversized, raised circle). */
 .tabbar button.fab .fab-circle {
-  width: 35px; height: 35px; margin-top: -9px;
+  width: 24px; height: 24px;
   border-radius: 50%;
   background: var(--fab-gradient);
   color: #fdfbf7;
   display: flex; align-items: center; justify-content: center;
-  box-shadow: 0 5px 12px rgba(91, 63, 214, 0.3);
 }
 
 /* ---- headings & text ---- */
@@ -254,12 +254,6 @@ textarea.input { resize: vertical; min-height: 88px; }
 .rank-row .tags {
   font-size: 12.5px; color: var(--soft); margin-top: 3px;
   white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
-}
-
-/* ---- the signature: serif score numeral ---- */
-.score {
-  font-family: var(--display); font-weight: var(--disp-weight);
-  font-size: 22px; flex-shrink: 0; color: var(--ink);
 }
 
 /* ---- empty state ---- */
@@ -382,14 +376,9 @@ textarea.input { resize: vertical; min-height: 88px; }
 }
 .detail .area { font-size: 13px; color: var(--soft); margin-top: 5px; }
 .detail .score-block { display: flex; align-items: center; gap: 16px; margin-top: 18px; }
-.detail .score-big { font-family: var(--display); font-weight: var(--disp-weight); font-size: 46px; line-height: 1; }
 .detail .tier-info { border-left: 1px solid var(--line-2); padding-left: 16px; }
 .detail .tier-name { font-size: 13.5px; font-weight: 600; }
 .detail .visit-meta { font-size: 12px; color: var(--soft); margin-top: 2px; }
-.detail .maps-link {
-  display: inline-flex; align-items: center; gap: 6px; margin-top: 16px;
-  color: var(--accent); font-size: 13.5px; font-weight: 600; text-decoration: none;
-}
 .detail .divider { height: 1px; background: var(--line); margin: 22px 0 0; }
 .bread-tag {
   font-size: 12.5px; font-weight: 600; color: #5c5442;
@@ -401,9 +390,113 @@ textarea.input { resize: vertical; min-height: 88px; }
 .visit-row .b { font-size: 12px; color: var(--soft); margin-top: 3px; }
 .visit-row .notes { font-size: 14px; line-height: 1.55; margin-top: 7px; color: var(--ink-2); }
 
-/* saved badge (search) */
-.saved-badge {
-  font-size: 11px; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase;
-  color: var(--accent); border: 1px solid var(--accent-soft); border-radius: 6px;
-  padding: 5px 9px; flex-shrink: 0;
+/* ---- Beli-style score circle ---- */
+.score-circle {
+  flex-shrink: 0;
+  width: 46px; height: 46px; border-radius: 50%;
+  border: 1.5px solid var(--line-2); background: var(--surface);
+  display: flex; align-items: center; justify-content: center;
+  font-family: var(--display); font-weight: var(--disp-weight);
+  font-size: 16px; color: #1c7c54; /* green, like Beli */
 }
+.score-circle.big { width: 66px; height: 66px; font-size: 24px; border-width: 2px; }
+
+/* ---- in-list search bar ---- */
+.searchbar {
+  display: flex; align-items: center; gap: 9px; margin-top: 16px;
+  border: 1px solid var(--line-2); background: var(--surface);
+  border-radius: 11px; padding: 10px 13px; color: var(--soft);
+}
+.searchbar input {
+  flex: 1; border: 0; outline: none; background: none;
+  font-family: var(--sans); font-size: 14.5px; color: var(--ink);
+}
+.searchbar .clear { cursor: pointer; border: 0; background: none; color: var(--faint); padding: 2px; display: flex; }
+
+/* ---- rich detail: category tags + action pills ---- */
+.detail .cat-row {
+  display: flex; flex-wrap: wrap; gap: 7px 14px; margin-top: 12px;
+}
+.detail .cat-row .cat {
+  font-size: 13px; font-weight: 600; color: var(--accent);
+}
+.detail .actions { display: flex; gap: 9px; margin-top: 16px; }
+.detail .action-pill {
+  flex: 1; display: flex; align-items: center; justify-content: center; gap: 6px;
+  border: 1px solid var(--line-2); background: var(--surface); border-radius: 11px;
+  padding: 11px 8px; color: var(--accent); font-family: var(--sans);
+  font-size: 12.5px; font-weight: 600; cursor: pointer; text-decoration: none;
+}
+.detail .action-pill:active { border-color: var(--accent); }
+
+/* ---- Discover (famous bakeries inside Want-to-try) ---- */
+.discover-city { margin-top: 22px; }
+.discover-city .city-head {
+  display: flex; align-items: center; justify-content: space-between;
+  font-family: var(--display); font-weight: var(--disp-weight);
+  font-size: 18px; color: var(--ink); cursor: pointer; padding: 4px 0;
+}
+.discover-city .city-head .count { font-family: var(--sans); font-size: 12px; color: var(--soft); font-weight: 600; }
+.discover-row {
+  display: flex; align-items: center; gap: 12px;
+  padding: 12px 0; border-bottom: 1px solid var(--line);
+}
+.discover-row .info { flex: 1; min-width: 0; }
+.discover-row .nm { font-size: 14.5px; font-weight: 600; }
+.discover-row .ar { font-size: 12px; color: var(--soft); margin-top: 2px; }
+.discover-row .maps {
+  display: flex; align-items: center; color: var(--soft); padding: 6px; flex-shrink: 0;
+}
+.discover-row .added { font-size: 12px; font-weight: 600; color: var(--soft); flex-shrink: 0; padding: 0 4px; }
+
+/* ---- Explore ("Bread World") ---- */
+.stat-card {
+  background: var(--surface); border: 1px solid var(--line);
+  border-radius: var(--radius); padding: 18px; margin-top: 16px;
+}
+.stat-card .big {
+  font-family: var(--display); font-weight: var(--disp-weight);
+  font-size: 26px; color: var(--accent); line-height: 1.1;
+}
+.stat-card .row { display: flex; gap: 18px; margin-top: 14px; flex-wrap: wrap; }
+.stat-card .cell .k { font-size: 11px; text-transform: uppercase; letter-spacing: 0.08em; color: var(--soft); font-weight: 600; }
+.stat-card .cell .v { font-size: 15px; font-weight: 600; margin-top: 3px; }
+
+.explore-section-label {
+  font-family: var(--display); font-weight: var(--disp-weight);
+  font-size: 18px; color: var(--ink); margin: 26px 0 4px;
+}
+
+/* quick notes */
+.note-add { display: flex; gap: 8px; margin-top: 10px; }
+.note-row {
+  border-bottom: 1px solid var(--line); padding: 13px 0;
+  display: flex; gap: 10px; align-items: flex-start;
+}
+.note-row .body { flex: 1; min-width: 0; }
+.note-row .text { font-size: 14.5px; line-height: 1.5; color: var(--ink-2); white-space: pre-wrap; word-break: break-word; }
+.note-row .when { font-size: 11px; color: var(--faint); margin-top: 5px; }
+.note-row .x { cursor: pointer; border: 0; background: none; color: var(--faint); padding: 3px; display: flex; flex-shrink: 0; }
+
+/* inspiration */
+.inspire {
+  font-family: var(--display); font-style: italic; font-size: 16px; color: var(--soft);
+  text-align: center; line-height: 1.5; margin: 30px 10px 4px;
+}
+.glossary-strip { display: flex; gap: 10px; overflow-x: auto; margin: 12px -22px 0; padding: 2px 22px 8px; }
+.glossary-strip .gcard {
+  flex-shrink: 0; width: 78px; text-align: center;
+  border: 1px solid var(--line-2); background: var(--surface); border-radius: 12px; padding: 12px 6px;
+}
+.glossary-strip .gcard .emoji { font-size: 24px; }
+.glossary-strip .gcard .lbl { font-size: 11px; color: var(--soft); margin-top: 6px; font-weight: 600; }
+
+/* translator script log */
+.script-row {
+  border: 1px solid var(--line); background: var(--surface); border-radius: 12px;
+  padding: 12px 14px; margin-bottom: 10px;
+}
+.script-row .langs { font-size: 10.5px; text-transform: uppercase; letter-spacing: 0.08em; color: var(--faint); font-weight: 600; }
+.script-row .s { font-size: 13px; color: var(--soft); margin-top: 5px; }
+.script-row .t { font-family: var(--display); font-size: 17px; margin-top: 3px; }
+.script-tools { display: flex; gap: 8px; margin: 4px 0 14px; }

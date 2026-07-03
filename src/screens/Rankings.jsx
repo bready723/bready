@@ -1,32 +1,24 @@
 import { useState } from 'react'
 import { BREADS, breadEmoji, breadLabel } from '../lib/breads.js'
-import MapView from './MapView.jsx'
+import { IconSearch } from '../components/Icons.jsx'
 
-export default function Rankings({ bakeries, onOpen, onLog, onUpdateBakery }) {
+export default function Rankings({ bakeries, onOpen, onLog }) {
   const [filter, setFilter] = useState('all')
-  const [view, setView] = useState('list') // list | map
+  const [q, setQ] = useState('')
 
-  const list =
-    filter === 'all' ? bakeries : bakeries.filter((b) => (b.breads || []).includes(filter))
+  const query = q.trim().toLowerCase()
+  const list = bakeries
+    .filter((b) => filter === 'all' || (b.breads || []).includes(filter))
+    .filter((b) => {
+      if (!query) return true
+      const hay = `${b.name} ${b.area || ''} ${(b.breads || []).map(breadLabel).join(' ')}`.toLowerCase()
+      return hay.includes(query)
+    })
 
   return (
     <main className="screen">
-      <div style={{ display: 'flex', alignItems: 'flex-end', justifyContent: 'space-between', gap: 12 }}>
-        <div>
-          <h1 className="title">My rankings</h1>
-          <p className="subtitle">Every bakery, in order.</p>
-        </div>
-        {bakeries.length > 0 && (
-          <div className="segment">
-            <button className={view === 'list' ? 'on' : ''} onClick={() => setView('list')}>
-              List
-            </button>
-            <button className={view === 'map' ? 'on' : ''} onClick={() => setView('map')}>
-              Map
-            </button>
-          </div>
-        )}
-      </div>
+      <h1 className="title">My rankings</h1>
+      <p className="subtitle">Every bakery, in order.</p>
 
       {bakeries.length === 0 && (
         <div className="empty">
@@ -38,14 +30,24 @@ export default function Rankings({ bakeries, onOpen, onLog, onUpdateBakery }) {
         </div>
       )}
 
-      {bakeries.length > 0 && view === 'map' && (
-        <div style={{ marginTop: 18 }}>
-          <MapView bakeries={bakeries} onOpen={onOpen} onGeocode={onUpdateBakery} />
-        </div>
-      )}
-
-      {bakeries.length > 0 && view === 'list' && (
+      {bakeries.length > 0 && (
         <>
+          <div className="searchbar">
+            <IconSearch width={16} height={16} />
+            <input
+              placeholder="Search your bakeries…"
+              value={q}
+              onChange={(e) => setQ(e.target.value)}
+            />
+            {q && (
+              <button className="clear" onClick={() => setQ('')} title="Clear">
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round">
+                  <path d="M6 6l12 12M18 6L6 18" />
+                </svg>
+              </button>
+            )}
+          </div>
+
           <div className="filter-row">
             <button
               className={`filter-chip ${filter === 'all' ? 'on' : ''}`}
@@ -66,7 +68,7 @@ export default function Rankings({ bakeries, onOpen, onLog, onUpdateBakery }) {
 
           {list.length === 0 ? (
             <p className="muted" style={{ textAlign: 'center', fontSize: 13.5, padding: '36px 0' }}>
-              No {breadLabel(filter).toLowerCase()} logged yet.
+              {query ? `No match for “${q}”.` : `No ${breadLabel(filter).toLowerCase()} logged yet.`}
             </p>
           ) : (
             <div>
@@ -95,7 +97,7 @@ export default function Rankings({ bakeries, onOpen, onLog, onUpdateBakery }) {
                       {(b.breads || []).map((k) => breadLabel(k)).join(', ') || '—'}
                     </div>
                   </div>
-                  <div className="score">{b.score.toFixed(1)}</div>
+                  <div className="score-circle">{b.score.toFixed(1)}</div>
                 </div>
               ))}
             </div>
