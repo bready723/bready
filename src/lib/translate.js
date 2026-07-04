@@ -75,22 +75,32 @@ export function speechRecognitionSupported() {
 
 // Human-readable reason for a recognition failure, so the UI can guide the user
 // instead of silently doing nothing (the #1 "the mic doesn't work" complaint).
+// We surface the RAW SpeechRecognition error code in every message so we can tell
+// what's really happening instead of guessing — the codes look alike from outside.
 export function micErrorMessage(err) {
-  const code = (err && (err.error || err.message)) || ''
+  const code = (err && (err.error || err.message)) || 'unknown'
+  const tag = ` (${code})` // the real reason, so we're never guessing again
   switch (code) {
     case 'not-allowed':
+      // The SITE's own mic permission was denied/dismissed for THIS page.
+      return `Mic access was denied for this page. On iPhone: tap "aA" in Safari's address bar → Website Settings → Microphone → Allow, then reload.${tag}`
     case 'service-not-allowed':
-      return 'Microphone is blocked. Allow mic access for this site in your browser settings, then try again.'
+      // iOS routes voice through the system DICTATION service — not the per-site
+      // mic toggle. So "Microphone: Allow" for the site does NOT fix this; the
+      // system Dictation switch has to be on. This is the usual iPhone culprit.
+      return `iPhone's system dictation is off. Turn on Settings → General → Keyboard → Enable Dictation, then reload and try the mic again.${tag}`
     case 'no-speech':
-      return "Didn't catch anything — try again, or just type it below."
+      return `Didn't catch anything — try again, or just type it below.${tag}`
     case 'audio-capture':
-      return 'No microphone found on this device.'
+      return `No microphone found on this device.${tag}`
     case 'network':
-      return 'Voice needs an internet connection. Type it instead.'
+      return `Voice needs an internet connection. Type it instead.${tag}`
+    case 'aborted':
+      return `Voice input stopped. Tap the mic to try again, or type below.${tag}`
     case 'voice not supported':
-      return "This browser's voice input is unavailable — typing always works."
+      return `This browser's voice input is unavailable — typing always works.${tag}`
     default:
-      return "Voice didn't work here — no problem, typing always works."
+      return `Voice didn't work here — no problem, typing always works.${tag}`
   }
 }
 

@@ -167,6 +167,10 @@ export default function Translator({ country, onCountry }) {
     isCurated ? w.t[dest.lang] || w.en : auto[dest.lang]?.glossary[i] ?? w.en
 
   const voiceOk = !!speechRecognitionSupported()
+  // iPhone/iPad voice-to-text rides on iOS's system Dictation service, not the
+  // per-site mic toggle — so we tell Sara upfront where the real switch lives.
+  const isIOS =
+    typeof navigator !== 'undefined' && /iP(hone|ad|od)/.test(navigator.userAgent)
 
   async function doTranslate(value) {
     const phrase = (value ?? text).trim()
@@ -398,6 +402,11 @@ export default function Translator({ country, onCountry }) {
           {voiceOk && micMsg && (
             <p style={{ fontSize: 12.5, fontWeight: 600, color: listening ? 'var(--accent)' : 'var(--soft)', margin: '10px 2px 0' }}>
               {micMsg}
+            </p>
+          )}
+          {voiceOk && isIOS && !micMsg && !listening && (
+            <p className="muted" style={{ fontSize: 12, lineHeight: 1.5, margin: '10px 2px 0' }}>
+              📱 iPhone: voice needs <strong>Settings → General → Keyboard → Enable Dictation</strong> turned on.
             </p>
           )}
 
