@@ -326,6 +326,8 @@ textarea.input { resize: vertical; min-height: 88px; }
   background: var(--surface); color: var(--ink); cursor: pointer; text-align: left;
 }
 .tr-arrow { height: 42px; display: flex; align-items: center; justify-content: center; color: var(--faint); }
+.tr-swap { width: 42px; padding: 0; border: 1px solid var(--line-2); border-radius: 999px; background: var(--surface); color: var(--accent); cursor: pointer; }
+.tr-swap:active { background: var(--accent-tint); }
 
 /* dropdown menu (From/To pickers) */
 .dd-menu {

@@ -62,6 +62,25 @@ export const inputById = (id) => INPUT_LANGS.find((l) => l.id === id) || INPUT_L
 
 export const countryByCode = (code) => COUNTRIES.find((c) => c.code === code) || COUNTRIES[0]
 
+// Flip From ⇄ To for the "swap" button. Match by `bcp` first so Mandarin
+// (zh-CN) and Cantonese (zh-HK) don't collapse into each other, then fall back
+// to `lang`. `newFrom` is null when the current To has no spoken-input entry
+// (only the ~13 INPUT_LANGS can be a spoken From); `newTo` always resolves since
+// every input language maps to a country.
+export function flipLangs(fromId, toCode) {
+  const fromCur = inputById(fromId)
+  const toCur = countryByCode(toCode)
+  const newFrom =
+    INPUT_LANGS.find((l) => l.bcp === toCur.bcp) ||
+    INPUT_LANGS.find((l) => l.lang === toCur.lang) ||
+    null
+  const newTo =
+    COUNTRIES.find((c) => c.bcp === fromCur.bcp) ||
+    COUNTRIES.find((c) => c.lang === fromCur.lang) ||
+    null
+  return { newFrom, newTo }
+}
+
 // Curated bakery phrases — work offline, no API needed. `ko` is shown as Sara's
 // reference; `t[lang]` is what she shows/plays at the counter.
 export const PHRASES = [
