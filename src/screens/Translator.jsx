@@ -419,7 +419,9 @@ export default function Translator({ country, onCountry }) {
           )}
           {isIOS && !micMsg && !listening && (
             <p className="muted" style={{ fontSize: 12, lineHeight: 1.5, margin: '10px 2px 0' }}>
-              📱 On iPhone, tap 🎤 to open the keyboard, then use its <strong>mic key</strong> (by the space bar) to speak.
+              📱 On iPhone, tap 🎤 to open the keyboard, then its <strong>mic key</strong> to speak.
+              First switch the keyboard (🌐 globe key) to match your <strong>From</strong> language —
+              dictation follows the keyboard, not the From box.
             </p>
           )}
 
