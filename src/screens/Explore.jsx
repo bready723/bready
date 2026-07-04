@@ -1,21 +1,29 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import MapView from './MapView.jsx'
 import { BREADS, breadEmoji, breadLabel } from '../lib/breads.js'
 import { uid } from '../lib/storage.js'
 
-// A few "The Bear"-style lines — one shows at random each time you open Explore.
+// The Bready Kitchen banner. Cycles every 10s, always opening on "Every second
+// counts." (The Bear). The rest blend The Bear's kitchen ethos with Will
+// Guidara's *Unreasonable Hospitality* — short, paraphrased, made-for-a-banner.
 const INSPIRATION = [
-  'Every second counts.',
+  'Every second counts.', // The Bear
+  'Be unreasonable in the pursuit of hospitality.', // Unreasonable Hospitality
+  'The pursuit of excellence.',
+  'Hospitality is a dialogue, not a monologue.',
+  'Make people feel seen.',
+  'Give people more than they expect.',
+  'The little things are the big things.',
+  'Turn a transaction into a relationship.',
+  'Create a sense of belonging.',
+  'The magic is in the unreasonable.',
+  'Be the reason someone feels welcome.',
+  'Legacy is what you leave in people.',
+  'Respect the craft.', // The Bear
+  'Let it rip.', // The Bear
   'A good loaf is a whole day’s patience.',
-  'Respect the crumb.',
-  'The best bakery is the one you haven’t found yet.',
-  'Butter, flour, time. That’s the whole secret.',
   'Chase the fresh-out-of-the-oven moment.',
 ]
-
-function pickInspiration() {
-  return INSPIRATION[Math.floor(Math.random() * INSPIRATION.length)]
-}
 
 function fmtDate(ts) {
   try {
@@ -49,7 +57,20 @@ export default function Explore({ bakeries, notes, onChangeNotes, onOpen, onUpda
   const [draft, setDraft] = useState('')
   const [editingId, setEditingId] = useState(null)
   const [editText, setEditText] = useState('')
-  const [quote] = useState(pickInspiration)
+  const [quoteIdx, setQuoteIdx] = useState(0) // always opens on "Every second counts."
+  const [quoteShown, setQuoteShown] = useState(true) // drives the fade
+
+  // Rotate the banner quote every 10s with a short cross-fade.
+  useEffect(() => {
+    const tick = setInterval(() => {
+      setQuoteShown(false)
+      setTimeout(() => {
+        setQuoteIdx((i) => (i + 1) % INSPIRATION.length)
+        setQuoteShown(true)
+      }, 320)
+    }, 10000)
+    return () => clearInterval(tick)
+  }, [])
 
   const stats = computeStats(bakeries)
 
@@ -79,7 +100,12 @@ export default function Explore({ bakeries, notes, onChangeNotes, onOpen, onUpda
       {/* ---------- INSPIRATION BANNER (The Bear frame) ---------- */}
       <div className="inspire-banner">
         <span className="eyebrow">bready kitchen</span>
-        <span className="line">{quote}</span>
+        <span
+          className="line"
+          style={{ opacity: quoteShown ? 1 : 0, transition: 'opacity 0.32s ease' }}
+        >
+          {INSPIRATION[quoteIdx]}
+        </span>
       </div>
 
       {/* ---------- QUICK NOTES ---------- */}
