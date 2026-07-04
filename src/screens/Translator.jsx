@@ -429,6 +429,15 @@ export default function Translator({ country, onCountry }) {
               <Speak onClick={() => speak(output, dest.bcp)} color="#1D5BCE" />
             </div>
           )}
+          {/* MyMemory silently echoes the input when the From language is wrong —
+              catch that (output === input across two different languages) and nudge. */}
+          {status === 'done' && output && output.trim() === text.trim() &&
+            inputById(inputLang).lang !== dest.lang && (
+            <p className="muted" style={{ fontSize: 12.5, lineHeight: 1.55, margin: '10px 2px 0' }}>
+              ⚠️ Came back unchanged — check the <strong>From</strong> language matches what you typed
+              (e.g. set From to 🇰🇷 한국어 for Korean).
+            </p>
+          )}
           {status === 'error' && (
             <p className="muted" style={{ fontSize: 12.5, lineHeight: 1.55, margin: '14px 2px 0' }}>
               Couldn’t reach the translator — no internet? Try the <strong>Phrasebook</strong> tab; those work offline.
