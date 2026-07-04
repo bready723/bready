@@ -75,6 +75,7 @@ export default function Translator({ country, onCountry }) {
   const [fromOpen, setFromOpen] = useState(false)
   const [toOpen, setToOpen] = useState(false)
   const [text, setText] = useState('')
+  const [submitted, setSubmitted] = useState('') // the source we last translated (input clears after)
   const [output, setOutput] = useState('')
   const [status, setStatus] = useState('idle') // idle | loading | done | error
   const [listening, setListening] = useState(false)
@@ -183,7 +184,9 @@ export default function Translator({ country, onCountry }) {
       const out = await translateText(phrase, dest.lang, inputById(inputLang).lang)
       if (myReq !== reqRef.current) return
       setOutput(out)
+      setSubmitted(phrase)
       setStatus('done')
+      setText('') // clear the box so the next dictation starts fresh (no run-on)
       speak(out, dest.bcp)
       logScript(phrase, out)
     } catch (e) {
@@ -423,7 +426,7 @@ export default function Translator({ country, onCountry }) {
           {status === 'done' && output && (
             <div className="phrase" style={{ marginTop: 16 }}>
               <div className="txt">
-                <div className="src">{text}</div>
+                <div className="src">{submitted}</div>
                 <div className="dst">{output}</div>
               </div>
               <Speak onClick={() => speak(output, dest.bcp)} color="#1D5BCE" />
@@ -431,7 +434,7 @@ export default function Translator({ country, onCountry }) {
           )}
           {/* MyMemory silently echoes the input when the From language is wrong —
               catch that (output === input across two different languages) and nudge. */}
-          {status === 'done' && output && output.trim() === text.trim() &&
+          {status === 'done' && output && output.trim() === submitted.trim() &&
             inputById(inputLang).lang !== dest.lang && (
             <p className="muted" style={{ fontSize: 12.5, lineHeight: 1.55, margin: '10px 2px 0' }}>
               ⚠️ Came back unchanged — check the <strong>From</strong> language matches what you typed
