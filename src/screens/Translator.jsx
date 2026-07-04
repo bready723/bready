@@ -406,7 +406,8 @@ export default function Translator({ country, onCountry }) {
           )}
           {voiceOk && isIOS && !micMsg && !listening && (
             <p className="muted" style={{ fontSize: 12, lineHeight: 1.5, margin: '10px 2px 0' }}>
-              📱 iPhone: voice needs <strong>Settings → General → Keyboard → Enable Dictation</strong> turned on.
+              📱 Mic not starting? iPhone voice needs iOS <strong>Dictation</strong> on
+              (Settings → General → Keyboard). If it’s already on, iOS voice can still be flaky — just type.
             </p>
           )}
 
