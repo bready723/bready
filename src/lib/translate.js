@@ -85,10 +85,10 @@ export function micErrorMessage(err) {
       // The SITE's own mic permission was denied/dismissed for THIS page.
       return `Mic access was denied for this page. On iPhone: tap "aA" in Safari's address bar → Website Settings → Microphone → Allow, then reload.${tag}`
     case 'service-not-allowed':
-      // iOS routes voice through the system DICTATION service — not the per-site
-      // mic toggle. So "Microphone: Allow" for the site does NOT fix this; the
-      // system Dictation switch has to be on. This is the usual iPhone culprit.
-      return `iPhone's system dictation is off. Turn on Settings → General → Keyboard → Enable Dictation, then reload and try the mic again.${tag}`
+      // iOS Safari's in-app Web Speech API is broken — it throws this even when
+      // system Dictation is ON. The reliable path is the KEYBOARD's own mic key
+      // (native iOS Dictation), which bypasses the web API entirely.
+      return `iPhone's in-app voice isn't available (an iOS Safari limit). Tap the text box, then the 🎤 on your keyboard to speak — it needs iOS Dictation on — or just type.${tag}`
     case 'no-speech':
       return `Didn't catch anything — try again, or just type it below.${tag}`
     case 'audio-capture':

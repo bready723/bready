@@ -85,6 +85,7 @@ export default function Translator({ country, onCountry }) {
   const recRef = useRef(null)
   const micTimer = useRef(null)
   const reqRef = useRef(0)
+  const textRef = useRef(null)
 
   const isCurated = CURATED_LANGS.has(dest.lang)
   const fromCur = inputById(inputLang)
@@ -196,6 +197,14 @@ export default function Translator({ country, onCountry }) {
       clearTimeout(micTimer.current)
       micTimer.current = null
     }
+  }
+
+  // iOS Safari's Web Speech API is broken (throws service-not-allowed even with
+  // Dictation on), so on iPhone/iPad we skip it and hand off to the RELIABLE path:
+  // focus the box so the keyboard appears, and point Sara at its built-in 🎤 key.
+  function iosKeyboardMic() {
+    setMicMsg('🎤 Tap the mic key on your keyboard (by the space bar) to speak — iOS types it in the box, then hit Translate.')
+    textRef.current && textRef.current.focus()
   }
 
   function toggleMic() {
@@ -358,6 +367,7 @@ export default function Translator({ country, onCountry }) {
       {sub === 'translate' && (
         <div>
           <textarea
+            ref={textRef}
             className="input"
             style={{ marginTop: 18 }}
             placeholder={inputById(inputLang).lang === 'ko' ? '예: 사워도우 한 덩어리 주세요' : 'e.g. One sourdough loaf, please'}
@@ -375,8 +385,8 @@ export default function Translator({ country, onCountry }) {
             </button>
             {voiceOk && (
               <button
-                onClick={toggleMic}
-                title="Speak"
+                onClick={isIOS ? iosKeyboardMic : toggleMic}
+                title={isIOS ? 'Use the keyboard mic' : 'Speak'}
                 style={{
                   width: 48,
                   borderRadius: 10,
@@ -404,10 +414,9 @@ export default function Translator({ country, onCountry }) {
               {micMsg}
             </p>
           )}
-          {voiceOk && isIOS && !micMsg && !listening && (
+          {isIOS && !micMsg && !listening && (
             <p className="muted" style={{ fontSize: 12, lineHeight: 1.5, margin: '10px 2px 0' }}>
-              📱 Mic not starting? iPhone voice needs iOS <strong>Dictation</strong> on
-              (Settings → General → Keyboard). If it’s already on, iOS voice can still be flaky — just type.
+              📱 On iPhone, tap 🎤 to open the keyboard, then use its <strong>mic key</strong> (by the space bar) to speak.
             </p>
           )}
 
