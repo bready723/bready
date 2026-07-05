@@ -2,6 +2,7 @@ import { useEffect, useRef } from 'react'
 import L from 'leaflet'
 import 'leaflet/dist/leaflet.css'
 import { geocode, sleep } from '../lib/geo.js'
+import { seedCoords } from '../lib/seedGeo.js'
 import { googleMapsUrl } from '../lib/maps.js'
 
 const PRINCETON = [40.3573, -74.6672]
@@ -75,9 +76,13 @@ export default function MapView({ bakeries, onOpen, onGeocode }) {
       for (const b of pending) {
         if (cancelled) break
         attempted.current.add(b.id)
-        const coords = await geocode(b.name, b.area, b.city)
+        // Famous seed bakeries have pre-geocoded exact coords — use them with no
+        // network call (this is what fixes "one pin per city": rapid live
+        // geocoding got rate-limited and collapsed pins onto city centroids).
+        const local = seedCoords(b.name, b.area)
+        const coords = local || (await geocode(b.name, b.area, b.city))
         if (coords && onGeocode) onGeocode(b.id, coords)
-        await sleep(1100) // Nominatim asks for <= 1 request/second
+        if (!local) await sleep(1100) // only rate-limit the real Nominatim calls
       }
       running.current = false
     })()

@@ -179,6 +179,14 @@ export default function LogVisit({ bakeries, prefill, onComplete, onCancel }) {
                 onChange={(e) => setOtherText(e.target.value)}
               />
             )}
+            <div className="label">When did you go?</div>
+            <input
+              className="input"
+              type="date"
+              value={visitDate}
+              max={todayISO()}
+              onChange={(e) => setVisitDate(e.target.value)}
+            />
             <button className="btn" style={{ marginTop: 26 }} disabled={!name.trim()} onClick={onInfoNext}>
               Next
             </button>
@@ -259,15 +267,6 @@ export default function LogVisit({ bakeries, prefill, onComplete, onCancel }) {
                 {existing ? "You've ranked this one before — saving today's visit." : 'out of 10 · added to your rankings'}
               </p>
             </div>
-
-            <div className="label">When did you go?</div>
-            <input
-              className="input"
-              type="date"
-              value={visitDate}
-              max={todayISO()}
-              onChange={(e) => setVisitDate(e.target.value)}
-            />
 
             {!showDetails ? (
               <button className="btn ghost" style={{ marginTop: 14 }} onClick={() => setShowDetails(true)}>

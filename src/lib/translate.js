@@ -49,29 +49,71 @@ export function detectSource(text) {
   return /[가-힣]/.test(text) ? 'ko' : 'en'
 }
 
-// --- Free translation via MyMemory (no API key) ---
-export async function translateText(text, targetLang, sourceLang) {
-  const src = sourceLang || detectSource(text)
-  if (!text.trim()) return ''
-  if (src === targetLang) return text
+// Map an app language code — a plain code ('zh', 'ja') OR a BCP tag ('zh-HK',
+// 'ja-JP') — to the code each provider wants. Hong Kong reads TRADITIONAL
+// Chinese, so zh-HK → zh-TW: this fixes "Cantonese came back identical to
+// Mandarin" (Mandarin is Simplified zh-CN, so the scripts now differ).
+function targetCodes(code) {
+  const t = (code || '').toLowerCase()
+  if (t === 'zh-hk' || t === 'zh-tw') return { google: 'zh-TW', mymemory: 'zh-TW' }
+  if (t === 'zh-cn' || t === 'zh') return { google: 'zh-CN', mymemory: 'zh-CN' }
+  const two = t.slice(0, 2)
+  return { google: two, mymemory: two }
+}
+
+// Google's keyless "gtx" endpoint — far more reliable than MyMemory and
+// CORS-open (access-control-allow-origin: *), so it works from the browser.
+async function googleTranslate(text, tl, sl) {
+  const url =
+    'https://translate.googleapis.com/translate_a/single?client=gtx&sl=' +
+    encodeURIComponent(sl) +
+    '&tl=' +
+    encodeURIComponent(tl) +
+    '&dt=t&q=' +
+    encodeURIComponent(text)
+  const res = await fetch(url)
+  if (!res.ok) throw new Error('google http')
+  const data = await res.json()
+  // data[0] is an array of [translatedChunk, originalChunk, …] pairs.
+  const out = ((data && data[0]) || []).map((seg) => seg[0]).join('')
+  if (!out) throw new Error('google empty')
+  return out
+}
+
+// MyMemory fallback (also keyless). On quota/failure it silently ECHOES the
+// input, so a warning marker or an unchanged echo counts as a failure — that's
+// the root cause of "Korean came back unchanged": MyMemory was rate-limited.
+async function myMemoryTranslate(text, tl, sl) {
   const url =
     'https://api.mymemory.translated.net/get?q=' +
     encodeURIComponent(text) +
     '&langpair=' +
-    encodeURIComponent(`${src}|${targetLang}`)
+    encodeURIComponent(`${sl}|${tl}`)
   const res = await fetch(url)
-  if (!res.ok) throw new Error('translation service unavailable')
+  if (!res.ok) throw new Error('mymemory http')
   const data = await res.json()
-  // MyMemory returns HTTP 200 even for quota/error cases, signalling the real
-  // outcome in responseStatus and stuffing a warning into translatedText. Guard
-  // against speaking "MYMEMORY WARNING: YOU USED ALL FREE TRANSLATIONS…" aloud.
   const status = Number(data?.responseStatus)
   const out = data?.responseData?.translatedText
-  if (status && status !== 200) throw new Error('translation unavailable')
+  if (status && status !== 200) throw new Error('mymemory status')
   if (!out || /MYMEMORY WARNING|INVALID|PLEASE SELECT/i.test(out)) {
-    throw new Error('translation unavailable')
+    throw new Error('mymemory warning')
   }
   return out
+}
+
+// --- Free translation: Google gtx first, MyMemory as backup. No API keys. ---
+export async function translateText(text, targetLang, sourceLang) {
+  if (!text.trim()) return ''
+  const src = sourceLang || detectSource(text)
+  const sl = src.slice(0, 2)
+  const { google, mymemory } = targetCodes(targetLang)
+  // Same language in and out — nothing to translate (but zh→zh may switch script).
+  if (sl === google.slice(0, 2) && !/^zh/.test(google)) return text
+  try {
+    return await googleTranslate(text, google, sl)
+  } catch (e) {
+    return await myMemoryTranslate(text, mymemory, src)
+  }
 }
 
 // --- Voice input (best-effort; unreliable on iOS, so callers must fall back) ---

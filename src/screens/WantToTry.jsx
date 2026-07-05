@@ -180,6 +180,9 @@ export default function WantToTry({ wantToTry, onChange, onWent, onOpenDiscover 
                     const withCity = { ...b, city: c.city }
                     return (
                       <div key={b.name} className="discover-row">
+                        {b.photo && (
+                          <img className="disc-thumb" src={b.photo} alt="" loading="lazy" />
+                        )}
                         <div
                           className="info"
                           style={{ cursor: 'pointer' }}

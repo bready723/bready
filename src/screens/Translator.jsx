@@ -182,7 +182,9 @@ export default function Translator({ country, onCountry }) {
     setStatus('loading')
     setOutput('')
     try {
-      const out = await translateText(phrase, dest.lang, inputById(inputLang).lang)
+      // Pass dest.bcp (zh-HK/zh-CN/ja-JP…) so Cantonese maps to Traditional and
+      // stays distinct from Mandarin; translateText normalizes per provider.
+      const out = await translateText(phrase, dest.bcp, inputById(inputLang).lang)
       if (myReq !== reqRef.current) return
       setOutput(out)
       setSubmitted(phrase)
