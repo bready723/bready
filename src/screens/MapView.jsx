@@ -75,7 +75,7 @@ export default function MapView({ bakeries, onOpen, onGeocode }) {
       for (const b of pending) {
         if (cancelled) break
         attempted.current.add(b.id)
-        const coords = await geocode(b.name, b.area)
+        const coords = await geocode(b.name, b.area, b.city)
         if (coords && onGeocode) onGeocode(b.id, coords)
         await sleep(1100) // Nominatim asks for <= 1 request/second
       }

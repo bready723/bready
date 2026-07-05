@@ -178,12 +178,15 @@ export default function App() {
           onAdd={(b) =>
             setState((s) => ({
               ...s,
-              wantToTry: [{ id: uid(), name: b.name, area: b.area }, ...s.wantToTry],
+              wantToTry: [
+                { id: uid(), name: b.name, area: b.area, photo: b.photo, lat: b.lat, lng: b.lng, city: b.city },
+                ...s.wantToTry,
+              ],
             }))
           }
           onWent={(b) => {
             setDiscoverItem(null)
-            openLog({ name: b.name, area: b.area })
+            openLog({ name: b.name, area: b.area, photo: b.photo, lat: b.lat, lng: b.lng, city: b.city })
           }}
         />
       )}

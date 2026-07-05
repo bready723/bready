@@ -26,9 +26,16 @@ export function speak(text, bcpLang) {
     const u = new SpeechSynthesisUtterance(text)
     u.lang = bcpLang
     u.rate = 0.92
-    // Prefer a voice that matches the language if one is installed.
+    // Prefer a voice that matches the language if one is installed. Match the
+    // FULL tag first (e.g. zh-HK → Cantonese/Sinji), then fall back to the
+    // 2-letter prefix — otherwise "zh-HK" grabbed the first "zh" (Mandarin) voice
+    // and Cantonese always came out sounding like Mandarin.
     const voices = _voices.length ? _voices : synth.getVoices()
-    const match = voices.find((v) => v.lang && v.lang.toLowerCase().startsWith(bcpLang.slice(0, 2)))
+    const want = bcpLang.toLowerCase()
+    const prefix = want.slice(0, 2)
+    const match =
+      voices.find((v) => v.lang && v.lang.toLowerCase() === want) ||
+      voices.find((v) => v.lang && v.lang.toLowerCase().startsWith(prefix))
     if (match) u.voice = match
     synth.speak(u)
     return true

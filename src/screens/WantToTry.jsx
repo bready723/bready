@@ -23,7 +23,11 @@ export default function WantToTry({ wantToTry, onChange, onWent, onOpenDiscover 
   const savedNames = new Set(wantToTry.map((w) => w.name.trim().toLowerCase()))
   const addFromDiscover = (b) => {
     if (savedNames.has(b.name.trim().toLowerCase())) return
-    onChange([{ id: uid(), name: b.name, area: b.area }, ...wantToTry])
+    // Keep the curated photo/coords/city so they survive to the ranking step.
+    onChange([
+      { id: uid(), name: b.name, area: b.area, photo: b.photo, lat: b.lat, lng: b.lng, city: b.city },
+      ...wantToTry,
+    ])
   }
 
   const query = dq.trim().toLowerCase()

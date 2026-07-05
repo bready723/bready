@@ -28,5 +28,10 @@ export function uid() {
 }
 
 export function todayISO() {
-  return new Date().toISOString().slice(0, 10)
+  // LOCAL calendar date (YYYY-MM-DD), not UTC. toISOString() is UTC, which in
+  // negative-UTC zones (e.g. US Eastern in the evening) rolls the date forward a
+  // day — so a visit logged tonight would be stamped tomorrow. Shift by the
+  // timezone offset so the date matches the user's own clock.
+  const d = new Date()
+  return new Date(d.getTime() - d.getTimezoneOffset() * 60000).toISOString().slice(0, 10)
 }

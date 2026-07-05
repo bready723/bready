@@ -17,6 +17,7 @@ export default function LogVisit({ bakeries, prefill, onComplete, onCancel }) {
   const [name, setName] = useState(prefill?.name || '')
   const [area, setArea] = useState(prefill?.area || '')
   const [breads, setBreads] = useState([])
+  const [otherText, setOtherText] = useState('') // what "Other" actually was
   const [tier, setTier] = useState(null)
   const [candidate, setCandidate] = useState(null)
   const [result, setResult] = useState(null) // { list, score }
@@ -24,6 +25,7 @@ export default function LogVisit({ bakeries, prefill, onComplete, onCancel }) {
   const [showDetails, setShowDetails] = useState(false)
   const [notes, setNotes] = useState('')
   const [freshness, setFreshness] = useState('')
+  const [visitDate, setVisitDate] = useState(todayISO()) // editable — not the login date
 
   const insRef = useRef(null)
   const newId = useRef(uid())
@@ -77,9 +79,12 @@ export default function LogVisit({ bakeries, prefill, onComplete, onCancel }) {
   }
 
   function save() {
+    const otherLabel =
+      breads.includes('other') && otherText.trim() ? otherText.trim() : null
     const visit = {
-      date: todayISO(),
+      date: visitDate,
       breads,
+      otherLabel,
       freshnessTime: freshness || null,
       notes: notes || null,
     }
@@ -87,15 +92,39 @@ export default function LogVisit({ bakeries, prefill, onComplete, onCancel }) {
       const merged = Array.from(new Set([...(existing.breads || []), ...breads]))
       const list = bakeries.map((b) =>
         b.id === existing.id
-          ? { ...b, breads: merged, lastVisit: visit.date, visits: [...(b.visits || []), visit] }
+          ? {
+              ...b,
+              breads: merged,
+              otherLabel: otherLabel || b.otherLabel || null,
+              lastVisit: visit.date,
+              visits: [...(b.visits || []), visit],
+            }
           : b,
       )
       onComplete({ bakeries: list, loggedName: name, wishlistId: prefill?.id || null })
       return
     }
+    // Carry a curated seed bakery's photo + exact coords + city through, so
+    // ranking one from Discover fills them in automatically (no manual photo,
+    // no geocode round-trip).
+    const seeded = {}
+    if (prefill?.photo) seeded.photo = prefill.photo
+    if (prefill?.lat != null && prefill?.lng != null) {
+      seeded.lat = prefill.lat
+      seeded.lng = prefill.lng
+    }
+    if (prefill?.city) seeded.city = prefill.city
     const list = result.list.map((b) =>
       b.id === newId.current
-        ? { ...b, breads, lastVisit: visit.date, visits: [visit], createdAt: visit.date }
+        ? {
+            ...b,
+            breads,
+            otherLabel,
+            lastVisit: visit.date,
+            visits: [visit],
+            createdAt: visit.date,
+            ...seeded,
+          }
         : b,
     )
     onComplete({ bakeries: list, loggedName: name, wishlistId: prefill?.id || null })
@@ -140,6 +169,16 @@ export default function LogVisit({ bakeries, prefill, onComplete, onCancel }) {
                 </button>
               ))}
             </div>
+            {breads.includes('other') && (
+              <input
+                className="input"
+                style={{ marginTop: 12 }}
+                placeholder="What was it? e.g. Focaccia, Pretzel, Kouign-amann"
+                value={otherText}
+                autoFocus
+                onChange={(e) => setOtherText(e.target.value)}
+              />
+            )}
             <button className="btn" style={{ marginTop: 26 }} disabled={!name.trim()} onClick={onInfoNext}>
               Next
             </button>
@@ -221,13 +260,22 @@ export default function LogVisit({ bakeries, prefill, onComplete, onCancel }) {
               </p>
             </div>
 
+            <div className="label">When did you go?</div>
+            <input
+              className="input"
+              type="date"
+              value={visitDate}
+              max={todayISO()}
+              onChange={(e) => setVisitDate(e.target.value)}
+            />
+
             {!showDetails ? (
               <button className="btn ghost" style={{ marginTop: 14 }} onClick={() => setShowDetails(true)}>
-                + Add details (freshness, notes)
+                + Add details (time of day, notes)
               </button>
             ) : (
               <>
-                <div className="label">When did you go?</div>
+                <div className="label">Time of day</div>
                 <input
                   className="input"
                   type="time"

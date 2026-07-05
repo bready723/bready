@@ -1,6 +1,8 @@
 // Famous bakeries to discover, by city. Read-only reference data.
-// Each entry is just { name, area } — enough to open a keyless Google Maps
-// search (see lib/maps.js) and to add to your "Want to try" list.
+// Each entry is { name, area } plus, for the well-known ones, an optional
+// `photo` (a stable Wikimedia Commons image) and exact `lat`/`lng`. These ride
+// through the log flow so ranking one from Discover auto-fills its photo + map
+// pin — no manual photo, no geocode round-trip. The rest keep the emoji fallback.
 //
 // ⚠️ CURATED FROM PUBLIC "best bakery" LISTS + GOOGLE MAPS — names and
 // neighborhoods should be spot-checked by Sara before treating as canonical.
@@ -26,14 +28,14 @@ export const SEED_CITIES = [
   {
     city: 'New York City',
     bakeries: [
-      { name: 'Levain Bakery', area: 'Upper West Side' },
+      { name: 'Levain Bakery', area: 'Upper West Side', photo: 'https://commons.wikimedia.org/wiki/Special:FilePath/Storefrontny.jpg?width=1024' },
       { name: 'Dominique Ansel Bakery', area: 'SoHo' },
-      { name: 'Balthazar Bakery', area: 'SoHo' },
+      { name: 'Balthazar Bakery', area: 'SoHo', photo: 'https://commons.wikimedia.org/wiki/Special:FilePath/Balthazar_on_Spring_Street.jpg?width=1024', lat: 40.722712, lng: -73.998159 },
       { name: 'Breads Bakery', area: 'Union Square' },
       { name: 'Sullivan Street Bakery', area: 'Hell’s Kitchen' },
       { name: 'Ess-a-Bagel', area: 'Midtown East' },
-      { name: 'Russ & Daughters', area: 'Lower East Side' },
-      { name: 'Magnolia Bakery', area: 'West Village' },
+      { name: 'Russ & Daughters', area: 'Lower East Side', photo: 'https://commons.wikimedia.org/wiki/Special:FilePath/Russ_%26_Daughters_%2851624125108%29.jpg?width=1024', lat: 40.72259, lng: -73.98832 },
+      { name: 'Magnolia Bakery', area: 'West Village', photo: 'https://commons.wikimedia.org/wiki/Special:FilePath/Magnolia_Bakery%2C_401_Bleecker_Street%2C_New_York%2C_NY_10014%2C_USA_-_Jan_2013_O.jpg?width=1024', lat: 40.7359, lng: -74.005 },
       { name: 'Bouchon Bakery', area: 'Columbus Circle' },
       { name: 'Maman', area: 'SoHo' },
       { name: 'L’Appartement 4F', area: 'Brooklyn Heights' },
@@ -73,7 +75,7 @@ export const SEED_CITIES = [
       { name: 'Bub and Grandma’s', area: 'Glassell Park' },
       { name: 'Clark Street Bakery', area: 'Grand Central Market' },
       { name: 'Gjusta', area: 'Venice' },
-      { name: 'Bottega Louie', area: 'Downtown' },
+      { name: 'Bottega Louie', area: 'Downtown', photo: 'https://commons.wikimedia.org/wiki/Special:FilePath/BottegaLouieExterior_2009-04-12.jpg?width=1024' },
       { name: 'Proof Bakery', area: 'Atwater Village' },
       { name: 'Lodge Bread Co.', area: 'Culver City' },
       { name: 'Sqirl', area: 'Silver Lake' },
@@ -89,14 +91,14 @@ export const SEED_CITIES = [
   {
     city: 'San Francisco',
     bakeries: [
-      { name: 'Tartine Bakery', area: 'Mission' },
+      { name: 'Tartine Bakery', area: 'Mission', photo: 'https://commons.wikimedia.org/wiki/Special:FilePath/Tartine_bakery_exterior_in_2006.jpg?width=1024', lat: 37.761656, lng: -122.423681 },
       { name: 'Tartine Manufactory', area: 'Mission' },
       { name: 'Arsicault Bakery', area: 'Richmond' },
       { name: 'b. patisserie', area: 'Lower Pacific Heights' },
-      { name: 'Boudin Bakery', area: 'Fisherman’s Wharf' },
+      { name: 'Boudin Bakery', area: 'Fisherman’s Wharf', photo: 'https://commons.wikimedia.org/wiki/Special:FilePath/Bread_in_Boudin.jpg?width=1024' },
       { name: 'Craftsman and Wolves', area: 'Mission' },
       { name: 'Neighbor Bakehouse', area: 'Dogpatch' },
-      { name: 'Acme Bread', area: 'Ferry Building' },
+      { name: 'Acme Bread', area: 'Ferry Building', photo: 'https://commons.wikimedia.org/wiki/Special:FilePath/Acme_Bread_Shop_Front_2010.JPG?width=1024' },
       { name: 'Le Marais Bakery', area: 'Marina' },
       { name: 'Devil’s Teeth Baking Company', area: 'Outer Sunset' },
       { name: 'Mr. Holmes Bakehouse', area: 'Tenderloin' },
@@ -110,7 +112,7 @@ export const SEED_CITIES = [
     city: 'Paris',
     bakeries: [
       { name: 'Du Pain et des Idées', area: '10e' },
-      { name: 'Poilâne', area: '6e' },
+      { name: 'Poilâne', area: '6e', photo: 'https://commons.wikimedia.org/wiki/Special:FilePath/Pain_Po%C3%AElane-_Paris_15e.jpg?width=1024' },
       { name: 'Cédric Grolet Opéra', area: '2e' },
       { name: 'Boulangerie Utopie', area: '11e' },
       { name: 'Mamiche', area: '9e' },
@@ -122,7 +124,7 @@ export const SEED_CITIES = [
       { name: 'Circus Bakery', area: '6e' },
       { name: 'BO&MIE', area: '1er' },
       { name: 'Liberté', area: '10e' },
-      { name: 'Stohrer', area: '2e' },
+      { name: 'Stohrer', area: '2e', photo: 'https://commons.wikimedia.org/wiki/Special:FilePath/Patisserie_Stohrer_%28Paris%29.jpg?width=1024' },
       { name: 'Des Gâteaux et du Pain', area: '15e' },
       { name: 'Mokonuts', area: '11e' },
       { name: 'Ten Belles Bread', area: '11e' },
@@ -141,7 +143,7 @@ export const SEED_CITIES = [
       { name: 'Tartine', area: 'Itaewon' },
       { name: 'Le Alaska', area: 'Yeonnam-dong' },
       { name: 'Peter Pan 1978', area: 'Bangbae' },
-      { name: 'Sungsimdang', area: 'Daejeon (flagship)' },
+      { name: 'Sungsimdang', area: 'Daejeon (flagship)', photo: 'https://commons.wikimedia.org/wiki/Special:FilePath/Sungsimdang_2019.jpg?width=1024' },
       { name: 'Millac Bakery', area: 'Seongsu' },
       { name: 'Coffee Nap Roasters', area: 'Yangjae' },
       { name: 'Café Onion Gwangjang', area: 'Jongno' },

@@ -2,8 +2,11 @@
 // place ranked bakeries on the in-app map. Be polite: low volume, cache results.
 const memCache = {}
 
-export async function geocode(name, area) {
-  const q = [name, area].filter(Boolean).join(', ')
+export async function geocode(name, area, city) {
+  // Include the city so Nominatim resolves the actual storefront POI instead of
+  // a neighborhood centroid (or nothing) — e.g. "Ess-a-Bagel, Midtown East,
+  // New York City" pins the shop, not the middle of Midtown.
+  const q = [name, area, city].filter(Boolean).join(', ')
   if (!q) return null
   if (memCache[q]) return memCache[q]
   try {

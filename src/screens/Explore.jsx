@@ -3,26 +3,101 @@ import MapView from './MapView.jsx'
 import { BREADS, breadEmoji, breadLabel } from '../lib/breads.js'
 import { uid } from '../lib/storage.js'
 
-// The Bready Kitchen banner. Cycles every 10s, always opening on "Every second
-// counts." (The Bear). The rest blend The Bear's kitchen ethos with Will
-// Guidara's *Unreasonable Hospitality* — short, paraphrased, made-for-a-banner.
+// The Bready Kitchen banner. Rotates every 10s in RANDOM order, but always opens
+// on "Every second counts." (The Bear) on first render. The set blends The Bear's
+// kitchen ethos, Will Guidara's *Unreasonable Hospitality*, and bread/craft lines
+// — all short, paraphrased, made-for-a-banner.
 const INSPIRATION = [
-  'Every second counts.', // The Bear
-  'Be unreasonable in the pursuit of hospitality.', // Unreasonable Hospitality
+  'Every second counts.', // The Bear — index 0, the opener
+  // --- The Bear / kitchen ethos ---
+  'Let it rip.',
+  'Respect the craft.',
+  'Yes, chef.',
+  'Dial it in.',
+  'Every plate matters.',
+  'Cook with intention.',
+  'Push yourself, then push again.',
+  'Fear is the price of ambition.',
+  'Do it right, or do it again.',
+  'Consistency is the craft.',
+  'Sharpen your knives, sharpen your focus.',
+  'The kitchen is a team sport.',
+  'Care is the ingredient you can taste.',
+  'Clean as you go.',
+  'Everything in its place.',
+  'The rush reveals who you are.',
+  'Excellence is a habit, not an accident.',
+  'Repetition is where mastery hides.',
+  'A calm kitchen is a confident kitchen.',
+  // --- Unreasonable Hospitality (Will Guidara) ---
+  'Be unreasonable in the pursuit of hospitality.',
+  'Unreasonable hospitality.',
   'The pursuit of excellence.',
-  'Hospitality is a dialogue, not a monologue.',
   'Make people feel seen.',
   'Give people more than they expect.',
+  'Hospitality is a dialogue, not a monologue.',
   'The little things are the big things.',
   'Turn a transaction into a relationship.',
   'Create a sense of belonging.',
-  'The magic is in the unreasonable.',
   'Be the reason someone feels welcome.',
   'Legacy is what you leave in people.',
-  'Respect the craft.', // The Bear
-  'Let it rip.', // The Bear
+  'Excellence lives in the details.',
+  'Take care of each other.',
+  'Be on the same side as your guest.',
+  'The magic is in the unreasonable.',
+  'Surprise and delight.',
+  'Give people a story to tell.',
+  'Presence is a gift.',
+  'Generosity is a competitive advantage.',
+  'Hospitality is a choice you make on purpose.',
+  'Anticipate, then exceed.',
+  'Make the ordinary unforgettable.',
+  'Notice what others miss.',
+  'Leave people better than you found them.',
+  'The unreasonable becomes the unforgettable.',
+  'Chase the “how did they know?”',
+  'Give more than the recipe requires.',
+  'Warmth scales.',
+  // --- Bread & the bakery ---
   'A good loaf is a whole day’s patience.',
   'Chase the fresh-out-of-the-oven moment.',
+  'Respect the crumb.',
+  'Trust the slow rise.',
+  'Flour, water, salt, time.',
+  'Great bread can’t be rushed.',
+  'The oven doesn’t lie.',
+  'Patience is the secret ingredient.',
+  'Feed the starter, feed the soul.',
+  'The crust tells the story.',
+  'Warm bread, warm heart.',
+  'Bake like someone you love is waiting.',
+  'The best crumb is honest.',
+  'Let the dough tell you when.',
+  'A blistered crust is earned.',
+  'Simple ingredients, endless care.',
+  'Every bake teaches you something.',
+  'The loaf remembers your hands.',
+  'Good things take time to rise.',
+  'Sourdough rewards the patient.',
+  'Butter is not optional.',
+  'A great croissant is layers of patience.',
+  'Steam, score, wait.',
+  'Bread is love you can hold.',
+  'The oven spring is the reward.',
+  'Knead today, feast tomorrow.',
+  'A bakery smells like morning.',
+  'Break bread, build people.',
+  'The first bite should feel like a secret.',
+  'Nothing beats the heel of a warm baguette.',
+  // --- Craft, in general ---
+  'Make it worth the trip.',
+  'Do small things with great care.',
+  'Show up like it’s opening day.',
+  'Standards are what you tolerate.',
+  'Craft over speed, always.',
+  'A little better, every day.',
+  'Taste, adjust, repeat.',
+  'The joy is in the making.',
 ]
 
 function fmtDate(ts) {
@@ -60,12 +135,18 @@ export default function Explore({ bakeries, notes, onChangeNotes, onOpen, onUpda
   const [quoteIdx, setQuoteIdx] = useState(0) // always opens on "Every second counts."
   const [quoteShown, setQuoteShown] = useState(true) // drives the fade
 
-  // Rotate the banner quote every 10s with a short cross-fade.
+  // Rotate the banner quote every 10s with a short cross-fade — RANDOM order,
+  // never repeating the one currently on screen.
   useEffect(() => {
     const tick = setInterval(() => {
       setQuoteShown(false)
       setTimeout(() => {
-        setQuoteIdx((i) => (i + 1) % INSPIRATION.length)
+        setQuoteIdx((i) => {
+          if (INSPIRATION.length < 2) return i
+          let n = i
+          while (n === i) n = Math.floor(Math.random() * INSPIRATION.length)
+          return n
+        })
         setQuoteShown(true)
       }, 320)
     }, 10000)

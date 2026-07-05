@@ -45,6 +45,10 @@ export default function BakeryDetail({ bakery, onClose, onUpdateBakery }) {
   const visits = (bakery.visits || []).slice().reverse()
   const fileRef = useRef(null)
 
+  // "Other" carries the name Sara typed (e.g. Focaccia); fall back to "Other".
+  const breadName = (k, other) =>
+    k === 'other' ? other || bakery.otherLabel || 'Other' : breadLabel(k)
+
   const visitMeta =
     visits.length > 0
       ? `${visits.length} visit${visits.length > 1 ? 's' : ''} · last ${visits[0].date}`
@@ -87,7 +91,7 @@ export default function BakeryDetail({ bakery, onClose, onUpdateBakery }) {
         {(bakery.breads || []).length > 0 && (
           <div className="cat-row">
             {bakery.breads.map((k) => (
-              <span key={k} className="cat">{breadLabel(k)}</span>
+              <span key={k} className="cat">{breadName(k)}</span>
             ))}
           </div>
         )}
@@ -134,7 +138,7 @@ export default function BakeryDetail({ bakery, onClose, onUpdateBakery }) {
           ) : (
             bakery.breads.map((k) => (
               <span key={k} className="bread-tag">
-                {breadLabel(k)}
+                {breadName(k)}
               </span>
             ))
           )}
@@ -150,7 +154,7 @@ export default function BakeryDetail({ bakery, onClose, onUpdateBakery }) {
                 {v.date}
                 {v.freshnessTime ? ` · ${v.freshnessTime}` : ''}
               </div>
-              <div className="b">{(v.breads || []).map((k) => breadLabel(k)).join(', ') || '—'}</div>
+              <div className="b">{(v.breads || []).map((k) => breadName(k, v.otherLabel)).join(', ') || '—'}</div>
               {v.notes && <div className="notes">{v.notes}</div>}
             </div>
           ))

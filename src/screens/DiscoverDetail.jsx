@@ -12,14 +12,18 @@ export default function DiscoverDetail({ bakery, added, onClose, onAdd, onWent }
   return (
     <div className="detail">
       <div style={{ position: 'relative' }}>
-        <iframe
-          title={`Map of ${bakery.name}`}
-          className="hero"
-          style={{ border: 0 }}
-          src={mapSrc}
-          loading="lazy"
-          referrerPolicy="no-referrer-when-downgrade"
-        />
+        {bakery.photo ? (
+          <img className="hero" src={bakery.photo} alt={bakery.name} loading="lazy" />
+        ) : (
+          <iframe
+            title={`Map of ${bakery.name}`}
+            className="hero"
+            style={{ border: 0 }}
+            src={mapSrc}
+            loading="lazy"
+            referrerPolicy="no-referrer-when-downgrade"
+          />
+        )}
         <button className="back" onClick={onClose}>
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
             <path d="M14 6l-6 6 6 6" />

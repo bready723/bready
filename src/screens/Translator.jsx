@@ -365,30 +365,27 @@ export default function Translator({ country, onCountry }) {
         </div>
       </div>
 
-      {/* sub-tabs */}
-      <div style={{ display: 'flex', gap: 8, marginTop: 20 }}>
+      {/* sub-tabs — equal width, fit to phone */}
+      <div className="subtab-row">
         <button className={`subtab ${sub === 'translate' ? 'on' : ''}`} onClick={() => setSub('translate')}>
-          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round"><path d="M4 17V6a2 2 0 012-2h12a2 2 0 012 2v7a2 2 0 01-2 2H9l-5 4z" /></svg>
-          Translate
+          <span className="subtab-lbl">Translate</span>
         </button>
         <button className={`subtab ${sub === 'phrases' ? 'on' : ''}`} onClick={() => setSub('phrases')}>
-          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round"><path d="M4 19.5A2.5 2.5 0 016.5 17H20" /><path d="M6.5 2H20v20H6.5A2.5 2.5 0 014 19.5v-15A2.5 2.5 0 016.5 2z" /></svg>
-          Phrasebook
+          <span className="subtab-lbl">Phrases</span>
         </button>
         <button className={`subtab ${sub === 'words' ? 'on' : ''}`} onClick={() => setSub('words')}>
-          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round"><path d="M4 15a8 7 0 0116 0v3H4v-3z" /><path d="M9 11.2l-1.2 1.8M13.2 10.6L12 12.4M17 11.6l-1.2 1.8" /></svg>
-          Bread words
+          <span className="subtab-lbl">Words</span>
         </button>
         <button className={`subtab ${sub === 'script' ? 'on' : ''}`} onClick={() => setSub('script')}>
-          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round"><path d="M8 6h11M8 12h11M8 18h11" /><path d="M3.5 6h.01M3.5 12h.01M3.5 18h.01" /></svg>
-          Script
+          <span className="subtab-lbl">Script</span>
         </button>
       </div>
 
       {/* Cantonese caveat: written text falls back to standard Chinese; the voice is real Cantonese. */}
       {dest.code === 'HK' && sub !== 'script' && (
         <p className="muted" style={{ fontSize: 12, lineHeight: 1.5, margin: '12px 2px 0' }}>
-          廣東話: the written text shows standard Chinese, but 🔊 <strong>plays in Cantonese</strong>.
+          廣東話: the written text is standard Chinese, and 🔊 <strong>plays in Cantonese</strong> if
+          your phone has the Cantonese voice installed.
         </p>
       )}
 
