@@ -8,7 +8,7 @@ import FX from './screens/FX.jsx'
 import LogVisit from './screens/LogVisit.jsx'
 import BakeryDetail from './screens/BakeryDetail.jsx'
 import DiscoverDetail from './screens/DiscoverDetail.jsx'
-import { IconRank, IconPlus, IconBookmark, IconGlobe, IconExplore, IconFx } from './components/Icons.jsx'
+import { IconRank, IconBookmark, IconGlobe, IconExplore, IconFx } from './components/Icons.jsx'
 
 // Each tab owns a hue along the brand gradient (blue → purple → magenta → gold);
 // full colour when active, dimmed to 55% when not. Add stays the gradient chip.
@@ -128,12 +128,6 @@ export default function App() {
         >
           <IconBookmark />
           Want to try
-        </button>
-        <button className="fab" style={{ color: '#5B3FD6' }} onClick={() => openLog()}>
-          <span className="fab-circle">
-            <IconPlus width={15} height={15} />
-          </span>
-          Add
         </button>
         <button
           className={tab === 'translate' ? 'active' : ''}

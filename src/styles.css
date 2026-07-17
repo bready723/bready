@@ -596,3 +596,19 @@ textarea.input { resize: vertical; min-height: 88px; }
 .fx-key.eq { background: #e0218a; color: #fff; font-size: 26px; height: 100%; box-shadow: 0 5px 14px -4px rgba(224,33,138,0.55); }
 .fx-key.dot { background: var(--surface); border: 1px solid var(--line-2); color: var(--accent); font-family: var(--display); font-size: 24px; }
 .fx-foot { margin-top: 16px; font-size: 11px; color: var(--soft); text-align: center; line-height: 1.5; }
+
+/* ---- floating add button (Rankings) — replaces the center nav "Add" ---- */
+.fab-anchor {
+  position: fixed; left: 50%; transform: translateX(-50%);
+  bottom: calc(var(--tab-h) + var(--safe-bottom) + 34px);
+  width: 100%; max-width: 480px; pointer-events: none; z-index: 25;
+}
+.fab-float {
+  position: absolute; right: 18px; bottom: 0; pointer-events: auto;
+  width: 56px; height: 56px; border-radius: 50%; border: none; cursor: pointer;
+  background: var(--fab-gradient); color: #fff;
+  box-shadow: 0 8px 22px -6px rgba(91,63,214,0.55), 0 2px 6px rgba(0,0,0,0.12);
+  display: flex; align-items: center; justify-content: center;
+  transition: transform 0.1s ease;
+}
+.fab-float:active { transform: scale(0.93); }

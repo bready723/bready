@@ -103,6 +103,16 @@ export default function Rankings({ bakeries, filter, onFilter, onOpen, onLog }) 
           )}
         </>
       )}
+
+      {/* Floating add button — log a visit from where your bakeries live.
+          Anchored to the app column's bottom-right, above the tab bar. */}
+      <div className="fab-anchor">
+        <button className="fab-float" onClick={onLog} aria-label="Log a visit" title="Log a visit">
+          <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.3" strokeLinecap="round">
+            <path d="M12 5v14M5 12h14" />
+          </svg>
+        </button>
+      </div>
     </main>
   )
 }
