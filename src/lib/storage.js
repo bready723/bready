@@ -3,7 +3,7 @@
 
 const KEY = 'bready.v1'
 
-const EMPTY = { bakeries: [], wantToTry: [], notes: [], country: 'FR' }
+const EMPTY = { bakeries: [], wantToTry: [], notes: [], country: 'FR', fxCurrency: 'USD' }
 
 export function loadState() {
   try {

@@ -4,17 +4,19 @@ import Rankings from './screens/Rankings.jsx'
 import WantToTry from './screens/WantToTry.jsx'
 import Translator from './screens/Translator.jsx'
 import Explore from './screens/Explore.jsx'
+import FX from './screens/FX.jsx'
 import LogVisit from './screens/LogVisit.jsx'
 import BakeryDetail from './screens/BakeryDetail.jsx'
 import DiscoverDetail from './screens/DiscoverDetail.jsx'
-import { IconRank, IconPlus, IconBookmark, IconGlobe, IconExplore } from './components/Icons.jsx'
+import { IconRank, IconPlus, IconBookmark, IconGlobe, IconExplore, IconFx } from './components/Icons.jsx'
 
 // Each tab owns a hue along the brand gradient (blue → purple → magenta → gold);
 // full colour when active, dimmed to 55% when not. Add stays the gradient chip.
 const TAB_COLORS = {
   rankings: ['#1AA7E8', 'rgba(26,167,232,0.55)'],
   want: ['#3B73DF', 'rgba(59,115,223,0.55)'],
-  translate: ['#9E30B0', 'rgba(158,48,176,0.55)'],
+  translate: ['#7E36C9', 'rgba(126,54,201,0.55)'],
+  fx: ['#B5299E', 'rgba(181,41,158,0.55)'],
   explore: ['#A9702E', 'rgba(169,112,46,0.55)'],
 }
 
@@ -106,6 +108,9 @@ export default function App() {
           }}
         />
       )}
+      {tab === 'fx' && (
+        <FX currency={state.fxCurrency} onCurrency={(fxCurrency) => update({ fxCurrency })} />
+      )}
 
       <nav className="tabbar">
         <button
@@ -137,6 +142,14 @@ export default function App() {
         >
           <IconGlobe />
           Translate
+        </button>
+        <button
+          className={tab === 'fx' ? 'active' : ''}
+          style={{ color: tc('fx') }}
+          onClick={() => setTab('fx')}
+        >
+          <IconFx />
+          FX
         </button>
         <button
           className={tab === 'explore' ? 'active' : ''}

@@ -71,3 +71,14 @@ export function IconPin(props) {
     </svg>
   )
 }
+
+export function IconFx(props) {
+  // a coin with a ₩ won mark
+  return (
+    <svg {...base} strokeWidth="1.7" {...props}>
+      <circle cx="12" cy="12" r="9" />
+      <path d="M8 8.5l1.7 6 2.3-5 2.3 5 1.7-6" />
+      <path d="M7.4 11.3h9.2M7.4 13.3h9.2" />
+    </svg>
+  )
+}
