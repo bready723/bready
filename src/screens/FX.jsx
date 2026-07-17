@@ -1,7 +1,6 @@
 import { useEffect, useRef, useState } from 'react'
 import {
   CURRENCIES,
-  currencyMeta,
   fetchLatest,
   fetchHistory,
   krwPerUnit,
@@ -35,6 +34,9 @@ const KEYS = [
   { k: '.', kind: 'dot', style: { gridColumn: 3, gridRow: 5 } },
 ]
 
+// Keep only digits and a single decimal point.
+const sanitize = (v) => v.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1')
+
 function niceDate(iso) {
   if (!iso) return ''
   try {
@@ -64,12 +66,20 @@ export default function FX({ currency, onCurrency }) {
   const [krwMap, setKrwMap] = useState(null)
   const [rateDate, setRateDate] = useState('')
   const [loadErr, setLoadErr] = useState(false)
-  const [expr, setExpr] = useState('100')
-  const [dir, setDir] = useState('fx') // which side the keypad drives: 'fx' | 'krw'
   const [period, setPeriod] = useState(30)
   const [history, setHistory] = useState([])
   const [histLoading, setHistLoading] = useState(false)
   const histReq = useRef(0)
+
+  // Converter — two linked, editable fields (type in either side).
+  const [fx, setFx] = useState('100')
+  const [krw, setKrw] = useState('')
+  const lastEdited = useRef('fx')
+
+  // Calculator — a plain, standalone calculator (no currency).
+  const [calc, setCalc] = useState('')
+
+  const rate = krwMap ? krwPerUnit(currency, krwMap) : null // KRW per 1 unit
 
   // Load live rates once.
   useEffect(() => {
@@ -101,30 +111,36 @@ export default function FX({ currency, onCurrency }) {
       })
   }, [currency, period])
 
-  const rate = krwMap ? krwPerUnit(currency, krwMap) : null // KRW per 1 unit
-  const val = evalExpression(expr)
-  let foreign, krw
-  if (dir === 'fx') {
-    foreign = val
-    krw = val != null && rate != null ? Math.round(val * rate) : null
-  } else {
-    krw = val
-    foreign = val != null && rate != null ? val / rate : null
-  }
-  const meta = currencyMeta(currency)
-
-  function setDirection(nd) {
-    if (nd === dir) return
-    const v = evalExpression(expr)
-    if (v != null && rate != null) {
-      const conv = nd === 'krw' ? Math.round(v * rate) : Number((v / rate).toFixed(2))
-      setExpr(String(conv))
+  // Re-derive the non-edited side when the rate or currency changes.
+  useEffect(() => {
+    if (rate == null) return
+    if (lastEdited.current === 'fx') {
+      const n = parseFloat(fx)
+      setKrw(fx && !isNaN(n) ? String(Math.round(n * rate)) : '')
+    } else {
+      const n = parseFloat(krw)
+      setFx(krw && !isNaN(n) ? (n / rate).toFixed(2) : '')
     }
-    setDir(nd)
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [rate, currency])
+
+  function onFxInput(raw) {
+    const v = sanitize(raw)
+    lastEdited.current = 'fx'
+    setFx(v)
+    const n = parseFloat(v)
+    setKrw(v && rate != null && !isNaN(n) ? String(Math.round(n * rate)) : '')
+  }
+  function onKrwInput(raw) {
+    const v = sanitize(raw)
+    lastEdited.current = 'krw'
+    setKrw(v)
+    const n = parseFloat(v)
+    setFx(v && rate != null && !isNaN(n) ? (n / rate).toFixed(2) : '')
   }
 
-  function pressKey(k) {
-    setExpr((e) => {
+  function pressCalc(k) {
+    setCalc((e) => {
       if (k === 'AC') return ''
       if (k === 'del') return e.slice(0, -1)
       if (k === '=') {
@@ -133,7 +149,7 @@ export default function FX({ currency, onCurrency }) {
       }
       if ('+-*/'.includes(k)) {
         if (!e) return k === '-' ? '-' : e
-        if ('+-*/'.includes(e.slice(-1))) return e.slice(0, -1) + k // replace trailing op
+        if ('+-*/'.includes(e.slice(-1))) return e.slice(0, -1) + k
         return e + k
       }
       if (k === '.') {
@@ -142,14 +158,14 @@ export default function FX({ currency, onCurrency }) {
         if (e === '' || '+-*/'.includes(e.slice(-1))) return e + '0.'
         return e + '.'
       }
-      return e + k // digit
+      return e + k
     })
   }
 
-  const fromNum = foreign != null ? fmt(foreign, foreign >= 1000 ? 0 : 2) : dir === 'fx' ? expr || '0' : '—'
-  const toNum = krw != null ? fmt(krw, 0) : dir === 'krw' ? expr || '0' : '—'
-  const hasMath = /[+\-*/]/.test(expr.slice(1))
-  const keypadBig = val != null ? fmt(val, val >= 1000 ? 0 : 2) : expr || '0'
+  // Calculator display: line 1 = the process (small), line 2 = the result (big).
+  const calcResult = evalExpression(calc)
+  const calcLine1 = calc || '0'
+  const calcLine2 = calcResult != null ? fmt(calcResult, 6) : calc.split(/[+\-*/]/).pop() || '0'
 
   const pct =
     history.length >= 2 ? ((history[history.length - 1].rate - history[0].rate) / history[0].rate) * 100 : null
@@ -165,19 +181,22 @@ export default function FX({ currency, onCurrency }) {
       </div>
       <p className="subtitle" style={{ marginTop: 2 }}>Won ⇄ the world, live.</p>
 
-      {/* ---------- FROM (foreign) ---------- */}
-      <div
-        className={`fx-card ${dir === 'fx' ? 'on' : ''}`}
-        style={gradBorder('var(--surface)')}
-        onClick={() => setDirection('fx')}
-      >
+      {/* ---------- FROM (foreign) — editable ---------- */}
+      <div className="fx-card" style={gradBorder('var(--surface)')}>
         <div className="fx-label">From</div>
         <div className="fx-row">
-          <div className="fx-num">{fromNum}</div>
+          <input
+            className="fx-num-input"
+            type="text"
+            inputMode="decimal"
+            value={fx}
+            placeholder="0"
+            onChange={(e) => onFxInput(e.target.value)}
+            aria-label="Amount in foreign currency"
+          />
           <select
             className="fx-cur"
             value={currency}
-            onClick={(e) => e.stopPropagation()}
             onChange={(e) => onCurrency(e.target.value)}
             aria-label="Currency"
           >
@@ -190,26 +209,19 @@ export default function FX({ currency, onCurrency }) {
         </div>
       </div>
 
-      {/* ---------- SWAP ---------- */}
-      <div className="fx-swapwrap">
-        <button
-          className="fx-swap"
-          onClick={() => setDirection(dir === 'fx' ? 'krw' : 'fx')}
-          aria-label="Swap direction"
-          title="Swap"
-        >
-          ⇅
-        </button>
-      </div>
-
-      {/* ---------- TO (KRW) ---------- */}
-      <div
-        className={`fx-card fx-to ${dir === 'krw' ? 'on' : ''}`}
-        onClick={() => setDirection('krw')}
-      >
+      {/* ---------- TO (KRW) — editable ---------- */}
+      <div className="fx-card fx-to" style={{ marginTop: 12 }}>
         <div className="fx-label" style={{ color: 'rgba(255,255,255,0.72)' }}>To</div>
         <div className="fx-row">
-          <div className="fx-num" style={{ color: '#fff' }}>{toNum}</div>
+          <input
+            className="fx-num-input white"
+            type="text"
+            inputMode="decimal"
+            value={krw}
+            placeholder="0"
+            onChange={(e) => onKrwInput(e.target.value)}
+            aria-label="Amount in Korean won"
+          />
           <div className="fx-krw">🇰🇷 KRW</div>
         </div>
       </div>
@@ -262,11 +274,12 @@ export default function FX({ currency, onCurrency }) {
         </div>
       </div>
 
-      {/* ---------- KEYPAD ---------- */}
-      <div className="fx-card" style={{ ...gradBorder('var(--canvas)'), padding: 14, marginTop: 22 }}>
+      {/* ---------- CALCULATOR (standalone) ---------- */}
+      <div className="fx-calc-title">Calculator</div>
+      <div className="fx-card" style={{ ...gradBorder('var(--canvas)'), padding: 14, marginTop: 0 }}>
         <div className="fx-display">
-          <div className="fx-display-expr">{hasMath ? expr : `${dir === 'fx' ? meta.flag + ' ' + currency : '🇰🇷 KRW'}`}</div>
-          <div className="fx-display-big">{keypadBig}</div>
+          <div className="fx-display-expr">{calcLine1}</div>
+          <div className="fx-display-big">{calcLine2}</div>
         </div>
         <div className="fx-keys">
           {KEYS.map((key) => (
@@ -274,7 +287,7 @@ export default function FX({ currency, onCurrency }) {
               key={key.k}
               className={`fx-key ${key.kind}`}
               style={key.style}
-              onClick={() => pressKey(key.k)}
+              onClick={() => pressCalc(key.k)}
             >
               {key.label || key.k}
             </button>

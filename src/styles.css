@@ -612,3 +612,17 @@ textarea.input { resize: vertical; min-height: 88px; }
   transition: transform 0.1s ease;
 }
 .fab-float:active { transform: scale(0.93); }
+
+/* editable converter inputs (replace the read-only .fx-num divs) */
+.fx-num-input {
+  flex: 1; min-width: 0; width: 100%; border: none; background: transparent; outline: none;
+  font-family: var(--display); font-weight: 500; font-size: 44px; line-height: 1.05;
+  color: var(--ink); font-variant-numeric: tabular-nums; padding: 0;
+}
+.fx-num-input::placeholder { color: var(--faint); }
+.fx-num-input.white { color: #fff; }
+.fx-num-input.white::placeholder { color: rgba(255,255,255,0.5); }
+.fx-calc-title {
+  font: 600 12px var(--sans); letter-spacing: 0.1em; text-transform: uppercase;
+  color: var(--soft); margin: 24px 2px 10px;
+}
