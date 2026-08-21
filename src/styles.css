@@ -629,3 +629,11 @@ textarea.input { resize: vertical; min-height: 88px; }
   font: 600 12px var(--sans); letter-spacing: 0.1em; text-transform: uppercase;
   color: var(--soft); margin: 24px 2px 10px;
 }
+
+/* ---- storage warning: a failed save used to be completely silent ---- */
+.storage-warn {
+  margin: 10px 16px 0; padding: 10px 13px; border-radius: 12px;
+  font: 500 13px/1.45 var(--sans); color: #7a5300;
+  background: #fff4d6; border: 1px solid #f0d089;
+}
+.storage-warn.bad { color: #8c1d3f; background: #ffe4ec; border-color: #f3b3c8; }

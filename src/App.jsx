@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react'
-import { loadState, saveState, uid } from './lib/storage.js'
+import { loadState, saveState, storageUsage, uid, SAVE_OK, SAVE_FULL } from './lib/storage.js'
 import Rankings from './screens/Rankings.jsx'
 import WantToTry from './screens/WantToTry.jsx'
 import Translator from './screens/Translator.jsx'
@@ -28,9 +28,13 @@ export default function App() {
   const [detailId, setDetailId] = useState(null)
   const [discoverItem, setDiscoverItem] = useState(null) // famous bakery opened from Discover
   const [rankFilter, setRankFilter] = useState('all') // bread filter for the Rankings list
+  const [saveIssue, setSaveIssue] = useState(null) // null | SAVE_FULL | SAVE_BLOCKED
 
+  // A failed write used to be invisible: the app kept working from memory and
+  // everything vanished on reload. Surface it instead.
   useEffect(() => {
-    saveState(state)
+    const result = saveState(state)
+    setSaveIssue(result === SAVE_OK ? null : result)
   }, [state])
 
   const update = (patch) => setState((s) => ({ ...s, ...patch }))
@@ -66,6 +70,17 @@ export default function App() {
   const detailBakery = state.bakeries.find((b) => b.id === detailId) || null
   const tc = (key) => TAB_COLORS[key][tab === key ? 0 : 1]
 
+  // Photos are stored as data URLs, so the browser's ~5MB runs out after a few
+  // dozen. Warn before that, and shout once writes actually start failing.
+  const usage = storageUsage(state)
+  const storageWarning = saveIssue
+    ? saveIssue === SAVE_FULL
+      ? "This browser's storage is full — your latest change was NOT saved. Remove a few bakery photos to free space."
+      : "This browser is blocking storage, so nothing is being saved. Private browsing does this."
+    : usage.nearlyFull
+      ? `Storage is ${Math.round(usage.ratio * 100)}% full. Photos take the most room — once it fills, new visits stop saving.`
+      : null
+
   return (
     <div className="app">
       <header className="appbar">
@@ -74,6 +89,12 @@ export default function App() {
           <span className="sub">{state.bakeries.length} ranked</span>
         )}
       </header>
+
+      {storageWarning && (
+        <div className={`storage-warn${saveIssue ? ' bad' : ''}`} role="alert">
+          {storageWarning}
+        </div>
+      )}
 
       {tab === 'rankings' && (
         <Rankings
