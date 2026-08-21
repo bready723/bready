@@ -8,7 +8,9 @@ import FX from './screens/FX.jsx'
 import LogVisit from './screens/LogVisit.jsx'
 import BakeryDetail from './screens/BakeryDetail.jsx'
 import DiscoverDetail from './screens/DiscoverDetail.jsx'
+import SignIn from './screens/SignIn.jsx'
 import { IconRank, IconBookmark, IconGlobe, IconExplore, IconFx } from './components/Icons.jsx'
+import { onAuthChange, isCloudConfigured } from './lib/auth.js'
 
 // Each tab owns a hue along the brand gradient (blue → purple → magenta → gold);
 // full colour when active, dimmed to 55% when not. Add stays the gradient chip.
@@ -29,6 +31,12 @@ export default function App() {
   const [discoverItem, setDiscoverItem] = useState(null) // famous bakery opened from Discover
   const [rankFilter, setRankFilter] = useState('all') // bread filter for the Rankings list
   const [saveIssue, setSaveIssue] = useState(null) // null | SAVE_FULL | SAVE_BLOCKED
+  const [user, setUser] = useState(null)
+  const [showSignIn, setShowSignIn] = useState(false)
+
+  // Signing in is optional — the app worked without an account before there was
+  // one, and still does. This only tracks who is signed in, if anyone.
+  useEffect(() => onAuthChange(setUser), [])
 
   // A failed write used to be invisible: the app kept working from memory and
   // everything vanished on reload. Surface it instead.
@@ -88,6 +96,11 @@ export default function App() {
         {tab === 'rankings' && state.bakeries.length > 0 && (
           <span className="sub">{state.bakeries.length} ranked</span>
         )}
+        {isCloudConfigured() && (
+          <button className="signin-chip" onClick={() => setShowSignIn(true)}>
+            {user ? 'Synced' : 'Sign in'}
+          </button>
+        )}
       </header>
 
       {storageWarning && (
@@ -131,6 +144,10 @@ export default function App() {
       )}
       {tab === 'fx' && (
         <FX currency={state.fxCurrency} onCurrency={(fxCurrency) => update({ fxCurrency })} />
+      )}
+
+      {showSignIn && (
+        <SignIn user={user} onClose={() => setShowSignIn(false)} onSignedOut={() => setUser(null)} />
       )}
 
       <nav className="tabbar">

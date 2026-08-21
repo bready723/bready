@@ -1,0 +1,62 @@
+// Auth, wrapped so the rest of the app never has to care whether the cloud is
+// configured. Every function is safe to call in a local-only build.
+import { supabase, isCloudConfigured } from './supabase.js'
+
+export { isCloudConfigured }
+
+/**
+ * Send a sign-in link. Returns { ok } or { ok: false, error } — the caller
+ * shows the message, so no throwing into a click handler.
+ */
+export async function sendSignInLink(email, redirectTo) {
+  const address = String(email || '').trim()
+  if (!address) return { ok: false, error: 'Enter your email address.' }
+  if (!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(address)) return { ok: false, error: "That doesn't look like an email address." }
+  if (!supabase) return { ok: false, error: 'Cloud sync is not set up in this build.' }
+  try {
+    const { error } = await supabase.auth.signInWithOtp({
+      email: address,
+      options: { emailRedirectTo: redirectTo || window.location.href },
+    })
+    return error ? { ok: false, error: error.message } : { ok: true }
+  } catch (e) {
+    return { ok: false, error: e?.message || 'Could not reach the server.' }
+  }
+}
+
+export async function signOut() {
+  if (!supabase) return { ok: true }
+  try {
+    const { error } = await supabase.auth.signOut()
+    return error ? { ok: false, error: error.message } : { ok: true }
+  } catch (e) {
+    return { ok: false, error: e?.message || 'Sign out failed.' }
+  }
+}
+
+/** The signed-in user, or null. */
+export async function currentUser() {
+  if (!supabase) return null
+  try {
+    const { data } = await supabase.auth.getSession()
+    return data?.session?.user || null
+  } catch (e) {
+    return null
+  }
+}
+
+/**
+ * Subscribe to sign-in / sign-out. Fires once with the current user so callers
+ * do not need a separate initial fetch. Returns an unsubscribe function.
+ */
+export function onAuthChange(callback) {
+  if (!supabase) {
+    callback(null)
+    return () => {}
+  }
+  currentUser().then(callback)
+  const { data } = supabase.auth.onAuthStateChange((_event, session) => {
+    callback(session?.user || null)
+  })
+  return () => data?.subscription?.unsubscribe?.()
+}
