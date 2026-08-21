@@ -19,7 +19,7 @@ export default defineConfig({
         skipWaiting: true,
         cleanupOutdatedCaches: true,
       },
-      includeAssets: ['favicon.svg', 'icon-192.png', 'icon-512.png'],
+      includeAssets: ['favicon.svg', 'icon-192.png', 'icon-512.png', 'icon-maskable-512.png'],
       manifest: {
         name: 'bready',
         short_name: 'bready',
@@ -33,7 +33,9 @@ export default defineConfig({
         icons: [
           { src: 'icon-192.png', sizes: '192x192', type: 'image/png' },
           { src: 'icon-512.png', sizes: '512x512', type: 'image/png' },
-          { src: 'icon-512.png', sizes: '512x512', type: 'image/png', purpose: 'maskable' },
+          // Android crops maskable icons to a circle, so this one keeps the
+          // croissant inside the center safe zone instead of bleeding to the edges.
+          { src: 'icon-maskable-512.png', sizes: '512x512', type: 'image/png', purpose: 'maskable' },
         ],
       },
     }),
