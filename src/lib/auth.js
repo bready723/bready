@@ -5,6 +5,17 @@ import { supabase, isCloudConfigured } from './supabase.js'
 export { isCloudConfigured }
 
 /**
+ * Where the magic link should land: the app's own address, clean. Using
+ * `location.href` would carry whatever query string happened to be on screen,
+ * which then has to match Supabase's redirect allow-list exactly — a cache
+ * buster in the URL was enough to fall back to the project's default.
+ */
+export function appUrl() {
+  const base = import.meta.env.BASE_URL || '/'
+  return `${window.location.origin}${base}`
+}
+
+/**
  * Send a sign-in link. Returns { ok } or { ok: false, error } — the caller
  * shows the message, so no throwing into a click handler.
  */
@@ -16,7 +27,7 @@ export async function sendSignInLink(email, redirectTo) {
   try {
     const { error } = await supabase.auth.signInWithOtp({
       email: address,
-      options: { emailRedirectTo: redirectTo || window.location.href },
+      options: { emailRedirectTo: redirectTo || appUrl() },
     })
     return error ? { ok: false, error: error.message } : { ok: true }
   } catch (e) {
