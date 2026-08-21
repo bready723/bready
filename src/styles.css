@@ -665,3 +665,12 @@ textarea.input { resize: vertical; min-height: 88px; }
   border-radius: 999px; padding: 5px 11px; font: 500 12px var(--sans);
   color: var(--ink-2); cursor: pointer;
 }
+
+/* ---- cloud sync status, shown for a moment after signing in ---- */
+.cloud-status {
+  margin: 10px 16px 0; padding: 10px 13px; border-radius: 12px; cursor: pointer;
+  font: 500 13px/1.45 var(--sans);
+}
+.cloud-status.busy { color: var(--ink-2); background: var(--line-2); }
+.cloud-status.good { color: #1c5c3a; background: #e2f4e9; border: 1px solid #b6e0c6; }
+.cloud-status.bad  { color: #8c1d3f; background: #ffe4ec; border: 1px solid #f3b3c8; }

@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { loadState, saveState, storageUsage, uid, SAVE_OK, SAVE_FULL } from './lib/storage.js'
 import Rankings from './screens/Rankings.jsx'
 import WantToTry from './screens/WantToTry.jsx'
@@ -11,6 +11,7 @@ import DiscoverDetail from './screens/DiscoverDetail.jsx'
 import SignIn from './screens/SignIn.jsx'
 import { IconRank, IconBookmark, IconGlobe, IconExplore, IconFx } from './components/Icons.jsx'
 import { onAuthChange, isCloudConfigured } from './lib/auth.js'
+import { reconcileOnSignIn } from './lib/cloud.js'
 
 // Each tab owns a hue along the brand gradient (blue → purple → magenta → gold);
 // full colour when active, dimmed to 55% when not. Add stays the gradient chip.
@@ -22,8 +23,24 @@ const TAB_COLORS = {
   explore: ['#A9702E', 'rgba(169,112,46,0.55)'],
 }
 
+function cloudMessage(result) {
+  switch (result.action) {
+    case 'uploaded':
+      return { tone: 'good', text: `Backed up to your account — ${result.count} items saved.` }
+    case 'downloaded':
+      return { tone: 'good', text: `Loaded ${result.count} bakeries from your account.` }
+    case 'upload-failed':
+      return { tone: 'bad', text: `Could not back up: ${result.error}. Your data is still here.` }
+    case 'download-failed':
+      return { tone: 'bad', text: `Could not load your account: ${result.error}` }
+    default:
+      return { tone: 'good', text: 'Synced.' }
+  }
+}
+
 export default function App() {
   const [state, setState] = useState(loadState)
+  const stateRef = useRef(state) // latest state, readable from async callbacks
   const [tab, setTab] = useState('rankings')
   const [logging, setLogging] = useState(false)
   const [prefill, setPrefill] = useState(null) // { name, area } when logging from Want-to-try
@@ -34,15 +51,38 @@ export default function App() {
   const [user, setUser] = useState(null)
   const [showSignIn, setShowSignIn] = useState(false)
 
+  const [cloudStatus, setCloudStatus] = useState(null) // {tone, text} or null
+
   // Signing in is optional — the app worked without an account before there was
   // one, and still does. This only tracks who is signed in, if anyone.
   useEffect(() => onAuthChange(setUser), [])
+
+  // The one moment that matters: someone just signed in. Push what this browser
+  // holds, or pull the account if this browser is empty. Never both, and never
+  // a delete — the local copy may be the only one that exists.
+  useEffect(() => {
+    if (!user) return
+    let cancelled = false
+    setCloudStatus({ tone: 'busy', text: 'Syncing…' })
+    // Read the current state through a ref, not by peeking inside a state
+    // updater: React is free to call an updater more than once, which would
+    // start the upload twice.
+    reconcileOnSignIn(stateRef.current, user).then((result) => {
+      if (cancelled) return
+      if (result.state) setState(result.state)
+      setCloudStatus(cloudMessage(result))
+    })
+    return () => {
+      cancelled = true
+    }
+  }, [user])
 
   // A failed write used to be invisible: the app kept working from memory and
   // everything vanished on reload. Surface it instead.
   useEffect(() => {
     const result = saveState(state)
     setSaveIssue(result === SAVE_OK ? null : result)
+    stateRef.current = state
   }, [state])
 
   const update = (patch) => setState((s) => ({ ...s, ...patch }))
@@ -106,6 +146,12 @@ export default function App() {
       {storageWarning && (
         <div className={`storage-warn${saveIssue ? ' bad' : ''}`} role="alert">
           {storageWarning}
+        </div>
+      )}
+
+      {cloudStatus && (
+        <div className={`cloud-status ${cloudStatus.tone}`} role="status" onClick={() => setCloudStatus(null)}>
+          {cloudStatus.text}
         </div>
       )}
 

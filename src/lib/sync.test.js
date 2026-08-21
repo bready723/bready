@@ -45,6 +45,7 @@ const localState = () => ({
       id: 'b1', name: 'Levain Bakery', area: 'Upper West Side', city: 'New York',
       tier: 'loved', score: 9.5, breads: ['croissant'], lastVisit: '2026-08-01',
       createdAt: '2026-08-01', lat: 40.78, lng: -73.97, seeded: true,
+      photo: 'data:image/jpeg;base64,AAAA',
       visits: [{ id: 'v1', date: '2026-08-01', breads: ['croissant'], freshnessTime: 'morning', notes: 'warm' }],
     },
     {
@@ -52,7 +53,7 @@ const localState = () => ({
       breads: ['baguette'], visits: [{ id: 'v2', date: '2026-08-10', breads: ['baguette'] }],
     },
   ],
-  wantToTry: [{ id: 'w1', name: 'Maman', area: 'Tribeca' }],
+  wantToTry: [{ id: 'w1', name: 'Maman', area: 'Tribeca', photo: 'data:image/jpeg;base64,BBBB' }],
   notes: [{ id: 'n1', text: 'try the kouign-amann', ts: 1755000000000 }],
   country: 'FR',
   fxCurrency: 'USD',
@@ -223,6 +224,21 @@ describe('mapping local state to rows and back', () => {
     const rows = toRows(localState(), USER, AT)
     expect(rows.visits).toHaveLength(2)
     expect(rows.visits[0]).toMatchObject({ id: 'v1', bakery_id: 'b1', visit_date: '2026-08-01', freshness_time: 'morning' })
+  })
+
+  it('carries photos through, under the name the app actually uses', () => {
+    const rows = toRows(localState(), USER, AT)
+    expect(rows.bakeries[0].photo_url).toBe('data:image/jpeg;base64,AAAA')
+    expect(rows.want_to_try[0].photo_url).toBe('data:image/jpeg;base64,BBBB')
+    const back = toLocal(rows)
+    expect(back.bakeries[0].photo).toBe('data:image/jpeg;base64,AAAA')
+    expect(back.wantToTry[0].photo).toBe('data:image/jpeg;base64,BBBB')
+  })
+
+  it('never invents a photo field the screens do not read', () => {
+    const back = toLocal(toRows(localState(), USER, AT))
+    expect(back.bakeries[0]).not.toHaveProperty('photoUrl')
+    expect(back.wantToTry[0]).not.toHaveProperty('photoUrl')
   })
 
   it('stamps every row with the owner', () => {
