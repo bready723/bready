@@ -674,3 +674,11 @@ textarea.input { resize: vertical; min-height: 88px; }
 .cloud-status.busy { color: var(--ink-2); background: var(--line-2); }
 .cloud-status.good { color: #1c5c3a; background: #e2f4e9; border: 1px solid #b6e0c6; }
 .cloud-status.bad  { color: #8c1d3f; background: #ffe4ec; border: 1px solid #f3b3c8; }
+
+.signin-divider {
+  display: flex; align-items: center; gap: 10px; margin: 22px 0 14px;
+  font: 500 12px var(--sans); color: var(--soft); text-transform: uppercase; letter-spacing: 0.06em;
+}
+.signin-divider::before, .signin-divider::after {
+  content: ''; flex: 1; height: 1px; background: var(--line-2);
+}

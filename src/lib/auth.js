@@ -35,6 +35,54 @@ export async function sendSignInLink(email, redirectTo) {
   }
 }
 
+/**
+ * Pull the one-time token out of a Supabase sign-in link.
+ *
+ * iOS always opens a link from Mail in Safari, never in a home-screen web app,
+ * so tapping the link signs in the wrong "browser" and the installed app stays
+ * empty. Copying the link and pasting it here signs in where Sara actually is.
+ * Returns null if this is not a sign-in link.
+ */
+export function tokenFromLink(link) {
+  const text = String(link || '').trim()
+  if (!text) return null
+  try {
+    const url = new URL(text)
+    // Supabase puts it in the query as ?token=; some clients rewrite the link
+    // and leave it in the fragment instead.
+    const fromQuery = url.searchParams.get('token') || url.searchParams.get('token_hash')
+    if (fromQuery) return fromQuery
+    const hash = new URLSearchParams(url.hash.replace(/^#/, ''))
+    return hash.get('token') || hash.get('token_hash') || null
+  } catch (e) {
+    return null
+  }
+}
+
+/**
+ * Sign in from a pasted sign-in link. The link is single use — if it was
+ * already opened somewhere else, Supabase rejects it and we say so.
+ */
+export async function signInWithLink(link) {
+  const token_hash = tokenFromLink(link)
+  if (!token_hash) {
+    return { ok: false, error: "That doesn't look like a sign-in link. Copy the whole link from the email." }
+  }
+  if (!supabase) return { ok: false, error: 'Cloud sync is not set up in this build.' }
+  try {
+    const { error } = await supabase.auth.verifyOtp({ token_hash, type: 'email' })
+    if (!error) return { ok: true }
+    return {
+      ok: false,
+      error: /expired|invalid|not found/i.test(error.message)
+        ? 'That link has already been used or has expired. Send yourself a new one.'
+        : error.message,
+    }
+  } catch (e) {
+    return { ok: false, error: e?.message || 'Could not reach the server.' }
+  }
+}
+
 export async function signOut() {
   if (!supabase) return { ok: true }
   try {
