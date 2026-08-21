@@ -88,20 +88,32 @@ export function mergeCollections(localRows = [], remoteRows = []) {
 // --------------------------------------------------------------- mapping --
 
 /**
- * Visits live inside their bakery and have never needed ids. The server needs
- * one per row, so mint them once and hand back a state that carries them —
- * stable ids are what make re-running a migration a no-op instead of a
- * duplicate.
+ * A visit's id, derived from where it sits rather than drawn at random.
+ *
+ * Visits live inside their bakery and have never carried ids, so migration has
+ * to invent them. Inventing them randomly bit us: the sign-in handler ran twice
+ * and the second pass minted a fresh set, uploading a duplicate of every visit.
+ * Deriving the id from the bakery and the position makes a re-run land on the
+ * same row instead of a new one — the upload is idempotent by construction, not
+ * by remembering to only do it once.
  */
-export function ensureVisitIds(state, makeId) {
+export function visitId(bakeryId, index) {
+  return `${bakeryId}-v${index}`
+}
+
+/**
+ * Give every visit an id, and hand back a state carrying them. Existing ids are
+ * left alone so nothing that already synced gets renamed.
+ */
+export function ensureVisitIds(state, _makeId) {
   let changed = false
   const bakeries = (state.bakeries || []).map((b) => {
-    const visits = (b.visits || []).map((v) => {
+    const visits = (b.visits || []).map((v, i) => {
       if (v.id) return v
       changed = true
-      return { ...v, id: makeId() }
+      return { ...v, id: visitId(b.id, i) }
     })
-    return changed ? { ...b, visits } : b
+    return { ...b, visits }
   })
   return changed ? { ...state, bakeries } : state
 }
@@ -238,7 +250,9 @@ export function toLocal(rows) {
 
 // ------------------------------------------------------------- migration --
 
-export const MIGRATED_KEY = 'bready.migrated.v1'
+// v2: v1 browsers uploaded visits under random ids. Bumping the key makes them
+// re-run migration once more, now writing deterministic ids.
+export const MIGRATED_KEY = 'bready.migrated.v2'
 
 /**
  * Turn whatever this browser is holding into an outbox aimed at `userId`.

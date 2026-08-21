@@ -200,11 +200,26 @@ describe('merge', () => {
 })
 
 describe('visit ids', () => {
-  it('mints an id for visits that never had one', () => {
-    let n = 0
+  it('derives an id for visits that never had one', () => {
     const state = { bakeries: [{ id: 'b1', visits: [{ date: '2026-08-01' }, { date: '2026-08-02' }] }] }
-    const out = ensureVisitIds(state, () => `v${++n}`)
-    expect(out.bakeries[0].visits.map((v) => v.id)).toEqual(['v1', 'v2'])
+    const out = ensureVisitIds(state)
+    expect(out.bakeries[0].visits.map((v) => v.id)).toEqual(['b1-v0', 'b1-v1'])
+  })
+
+  it('gives the same ids every time, so a second upload cannot duplicate', () => {
+    const state = { bakeries: [{ id: 'b1', visits: [{ date: '2026-08-01' }, { date: '2026-08-02' }] }] }
+    const first = ensureVisitIds(state)
+    const second = ensureVisitIds(state)
+    expect(second.bakeries[0].visits.map((v) => v.id)).toEqual(first.bakeries[0].visits.map((v) => v.id))
+  })
+
+  it('keeps ids unique across bakeries', () => {
+    const state = { bakeries: [
+      { id: 'b1', visits: [{ date: '2026-08-01' }] },
+      { id: 'b2', visits: [{ date: '2026-08-01' }] },
+    ] }
+    const ids = ensureVisitIds(state).bakeries.flatMap((b) => b.visits.map((v) => v.id))
+    expect(new Set(ids).size).toBe(2)
   })
 
   it('leaves existing ids alone and returns the same object when nothing changed', () => {

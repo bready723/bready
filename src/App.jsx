@@ -41,6 +41,7 @@ function cloudMessage(result) {
 export default function App() {
   const [state, setState] = useState(loadState)
   const stateRef = useRef(state) // latest state, readable from async callbacks
+  const syncedFor = useRef(null) // user id we have already reconciled for
   const [tab, setTab] = useState('rankings')
   const [logging, setLogging] = useState(false)
   const [prefill, setPrefill] = useState(null) // { name, area } when logging from Want-to-try
@@ -62,6 +63,11 @@ export default function App() {
   // a delete — the local copy may be the only one that exists.
   useEffect(() => {
     if (!user) return
+    // Supabase reports the session twice on load — once when we ask, once from
+    // the auth listener — and each report re-ran the whole upload, which is how
+    // every visit ended up in the account twice. Once per signed-in user, ever.
+    if (syncedFor.current === user.id) return
+    syncedFor.current = user.id
     let cancelled = false
     setCloudStatus({ tone: 'busy', text: 'Syncing…' })
     // Read the current state through a ref, not by peeking inside a state
@@ -70,6 +76,7 @@ export default function App() {
     reconcileOnSignIn(stateRef.current, user).then((result) => {
       if (cancelled) return
       if (result.state) setState(result.state)
+      if (result.error) syncedFor.current = null // a failure should be retryable
       setCloudStatus(cloudMessage(result))
     })
     return () => {

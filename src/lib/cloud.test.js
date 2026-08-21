@@ -87,8 +87,17 @@ describe('signing in with data in this browser', () => {
   it('gives visits ids and hands back a local state carrying them', async () => {
     const client = fakeClient(); const store = fakeStore()
     const r = await reconcileOnSignIn(withData(), USER, opts(client, store))
-    expect(r.state.bakeries[0].visits[0].id).toBe('v1')
+    expect(r.state.bakeries[0].visits[0].id).toBe('b1-v0')
     expect(client.rows('visits')).toHaveLength(1)
+  })
+
+  it('uploading twice cannot duplicate visits, even without the marker', async () => {
+    // the exact failure that doubled Sara's visit history: two runs, no memory
+    const client = fakeClient()
+    await reconcileOnSignIn(withData(), USER, opts(client, fakeStore()))
+    await reconcileOnSignIn(withData(), USER, opts(client, fakeStore()))
+    expect(client.rows('visits')).toHaveLength(1)
+    expect(client.rows('bakeries')).toHaveLength(2)
   })
 
   it('remembers it pushed, and does not push again', async () => {
