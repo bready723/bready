@@ -1,12 +1,12 @@
 import { useEffect, useRef, useState } from 'react'
+import { CURRENCIES, fetchLatest, fetchHistory, krwPerUnit, fmt } from '../lib/fx.js'
 import {
-  CURRENCIES,
-  fetchLatest,
-  fetchHistory,
-  krwPerUnit,
-  evalExpression,
-  fmt,
-} from '../lib/fx.js'
+  initialState,
+  press,
+  displayValue,
+  displayExpression,
+  isAllClear,
+} from '../lib/calculator.js'
 
 const MAGENTA = '#e0218a'
 // A gradient hairline border (bready brand) around a card of `bg`.
@@ -23,15 +23,13 @@ const PERIODS = [
   { key: 180, label: '6M' },
 ]
 
+// Same order as the iPhone calculator, so muscle memory transfers.
 const KEYS = [
-  { k: 'AC', kind: 'mag' }, { k: 'del', kind: 'mag', label: '⌫' },
-  { k: '/', kind: 'op', label: '÷' }, { k: '*', kind: 'op', label: '×' },
-  { k: '7', kind: 'num' }, { k: '8', kind: 'num' }, { k: '9', kind: 'num' }, { k: '-', kind: 'op', label: '−' },
-  { k: '4', kind: 'num' }, { k: '5', kind: 'num' }, { k: '6', kind: 'num' }, { k: '+', kind: 'op' },
-  { k: '1', kind: 'num' }, { k: '2', kind: 'num' }, { k: '3', kind: 'num' },
-  { k: '=', kind: 'eq', style: { gridColumn: 4, gridRow: '4 / span 2' } },
-  { k: '0', kind: 'num', style: { gridColumn: '1 / span 2' } },
-  { k: '.', kind: 'dot', style: { gridColumn: 3, gridRow: 5 } },
+  { k: 'del', kind: 'fn', label: '⌫' }, { k: 'AC', kind: 'fn' }, { k: '%', kind: 'fn' }, { k: '/', kind: 'op', label: '÷' },
+  { k: '7', kind: 'num' }, { k: '8', kind: 'num' }, { k: '9', kind: 'num' }, { k: '*', kind: 'op', label: '×' },
+  { k: '4', kind: 'num' }, { k: '5', kind: 'num' }, { k: '6', kind: 'num' }, { k: '-', kind: 'op', label: '−' },
+  { k: '1', kind: 'num' }, { k: '2', kind: 'num' }, { k: '3', kind: 'num' }, { k: '+', kind: 'op' },
+  { k: '+/-', kind: 'num', label: '⁺∕₋' }, { k: '0', kind: 'num' }, { k: '.', kind: 'num' }, { k: '=', kind: 'eq' },
 ]
 
 // Keep only digits and a single decimal point.
@@ -77,7 +75,7 @@ export default function FX({ currency, onCurrency }) {
   const lastEdited = useRef('fx')
 
   // Calculator — a plain, standalone calculator (no currency).
-  const [calc, setCalc] = useState('')
+  const [calc, setCalc] = useState(initialState)
 
   const rate = krwMap ? krwPerUnit(currency, krwMap) : null // KRW per 1 unit
 
@@ -140,32 +138,12 @@ export default function FX({ currency, onCurrency }) {
   }
 
   function pressCalc(k) {
-    setCalc((e) => {
-      if (k === 'AC') return ''
-      if (k === 'del') return e.slice(0, -1)
-      if (k === '=') {
-        const v = evalExpression(e)
-        return v == null ? e : String(v)
-      }
-      if ('+-*/'.includes(k)) {
-        if (!e) return k === '-' ? '-' : e
-        if ('+-*/'.includes(e.slice(-1))) return e.slice(0, -1) + k
-        return e + k
-      }
-      if (k === '.') {
-        const tail = e.split(/[+\-*/]/).pop()
-        if (tail.includes('.')) return e
-        if (e === '' || '+-*/'.includes(e.slice(-1))) return e + '0.'
-        return e + '.'
-      }
-      return e + k
-    })
+    setCalc((s) => press(s, k))
   }
 
-  // Calculator display: line 1 = the process (small), line 2 = the result (big).
-  const calcResult = evalExpression(calc)
-  const calcLine1 = calc || '0'
-  const calcLine2 = calcResult != null ? fmt(calcResult, 6) : calc.split(/[+\-*/]/).pop() || '0'
+  // Small line = the operation in progress. Big line = what you are typing.
+  const calcLine1 = displayExpression(calc)
+  const calcLine2 = displayValue(calc)
 
   const pct =
     history.length >= 2 ? ((history[history.length - 1].rate - history[0].rate) / history[0].rate) * 100 : null
@@ -278,18 +256,18 @@ export default function FX({ currency, onCurrency }) {
       <div className="fx-calc-title">Calculator</div>
       <div className="fx-card" style={{ ...gradBorder('var(--canvas)'), padding: 14, marginTop: 0 }}>
         <div className="fx-display">
-          <div className="fx-display-expr">{calcLine1}</div>
+          <div className="fx-display-expr">{calcLine1 || '\u00a0'}</div>
           <div className="fx-display-big">{calcLine2}</div>
         </div>
         <div className="fx-keys">
           {KEYS.map((key) => (
             <button
               key={key.k}
-              className={`fx-key ${key.kind}`}
-              style={key.style}
+              className={`fx-key ${key.kind}${calc.op === key.k && calc.overwrite ? ' armed' : ''}`}
               onClick={() => pressCalc(key.k)}
+              aria-label={key.k === 'del' ? 'delete' : key.k === '+/-' ? 'plus minus' : key.k}
             >
-              {key.label || key.k}
+              {key.k === 'AC' ? (isAllClear(calc) ? 'AC' : 'C') : key.label || key.k}
             </button>
           ))}
         </div>

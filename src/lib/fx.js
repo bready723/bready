@@ -92,43 +92,6 @@ export async function fetchHistory(code, days, points = 7) {
   return out
 }
 
-// --- Safe calculator: evaluate a +−×÷ expression with no eval() ---
-// Supports decimals and operator precedence (× ÷ before + −). Returns a finite
-// number, or null for an incomplete/invalid expression (e.g. a trailing "3×").
-export function evalExpression(str) {
-  if (!str) return null
-  const tokens = String(str).match(/\d+\.?\d*|\.\d+|[+\-*/]/g)
-  if (!tokens) return null
-  const prec = { '+': 1, '-': 1, '*': 2, '/': 2 }
-  const output = []
-  const ops = []
-  for (const t of tokens) {
-    if (t.length === 1 && prec[t]) {
-      while (ops.length && prec[ops[ops.length - 1]] >= prec[t]) output.push(ops.pop())
-      ops.push(t)
-    } else {
-      const n = parseFloat(t)
-      if (isNaN(n)) return null
-      output.push(n)
-    }
-  }
-  while (ops.length) output.push(ops.pop())
-  const st = []
-  for (const t of output) {
-    if (typeof t === 'number') {
-      st.push(t)
-    } else {
-      const b = st.pop()
-      const a = st.pop()
-      if (a === undefined || b === undefined) return null
-      if (t === '/' && b === 0) return null
-      st.push(t === '+' ? a + b : t === '-' ? a - b : t === '*' ? a * b : a / b)
-    }
-  }
-  const r = st.pop()
-  return st.length === 0 && typeof r === 'number' && isFinite(r) ? r : null
-}
-
 // Format a number with thousands separators and up to `dp` decimals (trailing
 // zeros trimmed). Used for both the big displays and the rate line.
 export function fmt(n, dp = 2) {

@@ -583,18 +583,21 @@ textarea.input { resize: vertical; min-height: 88px; }
   font-family: var(--display); font-weight: 600; font-size: 44px; color: #fff; text-align: right;
   font-variant-numeric: tabular-nums; line-height: 1.05; word-break: break-all; margin-top: 4px;
 }
-.fx-keys { display: grid; grid-template-columns: repeat(4, 1fr); gap: 9px; margin-top: 14px; }
+/* Round keys in the iPhone calculator's 4x5 order, in bready's colours. */
+.fx-keys { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; margin-top: 16px; }
 .fx-key {
-  height: 54px; border-radius: 15px; cursor: pointer; border: none;
+  aspect-ratio: 1; border-radius: 50%; cursor: pointer; border: none; padding: 0;
   font: 600 22px var(--sans); display: flex; align-items: center; justify-content: center;
-  transition: filter 0.1s, transform 0.06s;
+  transition: filter 0.1s, transform 0.06s, background 0.12s, color 0.12s;
+  -webkit-tap-highlight-color: transparent; touch-action: manipulation; user-select: none;
 }
-.fx-key:active { transform: scale(0.96); filter: brightness(0.95); }
-.fx-key.num { background: var(--surface); border: 1px solid var(--line-2); color: var(--ink); font-family: var(--display); font-size: 24px; }
-.fx-key.op { background: var(--accent); color: #fff; }
-.fx-key.mag { background: #e0218a; color: #fff; font-size: 16px; }
-.fx-key.eq { background: #e0218a; color: #fff; font-size: 26px; height: 100%; box-shadow: 0 5px 14px -4px rgba(224,33,138,0.55); }
-.fx-key.dot { background: var(--surface); border: 1px solid var(--line-2); color: var(--accent); font-family: var(--display); font-size: 24px; }
+.fx-key:active { transform: scale(0.93); filter: brightness(0.94); }
+.fx-key.num { background: var(--surface); border: 1px solid var(--line-2); color: var(--ink); font-family: var(--display); font-size: 25px; }
+.fx-key.fn { background: var(--line-2); color: var(--ink-2); font-size: 19px; }
+.fx-key.op { background: var(--accent); color: #fff; font-size: 25px; }
+.fx-key.eq { background: #e0218a; color: #fff; font-size: 26px; box-shadow: 0 5px 14px -4px rgba(224,33,138,0.55); }
+/* the pending operator stays lit, like iOS */
+.fx-key.op.armed { background: #fff; color: var(--accent); box-shadow: inset 0 0 0 2px var(--accent); }
 .fx-foot { margin-top: 16px; font-size: 11px; color: var(--soft); text-align: center; line-height: 1.5; }
 
 /* ---- floating add button (Rankings) — replaces the center nav "Add" ---- */

@@ -55,6 +55,12 @@ export default defineConfig({
           functions: 70,
           lines: 70,
         },
+        'src/lib/calculator.js': {
+          statements: 90,
+          branches: 90,
+          functions: 90,
+          lines: 90,
+        },
       },
     },
   },

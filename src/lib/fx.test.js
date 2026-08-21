@@ -1,22 +1,5 @@
 import { describe, it, expect } from 'vitest'
-import { evalExpression, krwPerUnit, fmt } from './fx.js'
-
-describe('evalExpression', () => {
-  it('evaluates a plain number', () => {
-    expect(evalExpression('100')).toBe(100)
-    expect(evalExpression('4.5')).toBe(4.5)
-  })
-  it('honors × ÷ precedence over + −', () => {
-    expect(evalExpression('3*4.5')).toBe(13.5)
-    expect(evalExpression('2+3*4')).toBe(14)
-    expect(evalExpression('10-2*3')).toBe(4)
-  })
-  it('returns null for an incomplete or invalid expression', () => {
-    expect(evalExpression('3*')).toBeNull()
-    expect(evalExpression('')).toBeNull()
-    expect(evalExpression('5/0')).toBeNull()
-  })
-})
+import { krwPerUnit, fmt } from './fx.js'
 
 describe('krwPerUnit', () => {
   it('inverts units-per-KRW into KRW-per-unit', () => {
