@@ -19,7 +19,7 @@ export default defineConfig({
         skipWaiting: true,
         cleanupOutdatedCaches: true,
       },
-      includeAssets: ['favicon.svg', 'icon-192.png', 'icon-512.png', 'icon-maskable-512.png'],
+      includeAssets: ['icon-192.png', 'icon-512.png', 'icon-maskable-512.png'],
       manifest: {
         name: 'bready',
         short_name: 'bready',
