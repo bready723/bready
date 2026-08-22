@@ -577,11 +577,17 @@ textarea.input { resize: vertical; min-height: 88px; }
 .fx-display { background: #e0218a; border-radius: 18px; padding: 14px 18px 16px; }
 .fx-display-expr {
   min-height: 17px; font: 500 14px var(--sans); color: rgba(255,255,255,0.72);
-  text-align: right; font-variant-numeric: tabular-nums; word-break: break-all; line-height: 1.2;
+  text-align: right; font-variant-numeric: tabular-nums; line-height: 1.2;
+  /* One line, always. Right-aligned, so what spills off is the oldest part of
+     the sum and the part being typed stays on screen. `break-all` used to wrap
+     it mid-number, which read as a broken display. */
+  white-space: nowrap; overflow: hidden;
 }
 .fx-display-big {
-  font-family: var(--display); font-weight: 600; font-size: 44px; color: #fff; text-align: right;
-  font-variant-numeric: tabular-nums; line-height: 1.05; word-break: break-all; margin-top: 4px;
+  font-family: var(--display); font-weight: 600; color: #fff; text-align: right;
+  font-variant-numeric: tabular-nums; line-height: 1.05; margin-top: 4px;
+  /* Size comes from bigFontSize() — long totals shrink rather than wrap. */
+  white-space: nowrap; overflow: hidden;
 }
 /* Round keys in the iPhone calculator's 4x5 order, in bready's colours. */
 .fx-keys { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; margin-top: 16px; }

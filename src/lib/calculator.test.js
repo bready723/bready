@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest'
-import { initialState, press, displayValue, displayExpression, isAllClear, ERROR } from './calculator.js'
+import { initialState, press, displayValue, displayExpression, isAllClear, ERROR, bigFontSize} from './calculator.js'
 
 // Drive the calculator the way a thumb does: a string of keys, one per token.
 const run = (keys) => keys.reduce((s, k) => press(s, k), initialState())
@@ -79,9 +79,31 @@ describe('arithmetic', () => {
     expect(expr(K('2 + 3 +'))).toBe('5 +')
   })
 
-  it('is immediate-execution: no operator precedence', () => {
-    // A pocket calculator gives 20 here, not 14 — that is the intended behaviour.
-    expect(show(K('2 + 3 * 4 ='))).toBe('20')
+  it('does × and ÷ before + and −, the way the iPhone does', () => {
+    // This test used to assert 20 — the left-to-right answer a cheap pocket
+    // calculator gives. The iPhone gives 14, and the iPhone is what Sara is
+    // holding in her other hand, so 20 was the bug and the test was wrong too.
+    expect(show(K('2 + 3 * 4 ='))).toBe('14')
+    expect(show(K('1 + 2 * 3 - 4 ='))).toBe('3')
+    expect(show(K('5 * 2 + 3 * 4 ='))).toBe('22')
+    expect(show(K('1 0 0 - 5 0 / 2 ='))).toBe('75')
+  })
+
+  it('keeps + and − left to right among themselves', () => {
+    expect(show(K('9 - 1 - 1 ='))).toBe('7')
+    expect(show(K('1 + 2 + 3 ='))).toBe('6')
+  })
+
+  it('keeps × and ÷ left to right among themselves', () => {
+    expect(show(K('8 / 2 / 2 ='))).toBe('2')
+    expect(show(K('6 / 3 * 2 ='))).toBe('4')
+  })
+
+  it('shows the running sum when + or − settles what came before', () => {
+    // 2 + 3 × 4 then "+" must show 14, not 2 and not 12.
+    expect(show(K('2 + 3 * 4 +'))).toBe('14')
+    // ...but × must not disturb the sum it sits inside: still showing 3.
+    expect(show(K('2 + 3 *'))).toBe('3')
   })
 
   it('swaps the pending operator when two are pressed in a row', () => {
@@ -253,5 +275,119 @@ describe('never breaks, whatever you press', () => {
     }
     // sanity: the fuzzer really did move the display around
     expect(seen.size).toBeGreaterThan(500)
+  })
+})
+
+// ---------------------------------------------------------------------------
+// Differential test: 3,000 random sums, checked against a second calculator
+// that shares no code with the first.
+//
+// The precedence bug survived 45 tests because the tests were written from the
+// same wrong idea as the code. A reference implementation cannot make that
+// mistake in sympathy: it is written from the rule (× and ÷ bind tighter),
+// not from the machine.
+// ---------------------------------------------------------------------------
+
+// A deterministic RNG, so a failure is reproducible rather than a ghost.
+function rng(seed) {
+  return function next() {
+    seed |= 0; seed = (seed + 0x6D2B79F5) | 0
+    let t = Math.imul(seed ^ (seed >>> 15), 1 | seed)
+    t = (t + Math.imul(t ^ (t >>> 7), 61 | t)) ^ t
+    return ((t ^ (t >>> 14)) >>> 0) / 4294967296
+  }
+}
+
+/** Evaluate [n, op, n, op, n...] by the rule, in two passes. */
+function referenceEval(tokens) {
+  const flat = [tokens[0]]
+  for (let i = 1; i < tokens.length; i += 2) {
+    const op = tokens[i], v = tokens[i + 1]
+    if (op === '*' || op === '/') {
+      const a = flat[flat.length - 1]
+      flat[flat.length - 1] = op === '*' ? a * v : a / v
+    } else {
+      flat.push(op, v)
+    }
+  }
+  let acc = flat[0]
+  for (let i = 1; i < flat.length; i += 2) {
+    acc = flat[i] === '+' ? acc + flat[i + 1] : acc - flat[i + 1]
+  }
+  return acc
+}
+
+describe('checked against an independent calculator', () => {
+  it('agrees on 3000 random sums', () => {
+    const next = rng(20260822)
+    const OPSET = ['+', '-', '*', '/']
+    const mismatches = []
+
+    for (let n = 0; n < 3000; n += 1) {
+      const operands = 2 + Math.floor(next() * 5) // 2..6 numbers
+      const tokens = []
+      const presses = []
+      for (let i = 0; i < operands; i += 1) {
+        if (i > 0) {
+          const op = OPSET[Math.floor(next() * 4)]
+          tokens.push(op)
+          presses.push(op)
+        }
+        // Never zero, so division by zero is out of scope here — it has its
+        // own tests, and it resets the machine rather than producing a number.
+        const digits = 1 + Math.floor(next() * 3)
+        let text = String(1 + Math.floor(next() * 9))
+        for (let d = 1; d < digits; d += 1) text += String(Math.floor(next() * 10))
+        tokens.push(Number(text))
+        presses.push(...text.split(''))
+      }
+      presses.push('=')
+
+      let s = initialState()
+      for (const key of presses) s = press(s, key)
+
+      const want = referenceEval(tokens)
+      const got = Number(s.entry)
+      // Both round to 12 significant figures for display; compare there.
+      const round = (x) => Number(x.toPrecision(12))
+      if (s.error || round(got) !== round(want)) {
+        mismatches.push({ keys: presses.join(' '), got: s.error ? 'Error' : got, want })
+      }
+    }
+
+    expect(mismatches.slice(0, 5)).toEqual([])
+    expect(mismatches).toHaveLength(0)
+  })
+})
+
+describe('divide by zero', () => {
+  it('says Error rather than Infinity', () => {
+    expect(show(K('1 / 0 ='))).toBe('Error')
+    expect(show(K('5 + 1 / 0 ='))).toBe('Error')
+    expect(show(K('8 / 0 +'))).toBe('Error')
+  })
+
+  it('the next key starts a clean sum, not a poisoned one', () => {
+    expect(show(K('1 / 0 = 7'))).toBe('7')
+    expect(show(K('1 / 0 = 7 + 3 ='))).toBe('10')
+  })
+})
+
+describe('bigFontSize', () => {
+  it('shrinks as the total gets longer, measured against a 390px screen', () => {
+    expect(bigFontSize('12,345')).toBe(44)
+    expect(bigFontSize('123,456,789')).toBe(38)   // 11 chars
+    expect(bigFontSize('1,234,567,890')).toBe(32) // 13 chars
+    expect(bigFontSize('999,999,999,999')).toBe(27)
+    expect(bigFontSize('-999,999,999,999')).toBe(27)
+    expect(bigFontSize('-123,456.789012')).toBe(27)
+  })
+
+  it('never returns something unusable', () => {
+    for (const s of ['', '0', 'Error', 'x'.repeat(40)]) {
+      const n = bigFontSize(s)
+      expect(n).toBeGreaterThan(15)
+      expect(n).toBeLessThanOrEqual(44)
+    }
   })
 })

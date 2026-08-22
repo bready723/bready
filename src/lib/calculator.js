@@ -1,10 +1,17 @@
-// An immediate-execution calculator, modelled on the iOS calculator.
+// A calculator modelled on the iOS one — including its order of operations.
 //
-// The old version kept the whole keyed-in expression as a string and re-parsed
-// it on every press, which is why the big display showed the answer to a sum you
-// hadn't finished typing and why backspace ate the result after "=". This one
-// keeps the two things a pocket calculator actually holds: an accumulator plus a
-// pending operator, and the digits you are typing right now.
+// The first version kept a single accumulator and a single pending operator,
+// which is how a cheap pocket calculator works: it evaluates strictly left to
+// right, so 2 + 3 × 4 came out as 20. The iPhone does not do that. It applies
+// × and ÷ before + and −, giving 14, and that is what Sara is comparing
+// against. Hence two levels of pending state rather than one:
+//
+//   acc  addOp   the sum so far, and the + or − waiting on it
+//   mulAcc mulOp the product so far, and the × or ÷ waiting on it
+//
+// A × or ÷ only ever touches the inner pair. A + or − first collapses the
+// inner pair into the outer one, which is precedence, expressed as two slots
+// instead of a parser.
 //
 // Pure functions only — no React in here, so every rule below is unit-testable.
 
@@ -14,17 +21,26 @@ export const ERROR = 'Error'
 export const OPS = ['+', '-', '*', '/']
 export const OP_SYMBOL = { '+': '+', '-': '−', '*': '×', '/': '÷' }
 
+const isMul = (op) => op === '*' || op === '/'
+
 export function initialState() {
   return {
     entry: '0',      // the digits on the big line, as typed
-    acc: null,       // left-hand value, once an operator is pending
-    op: null,        // pending operator, one of OPS
+    acc: null,       // the running sum, once a + or − is pending
+    addOp: null,     // pending + or −
+    mulAcc: null,    // the running product, once a × or ÷ is pending
+    mulOp: null,     // pending × or ÷
     overwrite: true, // next digit replaces `entry` instead of appending
     lastOp: null,    // for repeat-equals
     lastRhs: null,
     done: false,     // an "=" has just produced this entry
     error: false,
   }
+}
+
+/** The operator currently lit on the keypad: the most recent one typed. */
+export function pendingOp(s) {
+  return s.mulOp || s.addOp || null
 }
 
 const num = (s) => parseFloat(s === '' || s === '-' ? '0' : s)
@@ -42,12 +58,24 @@ function apply(a, b, op) {
 // A computed result becomes the new entry string. Keep full precision in the
 // number, trim the float noise that 0.1+0.2 style arithmetic leaves behind.
 function toEntry(n) {
-  if (n === null || !isFinite(n)) return null
+  if (n === null || n === undefined || !isFinite(n)) return null
   const r = parseFloat(n.toPrecision(12))
   return String(r)
 }
 
 const errorState = (s) => ({ ...initialState(), lastOp: s.lastOp, lastRhs: s.lastRhs, entry: ERROR, error: true })
+
+/** Collapse the inner (× ÷) pair around `v`. Null means divide by zero. */
+function foldMul(s, v) {
+  return s.mulOp ? apply(s.mulAcc, v, s.mulOp) : v
+}
+
+/** Collapse everything pending around `v`. Null means divide by zero. */
+function foldAll(s, v) {
+  const t = foldMul(s, v)
+  if (t === null) return null
+  return s.addOp ? apply(s.acc, t, s.addOp) : t
+}
 
 function pressDigit(s, d) {
   if (s.overwrite || s.done) return { ...s, entry: d, overwrite: false, done: false }
@@ -63,25 +91,62 @@ function pressDot(s) {
   return { ...s, entry: s.entry + '.' }
 }
 
-function pressOp(s, op) {
-  // Two operators in a row just swaps which one is pending — no phantom maths.
-  if (s.op && s.overwrite) return { ...s, op }
-  if (s.op) {
-    const r = apply(s.acc, num(s.entry), s.op)
-    const e = toEntry(r)
+// Two operators in a row swaps which one is pending, rather than inventing an
+// operand out of thin air.
+function swapOp(s, op) {
+  if (s.mulOp) {
+    if (isMul(op)) return { ...s, mulOp: op }
+    // × giving way to +: the inner pair collapses to the operand it was
+    // holding, which then joins the sum. "2 + 3 × +" behaves as "2 + 3 +".
+    const total = s.addOp ? apply(s.acc, s.mulAcc, s.addOp) : s.mulAcc
+    const e = toEntry(total)
     if (e === null) return errorState(s)
-    return { ...s, acc: r, entry: e, op, overwrite: true, done: false }
+    return { ...s, acc: total, addOp: op, mulAcc: null, mulOp: null, entry: e, overwrite: true }
   }
-  return { ...s, acc: num(s.entry), op, overwrite: true, done: false }
+  if (isMul(op)) {
+    // "2 + ×" becomes "2 ×" — the abandoned + takes its operand with it.
+    const e = toEntry(s.acc)
+    if (e === null) return errorState(s)
+    return { ...s, mulAcc: s.acc, mulOp: op, acc: null, addOp: null, entry: e, overwrite: true }
+  }
+  return { ...s, addOp: op }
+}
+
+function pressOp(s, op) {
+  if (pendingOp(s) && s.overwrite) return swapOp(s, op)
+  const v = num(s.entry)
+
+  if (isMul(op)) {
+    // × and ÷ never disturb the sum they sit inside.
+    const left = foldMul(s, v)
+    const e = toEntry(left)
+    if (e === null) return errorState(s)
+    return { ...s, mulAcc: left, mulOp: op, entry: e, overwrite: true, done: false }
+  }
+
+  // + and − mean everything to their left is now settled, so the big line
+  // shows the running total — the same thing the iPhone does.
+  const total = foldAll(s, v)
+  const e = toEntry(total)
+  if (e === null) return errorState(s)
+  return { ...s, acc: total, addOp: op, mulAcc: null, mulOp: null, entry: e, overwrite: true, done: false }
 }
 
 function pressEquals(s) {
-  if (s.op) {
+  if (pendingOp(s)) {
     const rhs = num(s.entry)
-    const r = apply(s.acc, rhs, s.op)
-    const e = toEntry(r)
+    const total = foldAll(s, rhs)
+    const e = toEntry(total)
     if (e === null) return errorState(s)
-    return { ...s, entry: e, acc: null, op: null, overwrite: true, done: true, lastOp: s.op, lastRhs: rhs }
+    // Repeat-equals replays the innermost operation — the last one typed —
+    // because that is the one whose operand is still on the big line.
+    return {
+      ...s,
+      entry: e,
+      acc: null, addOp: null, mulAcc: null, mulOp: null,
+      overwrite: true, done: true,
+      lastOp: pendingOp(s), lastRhs: rhs,
+    }
   }
   // Bare "=" repeats whatever was done last, the way every calculator does.
   if (s.lastOp != null) {
@@ -93,11 +158,13 @@ function pressEquals(s) {
   return { ...s, overwrite: true, done: true }
 }
 
-// iOS semantics: inside a pending + or −, "%" means "that percent OF the left
-// operand", so 200 + 10% is 200 + 20. Anywhere else it just divides by 100.
+// iOS semantics: inside a pending + or −, "%" means "that percent OF the sum so
+// far", so 200 + 10% is 200 + 20. Inside a × or ÷, and on its own, it is just a
+// division by 100.
 function pressPercent(s) {
   const v = num(s.entry)
-  const pct = s.op === '+' || s.op === '-' ? (s.acc ?? 0) * (v / 100) : v / 100
+  const ofSum = s.addOp && !s.mulOp
+  const pct = ofSum ? (s.acc ?? 0) * (v / 100) : v / 100
   const e = toEntry(pct)
   if (e === null) return errorState(s)
   return { ...s, entry: e, overwrite: false, done: false }
@@ -142,6 +209,12 @@ export function press(state, key) {
   return s
 }
 
+/** Format a bare number the way the big line would show it. */
+function fmt(n) {
+  const e = toEntry(n)
+  return e === null ? '0' : displayValue({ entry: e, error: false })
+}
+
 /** The big line: the entry, with thousands separators. */
 export function displayValue(s) {
   if (s.error) return ERROR
@@ -153,16 +226,36 @@ export function displayValue(s) {
   return (neg ? '-' : '') + out
 }
 
-/** The small line: the operation in progress, or the sum just completed. */
+/**
+ * The small line: the whole operation in progress, so a mixed sum is visible
+ * as "2 + 3 ×" rather than leaving Sara to guess what the machine is holding.
+ */
 export function displayExpression(s) {
   if (s.error) return ''
-  if (s.op) {
-    const left = displayValue({ ...s, entry: toEntry(s.acc) ?? '0', error: false })
-    return `${left} ${OP_SYMBOL[s.op]}${s.overwrite ? '' : ' ' + displayValue(s)}`
+  const parts = []
+  if (s.addOp) parts.push(fmt(s.acc), OP_SYMBOL[s.addOp])
+  if (s.mulOp) parts.push(fmt(s.mulAcc), OP_SYMBOL[s.mulOp])
+  if (parts.length) {
+    if (!s.overwrite) parts.push(displayValue(s))
+    return parts.join(' ')
   }
-  if (s.done && s.lastOp) {
-    const rhs = displayValue({ ...s, entry: toEntry(s.lastRhs) ?? '0', error: false })
-    return `${OP_SYMBOL[s.lastOp]} ${rhs} =`
-  }
+  if (s.done && s.lastOp) return `${OP_SYMBOL[s.lastOp]} ${fmt(s.lastRhs)} =`
   return ''
+}
+
+/**
+ * How big the big line can be before it stops fitting a phone.
+ *
+ * The CSS used to let a long total wrap with `word-break: break-all`, which
+ * split it mid-number — a total reading "1,234,5" above "67,890". iOS shrinks
+ * the digits instead of breaking them, so this does too. The thresholds are
+ * measured against a 390px-wide screen, not guessed.
+ */
+export function bigFontSize(text) {
+  const n = String(text).length
+  if (n <= 9) return 44
+  if (n <= 11) return 38
+  if (n <= 13) return 32
+  if (n <= 16) return 27
+  return 23
 }

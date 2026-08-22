@@ -6,6 +6,8 @@ import {
   displayValue,
   displayExpression,
   isAllClear,
+  pendingOp,
+  bigFontSize,
 } from '../lib/calculator.js'
 
 const MAGENTA = '#e0218a'
@@ -257,13 +259,13 @@ export default function FX({ currency, onCurrency }) {
       <div className="fx-card" style={{ ...gradBorder('var(--canvas)'), padding: 14, marginTop: 0 }}>
         <div className="fx-display">
           <div className="fx-display-expr">{calcLine1 || '\u00a0'}</div>
-          <div className="fx-display-big">{calcLine2}</div>
+          <div className="fx-display-big" style={{ fontSize: bigFontSize(calcLine2) }}>{calcLine2}</div>
         </div>
         <div className="fx-keys">
           {KEYS.map((key) => (
             <button
               key={key.k}
-              className={`fx-key ${key.kind}${calc.op === key.k && calc.overwrite ? ' armed' : ''}`}
+              className={`fx-key ${key.kind}${pendingOp(calc) === key.k && calc.overwrite ? ' armed' : ''}`}
               onClick={() => pressCalc(key.k)}
               aria-label={key.k === 'del' ? 'delete' : key.k === '+/-' ? 'plus minus' : key.k}
             >
