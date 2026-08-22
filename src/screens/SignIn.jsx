@@ -1,13 +1,15 @@
 import { useState } from 'react'
-import { sendSignInLink, signInWithLink, signOut, isCloudConfigured } from '../lib/auth.js'
+import { sendSignInLink, signInWithPasted, getHandoffCode, signOut, isCloudConfigured } from '../lib/auth.js'
 
 // Sign-in is a sheet, not a wall: bready worked without an account for months
 // and still does. This only appears when Sara asks for it.
-// Shown on both the first screen and the "check your email" screen. It has to
-// be reachable without sending anything: iOS opens a mailed link in Safari
-// rather than the installed app, so Sara arrives here holding a link she
-// already has — and Supabase's free tier rate-limits sends hard enough that
-// making her request another one just to reach this box is a dead end.
+//
+// The paste box is on every screen, and reachable without sending anything.
+// On iOS a mailed link can never reach the home-screen app: tapping it opens
+// Safari, and copying it makes Mail load the link to draw a preview, which
+// spends the single-use token before it can be pasted. So the credential does
+// not come from email at all — Safari, already signed in, hands its session
+// over as a code.
 function PasteLink({ value, onChange, onSubmit, checking, error }) {
   return (
     <>
@@ -15,8 +17,9 @@ function PasteLink({ value, onChange, onSubmit, checking, error }) {
         <span>on your home-screen app?</span>
       </div>
       <p className="signin-body">
-        Tapping the link always opens Safari, never this app. Instead <strong>press and hold</strong> the link
-        in the email, choose <strong>Copy Link</strong>, and paste it here.
+        A mailed link cannot open this app, and copying it from the email uses it up. Instead open bready
+        in <strong>Safari</strong>, tap <strong>Synced</strong>, tap <strong>Copy sign-in code</strong>,
+        and paste it here.
       </p>
       <form onSubmit={onSubmit} noValidate>
         <input
@@ -25,13 +28,13 @@ function PasteLink({ value, onChange, onSubmit, checking, error }) {
           inputMode="url"
           autoCapitalize="off"
           autoCorrect="off"
-          placeholder="Paste the sign-in link"
+          placeholder="Paste your sign-in code"
           value={value}
           onChange={(e) => onChange(e.target.value)}
           disabled={checking}
         />
         <button className="signin-primary" type="submit" disabled={checking}>
-          {checking ? 'Signing in…' : 'Sign in with the link'}
+          {checking ? 'Signing in…' : 'Sign in with the code'}
         </button>
       </form>
       {error && <p className="signin-error">{error}</p>}
@@ -46,6 +49,31 @@ export default function SignIn({ user, onClose, onSignedOut }) {
   const [link, setLink] = useState('')
   const [linkStatus, setLinkStatus] = useState('idle') // idle | checking | error
   const [linkError, setLinkError] = useState('')
+  const [code, setCode] = useState('')
+  const [copyState, setCopyState] = useState('idle') // idle | copied | error
+  const [copyMessage, setCopyMessage] = useState('')
+
+  async function copyCode() {
+    setCopyState('idle')
+    setCopyMessage('')
+    setCode('')
+    const result = await getHandoffCode()
+    if (!result.ok) {
+      setCopyState('error')
+      setCopyMessage(result.error)
+      return
+    }
+    try {
+      await navigator.clipboard.writeText(result.code)
+      setCopyState('copied')
+    } catch (e) {
+      // Clipboard blocked. Show the code so it can be selected by hand rather
+      // than leaving Sara with a button that silently does nothing.
+      setCode(result.code)
+      setCopyState('error')
+      setCopyMessage('Could not copy automatically — select the code below and copy it.')
+    }
+  }
 
   async function submit(e) {
     e.preventDefault()
@@ -60,13 +88,13 @@ export default function SignIn({ user, onClose, onSignedOut }) {
     }
   }
 
-  // iOS opens a mailed link in Safari, never in the installed app, so pasting
-  // the link is the only way to sign in where Sara actually is.
+  // Takes a handoff code or a sign-in link — Sara should not have to know
+  // which kind of string she is holding.
   async function submitLink(e) {
     e.preventDefault()
     setLinkStatus('checking')
     setLinkError('')
-    const result = await signInWithLink(link)
+    const result = await signInWithPasted(link)
     if (result.ok) {
       onClose()
     } else {
@@ -93,6 +121,27 @@ export default function SignIn({ user, onClose, onSignedOut }) {
               Your bakeries, rankings and photos are saved to <strong>{user.email}</strong> and
               follow you to any browser you sign in on.
             </p>
+            <div className="signin-divider">
+              <span>on your home-screen app?</span>
+            </div>
+            <p className="signin-body">
+              Copy a sign-in code, then open the bready icon and paste it there. This moves the session,
+              so Safari may ask you to sign in again later.
+            </p>
+            <button className="signin-secondary" onClick={copyCode}>
+              {copyState === 'copied' ? 'Copied — now paste it in the app' : 'Copy sign-in code'}
+            </button>
+            {/* Only shown when the clipboard refused, so a live credential is
+                not sitting on screen for no reason. */}
+            {code && (
+              <input
+                className="signin-input"
+                readOnly
+                value={code}
+                onFocus={(e) => e.target.select()}
+              />
+            )}
+            {copyState === 'error' && <p className="signin-error">{copyMessage}</p>}
             <button className="signin-secondary" onClick={leave}>Sign out</button>
           </>
         ) : status === 'sent' ? (

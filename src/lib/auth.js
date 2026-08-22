@@ -60,27 +60,120 @@ export function tokenFromLink(link) {
 }
 
 /**
- * Sign in from a pasted sign-in link. The link is single use — if it was
- * already opened somewhere else, Supabase rejects it and we say so.
+ * A one-time code that moves this browser's session to another one.
+ *
+ * On iOS the sign-in link simply cannot reach the home-screen app. Tapping it
+ * opens Safari. Copying it is worse: to draw its preview, Mail *loads* the
+ * link, and a Supabase magic link is single use — so the token is spent by the
+ * act of looking at it, which is the "already used" dead end. The fix is to
+ * stop routing the credential through email at all. Safari is already signed
+ * in; it hands its session over directly, and the clipboard is the courier.
  */
-export async function signInWithLink(link) {
-  const token_hash = tokenFromLink(link)
-  if (!token_hash) {
-    return { ok: false, error: "That doesn't look like a sign-in link. Copy the whole link from the email." }
+export const HANDOFF_PREFIX = 'bready-signin:v1:'
+
+/** The code for a session, or null if there is nothing to hand over. */
+export function makeHandoffCode(session) {
+  const token = session?.refresh_token
+  return token ? `${HANDOFF_PREFIX}${token}` : null
+}
+
+/**
+ * Work out what got pasted: a handoff code, a sign-in link, or neither.
+ * Both arrive through the same box, because Sara should not have to know
+ * which kind of string she is holding.
+ */
+export function parsePasted(text) {
+  const raw = String(text || '').trim()
+  if (!raw) return null
+  if (raw.startsWith(HANDOFF_PREFIX)) {
+    // Mail and Notes both wrap long strings; the token itself has no spaces.
+    const refreshToken = raw.slice(HANDOFF_PREFIX.length).replace(/\s+/g, '')
+    return refreshToken ? { kind: 'handoff', refreshToken } : null
   }
-  if (!supabase) return { ok: false, error: 'Cloud sync is not set up in this build.' }
+  const token = tokenFromLink(raw)
+  return token ? { kind: 'link', token } : null
+}
+
+/** Read the live session and turn it into a code to copy. */
+export async function getHandoffCode(options = {}) {
+  const client = 'client' in options ? options.client : supabase
+  if (!client) return { ok: false, error: 'Cloud sync is not set up in this build.' }
   try {
-    const { error } = await supabase.auth.verifyOtp({ token_hash, type: 'email' })
-    if (!error) return { ok: true }
+    const { data } = await client.auth.getSession()
+    const code = makeHandoffCode(data?.session)
+    return code
+      ? { ok: true, code }
+      : { ok: false, error: 'Sign in here first, then copy the code.' }
+  } catch (e) {
+    return { ok: false, error: e?.message || 'Could not read this session.' }
+  }
+}
+
+// Safari says only "Load failed" when a request dies, which told Sara nothing.
+const NETWORK = /load failed|failed to fetch|networkerror|network request failed|timed? ?out/i
+
+/**
+ * Run one auth call, with a single silent retry if the connection drops. A
+ * phone waking a home-screen app up regularly loses the first request.
+ */
+async function attempt(run) {
+  for (let i = 0; i < 2; i += 1) {
+    try {
+      const { error } = await run()
+      return { error: error || null }
+    } catch (e) {
+      if (i === 0 && NETWORK.test(e?.message || '')) continue
+      return { thrown: e }
+    }
+  }
+}
+
+// Supabase's own wording, observed against the live endpoint rather than
+// guessed: a dead refresh token comes back as "Refresh token is not valid",
+// which matches none of the words you would expect.
+const SPENT = /expired|invalid|not valid|not found|already used|revoked/i
+
+function explain(message, kind) {
+  if (SPENT.test(message)) {
+    return kind === 'handoff'
+      ? 'That code was already used. Tap Copy sign-in code in Safari again for a fresh one.'
+      : 'That link has already been used or has expired. Send yourself a new one.'
+  }
+  return message
+}
+
+/**
+ * Sign in from whatever was pasted — a handoff code or a sign-in link.
+ * Never touches the send path, so it cannot burn the email rate limit.
+ */
+export async function signInWithPasted(text, options = {}) {
+  const parsed = parsePasted(text)
+  if (!parsed) {
+    return { ok: false, error: "That is not a sign-in code or link. Copy the whole thing and try again." }
+  }
+  const client = 'client' in options ? options.client : supabase
+  if (!client) return { ok: false, error: 'Cloud sync is not set up in this build.' }
+
+  const result = parsed.kind === 'handoff'
+    ? await attempt(() => client.auth.refreshSession({ refresh_token: parsed.refreshToken }))
+    : await attempt(() => client.auth.verifyOtp({ token_hash: parsed.token, type: 'email' }))
+
+  if (result.thrown) {
+    const message = result.thrown?.message || ''
     return {
       ok: false,
-      error: /expired|invalid|not found/i.test(error.message)
-        ? 'That link has already been used or has expired. Send yourself a new one.'
-        : error.message,
+      error: NETWORK.test(message)
+        ? 'Could not reach the server. Check your connection and try again.'
+        : message || 'Sign in failed.',
     }
-  } catch (e) {
-    return { ok: false, error: e?.message || 'Could not reach the server.' }
   }
+  if (!result.error) return { ok: true }
+  return { ok: false, error: explain(result.error.message, parsed.kind) }
+}
+
+/** Kept for callers that only ever hold a link. */
+export async function signInWithLink(link) {
+  return signInWithPasted(link)
 }
 
 export async function signOut() {

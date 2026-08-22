@@ -13,7 +13,10 @@ Staged so each phase leaves the app working. 🙋 marks a step only Sara can do.
 
 ## 3. Sign-in
 - [x] 3.1 `SignIn.jsx`: email field, "check your inbox" state, error state.
-- [ ] 3.2 Handle the magic-link return and persist the session.
+- [x] 3.2 Handle the magic-link return and persist the session.
+- [x] 3.4 iOS home-screen app: a mailed link cannot reach it. Tapping opens Safari, and copying the
+      link makes Mail load it to draw a preview, which spends the single-use token. Hand the session
+      over from Safari instead, as a one-time code on the clipboard.
 - [x] 3.3 Sign out, and a signed-out mode that still works locally.
 
 ## 4. Sync engine (the part worth testing hardest)
