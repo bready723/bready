@@ -50,12 +50,21 @@ export function detectSource(text) {
 }
 
 // Map an app language code — a plain code ('zh', 'ja') OR a BCP tag ('zh-HK',
-// 'ja-JP') — to the code each provider wants. Hong Kong reads TRADITIONAL
-// Chinese, so zh-HK → zh-TW: this fixes "Cantonese came back identical to
-// Mandarin" (Mandarin is Simplified zh-CN, so the scripts now differ).
-function targetCodes(code) {
+// 'ja-JP') — to the code each provider wants.
+//
+// Cantonese is its own language, not Chinese in a different script. This used
+// to send zh-HK as zh-TW, which returns Mandarin written in traditional
+// characters: "這個麵包多少錢?" — correct Chinese, and not something a Hong
+// Konger would say. The real thing is `yue`: "呢個麵包幾錢?" — 呢個 not 這個,
+// 幾錢 not 多少錢. Sara spotted it; the old comment here confidently explained
+// the wrong behaviour as a fix.
+//
+// MyMemory has no Cantonese at all, so the fallback can only offer traditional
+// Chinese. It is a fallback, and it says so.
+export function targetCodes(code) {
   const t = (code || '').toLowerCase()
-  if (t === 'zh-hk' || t === 'zh-tw') return { google: 'zh-TW', mymemory: 'zh-TW' }
+  if (t === 'zh-hk' || t === 'yue') return { google: 'yue', mymemory: 'zh-TW' }
+  if (t === 'zh-tw') return { google: 'zh-TW', mymemory: 'zh-TW' }
   if (t === 'zh-cn' || t === 'zh') return { google: 'zh-CN', mymemory: 'zh-CN' }
   const two = t.slice(0, 2)
   return { google: two, mymemory: two }
@@ -108,7 +117,9 @@ export async function translateText(text, targetLang, sourceLang) {
   const sl = src.slice(0, 2)
   const { google, mymemory } = targetCodes(targetLang)
   // Same language in and out — nothing to translate (but zh→zh may switch script).
-  if (sl === google.slice(0, 2) && !/^zh/.test(google)) return text
+  // Same language in and out — nothing to do. zh and yue are excluded: zh→zh
+  // still switches script, and zh→yue is a real translation.
+  if (sl === google.slice(0, 2) && !/^zh/.test(google) && google !== 'yue') return text
   try {
     return await googleTranslate(text, google, sl)
   } catch (e) {

@@ -83,6 +83,8 @@ export default function Translator({ country, onCountry }) {
   const [auto, setAuto] = useState(loadAuto)
   const [autoLoading, setAutoLoading] = useState(false)
   const [micMsg, setMicMsg] = useState('')
+  const [pasteMsg, setPasteMsg] = useState('')
+  const [copyMsg, setCopyMsg] = useState('')
   const [script, setScript] = useState(loadScript)
   const recRef = useRef(null)
   const micTimer = useRef(null)
@@ -180,7 +182,6 @@ export default function Translator({ country, onCountry }) {
     if (!phrase) return
     const myReq = ++reqRef.current
     setStatus('loading')
-    setOutput('')
     try {
       // Pass dest.bcp (zh-HK/zh-CN/ja-JP…) so Cantonese maps to Traditional and
       // stays distinct from Mandarin; translateText normalizes per provider.
@@ -189,13 +190,65 @@ export default function Translator({ country, onCountry }) {
       setOutput(out)
       setSubmitted(phrase)
       setStatus('done')
-      setText('') // clear the box so the next dictation starts fresh (no run-on)
-      speak(out, dest.bcp)
-      logScript(phrase, out)
+      // The box used to empty itself here, so you could never see what you had
+      // just asked for, let alone fix a typo. Google Translate keeps it; so do
+      // we. Speaking and logging moved to the 🔊 and Copy buttons: translation
+      // now happens while you type, and a phone that talks at every pause is
+      // unusable.
     } catch (e) {
       if (myReq !== reqRef.current) return
       setStatus('error')
     }
+  }
+
+  // Translate as it is typed, the way Google Translate does — no button to
+  // find, no button to forget. 600ms is long enough that a normal typing speed
+  // makes one request per phrase rather than one per keystroke.
+  useEffect(() => {
+    const phrase = text.trim()
+    if (!phrase) {
+      reqRef.current += 1 // abandon anything in flight
+      setOutput('')
+      setSubmitted('')
+      setStatus('idle')
+      return undefined
+    }
+    const timer = setTimeout(() => doTranslate(phrase), 600)
+    return () => clearTimeout(timer)
+    // dest.bcp and the From language are here on purpose: changing either
+    // should re-translate what is already on screen.
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [text, dest.bcp, inputLang])
+
+  // The clipboard needs a user gesture and can still be refused (iOS asks, and
+  // a refusal is silent). Say what to do by hand rather than looking broken.
+  async function paste() {
+    try {
+      const clip = await navigator.clipboard.readText()
+      if (clip) setText(clip)
+      else setPasteMsg('Clipboard is empty')
+    } catch (e) {
+      setPasteMsg('Press and hold the box to paste')
+    }
+    setTimeout(() => setPasteMsg(''), 2200)
+  }
+
+  async function copyOut() {
+    try {
+      await navigator.clipboard.writeText(output)
+      setCopyMsg('Copied')
+    } catch (e) {
+      setCopyMsg('Press and hold the text to copy')
+    }
+    logScript(submitted, output)
+    setTimeout(() => setCopyMsg(''), 1800)
+  }
+
+  // Saying it out loud or copying it is what makes a phrase worth keeping.
+  // Logging every pause in typing would fill Script with half-typed fragments.
+  function speakOut() {
+    speak(output, dest.bcp)
+    logScript(submitted, output)
   }
 
   // Flip From ⇄ To in one tap so Sara can hand the phone over for the reply.
@@ -383,14 +436,6 @@ export default function Translator({ country, onCountry }) {
         </button>
       </div>
 
-      {/* Cantonese caveat: written text falls back to standard Chinese; the voice is real Cantonese. */}
-      {dest.code === 'HK' && sub !== 'script' && (
-        <p className="muted" style={{ fontSize: 12, lineHeight: 1.5, margin: '12px 2px 0' }}>
-          廣東話: the written text is standard Chinese, and 🔊 <strong>plays in Cantonese</strong> if
-          your phone has the Cantonese voice installed.
-        </p>
-      )}
-
       {/* ---------- TRANSLATE ---------- */}
       {sub === 'translate' && (
         <div>
@@ -403,14 +448,14 @@ export default function Translator({ country, onCountry }) {
             onChange={(e) => setText(e.target.value)}
           />
           <div style={{ display: 'flex', gap: 8, marginTop: 10 }}>
-            <button
-              className="btn"
-              style={{ flex: 1 }}
-              onClick={() => doTranslate()}
-              disabled={!text.trim() || status === 'loading'}
-            >
-              {status === 'loading' ? 'Translating…' : `Translate → ${dest.flag}`}
+            <button className="btn ghost" style={{ flex: 1 }} onClick={paste}>
+              {pasteMsg || 'Paste'}
             </button>
+            {text && (
+              <button className="btn ghost" style={{ width: 64 }} onClick={() => setText('')}>
+                Clear
+              </button>
+            )}
             {voiceOk && (
               <button
                 onClick={isIOS ? iosKeyboardMic : toggleMic}
@@ -450,14 +495,21 @@ export default function Translator({ country, onCountry }) {
             </p>
           )}
 
-          {status === 'done' && output && (
-            <div className="phrase" style={{ marginTop: 16 }}>
-              <div className="txt">
-                <div className="src">{submitted}</div>
-                <div className="dst">{output}</div>
+          {output && (
+            <>
+              {/* Dimmed rather than blanked while the next answer arrives:
+                  clearing it made the whole card flash on every keystroke. */}
+              <div className="phrase" style={{ marginTop: 16, opacity: status === 'loading' ? 0.5 : 1 }}>
+                <div className="txt">
+                  <div className="src">{submitted}</div>
+                  <div className="dst">{output}</div>
+                </div>
+                <Speak onClick={speakOut} color="#1D5BCE" />
               </div>
-              <Speak onClick={() => speak(output, dest.bcp)} color="#1D5BCE" />
-            </div>
+              <button className="btn ghost" style={{ width: '100%', marginTop: 8 }} onClick={copyOut}>
+                {copyMsg || 'Copy translation'}
+              </button>
+            </>
           )}
           {/* MyMemory silently echoes the input when the From language is wrong —
               catch that (output === input across two different languages) and nudge. */}
