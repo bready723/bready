@@ -604,7 +604,7 @@ textarea.input { resize: vertical; min-height: 88px; }
 .fx-key.eq { background: #e0218a; color: #fff; font-size: 26px; box-shadow: 0 5px 14px -4px rgba(224,33,138,0.55); }
 /* the pending operator stays lit, like iOS */
 .fx-key.op.armed { background: #fff; color: var(--accent); box-shadow: inset 0 0 0 2px var(--accent); }
-.fx-foot { margin-top: 16px; font-size: 11px; color: var(--soft); text-align: center; line-height: 1.5; }
+.fx-foot { margin-top: 10px; margin-bottom: 26px; font-size: 11px; color: var(--soft); text-align: center; line-height: 1.5; }
 
 /* ---- floating add button (Rankings) — replaces the center nav "Add" ---- */
 .fab-anchor {

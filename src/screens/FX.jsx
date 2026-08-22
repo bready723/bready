@@ -254,6 +254,8 @@ export default function FX({ currency, onCurrency }) {
         </div>
       </div>
 
+      <p className="fx-foot">Live mid-market rates · updates daily · a rough guide, not the till price.</p>
+
       {/* ---------- CALCULATOR (standalone) ---------- */}
       <div className="fx-calc-title">Calculator</div>
       <div className="fx-card" style={{ ...gradBorder('var(--canvas)'), padding: 14, marginTop: 0 }}>
@@ -275,7 +277,6 @@ export default function FX({ currency, onCurrency }) {
         </div>
       </div>
 
-      <p className="fx-foot">Live mid-market rates · updates daily · a rough guide, not the till price.</p>
     </main>
   )
 }
