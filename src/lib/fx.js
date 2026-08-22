@@ -98,3 +98,35 @@ export function fmt(n, dp = 2) {
   if (n == null || !isFinite(n)) return ''
   return Number(n).toLocaleString('en-US', { minimumFractionDigits: 0, maximumFractionDigits: dp })
 }
+
+/**
+ * Put separators into a number the user is typing.
+ *
+ * Shown only while the field is not focused. Regrouping under a live caret
+ * moves it, and moving someone's caret mid-edit is worse than a long number.
+ */
+export function groupDigits(text) {
+  const raw = String(text ?? '')
+  if (raw === '') return ''
+  const [whole, ...rest] = raw.split('.')
+  const grouped = whole.replace(/\B(?=(\d{3})+(?!\d))/g, ',')
+  // "12." keeps its trailing dot: the user is still typing the cents.
+  return rest.length ? `${grouped}.${rest.join('')}` : grouped
+}
+
+/**
+ * How big an amount can be before it stops fitting its box.
+ *
+ * The converter's fields sit beside a currency chip, so there is far less room
+ * than the calculator has. A long amount used to scroll out of sight inside the
+ * input — the whole number was there, just not visible. Measured at 390px.
+ */
+export function fieldFontSize(text) {
+  const n = String(text ?? '').length
+  if (n <= 7) return 44
+  if (n <= 9) return 37
+  if (n <= 11) return 31
+  if (n <= 14) return 25
+  if (n <= 18) return 20
+  return 17
+}

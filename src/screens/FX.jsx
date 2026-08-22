@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from 'react'
-import { CURRENCIES, fetchLatest, fetchHistory, krwPerUnit, fmt } from '../lib/fx.js'
+import { CURRENCIES, fetchLatest, fetchHistory, krwPerUnit, fmt, groupDigits, fieldFontSize } from '../lib/fx.js'
 import { TIP_PERCENTS, DEFAULT_PERCENT, computeTip, formatMoney, symbolFor } from '../lib/tip.js'
 import {
   initialState,
@@ -66,6 +66,9 @@ function sparkPoints(hist, w, h, pad = 6) {
 export default function FX({ currency, onCurrency }) {
   // Tip: the Shortcut Sara used to open, without leaving the app. Kept in the
   // component rather than in saved state — a bill is over once it is paid.
+  // Which amount box has the caret. Separators go in only when it does not:
+  // regrouping under a live caret moves it.
+  const [focusedField, setFocusedField] = useState(null)
   const [bill, setBill] = useState('')
   const [tipPct, setTipPct] = useState(DEFAULT_PERCENT)
   const tip = computeTip(bill, tipPct, currency)
@@ -176,8 +179,11 @@ export default function FX({ currency, onCurrency }) {
             className="fx-num-input"
             type="text"
             inputMode="decimal"
-            value={fx}
+            value={focusedField === 'fx' ? fx : groupDigits(fx)}
             placeholder="0"
+            style={{ fontSize: fieldFontSize(focusedField === 'fx' ? fx : groupDigits(fx)) }}
+            onFocus={() => setFocusedField('fx')}
+            onBlur={() => setFocusedField(null)}
             onChange={(e) => onFxInput(e.target.value)}
             aria-label="Amount in foreign currency"
           />
@@ -204,8 +210,11 @@ export default function FX({ currency, onCurrency }) {
             className="fx-num-input white"
             type="text"
             inputMode="decimal"
-            value={krw}
+            value={focusedField === 'krw' ? krw : groupDigits(krw)}
             placeholder="0"
+            style={{ fontSize: fieldFontSize(focusedField === 'krw' ? krw : groupDigits(krw)) }}
+            onFocus={() => setFocusedField('krw')}
+            onBlur={() => setFocusedField(null)}
             onChange={(e) => onKrwInput(e.target.value)}
             aria-label="Amount in Korean won"
           />

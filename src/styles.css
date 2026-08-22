@@ -627,6 +627,9 @@ textarea.input { resize: vertical; min-height: 88px; }
   flex: 1; min-width: 0; width: 100%; border: none; background: transparent; outline: none;
   font-family: var(--display); font-weight: 500; font-size: 44px; line-height: 1.05;
   color: var(--ink); font-variant-numeric: tabular-nums; padding: 0;
+  /* Size is set inline by fieldFontSize(); a long amount shrinks rather than
+     scrolling half of itself out of the box. */
+  min-width: 0;
 }
 .fx-num-input::placeholder { color: var(--faint); }
 .fx-num-input.white { color: #fff; }
