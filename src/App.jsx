@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from 'react'
+import { useCallback, useEffect, useRef, useState } from 'react'
 import { loadState, saveState, storageUsage, uid, SAVE_OK, SAVE_FULL } from './lib/storage.js'
 import Rankings from './screens/Rankings.jsx'
 import WantToTry from './screens/WantToTry.jsx'
@@ -11,7 +11,7 @@ import DiscoverDetail from './screens/DiscoverDetail.jsx'
 import SignIn from './screens/SignIn.jsx'
 import { IconRank, IconBookmark, IconGlobe, IconExplore, IconFx } from './components/Icons.jsx'
 import { onAuthChange, isCloudConfigured } from './lib/auth.js'
-import { reconcileOnSignIn } from './lib/cloud.js'
+import { reconcileOnSignIn, pushChanges, markSynced } from './lib/cloud.js'
 
 // Each tab owns a hue along the brand gradient (blue → purple → magenta → gold);
 // full colour when active, dimmed to 55% when not. Add stays the gradient chip.
@@ -53,6 +53,8 @@ export default function App() {
   const [showSignIn, setShowSignIn] = useState(false)
 
   const [cloudStatus, setCloudStatus] = useState(null) // {tone, text} or null
+  const [pushState, setPushState] = useState('idle') // idle | saving | held
+  const pushing = useRef(false)
 
   // Signing in is optional — the app worked without an account before there was
   // one, and still does. This only tracks who is signed in, if anyone.
@@ -77,6 +79,9 @@ export default function App() {
       if (cancelled) return
       if (result.state) setState(result.state)
       if (result.error) syncedFor.current = null // a failure should be retryable
+      // Local and the account agree as of right now. Recording that is what
+      // stops the very next push re-uploading every bakery and every photo.
+      if (!result.error) markSynced(result.state || stateRef.current, user)
       setCloudStatus(cloudMessage(result))
     })
     return () => {
@@ -91,6 +96,43 @@ export default function App() {
     setSaveIssue(result === SAVE_OK ? null : result)
     stateRef.current = state
   }, [state])
+
+  // Keep the account up to date as Sara works, not only at sign-in. Before
+  // this, a bakery added on Tuesday reached the cloud whenever she next signed
+  // in — which is the "my photos are not there" problem the cloud was meant to
+  // end. Debounced, because typing a name is a dozen state changes.
+  const pushNow = useCallback(async () => {
+    if (!user || pushing.current) return
+    pushing.current = true
+    try {
+      const result = await pushChanges(stateRef.current, user)
+      if (result.reason === 'not-signed-in') return
+      setPushState(result.ok ? 'idle' : 'held')
+    } finally {
+      pushing.current = false
+    }
+  }, [user])
+
+  useEffect(() => {
+    if (!user) return
+    setPushState((p) => (p === 'held' ? 'held' : 'saving'))
+    const t = setTimeout(pushNow, 900)
+    return () => clearTimeout(t)
+  }, [state, user, pushNow])
+
+  // A change made on the subway is held, not lost. Send it the moment there is
+  // a network again, or when Sara comes back to the app.
+  useEffect(() => {
+    if (!user) return
+    const retry = () => { if (navigator.onLine) pushNow() }
+    const onVisible = () => { if (document.visibilityState === 'visible') retry() }
+    window.addEventListener('online', retry)
+    document.addEventListener('visibilitychange', onVisible)
+    return () => {
+      window.removeEventListener('online', retry)
+      document.removeEventListener('visibilitychange', onVisible)
+    }
+  }, [user, pushNow])
 
   const update = (patch) => setState((s) => ({ ...s, ...patch }))
 
@@ -144,8 +186,11 @@ export default function App() {
           <span className="sub">{state.bakeries.length} ranked</span>
         )}
         {isCloudConfigured() && (
-          <button className="signin-chip" onClick={() => setShowSignIn(true)}>
-            {user ? 'Synced' : 'Sign in'}
+          <button
+            className={`signin-chip${user && pushState === 'held' ? ' held' : ''}`}
+            onClick={() => setShowSignIn(true)}
+          >
+            {!user ? 'Sign in' : pushState === 'held' ? 'Not saved' : pushState === 'saving' ? 'Saving…' : 'Synced'}
           </button>
         )}
       </header>

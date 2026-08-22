@@ -4,6 +4,7 @@ import {
   mergeRow, mergeCollections,
   ensureVisitIds, toRows, toLocal,
   planMigration, isMigrated, markMigrated, MIGRATED_KEY,
+  snapshot, diffToOutbox,
 } from './sync.js'
 
 // A stand-in for Supabase: keyed by primary key, so an upsert that arrives
@@ -386,5 +387,101 @@ describe('the journey this module exists for', () => {
     const onPhone = [{ id: 'b1', user_id: USER, name: 'stale on phone', updated_at: AT, rank_index: 0 }]
     const merged = mergeCollections(onPhone, srv.rows('bakeries'))
     expect(merged[0].name).toBe('renamed on laptop')
+  })
+})
+
+// ---------------------------------------------------------------------------
+// Spotting what changed.
+//
+// reconcileOnSignIn only ever ran at sign-in, so a bakery added afterwards sat
+// in one browser until the next sign-in. To push continuously, something has to
+// answer "what is different since last time?" without asking the server —
+// otherwise every keystroke costs a round trip.
+// ---------------------------------------------------------------------------
+
+const STATE = {
+  bakeries: [
+    { id: 'b1', name: 'Ess-a-Bagel', area: 'Midtown East', tier: 'Bagel', score: 9.8, breads: ['bagel'],
+      visits: [{ id: 'b1-v0', date: '2026-08-01', breads: ['bagel'] }] },
+    { id: 'b2', name: 'Gingered Peach', area: 'Princeton', tier: 'Croissant', score: 9.1, breads: ['croissant'], visits: [] },
+  ],
+  wantToTry: [{ id: 'w1', name: 'Balthazar' }],
+  notes: [{ id: 'n1', text: 'butter matters', ts: 1 }],
+  country: 'US',
+  fxCurrency: 'USD',
+}
+const rowsFor = (state, at = 'T1') => toRows(state, 'u1', at)
+const ids = (outbox) => outbox.map((c) => `${c.op}:${c.entity}:${c.id}`).sort()
+
+describe('diffToOutbox', () => {
+  it('sends everything the first time, when there is nothing to compare against', () => {
+    const { outbox } = diffToOutbox(null, rowsFor(STATE), 'T1')
+    expect(ids(outbox)).toEqual([
+      'upsert:bakeries:b1', 'upsert:bakeries:b2',
+      'upsert:notes:n1', 'upsert:prefs:u1',
+      'upsert:visits:b1-v0', 'upsert:want_to_try:w1',
+    ])
+  })
+
+  it('sends nothing at all when nothing changed', () => {
+    const snap = snapshot(rowsFor(STATE))
+    const { outbox } = diffToOutbox(snap, rowsFor(STATE), 'T2')
+    expect(outbox).toEqual([])
+  })
+
+  it('ignores updated_at, which moves on its own every single call', () => {
+    // Without this the app would re-upload the entire account on a timer.
+    const snap = snapshot(rowsFor(STATE, 'T1'))
+    const { outbox } = diffToOutbox(snap, rowsFor(STATE, 'T9999'), 'T9999')
+    expect(outbox).toEqual([])
+  })
+
+  it('sends only the row that changed', () => {
+    const snap = snapshot(rowsFor(STATE))
+    const edited = { ...STATE, bakeries: [{ ...STATE.bakeries[0], score: 9.9 }, STATE.bakeries[1]] }
+    const { outbox } = diffToOutbox(snap, rowsFor(edited, 'T2'), 'T2')
+    expect(ids(outbox)).toEqual(['upsert:bakeries:b1'])
+    expect(outbox[0].row.score).toBe(9.9)
+  })
+
+  it('notices a photo being added, which is the whole point of the cloud', () => {
+    const snap = snapshot(rowsFor(STATE))
+    const withPhoto = { ...STATE, bakeries: [{ ...STATE.bakeries[0], photo: 'data:image/jpeg;base64,AAA' }, STATE.bakeries[1]] }
+    const { outbox } = diffToOutbox(snap, rowsFor(withPhoto, 'T2'), 'T2')
+    expect(ids(outbox)).toEqual(['upsert:bakeries:b1'])
+    expect(outbox[0].row.photo_url).toBe('data:image/jpeg;base64,AAA')
+  })
+
+  it('turns a removed bakery into a delete, and its visits with it', () => {
+    const snap = snapshot(rowsFor(STATE))
+    const fewer = { ...STATE, bakeries: [STATE.bakeries[1]] }
+    const { outbox } = diffToOutbox(snap, rowsFor(fewer, 'T2'), 'T2')
+    // b2 is in there too, and should be: removing the bakery above it moves it
+    // from 2nd to 1st, and rank_index is how the ranking is stored.
+    expect(ids(outbox)).toEqual(['delete:bakeries:b1', 'delete:visits:b1-v0', 'upsert:bakeries:b2'])
+    expect(outbox.find((c) => c.op === 'delete').at).toBe('T2')
+  })
+
+  it('notices a reorder, because the list order is the ranking', () => {
+    const snap = snapshot(rowsFor(STATE))
+    const swapped = { ...STATE, bakeries: [STATE.bakeries[1], STATE.bakeries[0]] }
+    const { outbox } = diffToOutbox(snap, rowsFor(swapped, 'T2'), 'T2')
+    expect(ids(outbox)).toEqual(['upsert:bakeries:b1', 'upsert:bakeries:b2'])
+  })
+
+  it('sends prefs when they change, and never deletes them', () => {
+    const snap = snapshot(rowsFor(STATE))
+    const { outbox } = diffToOutbox(snap, rowsFor({ ...STATE, fxCurrency: 'KRW' }, 'T2'), 'T2')
+    expect(ids(outbox)).toEqual(['upsert:prefs:u1'])
+    const emptied = diffToOutbox(snap, toRows({ bakeries: [], wantToTry: [], notes: [] }, 'u1', 'T2'), 'T2')
+    expect(emptied.outbox.filter((c) => c.entity === 'prefs' && c.op === 'delete')).toEqual([])
+  })
+
+  it('collapses repeated offline edits of one row into one row', () => {
+    const snap = snapshot(rowsFor(STATE))
+    const once = diffToOutbox(snap, rowsFor({ ...STATE, bakeries: [{ ...STATE.bakeries[0], score: 9.9 }, STATE.bakeries[1]] }, 'T2'), 'T2')
+    const twice = diffToOutbox(snap, rowsFor({ ...STATE, bakeries: [{ ...STATE.bakeries[0], score: 9.95 }, STATE.bakeries[1]] }, 'T3'), 'T3', once.outbox)
+    expect(ids(twice.outbox)).toEqual(['upsert:bakeries:b1'])
+    expect(twice.outbox[0].row.score).toBe(9.95)
   })
 })

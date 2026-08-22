@@ -118,6 +118,68 @@ export function ensureVisitIds(state, _makeId) {
   return changed ? { ...state, bakeries } : state
 }
 
+// ------------------------------------------------------------ what changed --
+
+/**
+ * A stable string for a row, ignoring `updated_at`.
+ *
+ * `updated_at` is stamped fresh on every call, so including it would make every
+ * row look changed and the app would re-upload the whole account on a timer.
+ */
+function fingerprint(value) {
+  if (Array.isArray(value)) return `[${value.map(fingerprint).join(',')}]`
+  if (value && typeof value === 'object') {
+    return `{${Object.keys(value)
+      .filter((k) => k !== 'updated_at')
+      .sort()
+      .map((k) => `${JSON.stringify(k)}:${fingerprint(value[k])}`)
+      .join(',')}}`
+  }
+  return JSON.stringify(value ?? null)
+}
+
+/** The key a row is stored under: prefs are one-per-user, everything else by id. */
+const rowKey = (entity, row) => (entity === 'prefs' ? row.user_id : row.id)
+
+/** Every row's fingerprint, so the next call can tell what moved. */
+export function snapshot(rows) {
+  const out = {}
+  for (const entity of ENTITIES) {
+    const list = entity === 'prefs' ? (rows.prefs ? [rows.prefs] : []) : rows[entity] || []
+    out[entity] = Object.fromEntries(list.map((r) => [rowKey(entity, r), fingerprint(r)]))
+  }
+  return out
+}
+
+/**
+ * Compare a snapshot with the rows as they are now and queue the difference.
+ * Pass a carried outbox to keep changes that have not been sent yet — enqueue
+ * collapses repeats, so editing the same bakery while offline costs one row.
+ *
+ * Returns the outbox to send and the snapshot to store *once it has landed* —
+ * storing it earlier would lose changes whose upload failed.
+ */
+export function diffToOutbox(prevSnapshot, rows, at, carried = emptyOutbox()) {
+  const next = snapshot(rows)
+  let outbox = carried
+  for (const entity of ENTITIES) {
+    const before = (prevSnapshot && prevSnapshot[entity]) || {}
+    const after = next[entity]
+    const list = entity === 'prefs' ? (rows.prefs ? [rows.prefs] : []) : rows[entity] || []
+    for (const row of list) {
+      const key = rowKey(entity, row)
+      if (before[key] !== after[key]) outbox = enqueue(outbox, { entity, id: key, op: 'upsert', row })
+    }
+    // Preferences are a single row per account; there is no such thing as
+    // deleting them, only changing them.
+    if (entity === 'prefs') continue
+    for (const key of Object.keys(before)) {
+      if (!(key in after)) outbox = enqueue(outbox, { entity, id: key, op: 'delete', at })
+    }
+  }
+  return { outbox, snapshot: next }
+}
+
 /** Local app state -> the rows the database expects. */
 export function toRows(state, userId, updatedAt) {
   const bakeries = (state.bakeries || []).map((b, index) => ({

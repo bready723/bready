@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest'
-import { reconcileOnSignIn, makeAdapter, pullAll } from './cloud.js'
+import { reconcileOnSignIn, makeAdapter, pullAll, pushChanges, markSynced, OUTBOX_KEY, SYNCED_KEY } from './cloud.js'
 import { MIGRATED_KEY } from './sync.js'
 
 // A Supabase stand-in: `from(table)` with the handful of calls cloud.js makes.
@@ -194,5 +194,149 @@ describe('guards', () => {
 
   it('surfaces a read failure rather than pretending the account is empty', async () => {
     await expect(pullAll(fakeClient({ failOn: 'notes' }))).rejects.toThrow(/notes: permission denied/)
+  })
+})
+
+// ---------------------------------------------------------------------------
+// Pushing changes as they happen.
+//
+// Until now sync only ran at sign-in, so a bakery added on Tuesday reached the
+// cloud on whatever day Sara next signed in. These are the properties that make
+// continuous pushing safe to run after every edit.
+// ---------------------------------------------------------------------------
+
+describe('pushChanges', () => {
+  const counted = (opts) => {
+    const client = fakeClient(opts)
+    let upserts = 0, deletes = 0, selects = 0
+    const inner = client.from.bind(client)
+    client.from = (table) => {
+      const t = inner(table)
+      return {
+        upsert: (...a) => { upserts += 1; return t.upsert(...a) },
+        select: (...a) => { selects += 1; return t.select(...a) },
+        update: (patch) => ({ eq: (...a) => { deletes += 1; return t.update(patch).eq(...a) } }),
+      }
+    }
+    return { client, count: () => ({ upserts, deletes, selects }) }
+  }
+
+  it('does nothing, and touches no network, when signed out', async () => {
+    const { client, count } = counted()
+    const result = await pushChanges(withData(), null, { client, store: fakeStore(), now: AT })
+    expect(result.ok).toBe(false)
+    expect(count()).toEqual({ upserts: 0, deletes: 0, selects: 0 })
+  })
+
+  it('sends everything the first time and remembers what it sent', async () => {
+    const { client } = counted()
+    const store = fakeStore()
+    const result = await pushChanges(withData(), USER, { client, store, now: AT })
+    expect(result.ok).toBe(true)
+    expect(result.sent).toBeGreaterThan(0)
+    expect(client.rows('bakeries')).toHaveLength(2)
+    expect(store.getItem(SYNCED_KEY)).toBeTruthy()
+    expect(JSON.parse(store.getItem(OUTBOX_KEY)).outbox).toEqual([])
+  })
+
+  it('sends NOTHING on the next call when nothing changed', async () => {
+    // The one that matters: this runs after every edit, so an unchanged state
+    // must cost zero requests or the app hammers Supabase for free-tier fun.
+    const store = fakeStore()
+    const first = counted()
+    await pushChanges(withData(), USER, { client: first.client, store, now: AT })
+    const second = counted()
+    const result = await pushChanges(withData(), USER, { client: second.client, store, now: '2026-08-21T05:00:00.000Z' })
+    expect(result.ok).toBe(true)
+    expect(result.sent).toBe(0)
+    expect(second.count()).toEqual({ upserts: 0, deletes: 0, selects: 0 })
+  })
+
+  it('sends only the bakery that changed', async () => {
+    const store = fakeStore()
+    const first = counted()
+    const state = withData()
+    await pushChanges(state, USER, { client: first.client, store, now: AT })
+    const edited = { ...state, bakeries: [{ ...state.bakeries[0], score: 9.9 }, state.bakeries[1]] }
+    const second = counted()
+    const result = await pushChanges(edited, USER, { client: second.client, store, now: '2026-08-21T05:00:00.000Z' })
+    expect(result.sent).toBe(1)
+    expect(second.count().upserts).toBe(1)
+  })
+
+  it('keeps a failed change and does not pretend it landed', async () => {
+    const store = fakeStore()
+    const result = await pushChanges(withData(), USER, { client: fakeClient({ failOn: 'bakeries' }), store, now: AT })
+    expect(result.ok).toBe(false)
+    expect(result.error).toMatch(/permission denied/)
+    // Nothing may be marked as synced, or the change is lost forever.
+    expect(store.getItem(SYNCED_KEY)).toBeNull()
+    expect(JSON.parse(store.getItem(OUTBOX_KEY)).outbox.length).toBeGreaterThan(0)
+  })
+
+  it('sends the held-back change when the connection comes back, exactly once', async () => {
+    const store = fakeStore()
+    await pushChanges(withData(), USER, { client: fakeClient({ failOn: 'bakeries' }), store, now: AT })
+    const back = counted()
+    const result = await pushChanges(withData(), USER, { client: back.client, store, now: '2026-08-21T05:00:00.000Z' })
+    expect(result.ok).toBe(true)
+    expect(back.client.rows('bakeries')).toHaveLength(2)
+    const again = counted()
+    await pushChanges(withData(), USER, { client: again.client, store, now: '2026-08-21T06:00:00.000Z' })
+    expect(again.count()).toEqual({ upserts: 0, deletes: 0, selects: 0 })
+  })
+
+  it('marks a removed bakery deleted rather than leaving it on the server', async () => {
+    const store = fakeStore()
+    const client = fakeClient()
+    const state = withData()
+    await pushChanges(state, USER, { client, store, now: AT })
+    await pushChanges({ ...state, bakeries: [state.bakeries[1]] }, USER, { client, store, now: '2026-08-21T05:00:00.000Z' })
+    const gone = client.tables.bakeries.get(state.bakeries[0].id)
+    expect(gone.deleted_at).toBe('2026-08-21T05:00:00.000Z')
+  })
+
+  it('still works with no storage at all, as in a private window', async () => {
+    const { client } = counted()
+    const result = await pushChanges(withData(), USER, { client, store: null, now: AT })
+    expect(result.ok).toBe(true)
+    expect(client.rows('bakeries')).toHaveLength(2)
+  })
+
+  it('gives visits ids before sending, so they cannot duplicate', async () => {
+    const store = fakeStore()
+    const client = fakeClient()
+    const state = withData()
+    state.bakeries[0].visits = [{ date: '2026-08-01', breads: ['bagel'] }] // no id, as the UI writes them
+    await pushChanges(state, USER, { client, store, now: AT })
+    const visits = client.rows('visits')
+    expect(visits).toHaveLength(1)
+    expect(visits[0].id).toBe('b1-v0')
+    await pushChanges(state, USER, { client, store, now: '2026-08-21T05:00:00.000Z' })
+    expect(client.rows('visits')).toHaveLength(1)
+  })
+})
+
+describe('markSynced', () => {
+  it('stops the first push after sign-in re-uploading everything', async () => {
+    const store = fakeStore()
+    const state = withData()
+    markSynced(state, USER, { store, now: AT })
+    const client = fakeClient()
+    let upserts = 0
+    const inner = client.from.bind(client)
+    client.from = (t) => ({ ...inner(t), upsert: (...a) => { upserts += 1; return inner(t).upsert(...a) } })
+    const result = await pushChanges(state, USER, { client, store, now: '2026-08-21T05:00:00.000Z' })
+    expect(result.sent).toBe(0)
+    expect(upserts).toBe(0)
+  })
+
+  it('still notices the next real edit', async () => {
+    const store = fakeStore()
+    const state = withData()
+    markSynced(state, USER, { store, now: AT })
+    const edited = { ...state, bakeries: [{ ...state.bakeries[0], name: 'Renamed' }, state.bakeries[1]] }
+    const result = await pushChanges(edited, USER, { client: fakeClient(), store, now: '2026-08-21T05:00:00.000Z' })
+    expect(result.sent).toBe(1)
   })
 })

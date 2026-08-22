@@ -25,6 +25,9 @@ Staged so each phase leaves the app working. 🙋 marks a step only Sara can do.
 - [x] 4.3 Pull server changes and merge; last-write-wins on `updated_at`.
 - [x] 4.4 Soft deletes, so a delete on one device does not resurrect from another.
 - [x] 4.5 Unit tests: queue, replay, duplicate suppression, conflict, offline→online.
+- [x] 4.6 Push continuously, not only at sign-in: diff the state against the last
+      acknowledged snapshot, queue only what moved, and hold it when offline.
+      The chip reads "Not saved" rather than a comforting "Synced".
 
 ## 5. Photos
 - [ ] 5.1 Upload on pick; store the URL on the bakery row.
