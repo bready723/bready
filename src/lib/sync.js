@@ -10,6 +10,8 @@
 //   updated_at  when two versions disagree, the later one wins
 //   deleted_at  deletes are rows too, so a device that missed one still learns
 
+import { isStoragePath } from './photos.js'
+
 export const ENTITIES = ['bakeries', 'visits', 'want_to_try', 'notes', 'prefs']
 
 // ---------------------------------------------------------------- outbox --
@@ -193,7 +195,9 @@ export function toRows(state, userId, updatedAt) {
     rank_index: index, // position in the full ranked list — the list order IS the ranking
     breads: b.breads || [],
     other_label: b.otherLabel ?? null,
-    photo_url: b.photo ?? null,
+    // Once the picture is in the bucket the row keeps only the path to it;
+    // before that it still carries the data: URL, so nothing breaks mid-move.
+    photo_url: b.photoPath ?? b.photo ?? null,
     lat: b.lat ?? null,
     lng: b.lng ?? null,
     seeded: Boolean(b.seeded),
@@ -280,7 +284,9 @@ export function toLocal(rows) {
       score: b.score ?? undefined,
       breads: b.breads || [],
       otherLabel: b.other_label ?? undefined,
-      photo: b.photo_url ?? undefined,
+      ...(isStoragePath(b.photo_url)
+        ? { photoPath: b.photo_url }
+        : { photo: b.photo_url ?? undefined }),
       lat: b.lat ?? undefined,
       lng: b.lng ?? undefined,
       seeded: Boolean(b.seeded),

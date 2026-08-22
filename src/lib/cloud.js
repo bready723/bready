@@ -9,6 +9,9 @@ import {
   isMigrated, markMigrated, toRows, diffToOutbox, emptyOutbox, snapshot,
 } from './sync.js'
 import { uid } from './storage.js'
+import {
+  PHOTO_BUCKET, planPhotoUploads, applyUploads, unresolvedPhotos, applyResolved,
+} from './photos.js'
 
 // bakeries / visits / want_to_try are keyed on (user_id, id); prefs on user_id
 // alone. PostgREST needs telling, or an upsert turns into a duplicate insert.
@@ -191,4 +194,52 @@ export function markSynced(state, user, options = {}) {
   const rows = toRows(ensureVisitIds(state), user.id, now)
   writeJSON(store, SYNCED_KEY, { userId: user.id, snapshot: snapshot(rows) })
   writeJSON(store, OUTBOX_KEY, { userId: user.id, outbox: emptyOutbox() })
+}
+
+// ------------------------------------------------------------- photos --
+//
+// A photo used to travel as a data: URL inside the bakery row — the whole JPEG
+// in a database column, re-sent on every change. These two move it to the
+// `photos` bucket and fetch it back, leaving the row holding a path.
+
+export async function syncPhotos(state, user, options = {}) {
+  const client = 'client' in options ? options.client : supabase
+  if (!client || !user) return { state, uploaded: 0, error: null }
+  const jobs = planPhotoUploads(state, user.id)
+  if (!jobs.length) return { state, uploaded: 0, error: null }
+
+  const done = []
+  for (const job of jobs) {
+    try {
+      const body = new Blob([job.bytes], { type: job.contentType })
+      const { error } = await client.storage
+        .from(PHOTO_BUCKET)
+        .upload(job.path, body, { contentType: job.contentType, upsert: true })
+      if (error) throw new Error(error.message)
+      done.push({ bakeryId: job.bakeryId, path: job.path })
+    } catch (e) {
+      // Stop at the first failure and keep what did land: the photos already
+      // moved must not be uploaded a second time when this runs again.
+      return { state: applyUploads(state, done), uploaded: done.length, error: e?.message || String(e) }
+    }
+  }
+  return { state: applyUploads(state, done), uploaded: done.length, error: null }
+}
+
+/** Fetch a viewable link for every photo that lives in the bucket. */
+export async function resolvePhotos(state, options = {}) {
+  const client = 'client' in options ? options.client : supabase
+  const wanted = unresolvedPhotos(state)
+  if (!client || !wanted.length) return { state, resolved: 0 }
+  const ttl = options.ttlSeconds || 60 * 60
+  const found = []
+  for (const item of wanted) {
+    try {
+      const { data, error } = await client.storage.from(PHOTO_BUCKET).createSignedUrl(item.path, ttl)
+      found.push({ bakeryId: item.bakeryId, url: error ? null : data?.signedUrl || null })
+    } catch (e) {
+      found.push({ bakeryId: item.bakeryId, url: null })
+    }
+  }
+  return { state: applyResolved(state, found), resolved: found.filter((f) => f.url).length }
 }

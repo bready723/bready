@@ -30,8 +30,8 @@ Staged so each phase leaves the app working. 🙋 marks a step only Sara can do.
       The chip reads "Not saved" rather than a comforting "Synced".
 
 ## 5. Photos
-- [ ] 5.1 Upload on pick; store the URL on the bakery row.
-- [ ] 5.2 Queue the upload when offline; retry on reconnect.
+- [x] 5.1 Upload on pick; store the URL on the bakery row.
+- [x] 5.2 Queue the upload when offline; retry on reconnect.
 - [~] 5.3 Migrate existing data-URL photos up, then drop them from local state.
 
 ## 6. Migration

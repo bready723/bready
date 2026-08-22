@@ -11,7 +11,7 @@ import DiscoverDetail from './screens/DiscoverDetail.jsx'
 import SignIn from './screens/SignIn.jsx'
 import { IconRank, IconBookmark, IconGlobe, IconExplore, IconFx } from './components/Icons.jsx'
 import { onAuthChange, isCloudConfigured } from './lib/auth.js'
-import { reconcileOnSignIn, pushChanges, markSynced } from './lib/cloud.js'
+import { reconcileOnSignIn, pushChanges, markSynced, syncPhotos, resolvePhotos } from './lib/cloud.js'
 
 // Each tab owns a hue along the brand gradient (blue → purple → magenta → gold);
 // full colour when active, dimmed to 55% when not. Add stays the gradient chip.
@@ -75,15 +75,23 @@ export default function App() {
     // Read the current state through a ref, not by peeking inside a state
     // updater: React is free to call an updater more than once, which would
     // start the upload twice.
-    reconcileOnSignIn(stateRef.current, user).then((result) => {
-      if (cancelled) return
-      if (result.state) setState(result.state)
-      if (result.error) syncedFor.current = null // a failure should be retryable
-      // Local and the account agree as of right now. Recording that is what
-      // stops the very next push re-uploading every bakery and every photo.
-      if (!result.error) markSynced(result.state || stateRef.current, user)
-      setCloudStatus(cloudMessage(result))
-    })
+    // Move photos to the bucket before the first upload, or a fresh sign-in
+    // ships every JPEG into a database column and then replaces it a second
+    // later. Does nothing when there is nothing to move.
+    syncPhotos(stateRef.current, user)
+      .then((moved) => {
+        if (moved.state !== stateRef.current) setState(moved.state)
+        return reconcileOnSignIn(moved.state, user)
+      })
+      .then((result) => {
+        if (cancelled) return
+        if (result.state) setState(result.state)
+        if (result.error) syncedFor.current = null // a failure should be retryable
+        // Local and the account agree as of right now. Recording that is what
+        // stops the very next push re-uploading every bakery and every photo.
+        if (!result.error) markSynced(result.state || stateRef.current, user)
+        setCloudStatus(cloudMessage(result))
+      })
     return () => {
       cancelled = true
     }
@@ -105,9 +113,14 @@ export default function App() {
     if (!user || pushing.current) return
     pushing.current = true
     try {
-      const result = await pushChanges(stateRef.current, user)
+      // Photos move to the bucket first, so the row that follows carries a path
+      // instead of the whole JPEG. A failure here is not fatal: the picture
+      // stays inline and the next push tries again.
+      const moved = await syncPhotos(stateRef.current, user)
+      if (moved.state !== stateRef.current) setState(moved.state)
+      const result = await pushChanges(moved.state, user)
       if (result.reason === 'not-signed-in') return
-      setPushState(result.ok ? 'idle' : 'held')
+      setPushState(result.ok && !moved.error ? 'idle' : 'held')
     } finally {
       pushing.current = false
     }
@@ -119,6 +132,19 @@ export default function App() {
     const t = setTimeout(pushNow, 900)
     return () => clearTimeout(t)
   }, [state, user, pushNow])
+
+  // Photos that live in the bucket arrive as a path, not a picture. Fetch a
+  // viewable link for each one. The links are signed and expire, which is why
+  // saveState drops them and this runs again on the next launch.
+  useEffect(() => {
+    if (!user) return
+    let cancelled = false
+    resolvePhotos(stateRef.current).then((result) => {
+      if (cancelled || result.state === stateRef.current) return
+      setState(result.state)
+    })
+    return () => { cancelled = true }
+  }, [user, state])
 
   // A change made on the subway is held, not lost. Send it the moment there is
   // a network again, or when Sara comes back to the app.

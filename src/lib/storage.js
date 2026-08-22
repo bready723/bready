@@ -1,6 +1,8 @@
 // Local-first storage. Everything lives in the browser for now; this is the
 // single seam we'll later swap for Supabase without touching the screens.
 
+import { forgetSignedLinks } from './photos.js'
+
 const KEY = 'bready.v1'
 
 const EMPTY = { bakeries: [], wantToTry: [], notes: [], country: 'FR', fxCurrency: 'USD' }
@@ -43,7 +45,9 @@ export function isQuotaError(e) {
 // nothing on screen to say so. The caller is now expected to surface this.
 export function saveState(state) {
   try {
-    localStorage.setItem(KEY, JSON.stringify(state))
+    // A bucket link is signed and expires; saving one means a broken image on
+    // the next launch. The path is kept, the link is fetched again.
+    localStorage.setItem(KEY, JSON.stringify(forgetSignedLinks(state)))
     return SAVE_OK
   } catch (e) {
     return isQuotaError(e) ? SAVE_FULL : SAVE_BLOCKED
