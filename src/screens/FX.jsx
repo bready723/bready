@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from 'react'
 import { CURRENCIES, fetchLatest, fetchHistory, krwPerUnit, fmt } from '../lib/fx.js'
+import { TIP_PERCENTS, DEFAULT_PERCENT, computeTip, formatMoney, symbolFor } from '../lib/tip.js'
 import {
   initialState,
   press,
@@ -63,6 +64,12 @@ function sparkPoints(hist, w, h, pad = 6) {
 }
 
 export default function FX({ currency, onCurrency }) {
+  // Tip: the Shortcut Sara used to open, without leaving the app. Kept in the
+  // component rather than in saved state — a bill is over once it is paid.
+  const [bill, setBill] = useState('')
+  const [tipPct, setTipPct] = useState(DEFAULT_PERCENT)
+  const tip = computeTip(bill, tipPct, currency)
+
   const [krwMap, setKrwMap] = useState(null)
   const [rateDate, setRateDate] = useState('')
   const [loadErr, setLoadErr] = useState(false)
@@ -274,6 +281,51 @@ export default function FX({ currency, onCurrency }) {
               {key.k === 'AC' ? (isAllClear(calc) ? 'AC' : 'C') : key.label || key.k}
             </button>
           ))}
+        </div>
+      </div>
+
+      {/* ---------- TIP ---------- */}
+      <div className="fx-calc-title">Tip</div>
+      <div className="fx-card" style={{ ...gradBorder('var(--canvas)'), padding: 14, marginTop: 0 }}>
+        <div className="tip-label">Bill</div>
+        <div className="tip-bill">
+          <span className="tip-sign">{symbolFor(currency)}</span>
+          <input
+            className="fx-num-input"
+            type="text"
+            inputMode="decimal"
+            value={bill}
+            placeholder="0"
+            onChange={(e) => setBill(e.target.value)}
+            aria-label="Bill amount"
+          />
+          {bill !== '' && (
+            <button className="tip-clear" onClick={() => setBill('')} aria-label="Clear the bill">×</button>
+          )}
+        </div>
+
+        <div className="tip-pcts" role="group" aria-label="Tip percentage">
+          {TIP_PERCENTS.map((p) => (
+            <button
+              key={p}
+              className={`tip-pct${p === tipPct ? ' on' : ''}`}
+              aria-pressed={p === tipPct}
+              onClick={() => setTipPct(p)}
+            >
+              {p}%
+            </button>
+          ))}
+        </div>
+
+        <div className="tip-out">
+          <div className="tip-row">
+            <span>Tip</span>
+            <b>{symbolFor(currency)}{formatMoney(tip.tip, currency)}</b>
+          </div>
+          <div className="tip-row total">
+            <span>Total</span>
+            <b>{symbolFor(currency)}{formatMoney(tip.total, currency)}</b>
+          </div>
         </div>
       </div>
 
