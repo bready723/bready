@@ -236,7 +236,8 @@ describe('the small line', () => {
   })
 
   it('shows the completed operation after equals', () => {
-    expect(expr(K('5 + 3 ='))).toBe('+ 3 =')
+    // Was '+ 3 =' — the test agreed with the bug that dropped the first number.
+    expect(expr(K('5 + 3 ='))).toBe('5 + 3 =')
   })
 
   it('is empty in the error state', () => {
@@ -389,5 +390,42 @@ describe('bigFontSize', () => {
       expect(n).toBeGreaterThan(15)
       expect(n).toBeLessThanOrEqual(44)
     }
+  })
+})
+
+describe('the line above the number', () => {
+  // Sara, looking at a finished 78 × 56: "why is the calculator process on top
+  // still broken". The maths was right; the line read "× 56 =" because it was
+  // rebuilt after the fact from the operator alone, first number long gone.
+  it('writes out the whole finished sum, first number included', () => {
+    expect(expr(K('7 8 * 5 6 ='))).toBe('78 × 56 =')
+    expect(show(K('7 8 * 5 6 ='))).toBe('4,368')
+  })
+
+  it('writes out a mixed sum in the order it was typed', () => {
+    expect(expr(K('2 + 3 * 4 ='))).toBe('2 + 3 × 4 =')
+    expect(expr(K('1 0 0 - 5 0 / 2 ='))).toBe('100 − 50 ÷ 2 =')
+  })
+
+  it('follows along while typing', () => {
+    expect(expr(K('2'))).toBe('')
+    expect(expr(K('2 +'))).toBe('2 +')
+    expect(expr(K('2 + 3'))).toBe('2 + 3')
+    expect(expr(K('2 + 3 *'))).toBe('2 + 3 ×')
+    expect(expr(K('2 + 3 * 4'))).toBe('2 + 3 × 4')
+  })
+
+  it('shows the repeat, not the sum before it', () => {
+    expect(expr(K('7 8 * 5 6 = ='))).toBe('4,368 × 56 =')
+  })
+
+  it('groups thousands there too', () => {
+    expect(expr(K('1 2 3 4 5 + 6 7 8 9 0 ='))).toBe('12,345 + 67,890 =')
+  })
+
+  it('is empty when there is nothing to say', () => {
+    expect(expr([])).toBe('')
+    expect(expr(K('5'))).toBe('')
+    expect(expr(K('1 / 0 ='))).toBe('')
   })
 })

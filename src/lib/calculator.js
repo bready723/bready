@@ -33,6 +33,7 @@ export function initialState() {
     overwrite: true, // next digit replaces `entry` instead of appending
     lastOp: null,    // for repeat-equals
     lastRhs: null,
+    lastExpr: null,  // the sum just completed, written out in full
     done: false,     // an "=" has just produced this entry
     error: false,
   }
@@ -75,6 +76,14 @@ function foldAll(s, v) {
   const t = foldMul(s, v)
   if (t === null) return null
   return s.addOp ? apply(s.acc, t, s.addOp) : t
+}
+
+/** The sum in progress, as "2 + 3 ×" — everything typed but the operand. */
+function pendingParts(s) {
+  const parts = []
+  if (s.addOp) parts.push(fmt(s.acc), OP_SYMBOL[s.addOp])
+  if (s.mulOp) parts.push(fmt(s.mulAcc), OP_SYMBOL[s.mulOp])
+  return parts
 }
 
 function pressDigit(s, d) {
@@ -146,6 +155,10 @@ function pressEquals(s) {
       acc: null, addOp: null, mulAcc: null, mulOp: null,
       overwrite: true, done: true,
       lastOp: pendingOp(s), lastRhs: rhs,
+      // Written out here, while the operands still exist. The small line used
+      // to be rebuilt afterwards from lastOp alone, which is why a finished
+      // "78 × 56 =" showed up as "× 56 =" with the first number missing.
+      lastExpr: `${pendingParts(s).join(' ')} ${displayValue(s)} =`,
     }
   }
   // Bare "=" repeats whatever was done last, the way every calculator does.
@@ -153,7 +166,8 @@ function pressEquals(s) {
     const r = apply(num(s.entry), s.lastRhs, s.lastOp)
     const e = toEntry(r)
     if (e === null) return errorState(s)
-    return { ...s, entry: e, overwrite: true, done: true }
+    const lastExpr = `${displayValue(s)} ${OP_SYMBOL[s.lastOp]} ${fmt(s.lastRhs)} =`
+    return { ...s, entry: e, overwrite: true, done: true, lastExpr }
   }
   return { ...s, overwrite: true, done: true }
 }
@@ -232,14 +246,12 @@ export function displayValue(s) {
  */
 export function displayExpression(s) {
   if (s.error) return ''
-  const parts = []
-  if (s.addOp) parts.push(fmt(s.acc), OP_SYMBOL[s.addOp])
-  if (s.mulOp) parts.push(fmt(s.mulAcc), OP_SYMBOL[s.mulOp])
+  const parts = pendingParts(s)
   if (parts.length) {
     if (!s.overwrite) parts.push(displayValue(s))
     return parts.join(' ')
   }
-  if (s.done && s.lastOp) return `${OP_SYMBOL[s.lastOp]} ${fmt(s.lastRhs)} =`
+  if (s.done && s.lastExpr) return s.lastExpr
   return ''
 }
 
