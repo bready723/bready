@@ -1,4 +1,5 @@
 // Browser-native speech + a free translation API. No keys, no cost.
+import { lookupSetPhrase } from './phrasebook.js'
 
 // Voices load asynchronously — getVoices() is often empty on the first call,
 // so we warm a cache up front and refresh it when the browser fires the event.
@@ -144,6 +145,13 @@ export async function translateDetailed(text, targetLang, sourceLang) {
   const src = sourceLang || detectSource(text)
   const sl = src.slice(0, 2)
   const { google, mymemory } = targetCodes(targetLang)
+  // A Korean set phrase is answered from the hand-checked table, not the
+  // machine — 잘 먹었습니다 comes back from Google as "Well done!". Only the
+  // phrases in that table are diverted; everything else carries on as before.
+  if (sl === 'ko') {
+    const known = lookupSetPhrase(text, targetLang)
+    if (known) return { ...known, source: 'phrasebook' }
+  }
   // Same language in and out — nothing to do. zh and yue are excluded: zh→zh
   // still switches script, and zh→yue is a real translation.
   if (sl === google.slice(0, 2) && !/^zh/.test(google) && google !== 'yue') {

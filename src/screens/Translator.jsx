@@ -91,6 +91,7 @@ export default function Translator({ country, onCountry }) {
   const [submitted, setSubmitted] = useState('') // the source we last translated (input clears after)
   const [output, setOutput] = useState('')
   const [reading, setReading] = useState('') // how to SAY the translation
+  const [source, setSource] = useState('') // 'phrasebook' when hand-checked
   const [showBig, setShowBig] = useState(false)
   const [status, setStatus] = useState('idle') // idle | loading | done | error
   const [listening, setListening] = useState(false)
@@ -199,7 +200,7 @@ export default function Translator({ country, onCountry }) {
     try {
       // Pass dest.bcp (zh-HK/zh-CN/ja-JP…) so Cantonese maps to Traditional and
       // stays distinct from Mandarin; translateText normalizes per provider.
-      const { text: out, reading: rom } = await translateDetailed(
+      const { text: out, reading: rom, source: src } = await translateDetailed(
         phrase,
         dest.bcp,
         inputById(inputLang).lang,
@@ -207,6 +208,7 @@ export default function Translator({ country, onCountry }) {
       if (myReq !== reqRef.current) return
       setOutput(out)
       setReading(rom)
+      setSource(src || '')
       setSubmitted(phrase)
       setStatus('done')
       // The box used to empty itself here, so you could never see what you had
@@ -229,6 +231,7 @@ export default function Translator({ country, onCountry }) {
       reqRef.current += 1 // abandon anything in flight
       setOutput('')
       setReading('')
+      setSource('')
       setSubmitted('')
       setStatus('idle')
       return undefined
@@ -284,6 +287,7 @@ export default function Translator({ country, onCountry }) {
     setText('')
     setOutput('')
     setReading('')
+    setSource('')
     setSubmitted('')
     setStatus('idle')
     setMicMsg('')
@@ -527,6 +531,9 @@ export default function Translator({ country, onCountry }) {
             <div className="tr-out" style={{ opacity: status === 'loading' ? 0.55 : 1 }}>
               <div className="top">
                 <div style={{ flex: 1, minWidth: 0 }}>
+                  {/* Say where it came from: this one was checked by hand, so
+                      it is not the machine's guess at a ritual phrase. */}
+                  {source === 'phrasebook' && <div className="tr-tag">Checked phrase</div>}
                   <div className="dst">{output}</div>
                   {/* The line that makes a translation usable out loud. Empty for
                       French or Spanish, which you can already read. */}
@@ -551,7 +558,7 @@ export default function Translator({ country, onCountry }) {
 
           {/* MyMemory silently echoes the input when the From language is wrong —
               catch that (output === input across two different languages) and nudge. */}
-          {status === 'done' && output && output.trim() === submitted.trim() &&
+          {status === 'done' && !source && output && output.trim() === submitted.trim() &&
             inputById(inputLang).lang !== dest.lang && (
             <p className="muted" style={{ fontSize: 12.5, lineHeight: 1.55, margin: '10px 2px 0' }}>
               ⚠️ Came back unchanged — check the <strong>From</strong> language matches what you typed

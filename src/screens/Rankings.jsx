@@ -1,8 +1,19 @@
 import { useState } from 'react'
 import { BREADS, breadEmoji, breadLabel } from '../lib/breads.js'
 import { IconSearch } from '../components/Icons.jsx'
+import WantToTry from './WantToTry.jsx'
 
-export default function Rankings({ bakeries, filter, onFilter, onOpen, onLog }) {
+export default function Rankings({
+  bakeries,
+  filter,
+  onFilter,
+  onOpen,
+  onLog,
+  wantToTry,
+  onChangeWant,
+  onWent,
+  onOpenDiscover,
+}) {
   const [q, setQ] = useState('')
 
   const query = q.trim().toLowerCase()
@@ -19,8 +30,10 @@ export default function Rankings({ bakeries, filter, onFilter, onOpen, onLog }) 
       <h1 className="title">My rankings</h1>
       <p className="subtitle">Every bakery, in order.</p>
 
+      {/* The wishlist sits right underneath now, so the empty state no longer
+          needs to fill the whole screen on its own. */}
       {bakeries.length === 0 && (
-        <div className="empty">
+        <div className="empty" style={{ padding: '44px 24px 0' }}>
           <div className="head">Nothing ranked yet.</div>
           <p>Your first croissant awaits.</p>
           <button className="btn" style={{ maxWidth: 200, margin: '20px auto 0' }} onClick={onLog}>
@@ -103,6 +116,15 @@ export default function Rankings({ bakeries, filter, onFilter, onOpen, onLog }) 
           )}
         </>
       )}
+
+      {/* The wishlist lives here, under the rankings, the way the calculator
+          lives under the currency converter. One screen for bakeries. */}
+      <WantToTry
+        wantToTry={wantToTry}
+        onChange={onChangeWant}
+        onWent={onWent}
+        onOpenDiscover={onOpenDiscover}
+      />
 
       {/* Floating add button — log a visit from where your bakeries live.
           Anchored to the app column's bottom-right, above the tab bar. */}

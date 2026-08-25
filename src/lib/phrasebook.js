@@ -137,3 +137,154 @@ export const GLOSSARY = [
   { en: 'Fresh', emoji: '✨', t: { fr: 'Frais', ja: '焼きたて', it: 'Fresco', es: 'Fresco', de: 'Frisch', zh: '新鲜', ko: '신선한', en: 'Fresh' } },
   { en: 'Gluten-free', emoji: '🌾', t: { fr: 'Sans gluten', ja: 'グルテンフリー', it: 'Senza glutine', es: 'Sin gluten', de: 'Glutenfrei', zh: '无麸质', ko: '글루텐 프리', en: 'Gluten-free' } },
 ]
+
+// ---------------------------------------------------------------------------
+// Korean set phrases — the ones a machine cannot do.
+//
+// Sara typed "잘 먹었습니다!" and got back "Well done!". Verified against the
+// live endpoint: the request was correct (ko→en, HTTP 200, one call, no
+// fallback) and Google itself answered that. Korean→Japanese was no better:
+// "よく食べました" — "I ate a lot" — instead of ごちそうさまでした.
+//
+// That is not a bug to fix, it is what word-level translation does to ritual
+// speech. 수고하세요 has no meaning to carry across; it has a ROLE — the thing
+// you say on the way out. So these are not translations, they are
+// REPLACEMENTS: whatever a local actually says at that moment.
+//
+// `t` is what to show, `r` is how to say it (only where the script needs it).
+// Anything not in this table still goes to the translator as before.
+export const KO_SET_PHRASES = [
+  {
+    ko: '실례합니다',
+    alt: ['저기요'],
+    t: { en: 'Excuse me.', ja: 'すみません', fr: 'Excusez-moi.', it: 'Scusi.', es: 'Disculpe.', de: 'Entschuldigung.', zh: '不好意思。' },
+    r: { ja: 'Sumimasen', zh: 'Bù hǎoyìsi' },
+  },
+  {
+    ko: '하나씩 주세요',
+    alt: ['각각 하나씩 주세요', '하나씩만 주세요'],
+    t: { en: 'One of each, please.', ja: '一つずつください', fr: 'Un de chaque, s’il vous plaît.', it: 'Uno di ciascuno, per favore.', es: 'Uno de cada, por favor.', de: 'Von jedem eins, bitte.', zh: '每样来一个，谢谢。' },
+    r: { ja: 'Hitotsu zutsu kudasai', zh: 'Měi yàng lái yí ge, xièxie' },
+  },
+  {
+    ko: '데워 주실 수 있어요?',
+    alt: ['데워주세요', '따뜻하게 해주세요', '데워 주세요'],
+    t: { en: 'Could you warm it up?', ja: '温めてもらえますか', fr: 'Vous pouvez le réchauffer ?', it: 'Me lo può riscaldare?', es: '¿Me lo puede calentar?', de: 'Können Sie das aufwärmen?', zh: '可以帮我加热吗？' },
+    r: { ja: 'Atatamete moraemasu ka', zh: 'Kěyǐ bāng wǒ jiārè ma' },
+  },
+  {
+    // 봉투 comes back as "envelope" — the letter kind.
+    ko: '봉투 하나 주세요',
+    alt: ['봉투 주세요', '봉지 하나 주세요', '봉지 주세요'],
+    t: { en: 'Could I have a bag?', ja: '袋を一つください', fr: 'Un sac, s’il vous plaît.', it: 'Un sacchetto, per favore.', es: 'Una bolsa, por favor.', de: 'Eine Tüte, bitte.', zh: '请给我一个袋子。' },
+    r: { ja: 'Fukuro o hitotsu kudasai', zh: 'Qǐng gěi wǒ yí ge dàizi' },
+  },
+  {
+    // Every country has a fixed counter word for this. None of them is "wrap".
+    ko: '포장해 주세요',
+    alt: ['포장이요', '포장해주세요', '테이크아웃이요', '가져갈게요'],
+    t: { en: 'To go, please.', ja: '持ち帰りでお願いします', fr: 'À emporter, s’il vous plaît.', it: 'Da portare via, per favore.', es: 'Para llevar, por favor.', de: 'Zum Mitnehmen, bitte.', zh: '打包，谢谢。' },
+    r: { ja: 'Mochikaeri de onegaishimasu', zh: 'Dǎbāo, xièxie' },
+  },
+  {
+    ko: '여기서 먹을게요',
+    alt: ['여기서 먹어요', '매장에서 먹을게요', '먹고 갈게요'],
+    t: { en: 'For here, please.', ja: 'ここで食べます', fr: 'Sur place, s’il vous plaît.', it: 'Lo mangio qui, grazie.', es: 'Para tomar aquí.', de: 'Zum Hieressen, bitte.', zh: '在这里吃。' },
+    r: { ja: 'Koko de tabemasu', zh: 'Zài zhèlǐ chī' },
+  },
+  {
+    // "It's okay" reads as YES in English. This one matters.
+    ko: '괜찮아요',
+    alt: ['아니요 괜찮아요', '괜찮습니다', '괜찮아요 감사합니다'],
+    t: { en: 'No thank you, I’m fine.', ja: '大丈夫です、結構です', fr: 'Non merci, ça ira.', it: 'No grazie, va bene così.', es: 'No, gracias, así está bien.', de: 'Nein danke, das passt so.', zh: '不用了，谢谢。' },
+    r: { ja: 'Daijōbu desu, kekkō desu', zh: 'Bú yòng le, xièxie' },
+  },
+  {
+    // English has no equivalent at all, so the English side is a stand-in.
+    ko: '잘 먹겠습니다',
+    alt: ['잘 먹을게요'],
+    t: { en: 'Thank you, this looks great.', ja: 'いただきます', fr: 'Merci, ça a l’air délicieux.', it: 'Grazie, sembra ottimo.', es: 'Gracias, tiene muy buena pinta.', de: 'Danke, das sieht köstlich aus.', zh: '我开动了。' },
+    r: { ja: 'Itadakimasu', zh: 'Wǒ kāidòng le' },
+  },
+  {
+    // The one that started this: measured as "Well done!" / よく食べました.
+    ko: '잘 먹었습니다',
+    alt: ['잘 먹었어요', '맛있게 잘 먹었습니다'],
+    t: { en: 'Thank you, that was delicious.', ja: 'ごちそうさまでした', fr: 'C’était délicieux, merci.', it: 'Grazie, era buonissimo.', es: 'Gracias, estaba delicioso.', de: 'Danke, das war köstlich.', zh: '我吃饱了，谢谢。' },
+    r: { ja: 'Gochisōsama deshita', zh: 'Wǒ chī bǎo le, xièxie' },
+  },
+  {
+    ko: '정말 맛있어요!',
+    alt: ['진짜 맛있어요', '너무 맛있어요', '정말 맛있어요'],
+    t: { en: 'This is really good!', ja: 'とても美味しいです', fr: 'C’est vraiment délicieux !', it: 'È davvero buonissimo!', es: '¡Está riquísimo!', de: 'Das schmeckt richtig gut!', zh: '真好吃！' },
+    r: { ja: 'Totemo oishii desu', zh: 'Zhēn hǎochī' },
+  },
+  {
+    ko: '맛있게 드세요',
+    alt: ['맛있게 먹어요', '맛있게 드십시오'],
+    t: { en: 'Enjoy!', ja: 'どうぞ召し上がってください', fr: 'Bon appétit !', it: 'Buon appetito!', es: '¡Buen provecho!', de: 'Guten Appetit!', zh: '请慢用。' },
+    r: { ja: 'Dōzo meshiagatte kudasai', zh: 'Qǐng màn yòng' },
+  },
+  {
+    ko: '또 올게요',
+    alt: ['다음에 또 올게요', '또 오겠습니다'],
+    t: { en: 'I’ll be back!', ja: 'また来ます', fr: 'Je reviendrai !', it: 'Tornerò!', es: '¡Volveré!', de: 'Ich komme wieder!', zh: '我还会再来的。' },
+    r: { ja: 'Mata kimasu', zh: 'Wǒ hái huì zài lái de' },
+  },
+  {
+    // Untranslatable on purpose. お疲れさまです is what you say to a COLLEAGUE;
+    // to a shop you say thank-you. Same role, different words.
+    ko: '수고하세요',
+    alt: ['수고하셨습니다', '수고하셨어요'],
+    t: { en: 'Have a good one!', ja: 'ありがとうございました', fr: 'Bonne journée !', it: 'Buona giornata!', es: '¡Que vaya bien!', de: 'Schönen Tag noch!', zh: '辛苦了。' },
+    r: { ja: 'Arigatō gozaimashita', zh: 'Xīnkǔ le' },
+  },
+  {
+    ko: '안녕히 계세요',
+    alt: ['안녕히계세요', '들어가세요'],
+    t: { en: 'Goodbye!', ja: '失礼します', fr: 'Au revoir !', it: 'Arrivederci!', es: '¡Hasta luego!', de: 'Auf Wiedersehen!', zh: '再见。' },
+    r: { ja: 'Shitsurei shimasu', zh: 'Zàijiàn' },
+  },
+]
+
+// Typed Korean never arrives clean: trailing !, a missing space, ~요 instead of
+// ~습니다. Strip what does not change the meaning, keep what does.
+function normalizeKo(text) {
+  return String(text || '')
+    .replace(/\s+/g, '')
+    .replace(/[!?.,~ㅋㅎ…。！？]+$/g, '')
+}
+
+// Mandarin and Cantonese both live under `zh` here, so a Hong Kong target gets
+// the Mandarin line for now. It is right in writing and wrong out loud —
+// splitting them is a separate change.
+function phraseLang(code) {
+  const t = String(code || '').toLowerCase()
+  if (t === 'yue' || t.startsWith('zh')) return 'zh'
+  return t.slice(0, 2)
+}
+
+let _koIndex = null
+function koIndex() {
+  if (_koIndex) return _koIndex
+  _koIndex = new Map()
+  for (const entry of KO_SET_PHRASES) {
+    for (const key of [entry.ko, ...(entry.alt || [])]) {
+      _koIndex.set(normalizeKo(key), entry)
+    }
+  }
+  return _koIndex
+}
+
+/**
+ * A hand-checked answer for this Korean phrase, or null to let the translator
+ * handle it. Returns the same { text, reading } shape the providers do.
+ */
+export function lookupSetPhrase(text, targetLang) {
+  const entry = koIndex().get(normalizeKo(text))
+  if (!entry) return null
+  const lang = phraseLang(targetLang)
+  const out = entry.t[lang]
+  if (!out) return null
+  return { text: out, reading: (entry.r && entry.r[lang]) || '' }
+}

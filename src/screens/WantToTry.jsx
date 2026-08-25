@@ -39,11 +39,13 @@ export default function WantToTry({ wantToTry, onChange, onWent, onOpenDiscover 
   })).filter((c) => c.matches.length > 0)
 
   return (
-    <main className="screen">
-      <h1 className="title">Want to try</h1>
-      <p className="subtitle">Your wishlist — and famous spots to discover.</p>
+    <section>
+      <div className="section-title">Want to try</div>
+      <p className="subtitle" style={{ margin: '0 2px' }}>
+        Your wishlist — and famous spots to discover.
+      </p>
 
-      <div className="segment" style={{ marginTop: 16, width: '100%' }}>
+      <div className="segment" style={{ marginTop: 14, width: '100%' }}>
         <button
           className={mode === 'mine' ? 'on' : ''}
           style={{ flex: 1 }}
@@ -215,6 +217,6 @@ export default function WantToTry({ wantToTry, onChange, onWent, onOpenDiscover 
           </p>
         </>
       )}
-    </main>
+    </section>
   )
 }
