@@ -1,0 +1,25 @@
+{
+  "artboards": [
+    { "file": "Today.dc.html",     "x": 0,    "y": 0,    "w": 390, "h": 844, "title": "Today (for comparison)" },
+    { "file": "Main.dc.html",      "x": 500,  "y": 0,    "w": 390, "h": 844, "title": "Option A · Quiet Editorial" },
+    { "file": "OptionB.dc.html",   "x": 1000, "y": 0,    "w": 390, "h": 844, "title": "Option B · Tight & Legible" },
+    { "file": "OptionC.dc.html",   "x": 1500, "y": 0,    "w": 390, "h": 844, "title": "Option C · Bakery Counter" },
+    { "file": "Scale.dc.html",     "x": 0,    "y": 1240, "w": 900, "h": 720, "title": "Sizes, measured" },
+    { "file": "Translate.dc.html", "x": 1010, "y": 1240, "w": 390, "h": 844, "title": "Translate, rebuilt" }
+  ],
+  "annotations": [
+    { "id": "note-today", "x": 0,    "y": -250, "w": 390,
+      "text": "TODAY\n\nWhat gets in the way:\n· Headings are blue, so colour no longer means \"tappable\".\n· Five tabs in five different hues — nothing says \"you are here\".\n· Filter chips are 11px all-caps: the hardest text on the screen.\n· The + button is 40px, under the 44px minimum." },
+    { "id": "note-a", "x": 500,  "y": -250, "w": 390,
+      "text": "OPTION A — my recommendation\n\nKeeps everything that already looks like you: warm paper, the serif, the gradient wordmark. Changes only what is working against you — ink headings, one accent, four tabs, text sub-tabs, a bigger + button.\n\nTradeoff: it is an edit, not a new look. If you wanted bready to feel different, this will feel familiar." },
+    { "id": "note-b", "x": 1000, "y": -250, "w": 390,
+      "text": "OPTION B — closest to Beli's information design\n\nSystem font, white, numbers up top, 9 bakeries visible instead of 5. Fastest to scan and the safest on any phone.\n\nTradeoff: it gives up the serif and the warm paper, so it reads like a competent app rather than yours. The gradient wordmark is the only thing left that is bready." },
+    { "id": "note-c", "x": 1500, "y": -250, "w": 390,
+      "text": "OPTION C — the memorable one\n\nA printed food-guide page: heavy rules, big serif numerals, your No.1 given real space, magenta as the single accent.\n\nTradeoff: it is the least dense — 5 bakeries on screen — and it needs photos to look this good. With emoji placeholders it will look plainer than this." },
+    { "id": "note-spec", "x": 0, "y": 990, "w": 900,
+      "text": "BELOW: the numbers, and the Translate screen.\n\nEvery \"Today\" size in the table is read out of src/styles.css, not estimated. Every \"Beli\" comparison is measured off Beli's own App Store screenshots. The one item in red is a genuine defect rather than a preference." },
+    { "id": "note-ocr", "x": 1010, "y": 990, "w": 390,
+      "text": "TRANSLATE\n\nThe two real additions: the pronunciation line under every translation, so you can say it out loud, and \"Show big\" so you can turn the phone around at the counter.\n\n\"Menu photo\" is drawn but NOT decided — reading text out of a photo needs a paid service. Everything else on this screen works with what the app already has." }
+  ],
+  "launch": { "view": "canvas" }
+}

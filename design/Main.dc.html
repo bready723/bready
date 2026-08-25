@@ -1,0 +1,159 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,500&family=Instrument+Sans:wght@400;500;600;700&display=swap">
+  <style>
+    body { margin: 0; font-family: 'Instrument Sans', -apple-system, system-ui, sans-serif; }
+    a { color: #1d5bce; } a:hover { color: #16469e; }
+    .a-scr { -webkit-font-smoothing: antialiased; }
+    .a-row { display: flex; align-items: center; gap: 13px; padding: 11px 0; border-bottom: 1px solid #efeade; }
+    .a-num { width: 17px; text-align: center; font-family: 'Newsreader', Georgia, serif; font-style: italic; font-size: 15px; color: #b3a992; flex-shrink: 0; }
+    .a-th { width: 54px; height: 54px; border-radius: 12px; background: #f4ecdf; display: flex; align-items: center; justify-content: center; font-size: 23px; flex-shrink: 0; }
+    .a-nm { font-size: 16px; font-weight: 600; letter-spacing: -0.012em; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; color: #1a140c; }
+    .a-mt { font-size: 12.5px; color: #9a9080; margin-top: 2px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+    .a-sc { width: 44px; height: 44px; border-radius: 50%; flex-shrink: 0; display: flex; align-items: center; justify-content: center;
+            border: 1.5px solid rgba(29,91,206,0.22); background: rgba(29,91,206,0.06);
+            font-family: 'Newsreader', Georgia, serif; font-weight: 600; font-size: 16.5px; color: #1d5bce; font-variant-numeric: tabular-nums; }
+    .a-chip { flex-shrink: 0; font-size: 12.5px; font-weight: 600; padding: 7px 12px; border-radius: 999px; border: 1px solid #e4ddd0; background: #fff; color: #5c5442; }
+    .a-chip.on { border-color: #1d5bce; background: #1d5bce; color: #fff; }
+    .a-tab { flex: 1; display: flex; flex-direction: column; align-items: center; gap: 5px; font-size: 10px; font-weight: 600; letter-spacing: 0.01em; color: #b8ae9c; }
+    .a-tab.on { color: #1a140c; }
+  </style>
+</helmet>
+
+<div class="a-scr" style="width: 390px; height: 844px; position: relative; overflow: hidden; background: #faf8f4; color: #1a140c;">
+
+  <!-- app bar: wordmark keeps the gradient; nothing else is coloured -->
+  <div style="display: flex; align-items: center; gap: 9px; padding: 16px 20px 11px;">
+    <span style="font-size: 20px; font-weight: 700; letter-spacing: -0.02em; background: linear-gradient(100deg,#1aa7e8 0%,#5b3fd6 50%,#e0218a 100%); -webkit-background-clip: text; background-clip: text; color: transparent;">bready</span>
+    <div style="margin-left: auto; display: flex; align-items: center; gap: 6px;">
+      <span style="width: 7px; height: 7px; border-radius: 50%; background: #1c7c54;"></span>
+      <span style="font-size: 12px; color: #9a9080; font-weight: 500;">Synced</span>
+    </div>
+  </div>
+
+  <div style="padding: 4px 20px 0;">
+    <h1 style="font-family: 'Newsreader', Georgia, serif; font-weight: 500; font-size: 32px; line-height: 1.02; letter-spacing: -0.018em; color: #1a140c; margin: 0;">My rankings</h1>
+    <p style="color: #9a9080; font-size: 13px; margin: 5px 0 0;">12 bakeries · 4 cities · 3 this month</p>
+  </div>
+
+  <!-- text tabs, underlined (sub-navigation), not pills -->
+  <div style="display: flex; gap: 22px; padding: 0 20px; margin-top: 16px; border-bottom: 1px solid #eae4d7;">
+    <div style="padding-bottom: 9px; font-size: 14.5px; font-weight: 700; color: #1a140c; box-shadow: inset 0 -2px 0 #1d5bce;">Been</div>
+    <div style="padding-bottom: 9px; font-size: 14.5px; font-weight: 500; color: #9a9080;">Want to try</div>
+    <div style="padding-bottom: 9px; font-size: 14.5px; font-weight: 500; color: #9a9080;">Map</div>
+    <div style="margin-left: auto; padding-bottom: 9px; color: #9a9080;">
+      <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><circle cx="11" cy="11" r="7"></circle><path d="M20 20l-3.6-3.6"></path></svg>
+    </div>
+  </div>
+
+  <!-- rank by: the one new control. Compare croissants with croissants. -->
+  <div style="padding: 14px 20px 0;">
+    <div style="display: flex; align-items: center; gap: 8px;">
+      <span style="font-size: 10.5px; font-weight: 700; letter-spacing: 0.11em; text-transform: uppercase; color: #b3a992; flex-shrink: 0;">Rank by</span>
+      <div style="display: flex; gap: 7px; overflow: hidden;">
+        <span class="a-chip on">Everything</span>
+        <span class="a-chip">🥐 Croissant</span>
+        <span class="a-chip">🥖 Sourdough</span>
+        <span class="a-chip">🥯 Bagel</span>
+      </div>
+    </div>
+  </div>
+
+  <div style="padding: 8px 20px 0;">
+    <div class="a-row">
+      <div class="a-num">1</div>
+      <div class="a-th">🥐</div>
+      <div style="flex: 1; min-width: 0;">
+        <div class="a-nm">Terra Momo Bread Company</div>
+        <div class="a-mt">Witherspoon St · Croissant, Sourdough</div>
+      </div>
+      <div class="a-sc">9.4</div>
+    </div>
+    <div class="a-row">
+      <div class="a-num">2</div>
+      <div class="a-th">🥖</div>
+      <div style="flex: 1; min-width: 0;">
+        <div class="a-nm">Olives</div>
+        <div class="a-mt">Witherspoon St · Sourdough</div>
+      </div>
+      <div class="a-sc">8.8</div>
+    </div>
+    <div class="a-row">
+      <div class="a-num">3</div>
+      <div class="a-th">🥯</div>
+      <div style="flex: 1; min-width: 0;">
+        <div class="a-nm">Chez Alice Café &amp; Bakery</div>
+        <div class="a-mt">Palmer Square · Bagel, Pastry</div>
+      </div>
+      <div class="a-sc">8.1</div>
+    </div>
+    <div class="a-row">
+      <div class="a-num">4</div>
+      <div class="a-th">🧁</div>
+      <div style="flex: 1; min-width: 0;">
+        <div class="a-nm">The Bent Spoon</div>
+        <div class="a-mt">Palmer Square · Pastry</div>
+      </div>
+      <div class="a-sc">7.6</div>
+    </div>
+    <div class="a-row">
+      <div class="a-num">5</div>
+      <div class="a-th">🍞</div>
+      <div style="flex: 1; min-width: 0;">
+        <div class="a-nm">Small World Coffee</div>
+        <div class="a-mt">Witherspoon St · Other</div>
+      </div>
+      <div class="a-sc">7.0</div>
+    </div>
+    <div class="a-row">
+      <div class="a-num">6</div>
+      <div class="a-th">🥐</div>
+      <div style="flex: 1; min-width: 0;">
+        <div class="a-nm">Jammin’ Crepes</div>
+        <div class="a-mt">Nassau St · Pastry</div>
+      </div>
+      <div class="a-sc">6.4</div>
+    </div>
+    <div class="a-row" style="border-bottom: none;">
+      <div class="a-num">7</div>
+      <div class="a-th">🥖</div>
+      <div style="flex: 1; min-width: 0;">
+        <div class="a-nm">Boro Bean</div>
+        <div class="a-mt">Hopewell, NJ · Sourdough</div>
+      </div>
+      <div class="a-sc">6.0</div>
+    </div>
+  </div>
+
+  <!-- add -->
+  <div style="position: absolute; right: 18px; bottom: 98px; width: 52px; height: 52px; border-radius: 50%; background: linear-gradient(115deg,#1aa7e8 0%,#5b3fd6 50%,#e0218a 100%); color: #fff; box-shadow: 0 8px 20px -6px rgba(91,63,214,0.55); display: flex; align-items: center; justify-content: center;">
+    <svg width="23" height="23" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round"><path d="M12 5v14M5 12h14"></path></svg>
+  </div>
+
+  <!-- four tabs, one active colour -->
+  <div style="position: absolute; left: 0; right: 0; bottom: 0; display: flex; align-items: flex-start; padding: 11px 6px 22px; background: rgba(250,248,244,0.97); border-top: 1px solid #eae4d7;">
+    <div class="a-tab on">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M5 20v-9M12 20V4M19 20v-6"></path></svg>Bakeries
+    </div>
+    <div class="a-tab">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"><circle cx="12" cy="12" r="9"></circle><path d="M3 12h18M12 3c2.5 3 2.5 15 0 18M12 3c-2.5 3-2.5 15 0 18"></path></svg>Translate
+    </div>
+    <div class="a-tab">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M4 8h12M10 4l-6 4 6 4M20 16H8M14 12l6 4-6 4"></path></svg>FX
+    </div>
+    <div class="a-tab">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><circle cx="12" cy="8.5" r="3.6"></circle><path d="M4.8 20c1-3.6 3.8-5.4 7.2-5.4s6.2 1.8 7.2 5.4"></path></svg>Me
+    </div>
+  </div>
+
+</div>
+</x-dc>
+</body>
+</html>

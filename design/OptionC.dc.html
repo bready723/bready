@@ -1,0 +1,94 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,400;1,6..72,500&family=Instrument+Sans:wght@400;500;600;700&display=swap">
+  <style>
+    body { margin: 0; font-family: 'Instrument Sans', -apple-system, system-ui, sans-serif; }
+    a { color: #c11a6f; } a:hover { color: #991357; }
+    .c-scr { -webkit-font-smoothing: antialiased; }
+    .c-row { display: flex; align-items: center; gap: 14px; padding: 13px 0; border-bottom: 1px solid #e0d3bd; }
+    .c-num { width: 26px; flex-shrink: 0; font-family: 'Newsreader', Georgia, serif; font-style: italic; font-weight: 400; font-size: 28px; line-height: 1; color: #c0ab8c; text-align: center; }
+    .c-nm { font-family: 'Newsreader', Georgia, serif; font-weight: 500; font-size: 19px; line-height: 1.15; letter-spacing: -0.01em; color: #241a0d; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+    .c-mt { font-size: 11.5px; font-weight: 600; letter-spacing: 0.03em; text-transform: uppercase; color: #9c8a6d; margin-top: 4px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+    .c-sc { flex-shrink: 0; font-family: 'Newsreader', Georgia, serif; font-weight: 600; font-size: 21px; color: #c11a6f; font-variant-numeric: tabular-nums; }
+    .c-tab { flex: 1; display: flex; flex-direction: column; align-items: center; gap: 5px; font-size: 9.5px; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; color: #a08e70; }
+    .c-tab.on { color: #241a0d; }
+  </style>
+</helmet>
+
+<div class="c-scr" style="width: 390px; height: 844px; position: relative; overflow: hidden; background: #f2e9da; color: #241a0d;">
+
+  <!-- masthead -->
+  <div style="padding: 18px 22px 12px; border-bottom: 2px solid #241a0d; display: flex; align-items: flex-end;">
+    <span style="font-family: 'Newsreader', Georgia, serif; font-weight: 600; font-size: 26px; letter-spacing: -0.03em; line-height: 1; color: #241a0d;">bready</span>
+    <span style="margin-left: auto; font-size: 10px; font-weight: 700; letter-spacing: 0.16em; text-transform: uppercase; color: #9c8a6d;">Princeton · 12 ranked</span>
+  </div>
+
+  <div style="padding: 16px 22px 0;">
+    <div style="display: flex; align-items: baseline; gap: 10px;">
+      <span style="font-size: 10.5px; font-weight: 700; letter-spacing: 0.18em; text-transform: uppercase; color: #9c8a6d;">No. 1 this year</span>
+      <span style="flex: 1; height: 1px; background: #d8c9b0;"></span>
+    </div>
+
+    <!-- hero: the top bakery gets the space it deserves -->
+    <div style="margin-top: 12px; border: 1px solid #241a0d; border-radius: 4px; overflow: hidden; background: #fbf6ec;">
+      <div style="height: 168px; background: linear-gradient(135deg,#e8d3b0 0%,#dcbf94 55%,#cfa87a 100%); display: flex; align-items: center; justify-content: center; font-size: 66px;">🥐</div>
+      <div style="padding: 14px 16px 15px; display: flex; align-items: flex-end; gap: 12px;">
+        <div style="flex: 1; min-width: 0;">
+          <div style="font-family: 'Newsreader', Georgia, serif; font-weight: 500; font-size: 25px; line-height: 1.08; letter-spacing: -0.015em;">Terra Momo Bread&nbsp;Company</div>
+          <div style="font-size: 11.5px; font-weight: 600; letter-spacing: 0.04em; text-transform: uppercase; color: #9c8a6d; margin-top: 6px;">Witherspoon St · Croissant, Sourdough</div>
+        </div>
+        <div style="flex-shrink: 0; font-family: 'Newsreader', Georgia, serif; font-weight: 600; font-size: 40px; line-height: 0.9; color: #c11a6f; font-variant-numeric: tabular-nums; letter-spacing: -0.03em;">9.4</div>
+      </div>
+    </div>
+
+    <div style="display: flex; align-items: baseline; gap: 10px; margin-top: 20px;">
+      <span style="font-size: 10.5px; font-weight: 700; letter-spacing: 0.18em; text-transform: uppercase; color: #9c8a6d;">The rest</span>
+      <span style="flex: 1; height: 1px; background: #d8c9b0;"></span>
+    </div>
+
+    <div style="margin-top: 2px;">
+      <div class="c-row">
+        <div class="c-num">2</div>
+        <div style="flex: 1; min-width: 0;"><div class="c-nm">Olives</div><div class="c-mt">Witherspoon St · Sourdough</div></div>
+        <div class="c-sc">8.8</div>
+      </div>
+      <div class="c-row">
+        <div class="c-num">3</div>
+        <div style="flex: 1; min-width: 0;"><div class="c-nm">Chez Alice Café &amp; Bakery</div><div class="c-mt">Palmer Square · Bagel, Pastry</div></div>
+        <div class="c-sc">8.1</div>
+      </div>
+      <div class="c-row">
+        <div class="c-num">4</div>
+        <div style="flex: 1; min-width: 0;"><div class="c-nm">The Bent Spoon</div><div class="c-mt">Palmer Square · Pastry</div></div>
+        <div class="c-sc">7.6</div>
+      </div>
+      <div class="c-row" style="border-bottom: none;">
+        <div class="c-num">5</div>
+        <div style="flex: 1; min-width: 0;"><div class="c-nm">Small World Coffee</div><div class="c-mt">Witherspoon St · Other</div></div>
+        <div class="c-sc">7.0</div>
+      </div>
+    </div>
+  </div>
+
+  <div style="position: absolute; right: 20px; bottom: 96px; height: 46px; padding: 0 20px; border-radius: 999px; background: #241a0d; color: #f2e9da; display: flex; align-items: center; gap: 8px; font-size: 13px; font-weight: 700; letter-spacing: 0.04em; text-transform: uppercase; box-shadow: 0 8px 18px -8px rgba(36,26,13,0.7);">
+    <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M12 5v14M5 12h14"></path></svg>Log
+  </div>
+
+  <div style="position: absolute; left: 0; right: 0; bottom: 0; display: flex; padding: 12px 6px 22px; background: #f2e9da; border-top: 2px solid #241a0d;">
+    <div class="c-tab on"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round"><path d="M5 20v-9M12 20V4M19 20v-6"></path></svg>Bakeries</div>
+    <div class="c-tab"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><circle cx="12" cy="12" r="9"></circle><path d="M3 12h18M12 3c2.5 3 2.5 15 0 18M12 3c-2.5 3-2.5 15 0 18"></path></svg>Translate</div>
+    <div class="c-tab"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round"><path d="M4 8h12M10 4l-6 4 6 4M20 16H8M14 12l6 4-6 4"></path></svg>FX</div>
+    <div class="c-tab"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round"><circle cx="12" cy="8.5" r="3.6"></circle><path d="M4.8 20c1-3.6 3.8-5.4 7.2-5.4s6.2 1.8 7.2 5.4"></path></svg>Me</div>
+  </div>
+
+</div>
+</x-dc>
+</body>
+</html>

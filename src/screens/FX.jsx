@@ -82,7 +82,7 @@ export default function FX({ currency, onCurrency }) {
   const histReq = useRef(0)
 
   // Converter — two linked, editable fields (type in either side).
-  const [fx, setFx] = useState('100')
+  const [fx, setFx] = useState('1')
   const [krw, setKrw] = useState('')
   const lastEdited = useRef('fx')
 

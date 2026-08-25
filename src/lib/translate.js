@@ -70,6 +70,29 @@ export function targetCodes(code) {
   return { google: two, mymemory: two }
 }
 
+// Pull the translation AND its pronunciation out of a gtx response.
+//
+// Shape observed against the live endpoint (not guessed): data[0] is a list of
+// chunks. A normal chunk is [translated, original, …]. When `dt=rm` is asked
+// for, one extra chunk rides at the end with both of those slots null:
+//   [null, null, "<how the TRANSLATION sounds>", "<how the SOURCE sounds>"]
+// A target written in Latin script (French, Spanish) has no such chunk at all,
+// which is why `reading` has to be allowed to come back empty.
+export function parseGoogle(data) {
+  const chunks = (data && data[0]) || []
+  let text = ''
+  let reading = ''
+  for (const seg of chunks) {
+    if (!Array.isArray(seg)) continue
+    if (seg[0] == null && seg[1] == null) {
+      if (typeof seg[2] === 'string') reading = seg[2]
+    } else if (typeof seg[0] === 'string') {
+      text += seg[0]
+    }
+  }
+  return { text, reading }
+}
+
 // Google's keyless "gtx" endpoint — far more reliable than MyMemory and
 // CORS-open (access-control-allow-origin: *), so it works from the browser.
 async function googleTranslate(text, tl, sl) {
@@ -78,15 +101,13 @@ async function googleTranslate(text, tl, sl) {
     encodeURIComponent(sl) +
     '&tl=' +
     encodeURIComponent(tl) +
-    '&dt=t&q=' +
+    '&dt=t&dt=rm&q=' +
     encodeURIComponent(text)
   const res = await fetch(url)
   if (!res.ok) throw new Error('google http')
-  const data = await res.json()
-  // data[0] is an array of [translatedChunk, originalChunk, …] pairs.
-  const out = ((data && data[0]) || []).map((seg) => seg[0]).join('')
-  if (!out) throw new Error('google empty')
-  return out
+  const parsed = parseGoogle(await res.json())
+  if (!parsed.text) throw new Error('google empty')
+  return parsed
 }
 
 // MyMemory fallback (also keyless). On quota/failure it silently ECHOES the
@@ -107,24 +128,38 @@ async function myMemoryTranslate(text, tl, sl) {
   if (!out || /MYMEMORY WARNING|INVALID|PLEASE SELECT/i.test(out)) {
     throw new Error('mymemory warning')
   }
-  return out
+  // MyMemory has no transliteration, so a fallback answer simply has no
+  // pronunciation line. Better than showing a wrong one.
+  return { text: out, reading: '' }
 }
 
 // --- Free translation: Google gtx first, MyMemory as backup. No API keys. ---
-export async function translateText(text, targetLang, sourceLang) {
-  if (!text.trim()) return ''
+//
+// Returns { text, reading }. `reading` is how to SAY the translation — the one
+// thing a printed script cannot give you when the answer is in an alphabet you
+// cannot read. Empty whenever the target is already in Latin script, or when
+// the fallback provider answered.
+export async function translateDetailed(text, targetLang, sourceLang) {
+  if (!text.trim()) return { text: '', reading: '' }
   const src = sourceLang || detectSource(text)
   const sl = src.slice(0, 2)
   const { google, mymemory } = targetCodes(targetLang)
-  // Same language in and out — nothing to translate (but zh→zh may switch script).
   // Same language in and out — nothing to do. zh and yue are excluded: zh→zh
   // still switches script, and zh→yue is a real translation.
-  if (sl === google.slice(0, 2) && !/^zh/.test(google) && google !== 'yue') return text
+  if (sl === google.slice(0, 2) && !/^zh/.test(google) && google !== 'yue') {
+    return { text, reading: '' }
+  }
   try {
     return await googleTranslate(text, google, sl)
   } catch (e) {
     return await myMemoryTranslate(text, mymemory, src)
   }
+}
+
+// The plain-string form every other caller already uses.
+export async function translateText(text, targetLang, sourceLang) {
+  const { text: out } = await translateDetailed(text, targetLang, sourceLang)
+  return out
 }
 
 // --- Voice input (best-effort; unreliable on iOS, so callers must fall back) ---

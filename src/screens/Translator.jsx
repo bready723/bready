@@ -12,6 +12,7 @@ import {
 import {
   speak,
   translateText,
+  translateDetailed,
   speechRecognitionSupported,
   startListening,
   micErrorMessage,
@@ -61,6 +62,17 @@ function Speak({ onClick, color }) {
   )
 }
 
+// Held-up-to-a-stranger size. Measured on a 390px screen: 12 characters fill
+// the width at 46px, so each step down buys roughly double the length.
+function bigSize(text) {
+  const n = String(text || '').length
+  if (n <= 12) return 46
+  if (n <= 24) return 38
+  if (n <= 44) return 31
+  if (n <= 80) return 25
+  return 20
+}
+
 function Chevron() {
   return (
     <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="var(--soft)" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" style={{ flexShrink: 0 }}>
@@ -78,6 +90,8 @@ export default function Translator({ country, onCountry }) {
   const [text, setText] = useState('')
   const [submitted, setSubmitted] = useState('') // the source we last translated (input clears after)
   const [output, setOutput] = useState('')
+  const [reading, setReading] = useState('') // how to SAY the translation
+  const [showBig, setShowBig] = useState(false)
   const [status, setStatus] = useState('idle') // idle | loading | done | error
   const [listening, setListening] = useState(false)
   const [auto, setAuto] = useState(loadAuto)
@@ -185,9 +199,14 @@ export default function Translator({ country, onCountry }) {
     try {
       // Pass dest.bcp (zh-HK/zh-CN/ja-JP…) so Cantonese maps to Traditional and
       // stays distinct from Mandarin; translateText normalizes per provider.
-      const out = await translateText(phrase, dest.bcp, inputById(inputLang).lang)
+      const { text: out, reading: rom } = await translateDetailed(
+        phrase,
+        dest.bcp,
+        inputById(inputLang).lang,
+      )
       if (myReq !== reqRef.current) return
       setOutput(out)
+      setReading(rom)
       setSubmitted(phrase)
       setStatus('done')
       // The box used to empty itself here, so you could never see what you had
@@ -209,6 +228,7 @@ export default function Translator({ country, onCountry }) {
     if (!phrase) {
       reqRef.current += 1 // abandon anything in flight
       setOutput('')
+      setReading('')
       setSubmitted('')
       setStatus('idle')
       return undefined
@@ -263,6 +283,7 @@ export default function Translator({ country, onCountry }) {
     // start the flipped direction clean
     setText('')
     setOutput('')
+    setReading('')
     setSubmitted('')
     setStatus('idle')
     setMicMsg('')
@@ -326,6 +347,17 @@ export default function Translator({ country, onCountry }) {
     setToOpen(false)
   }
 
+  if (showBig && output) {
+    return (
+      <div className="tr-big" onClick={() => setShowBig(false)}>
+        <div className="dst" style={{ fontSize: bigSize(output) }}>{output}</div>
+        {reading && <div className="rom">{reading}</div>}
+        <div className="src">{submitted}</div>
+        <div className="hint">Tap anywhere to go back</div>
+      </div>
+    )
+  }
+
   return (
     <main className="screen">
       <h1 className="title">Translator</h1>
@@ -338,7 +370,6 @@ export default function Translator({ country, onCountry }) {
       {/* From / To picker */}
       <div className="tr-grid">
         <div>
-          <div className="label" style={{ margin: '0 0 8px' }}>From</div>
           <div style={{ position: 'relative' }}>
             <button
               className="tr-select"
@@ -372,7 +403,7 @@ export default function Translator({ country, onCountry }) {
         </div>
 
         <button
-          className="tr-arrow tr-swap"
+          className="tr-swap"
           onClick={swapLangs}
           title="Swap From ⇄ To"
           aria-label="Swap the From and To languages"
@@ -386,7 +417,6 @@ export default function Translator({ country, onCountry }) {
         </button>
 
         <div>
-          <div className="label" style={{ margin: '0 0 8px' }}>To</div>
           <div style={{ position: 'relative' }}>
             <button
               className="tr-select"
@@ -439,44 +469,42 @@ export default function Translator({ country, onCountry }) {
       {/* ---------- TRANSLATE ---------- */}
       {sub === 'translate' && (
         <div>
-          <textarea
-            ref={textRef}
-            className="input"
-            style={{ marginTop: 18 }}
-            placeholder={inputById(inputLang).lang === 'ko' ? '예: 사워도우 한 덩어리 주세요' : 'e.g. One sourdough loaf, please'}
-            value={text}
-            onChange={(e) => setText(e.target.value)}
-          />
-          <div style={{ display: 'flex', gap: 8, marginTop: 10 }}>
-            <button className="btn ghost" style={{ flex: 1 }} onClick={paste}>
-              {pasteMsg || 'Paste'}
-            </button>
-            {text && (
-              <button className="btn ghost" style={{ width: 64 }} onClick={() => setText('')}>
-                Clear
-              </button>
-            )}
-            {voiceOk && (
-              <button
-                onClick={isIOS ? iosKeyboardMic : toggleMic}
-                title={isIOS ? 'Use the keyboard mic' : 'Speak'}
-                style={{
-                  width: 48,
-                  borderRadius: 10,
-                  border: `1px solid ${listening ? 'var(--accent)' : 'var(--line-2)'}`,
-                  background: listening ? 'var(--accent-tint)' : 'var(--surface)',
-                  color: listening ? 'var(--accent)' : 'var(--soft)',
-                  display: 'flex',
-                  alignItems: 'center',
-                  justifyContent: 'center',
-                  flexShrink: 0,
-                  cursor: 'pointer',
-                }}
-              >
-                <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"><rect x="9" y="3" width="6" height="11" rx="3" /><path d="M5 11a7 7 0 0014 0" /><path d="M12 18v3" /></svg>
-              </button>
-            )}
+          <div className="tr-in">
+            <textarea
+              ref={textRef}
+              rows={3}
+              placeholder={inputById(inputLang).lang === 'ko' ? '예: 사워도우 한 덩어리 주세요' : 'e.g. One sourdough loaf, please'}
+              value={text}
+              onChange={(e) => setText(e.target.value)}
+            />
+            <div className="tr-in-foot">
+              <span className="st">
+                {pasteMsg ||
+                  (status === 'loading'
+                    ? 'Translating…'
+                    : text.trim()
+                      ? 'Translating as you type'
+                      : '')}
+              </span>
+              <button className="tr-textbtn" onClick={paste}>Paste</button>
+              {voiceOk && (
+                <button
+                  className={`tr-iconbtn${listening ? ' on' : ''}`}
+                  onClick={isIOS ? iosKeyboardMic : toggleMic}
+                  title={isIOS ? 'Use the keyboard mic' : 'Speak'}
+                  aria-label="Speak instead of typing"
+                >
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"><rect x="9" y="3" width="6" height="11" rx="3" /><path d="M5 11a7 7 0 0014 0" /><path d="M12 18v3" /></svg>
+                </button>
+              )}
+              {text && (
+                <button className="tr-iconbtn" onClick={() => setText('')} aria-label="Clear">
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round"><path d="M6 6l12 12M18 6L6 18" /></svg>
+                </button>
+              )}
+            </div>
           </div>
+
           {!voiceOk && (
             <p className="muted" style={{ fontSize: 12, marginTop: 6 }}>
               Voice input isn’t available in this browser — typing works perfectly.
@@ -496,21 +524,31 @@ export default function Translator({ country, onCountry }) {
           )}
 
           {output && (
-            <>
-              {/* Dimmed rather than blanked while the next answer arrives:
-                  clearing it made the whole card flash on every keystroke. */}
-              <div className="phrase" style={{ marginTop: 16, opacity: status === 'loading' ? 0.5 : 1 }}>
-                <div className="txt">
-                  <div className="src">{submitted}</div>
+            <div className="tr-out" style={{ opacity: status === 'loading' ? 0.55 : 1 }}>
+              <div className="top">
+                <div style={{ flex: 1, minWidth: 0 }}>
                   <div className="dst">{output}</div>
+                  {/* The line that makes a translation usable out loud. Empty for
+                      French or Spanish, which you can already read. */}
+                  {reading && <div className="rom">{reading}</div>}
                 </div>
-                <Speak onClick={speakOut} color="#1D5BCE" />
+                <button className="say" onClick={speakOut} aria-label="Play it aloud">
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.9" strokeLinecap="round" strokeLinejoin="round"><path d="M4 9v6h4l5 4V5L8 9H4z" /><path d="M17.5 8.5a5 5 0 010 7" /></svg>
+                </button>
               </div>
-              <button className="btn ghost" style={{ width: '100%', marginTop: 8 }} onClick={copyOut}>
-                {copyMsg || 'Copy translation'}
-              </button>
-            </>
+              <div className="tr-out-btns">
+                <button className="tr-out-btn" onClick={copyOut}>
+                  <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.9" strokeLinecap="round"><rect x="9" y="9" width="11" height="11" rx="2.5" /><path d="M15 5H6a2 2 0 00-2 2v9" /></svg>
+                  {copyMsg || 'Copy'}
+                </button>
+                <button className="tr-out-btn" onClick={() => setShowBig(true)}>
+                  <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.9" strokeLinecap="round" strokeLinejoin="round"><path d="M4 9V4h5M20 15v5h-5M20 9V4h-5M4 15v5h5" /></svg>
+                  Show big
+                </button>
+              </div>
+            </div>
           )}
+
           {/* MyMemory silently echoes the input when the From language is wrong —
               catch that (output === input across two different languages) and nudge. */}
           {status === 'done' && output && output.trim() === submitted.trim() &&

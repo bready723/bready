@@ -1,0 +1,90 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Newsreader:opsz,wght@6..72,400;6..72,500;6..72,600&family=Instrument+Sans:wght@400;500;600;700&display=swap">
+  <style>
+    body { margin: 0; font-family: 'Instrument Sans', -apple-system, system-ui, sans-serif; }
+    a { color: #1d5bce; } a:hover { color: #16469e; }
+    .s-h { font-family: 'Newsreader', Georgia, serif; font-weight: 500; letter-spacing: -0.015em; color: #1a140c; }
+    .s-eyebrow { font-size: 10.5px; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; color: #b3a992; }
+    table { border-collapse: collapse; width: 100%; }
+    th { text-align: left; font-size: 10.5px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: #9a9080; padding: 0 10px 8px 0; border-bottom: 1px solid #e4ddd0; }
+    td { font-size: 13px; color: #3b3327; padding: 9px 10px 9px 0; border-bottom: 1px solid #efeade; vertical-align: top; line-height: 1.4; }
+    td.role { font-weight: 600; color: #1a140c; white-space: nowrap; }
+    td.now { color: #9a9080; font-variant-numeric: tabular-nums; }
+    td.next { color: #1d5bce; font-weight: 600; font-variant-numeric: tabular-nums; }
+    td.why { color: #6b6354; }
+    .flag { color: #b3261e; font-weight: 700; }
+  </style>
+</helmet>
+
+<div style="width: 900px; min-height: 700px; background: #faf8f4; color: #1a140c; padding: 34px 38px 40px;">
+
+  <div class="s-eyebrow">Option A · measured spec</div>
+  <div class="s-h" style="font-size: 32px; line-height: 1.05; margin-top: 6px;">Font, icon and layout sizes</div>
+  <div style="font-size: 13.5px; color: #6b6354; margin-top: 8px; max-width: 620px; line-height: 1.55;">
+    “Today” is read out of <span style="font-family: ui-monospace, Menlo, monospace; font-size: 12.5px;">src/styles.css</span>. “Beli” is measured off Beli’s own App&nbsp;Store screenshots. Every proposed number is set at a 390&nbsp;px screen width.
+  </div>
+
+  <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 34px; margin-top: 30px;">
+
+    <div>
+      <div class="s-eyebrow" style="margin-bottom: 12px;">Type</div>
+      <table>
+        <tr><th style="width: 116px;">Role</th><th style="width: 96px;">Today</th><th style="width: 96px;">Proposed</th><th>Why</th></tr>
+        <tr><td class="role">Screen title</td><td class="now">31 px serif<br>blue #1d5bce</td><td class="next">32 px serif<br>ink #1a140c</td><td class="why">A heading is not a link. Colour goes back to things you can tap.</td></tr>
+        <tr><td class="role">Bakery name</td><td class="now">15.5 / 600</td><td class="next">16 / 600</td><td class="why">The one line you actually read. Beli sets its equivalent at 16.</td></tr>
+        <tr><td class="role">Row sub-line</td><td class="now">12.5</td><td class="next">12.5</td><td class="why">Unchanged: already right.</td></tr>
+        <tr><td class="role">Score</td><td class="now">16 serif in a 46 circle</td><td class="next">16.5 serif in a 44 circle</td><td class="why">Tabular numerals so 9.4 and 10.0 line up down the column.</td></tr>
+        <tr><td class="role">Sub-navigation</td><td class="now">12 px pills, all-caps</td><td class="next">14.5 px text tabs<br>2 px underline</td><td class="why">Beli’s pattern. Pills read as filters; these are places to go.</td></tr>
+        <tr><td class="role">Filter chip</td><td class="now">11 px all-caps<br>0.07em tracking</td><td class="next">12.5 px sentence case<br>pill radius</td><td class="why">All-caps at 11 px is the hardest text on the screen to read.</td></tr>
+        <tr><td class="role">Tab label</td><td class="now">10 / 600</td><td class="next">10 / 600</td><td class="why">Unchanged.</td></tr>
+      </table>
+    </div>
+
+    <div>
+      <div class="s-eyebrow" style="margin-bottom: 12px;">Icons, spacing, targets</div>
+      <table>
+        <tr><th style="width: 116px;">Item</th><th style="width: 96px;">Today</th><th style="width: 96px;">Proposed</th><th>Why</th></tr>
+        <tr><td class="role">Tab icon</td><td class="now">22 px<br>stroke 1.7</td><td class="next">24 px<br>stroke 1.8</td><td class="why">Beli sits at 24. At 22 the icons read lighter than their labels.</td></tr>
+        <tr><td class="role">Tab count</td><td class="now">5 tabs<br>5 different hues</td><td class="next">4 tabs<br>1 hue</td><td class="why">Five colours means none of them signals “you are here”.</td></tr>
+        <tr><td class="role">Add button</td><td class="now"><span class="flag">40 × 40</span></td><td class="next">52 × 52</td><td class="why"><span class="flag">Below the 44 px minimum touch target.</span> It is the app’s most-used control.</td></tr>
+        <tr><td class="role">Row thumbnail</td><td class="now">52, radius 10</td><td class="next">54, radius 12</td><td class="why">Photos are the point; give them the extra 2 px.</td></tr>
+        <tr><td class="role">Row height</td><td class="now">80 px</td><td class="next">76 px</td><td class="why">One more bakery per screen without crowding.</td></tr>
+        <tr><td class="role">Screen padding</td><td class="now">22 px</td><td class="next">20 px</td><td class="why">Matches the 20 px the tab bar and header already use.</td></tr>
+        <tr><td class="role">Hairline</td><td class="now">#ece7dc</td><td class="next">#efeade</td><td class="why">One step lighter, so the list reads as a list, not a table.</td></tr>
+      </table>
+    </div>
+  </div>
+
+  <div style="margin-top: 34px; border-top: 1px solid #e4ddd0; padding-top: 22px;">
+    <div class="s-eyebrow" style="margin-bottom: 12px;">Where colour is allowed</div>
+    <div style="display: flex; gap: 12px;">
+      <div style="flex: 1; border: 1px solid #e4ddd0; border-radius: 12px; padding: 14px 16px; background: #fff;">
+        <div style="font-size: 13.5px; font-weight: 700;">The gradient</div>
+        <div style="height: 8px; border-radius: 99px; background: linear-gradient(100deg,#1aa7e8 0%,#5b3fd6 50%,#e0218a 100%); margin: 10px 0 10px;"></div>
+        <div style="font-size: 12.5px; color: #6b6354; line-height: 1.5;">Wordmark and the Add button. Nowhere else.</div>
+      </div>
+      <div style="flex: 1; border: 1px solid #e4ddd0; border-radius: 12px; padding: 14px 16px; background: #fff;">
+        <div style="font-size: 13.5px; font-weight: 700;">The accent</div>
+        <div style="height: 8px; border-radius: 99px; background: #1d5bce; margin: 10px 0 10px;"></div>
+        <div style="font-size: 12.5px; color: #6b6354; line-height: 1.5;">Scores, the active tab underline, buttons, links.</div>
+      </div>
+      <div style="flex: 1; border: 1px solid #e4ddd0; border-radius: 12px; padding: 14px 16px; background: #fff;">
+        <div style="font-size: 13.5px; font-weight: 700;">Ink</div>
+        <div style="height: 8px; border-radius: 99px; background: #1a140c; margin: 10px 0 10px;"></div>
+        <div style="font-size: 12.5px; color: #6b6354; line-height: 1.5;">Every heading, every name. Text is ink, not decoration.</div>
+      </div>
+    </div>
+  </div>
+
+</div>
+</x-dc>
+</body>
+</html>

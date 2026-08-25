@@ -1,0 +1,122 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,500&family=Instrument+Sans:wght@400;500;600;700&display=swap">
+  <style>
+    body { margin: 0; font-family: 'Instrument Sans', -apple-system, system-ui, sans-serif; }
+    a { color: #1d5bce; } a:hover { color: #16469e; }
+    .t-scr { -webkit-font-smoothing: antialiased; }
+  </style>
+</helmet>
+
+<div class="t-scr" style="width: 390px; height: 844px; position: relative; overflow: hidden; background: #faf9f6; color: #211a11;">
+
+  <!-- app bar -->
+  <div style="display: flex; align-items: center; gap: 9px; padding: 15px 22px 12px; border-bottom: 1px solid #ece7dc;">
+    <span style="font-size: 19px; font-weight: 700; letter-spacing: -0.01em; background: linear-gradient(100deg,#1aa7e8 0%,#5b3fd6 50%,#e0218a 100%); -webkit-background-clip: text; background-clip: text; color: transparent;">bready</span>
+    <span style="margin-left: auto; font-size: 12px; color: #9a9080; font-weight: 500;">12 ranked</span>
+    <span style="border: 1px solid #e4ddd0; background: #fff; border-radius: 999px; padding: 5px 11px; font-size: 12px; font-weight: 500; color: #3b3327;">Synced</span>
+  </div>
+
+  <div style="padding: 20px 22px 0;">
+    <h1 style="font-family: 'Newsreader', Georgia, serif; font-weight: 500; font-size: 31px; line-height: 1.05; letter-spacing: -0.01em; color: #1d5bce; margin: 0;">My rankings</h1>
+    <p style="color: #9a9080; font-size: 13px; margin: 6px 0 0;">Every bakery, in order.</p>
+
+    <!-- search -->
+    <div style="display: flex; align-items: center; gap: 9px; margin-top: 16px; border: 1px solid #e4ddd0; background: #fff; border-radius: 11px; padding: 10px 13px; color: #9a9080;">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><circle cx="11" cy="11" r="7"></circle><path d="M20 20l-3.6-3.6"></path></svg>
+      <span style="font-size: 14.5px;">Search your bakeries…</span>
+    </div>
+
+    <!-- filter chips -->
+    <div style="display: flex; gap: 8px; margin: 18px 0 2px; overflow: hidden;">
+      <span style="flex-shrink: 0; font-size: 11px; font-weight: 600; letter-spacing: 0.07em; text-transform: uppercase; padding: 8px 13px; border-radius: 7px; border: 1px solid #1d5bce; background: #1d5bce; color: #fdfbf7;">All</span>
+      <span style="flex-shrink: 0; font-size: 11px; font-weight: 600; letter-spacing: 0.07em; text-transform: uppercase; padding: 8px 13px; border-radius: 7px; border: 1px solid #e4ddd0; background: #fff; color: #5c5442;">Croissant</span>
+      <span style="flex-shrink: 0; font-size: 11px; font-weight: 600; letter-spacing: 0.07em; text-transform: uppercase; padding: 8px 13px; border-radius: 7px; border: 1px solid #e4ddd0; background: #fff; color: #5c5442;">Sourdough</span>
+      <span style="flex-shrink: 0; font-size: 11px; font-weight: 600; letter-spacing: 0.07em; text-transform: uppercase; padding: 8px 13px; border-radius: 7px; border: 1px solid #e4ddd0; background: #fff; color: #5c5442;">Bagel</span>
+    </div>
+
+    <!-- rows -->
+    <div>
+      <div style="display: flex; align-items: center; gap: 14px; padding: 14px 0; border-bottom: 1px solid #ece7dc;">
+        <div style="width: 20px; text-align: center; font-family: 'Newsreader', Georgia, serif; font-style: italic; font-size: 15px; color: #b3a992;">1</div>
+        <div style="width: 52px; height: 52px; border-radius: 10px; background: #f4e9dc; display: flex; align-items: center; justify-content: center; font-size: 22px;">🥐</div>
+        <div style="flex: 1; min-width: 0;">
+          <div style="font-size: 15.5px; font-weight: 600; letter-spacing: -0.005em; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">Terra Momo Bread Company</div>
+          <div style="font-size: 12.5px; color: #9a9080; margin-top: 3px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">Witherspoon St · Croissant, Sourdough</div>
+        </div>
+        <div style="flex-shrink: 0; width: 46px; height: 46px; border-radius: 50%; border: 1.5px solid #e4ddd0; background: #fff; display: flex; align-items: center; justify-content: center; font-family: 'Newsreader', Georgia, serif; font-weight: 500; font-size: 16px; color: #1c7c54;">9.4</div>
+      </div>
+      <div style="display: flex; align-items: center; gap: 14px; padding: 14px 0; border-bottom: 1px solid #ece7dc;">
+        <div style="width: 20px; text-align: center; font-family: 'Newsreader', Georgia, serif; font-style: italic; font-size: 15px; color: #b3a992;">2</div>
+        <div style="width: 52px; height: 52px; border-radius: 10px; background: #f4e9dc; display: flex; align-items: center; justify-content: center; font-size: 22px;">🥖</div>
+        <div style="flex: 1; min-width: 0;">
+          <div style="font-size: 15.5px; font-weight: 600; letter-spacing: -0.005em; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">Olives</div>
+          <div style="font-size: 12.5px; color: #9a9080; margin-top: 3px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">Witherspoon St · Sourdough</div>
+        </div>
+        <div style="flex-shrink: 0; width: 46px; height: 46px; border-radius: 50%; border: 1.5px solid #e4ddd0; background: #fff; display: flex; align-items: center; justify-content: center; font-family: 'Newsreader', Georgia, serif; font-weight: 500; font-size: 16px; color: #1c7c54;">8.8</div>
+      </div>
+      <div style="display: flex; align-items: center; gap: 14px; padding: 14px 0; border-bottom: 1px solid #ece7dc;">
+        <div style="width: 20px; text-align: center; font-family: 'Newsreader', Georgia, serif; font-style: italic; font-size: 15px; color: #b3a992;">3</div>
+        <div style="width: 52px; height: 52px; border-radius: 10px; background: #f4e9dc; display: flex; align-items: center; justify-content: center; font-size: 22px;">🥯</div>
+        <div style="flex: 1; min-width: 0;">
+          <div style="font-size: 15.5px; font-weight: 600; letter-spacing: -0.005em; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">Chez Alice Café &amp; Bakery</div>
+          <div style="font-size: 12.5px; color: #9a9080; margin-top: 3px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">Palmer Square · Bagel, Pastry</div>
+        </div>
+        <div style="flex-shrink: 0; width: 46px; height: 46px; border-radius: 50%; border: 1.5px solid #e4ddd0; background: #fff; display: flex; align-items: center; justify-content: center; font-family: 'Newsreader', Georgia, serif; font-weight: 500; font-size: 16px; color: #1c7c54;">8.1</div>
+      </div>
+      <div style="display: flex; align-items: center; gap: 14px; padding: 14px 0; border-bottom: 1px solid #ece7dc;">
+        <div style="width: 20px; text-align: center; font-family: 'Newsreader', Georgia, serif; font-style: italic; font-size: 15px; color: #b3a992;">4</div>
+        <div style="width: 52px; height: 52px; border-radius: 10px; background: #f4e9dc; display: flex; align-items: center; justify-content: center; font-size: 22px;">🧁</div>
+        <div style="flex: 1; min-width: 0;">
+          <div style="font-size: 15.5px; font-weight: 600; letter-spacing: -0.005em; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">The Bent Spoon</div>
+          <div style="font-size: 12.5px; color: #9a9080; margin-top: 3px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">Palmer Square · Pastry</div>
+        </div>
+        <div style="flex-shrink: 0; width: 46px; height: 46px; border-radius: 50%; border: 1.5px solid #e4ddd0; background: #fff; display: flex; align-items: center; justify-content: center; font-family: 'Newsreader', Georgia, serif; font-weight: 500; font-size: 16px; color: #1c7c54;">7.6</div>
+      </div>
+      <div style="display: flex; align-items: center; gap: 14px; padding: 14px 0; border-bottom: 1px solid #ece7dc;">
+        <div style="width: 20px; text-align: center; font-family: 'Newsreader', Georgia, serif; font-style: italic; font-size: 15px; color: #b3a992;">5</div>
+        <div style="width: 52px; height: 52px; border-radius: 10px; background: #f4e9dc; display: flex; align-items: center; justify-content: center; font-size: 22px;">🍞</div>
+        <div style="flex: 1; min-width: 0;">
+          <div style="font-size: 15.5px; font-weight: 600; letter-spacing: -0.005em; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">Small World Coffee</div>
+          <div style="font-size: 12.5px; color: #9a9080; margin-top: 3px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">Witherspoon St · Other</div>
+        </div>
+        <div style="flex-shrink: 0; width: 46px; height: 46px; border-radius: 50%; border: 1.5px solid #e4ddd0; background: #fff; display: flex; align-items: center; justify-content: center; font-family: 'Newsreader', Georgia, serif; font-weight: 500; font-size: 16px; color: #1c7c54;">7.0</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- floating add -->
+  <div style="position: absolute; right: 18px; bottom: 104px; width: 40px; height: 40px; border-radius: 50%; background: linear-gradient(115deg,#1aa7e8 0%,#5b3fd6 50%,#e0218a 100%); color: #fff; box-shadow: 0 6px 16px -5px rgba(91,63,214,0.5); display: flex; align-items: center; justify-content: center;">
+    <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M12 5v14M5 12h14"></path></svg>
+  </div>
+
+  <!-- tab bar: five hues -->
+  <div style="position: absolute; left: 0; right: 0; bottom: 0; display: flex; align-items: flex-start; padding: 10px 2px 20px; background: rgba(250,249,246,0.96); border-top: 1px solid #ece7dc;">
+    <div style="flex: 1; display: flex; flex-direction: column; align-items: center; gap: 5px; font-size: 10px; font-weight: 600; color: #1AA7E8;">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"><path d="M5 20v-9M12 20V4M19 20v-6"></path></svg>Rankings
+    </div>
+    <div style="flex: 1; display: flex; flex-direction: column; align-items: center; gap: 5px; font-size: 10px; font-weight: 600; color: rgba(59,115,223,0.55);">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"><path d="M7 3.5h10V21l-5-4.2L7 21V3.5z"></path></svg>Want to try
+    </div>
+    <div style="flex: 1; display: flex; flex-direction: column; align-items: center; gap: 5px; font-size: 10px; font-weight: 600; color: rgba(126,54,201,0.55);">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><circle cx="12" cy="12" r="9"></circle><path d="M3 12h18M12 3c2.5 3 2.5 15 0 18M12 3c-2.5 3-2.5 15 0 18"></path></svg>Translate
+    </div>
+    <div style="flex: 1; display: flex; flex-direction: column; align-items: center; gap: 5px; font-size: 10px; font-weight: 600; color: rgba(181,41,158,0.55);">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"><path d="M4 8h12M10 4l-6 4 6 4M20 16H8M14 12l6 4-6 4"></path></svg>FX
+    </div>
+    <div style="flex: 1; display: flex; flex-direction: column; align-items: center; gap: 5px; font-size: 10px; font-weight: 600; color: rgba(169,112,46,0.55);">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"><circle cx="11" cy="11" r="7"></circle><path d="M20 20l-3.6-3.6"></path></svg>Explore
+    </div>
+  </div>
+
+</div>
+</x-dc>
+</body>
+</html>

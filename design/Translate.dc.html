@@ -1,0 +1,133 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Newsreader:opsz,wght@6..72,400;6..72,500;6..72,600&family=Instrument+Sans:wght@400;500;600;700&display=swap">
+  <style>
+    body { margin: 0; font-family: 'Instrument Sans', -apple-system, system-ui, sans-serif; }
+    a { color: #1d5bce; } a:hover { color: #16469e; }
+    .t-scr { -webkit-font-smoothing: antialiased; }
+    .t-lang { flex: 1; min-width: 0; display: flex; align-items: center; justify-content: center; gap: 6px;
+              height: 46px; border-radius: 12px; border: 1px solid #e4ddd0; background: #fff;
+              font-size: 15px; font-weight: 600; color: #1a140c; }
+    .t-act { flex: 1; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 7px;
+             height: 76px; border-radius: 14px; border: 1px solid #e4ddd0; background: #fff; color: #1d5bce;
+             font-size: 12px; font-weight: 600; }
+    .t-speak { width: 44px; height: 44px; flex-shrink: 0; border-radius: 50%; display: flex; align-items: center; justify-content: center;
+               background: rgba(29,91,206,0.08); border: 1px solid rgba(29,91,206,0.25); color: #1d5bce; }
+  </style>
+</helmet>
+
+<div class="t-scr" style="width: 390px; height: 844px; position: relative; overflow: hidden; background: #faf8f4; color: #1a140c;">
+
+  <div style="display: flex; align-items: center; padding: 16px 20px 10px;">
+    <span style="font-size: 20px; font-weight: 700; letter-spacing: -0.02em; background: linear-gradient(100deg,#1aa7e8 0%,#5b3fd6 50%,#e0218a 100%); -webkit-background-clip: text; background-clip: text; color: transparent;">bready</span>
+    <span style="margin-left: auto; display: flex; align-items: center; gap: 6px; font-size: 12px; font-weight: 500; color: #9a9080;">
+      <span style="width: 7px; height: 7px; border-radius: 50%; background: #1c7c54;"></span>Synced
+    </span>
+  </div>
+
+  <div style="padding: 0 20px;">
+
+    <!-- language bar -->
+    <div style="display: flex; align-items: center; gap: 8px;">
+      <div class="t-lang">English
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M6 9l6 6 6-6"></path></svg>
+      </div>
+      <div style="width: 40px; height: 40px; flex-shrink: 0; border-radius: 50%; background: #1d5bce; color: #fff; display: flex; align-items: center; justify-content: center;">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 8h13M14 4l3.5 4L14 12M20 16H7M10 12l-3.5 4L10 20"></path></svg>
+      </div>
+      <div class="t-lang">日本語 Japanese
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M6 9l6 6 6-6"></path></svg>
+      </div>
+    </div>
+
+    <!-- what you type -->
+    <div style="margin-top: 12px; border: 1px solid #e4ddd0; border-radius: 16px; background: #fff; padding: 15px 16px 12px;">
+      <div style="font-size: 21px; line-height: 1.35; letter-spacing: -0.01em; color: #1a140c;">Do you have anything without butter?</div>
+      <div style="display: flex; align-items: center; margin-top: 12px;">
+        <span style="font-size: 11.5px; font-weight: 600; color: #b3a992;">Translating as you type</span>
+        <span style="margin-left: auto; display: flex; gap: 14px; color: #9a9080;">
+          <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><rect x="9" y="3" width="6" height="11" rx="3"></rect><path d="M5 11a7 7 0 0 0 14 0M12 18v3"></path></svg>
+          <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"></path></svg>
+        </span>
+      </div>
+    </div>
+
+    <!-- what they read — plus how to say it -->
+    <div style="margin-top: 10px; border-radius: 16px; background: #1d5bce; padding: 16px 16px 14px; color: #fff;">
+      <div style="display: flex; gap: 12px; align-items: flex-start;">
+        <div style="flex: 1; min-width: 0;">
+          <div style="font-family: 'Newsreader', Georgia, serif; font-weight: 500; font-size: 24px; line-height: 1.35;">バターを使っていないものはありますか？</div>
+          <div style="font-size: 14px; font-weight: 500; color: rgba(255,255,255,0.82); margin-top: 8px; line-height: 1.4;">bataa o tsukatte inai mono wa arimasu ka?</div>
+        </div>
+        <div style="width: 44px; height: 44px; flex-shrink: 0; border-radius: 50%; background: rgba(255,255,255,0.18); display: flex; align-items: center; justify-content: center;">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M4 9v6h4l5 4V5L8 9H4zM17.5 8.5a5 5 0 0 1 0 7"></path></svg>
+        </div>
+      </div>
+      <div style="display: flex; gap: 8px; margin-top: 14px;">
+        <div style="flex: 1; height: 38px; border-radius: 10px; background: rgba(255,255,255,0.16); display: flex; align-items: center; justify-content: center; gap: 7px; font-size: 12.5px; font-weight: 600;">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round"><rect x="9" y="9" width="11" height="11" rx="2.5"></rect><path d="M15 5H6a2 2 0 0 0-2 2v9"></path></svg>Copy
+        </div>
+        <div style="flex: 1; height: 38px; border-radius: 10px; background: rgba(255,255,255,0.16); display: flex; align-items: center; justify-content: center; gap: 7px; font-size: 12.5px; font-weight: 600;">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v13M7.5 11.5L12 16l4.5-4.5M4 20h16"></path></svg>Show big
+        </div>
+      </div>
+    </div>
+
+    <!-- three ways in -->
+    <div style="display: flex; gap: 9px; margin-top: 14px;">
+      <div class="t-act">
+        <svg width="23" height="23" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8.5A2.5 2.5 0 0 1 5.5 6h1.9l1.3-2h6.6l1.3 2h1.9A2.5 2.5 0 0 1 21 8.5v8A2.5 2.5 0 0 1 18.5 19h-13A2.5 2.5 0 0 1 3 16.5v-8z"></path><circle cx="12" cy="12.5" r="3.4"></circle></svg>
+        Menu photo
+      </div>
+      <div class="t-act">
+        <svg width="23" height="23" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M4 5h9a3 3 0 0 1 3 3v2a3 3 0 0 1-3 3H8l-4 3V5z"></path><path d="M18 9h2v11l-3-2.5h-5"></path></svg>
+        Two-way talk
+      </div>
+      <div class="t-act">
+        <svg width="23" height="23" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"><rect x="9" y="3" width="6" height="11" rx="3"></rect><path d="M5 11a7 7 0 0 0 14 0M12 18v3"></path></svg>
+        Speak
+      </div>
+    </div>
+
+    <!-- the offline set that works with no signal -->
+    <div style="display: flex; align-items: baseline; margin-top: 20px;">
+      <span style="font-size: 10.5px; font-weight: 700; letter-spacing: 0.11em; text-transform: uppercase; color: #b3a992;">At the counter</span>
+      <span style="margin-left: auto; font-size: 11.5px; font-weight: 600; color: #9a9080;">Works offline</span>
+    </div>
+
+    <div style="display: flex; align-items: center; gap: 12px; background: #fff; border: 1px solid #efeade; border-radius: 13px; padding: 11px 13px; margin-top: 9px;">
+      <div style="flex: 1; min-width: 0;">
+        <div style="font-size: 12.5px; color: #9a9080;">One of these, please.</div>
+        <div style="font-family: 'Newsreader', Georgia, serif; font-size: 18px; margin-top: 3px; line-height: 1.3;">これを一つください</div>
+      </div>
+      <div class="t-speak"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M4 9v6h4l5 4V5L8 9H4zM17.5 8.5a5 5 0 0 1 0 7"></path></svg></div>
+    </div>
+
+    <div style="display: flex; align-items: center; gap: 12px; background: #fff; border: 1px solid #efeade; border-radius: 13px; padding: 11px 13px; margin-top: 8px;">
+      <div style="flex: 1; min-width: 0;">
+        <div style="font-size: 12.5px; color: #9a9080;">What is your most popular bread?</div>
+        <div style="font-family: 'Newsreader', Georgia, serif; font-size: 18px; margin-top: 3px; line-height: 1.3;">一番人気のパンはどれですか</div>
+      </div>
+      <div class="t-speak"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M4 9v6h4l5 4V5L8 9H4zM17.5 8.5a5 5 0 0 1 0 7"></path></svg></div>
+    </div>
+
+  </div>
+
+  <div style="position: absolute; left: 0; right: 0; bottom: 0; display: flex; padding: 11px 6px 22px; background: rgba(250,248,244,0.97); border-top: 1px solid #eae4d7;">
+    <div style="flex:1; display:flex; flex-direction:column; align-items:center; gap:5px; font-size:10px; font-weight:600; color:#b8ae9c;"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M5 20v-9M12 20V4M19 20v-6"></path></svg>Bakeries</div>
+    <div style="flex:1; display:flex; flex-direction:column; align-items:center; gap:5px; font-size:10px; font-weight:600; color:#1a140c;"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><circle cx="12" cy="12" r="9"></circle><path d="M3 12h18M12 3c2.5 3 2.5 15 0 18M12 3c-2.5 3-2.5 15 0 18"></path></svg>Translate</div>
+    <div style="flex:1; display:flex; flex-direction:column; align-items:center; gap:5px; font-size:10px; font-weight:600; color:#b8ae9c;"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M4 8h12M10 4l-6 4 6 4M20 16H8M14 12l6 4-6 4"></path></svg>FX</div>
+    <div style="flex:1; display:flex; flex-direction:column; align-items:center; gap:5px; font-size:10px; font-weight:600; color:#b8ae9c;"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><circle cx="12" cy="8.5" r="3.6"></circle><path d="M4.8 20c1-3.6 3.8-5.4 7.2-5.4s6.2 1.8 7.2 5.4"></path></svg>Me</div>
+  </div>
+
+</div>
+</x-dc>
+</body>
+</html>
