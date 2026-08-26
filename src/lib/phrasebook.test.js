@@ -1,5 +1,13 @@
 import { describe, it, expect } from 'vitest'
-import { flipLangs, lookupSetPhrase, KO_SET_PHRASES } from './phrasebook.js'
+import {
+  flipLangs,
+  lookupSetPhrase,
+  KO_SET_PHRASES,
+  PHRASES,
+  GLOSSARY,
+  COUNTRIES,
+  CURATED_LANGS,
+} from './phrasebook.js'
 
 // The swap button lives or dies on the bcp match keeping Mandarin (zh-CN) and
 // Cantonese (zh-HK) distinct — a plain lang:'zh' match would blur them.
@@ -65,9 +73,8 @@ describe('Korean set phrases', () => {
     expect(lookupSetPhrase('실례합니다', 'en-US').reading).toBe('')
   })
 
-  it('gives Cantonese the Mandarin line for now, rather than nothing', () => {
-    expect(lookupSetPhrase('포장해 주세요', 'zh-HK').text).toBe('打包，谢谢。')
-    expect(lookupSetPhrase('포장해 주세요', 'zh-HK')).toEqual(
+  it('no longer hands Hong Kong the Mandarin line', () => {
+    expect(lookupSetPhrase('포장해 주세요', 'zh-HK')).not.toEqual(
       lookupSetPhrase('포장해 주세요', 'zh-CN'),
     )
   })
@@ -89,5 +96,70 @@ describe('Korean set phrases', () => {
         expect(entry.r?.[lang], `${entry.ko} → ${lang} reading`).toBeTruthy()
       }
     }
+  })
+})
+
+// Hong Kong used to be handed Mandarin because both countries shared one `zh`
+// slot. It was right in writing and wrong out loud — 打包 for 外賣, 多少钱 for
+// 幾錢, simplified characters on a Hong Kong counter.
+describe('Cantonese is its own language', () => {
+  // Simplified forms whose traditional counterpart is a different character.
+  // None of them belongs in a line meant for Hong Kong.
+  const SIMPLIFIED = [...'谢面点鲜无颂团贝钱这请给炉荐饱帮热见会来个吗样时动还开']
+
+  const hk = COUNTRIES.find((c) => c.code === 'HK')
+  const cn = COUNTRIES.find((c) => c.code === 'CN')
+
+  it('has a language of its own, and keeps its own voice', () => {
+    expect(hk.lang).toBe('yue')
+    expect(cn.lang).toBe('zh')
+    expect(hk.bcp).toBe('zh-HK') // the voice still needs the region tag
+    expect(CURATED_LANGS.has('yue')).toBe(true)
+  })
+
+  // A handful of things genuinely are identical in both. Listing them keeps the
+  // rule strict everywhere else instead of loosening it for all.
+  const SAME_IN_BOTH = new Set(['你好！'])
+
+  it('never repeats the Mandarin line, except where the two really agree', () => {
+    for (const p of [...PHRASES, ...GLOSSARY]) {
+      expect(p.t.yue, `${p.en} has no Cantonese`).toBeTruthy()
+      if (SAME_IN_BOTH.has(p.t.yue)) continue
+      expect(p.t.yue, `${p.en} is just the Mandarin`).not.toBe(p.t.zh)
+    }
+    for (const e of KO_SET_PHRASES) {
+      expect(e.t.yue, `${e.ko} has no Cantonese`).toBeTruthy()
+      expect(e.t.yue, `${e.ko} is just the Mandarin`).not.toBe(e.t.zh)
+      expect(e.r.yue, `${e.ko} has no jyutping`).toBeTruthy()
+      expect(e.r.yue, `${e.ko} reads as pinyin`).not.toBe(e.r.zh)
+    }
+  })
+
+  it('is written in traditional characters', () => {
+    const every = [
+      ...PHRASES.map((p) => p.t.yue),
+      ...GLOSSARY.map((g) => g.t.yue),
+      ...KO_SET_PHRASES.map((e) => e.t.yue),
+    ]
+    for (const line of every) {
+      for (const ch of SIMPLIFIED) {
+        expect(line.includes(ch), `"${line}" contains the simplified ${ch}`).toBe(false)
+      }
+    }
+  })
+
+  it('routes zh-HK to Cantonese and everything else Chinese to Mandarin', () => {
+    expect(lookupSetPhrase('포장해 주세요', 'zh-HK').text).toBe('外賣，唔該')
+    expect(lookupSetPhrase('포장해 주세요', 'zh-CN').text).toBe('打包，谢谢。')
+    expect(lookupSetPhrase('포장해 주세요', 'zh-TW').text).toBe('打包，谢谢。')
+    expect(lookupSetPhrase('포장해 주세요', 'yue').text).toBe('外賣，唔該')
+  })
+
+  it('says the untranslatable one the way Hong Kong says it', () => {
+    // Not 辛苦了 — that is the Mandarin move. On the way out of a shop you say
+    // thanks.
+    const out = lookupSetPhrase('수고하세요', 'zh-HK')
+    expect(out.text).toBe('唔該晒，拜拜')
+    expect(out.reading).toBe('m4 goi1 saai3, baai1 baai3')
   })
 })
