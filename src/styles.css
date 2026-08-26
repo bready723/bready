@@ -151,7 +151,7 @@ input::placeholder, textarea::placeholder { color: #b9af9e; }
 }
 
 /* ---- headings & text ---- */
-h1.title {
+.title {
   font-family: var(--display);
   font-weight: var(--disp-weight);
   font-size: 31px;
@@ -708,11 +708,11 @@ textarea.input { resize: vertical; min-height: 88px; }
 .fx-num-input::placeholder { color: var(--faint); }
 .fx-num-input.white { color: #fff; }
 .fx-num-input.white::placeholder { color: rgba(255,255,255,0.5); }
-/* A second section on the same screen — the look FX already uses for
-   CALCULATOR, pulled out so Rankings can use it for the wishlist. */
-.section-title {
-  font: 600 12px var(--sans); letter-spacing: 0.1em; text-transform: uppercase;
-  color: var(--soft); margin: 34px 2px 8px; padding-top: 26px;
+/* A second section on the same screen. It gets the same serif heading as the
+   first one — a section is not a footnote. */
+.screen-section {
+  margin-top: 32px;
+  padding-top: 28px;
   border-top: 1px solid var(--line);
 }
 .fx-calc-title {
