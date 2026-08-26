@@ -573,7 +573,7 @@ textarea.input { resize: vertical; min-height: 88px; }
 .inspire-banner {
   margin-top: 20px;
   border: 2px solid #ffffff; border-radius: 14px;
-  padding: 20px 22px; background: #1b3a97;
+  padding: 20px 22px; background: var(--accent);
   box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.25);
 }
 .inspire-banner .eyebrow {
