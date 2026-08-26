@@ -273,7 +273,7 @@ export default function FX({ currency, onCurrency }) {
       <p className="fx-foot">Live mid-market rates · updates daily · a rough guide, not the till price.</p>
 
       {/* ---------- CALCULATOR (standalone) ---------- */}
-      <div className="fx-calc-title">Calculator</div>
+      <h2 className="title section">Calculator</h2>
       <div className="fx-card" style={{ ...gradBorder('var(--canvas)'), padding: 14, marginTop: 0 }}>
         <div className="fx-display">
           <div className="fx-display-expr">{calcLine1 || '\u00a0'}</div>
@@ -294,7 +294,7 @@ export default function FX({ currency, onCurrency }) {
       </div>
 
       {/* ---------- TIP ---------- */}
-      <div className="fx-calc-title">Tip</div>
+      <h2 className="title section">Tip</h2>
       <div className="fx-card" style={{ ...gradBorder('var(--canvas)'), padding: 14, marginTop: 0 }}>
         <div className="tip-label">Bill</div>
         <div className="tip-bill">

@@ -160,6 +160,7 @@ input::placeholder, textarea::placeholder { color: #b9af9e; }
   color: var(--accent);
   margin: 0;
 }
+.title.section { margin: 30px 2px 12px; }
 .muted { color: var(--soft); }
 .subtitle { color: var(--soft); font-size: 13px; margin: 6px 0 0; }
 
@@ -714,10 +715,6 @@ textarea.input { resize: vertical; min-height: 88px; }
   margin-top: 32px;
   padding-top: 28px;
   border-top: 1px solid var(--line);
-}
-.fx-calc-title {
-  font: 600 12px var(--sans); letter-spacing: 0.1em; text-transform: uppercase;
-  color: var(--soft); margin: 24px 2px 10px;
 }
 
 /* ---- storage warning: a failed save used to be completely silent ---- */
