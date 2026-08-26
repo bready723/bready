@@ -48,6 +48,40 @@ export async function pullAll(client = supabase) {
   return rows
 }
 
+// PostgREST checks a token's "issued at" against its OWN clock with no
+// tolerance. Sign-in mints a token and this file uses it microseconds later, so
+// a sub-second skew between two Supabase machines is enough to have the token
+// rejected as issued in the future. Nothing is wrong with the account, the
+// device or its clock — asking again a moment later is the entire fix.
+const TRANSIENT = /issued at future|not yet valid|failed to fetch|load failed|networkerror|network request failed|timed? ?out/i
+
+const nap = (ms) => new Promise((r) => setTimeout(r, ms))
+
+export async function withRetry(run, options = {}) {
+  const attempts = options.attempts || 3
+  const sleep = options.sleep || nap
+  const wait = options.wait || ((n) => 600 * 2 ** n)
+  for (let i = 0; i < attempts; i += 1) {
+    try {
+      return await run()
+    } catch (e) {
+      // A real refusal — wrong password, no permission, a missing table — must
+      // surface immediately rather than being tried three times.
+      if (i === attempts - 1 || !TRANSIENT.test(e?.message || '')) throw e
+      await sleep(wait(i))
+    }
+  }
+}
+
+/** Plain words for the few failures worth explaining rather than quoting. */
+export function explainCloudError(message) {
+  const text = String(message || '')
+  if (/issued at future/i.test(text)) {
+    return 'the server’s clock was briefly out of step. Nothing was lost — try again in a moment.'
+  }
+  return text
+}
+
 const isEmpty = (state) =>
   (state.bakeries || []).length === 0 &&
   (state.wantToTry || []).length === 0 &&
@@ -87,7 +121,7 @@ export async function reconcileOnSignIn(state, user, options = {}) {
 
   if (isEmpty(state)) {
     try {
-      const rows = await pullAll(client)
+      const rows = await withRetry(() => pullAll(client), { sleep: options.sleep })
       const downloaded = toLocal(rows)
       if (isEmpty(downloaded)) return { action: 'nothing-to-do', state: null, error: null }
       if (store) markMigrated(store, user.id)

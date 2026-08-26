@@ -10,7 +10,7 @@ import DiscoverDetail from './screens/DiscoverDetail.jsx'
 import SignIn from './screens/SignIn.jsx'
 import { IconRank, IconGlobe, IconExplore, IconFx } from './components/Icons.jsx'
 import { onAuthChange, isCloudConfigured } from './lib/auth.js'
-import { reconcileOnSignIn, pushChanges, markSynced, syncPhotos, resolvePhotos } from './lib/cloud.js'
+import { reconcileOnSignIn, pushChanges, markSynced, syncPhotos, resolvePhotos, explainCloudError } from './lib/cloud.js'
 
 // Each tab owns a hue along the brand gradient (blue → purple → magenta → gold);
 // full colour when active, dimmed to 55% when not. Add stays the gradient chip.
@@ -28,9 +28,9 @@ function cloudMessage(result) {
     case 'downloaded':
       return { tone: 'good', text: `Loaded ${result.count} bakeries from your account.` }
     case 'upload-failed':
-      return { tone: 'bad', text: `Could not back up: ${result.error}. Your data is still here.` }
+      return { tone: 'bad', text: `Could not back up: ${explainCloudError(result.error)}. Your data is still here.` }
     case 'download-failed':
-      return { tone: 'bad', text: `Could not load your account: ${result.error}` }
+      return { tone: 'bad', text: `Could not load your account: ${explainCloudError(result.error)}` }
     default:
       return { tone: 'good', text: 'Synced.' }
   }

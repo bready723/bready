@@ -1,5 +1,5 @@
-import { describe, it, expect } from 'vitest'
-import { reconcileOnSignIn, makeAdapter, pullAll, pushChanges, markSynced, OUTBOX_KEY, SYNCED_KEY } from './cloud.js'
+import { describe, it, expect, beforeEach } from 'vitest'
+import { reconcileOnSignIn, makeAdapter, pullAll, pushChanges, markSynced, withRetry, explainCloudError, OUTBOX_KEY, SYNCED_KEY } from './cloud.js'
 import { MIGRATED_KEY } from './sync.js'
 
 // A Supabase stand-in: `from(table)` with the handful of calls cloud.js makes.
@@ -338,5 +338,76 @@ describe('markSynced', () => {
     const edited = { ...state, bakeries: [{ ...state.bakeries[0], name: 'Renamed' }, state.bakeries[1]] }
     const result = await pushChanges(edited, USER, { client: fakeClient(), store, now: '2026-08-21T05:00:00.000Z' })
     expect(result.sent).toBe(1)
+  })
+})
+
+// Sara, on a Mac whose clock was exact to the second, got
+//   "Could not load your account: bakeries: JWT issued at future"
+// The token is minted by Supabase and used by pullAll microseconds later;
+// PostgREST compares its "issued at" to its own clock with no tolerance, so a
+// sub-second skew between two Supabase machines rejects a token that is fine a
+// moment later.
+describe('a token used the instant it was minted', () => {
+  const slept = []
+  const sleep = (ms) => { slept.push(ms); return Promise.resolve() }
+  beforeEach(() => { slept.length = 0 })
+
+  it('asks again instead of giving up', async () => {
+    let calls = 0
+    const run = async () => {
+      calls += 1
+      if (calls < 2) throw new Error('bakeries: JWT issued at future')
+      return 'rows'
+    }
+    expect(await withRetry(run, { sleep })).toBe('rows')
+    expect(calls).toBe(2)
+    expect(slept).toEqual([600]) // waited once, briefly
+  })
+
+  it('waits longer each time, then reports the failure honestly', async () => {
+    const run = async () => { throw new Error('bakeries: JWT issued at future') }
+    await expect(withRetry(run, { sleep })).rejects.toThrow('JWT issued at future')
+    expect(slept).toEqual([600, 1200])
+  })
+
+  it('never retries a real refusal', async () => {
+    let calls = 0
+    const run = async () => { calls += 1; throw new Error('bakeries: permission denied for table bakeries') }
+    await expect(withRetry(run, { sleep })).rejects.toThrow('permission denied')
+    expect(calls).toBe(1) // asking twice would not change the answer
+    expect(slept).toEqual([])
+  })
+
+  it('rides out a dropped connection too', async () => {
+    let calls = 0
+    const run = async () => { calls += 1; if (calls < 3) throw new Error('Load failed'); return 'ok' }
+    expect(await withRetry(run, { sleep })).toBe('ok')
+  })
+
+  it('says it in words, not in server jargon', () => {
+    expect(explainCloudError('bakeries: JWT issued at future')).toMatch(/clock was briefly out of step/i)
+    expect(explainCloudError('bakeries: JWT issued at future')).toMatch(/nothing was lost/i)
+    // Anything else is quoted as-is rather than guessed at.
+    expect(explainCloudError('permission denied')).toBe('permission denied')
+    expect(explainCloudError('')).toBe('')
+  })
+
+  it('a failed download never tells the cloud to delete anything', async () => {
+    // The screen goes empty when the pull fails, and the push that follows runs
+    // against an empty local state. It must not read that as "she deleted it".
+    const client = {
+      from: () => ({ select: async () => ({ data: null, error: { message: 'JWT issued at future' } }) }),
+    }
+    const store = new Map()
+    const fake = { getItem: (k) => store.get(k) ?? null, setItem: (k, v) => store.set(k, v) }
+    const result = await reconcileOnSignIn(
+      { bakeries: [], wantToTry: [], notes: [] },
+      { id: 'u1' },
+      { client, store: fake, sleep: () => Promise.resolve() },
+    )
+    expect(result.action).toBe('download-failed')
+    // The "we are in sync" marker must NOT have been written, because that is
+    // what a later push diffs against to decide what vanished.
+    expect(store.get(SYNCED_KEY)).toBeUndefined()
   })
 })
