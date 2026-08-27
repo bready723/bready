@@ -32,7 +32,7 @@
 
   --radius: 14px;
   --radius-sm: 10px;
-  --tab-h: 74px;
+  --tab-h: 62px;
   --safe-bottom: env(safe-area-inset-bottom, 0px);
 }
 
@@ -107,7 +107,7 @@ input::placeholder, textarea::placeholder { color: #b9af9e; }
   bottom: 0;
   width: 100%;
   max-width: 480px;
-  padding: 10px 2px calc(20px + var(--safe-bottom));
+  padding: 6px 2px calc(10px + var(--safe-bottom));
   display: flex;
   align-items: flex-start;
   background: rgba(250, 249, 246, 0.96);
@@ -123,8 +123,8 @@ input::placeholder, textarea::placeholder { color: #b9af9e; }
   flex-direction: column;
   align-items: center;
   justify-content: flex-start;
-  gap: 6px;
-  padding: 4px 0;
+  gap: 3px;
+  padding: 2px 0;
   font-family: var(--sans);
   /* Four tabs instead of five, so each one can be read without squinting.
      10px labels under 22px icons were sized for a five-across bar. */
