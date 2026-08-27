@@ -13,7 +13,7 @@ const FATAL = new Set(['not-allowed', 'service-not-allowed', 'audio-capture'])
 // single word, the restarts are a tight loop (e.g. no network) — give up.
 const MAX_DEAD_RESTARTS = 6
 
-export function startLiveListening({ lang = 'en-US', onFinal, onInterim, onError, onState, Ctor } = {}) {
+export function startLiveListening({ lang = 'en-US', onFinal, onInterim, onError, onState, Ctor, track } = {}) {
   const Rec =
     Ctor ||
     (typeof window !== 'undefined' &&
@@ -92,7 +92,22 @@ export function startLiveListening({ lang = 'en-US', onFinal, onInterim, onError
       }
     }
 
-    rec.start()
+    // Chrome 139+ can transcribe a MediaStreamTrack instead of the mic —
+    // that is how Zoom's remote voices get captioned while wearing earphones.
+    if (track) rec.start(track)
+    else rec.start()
+  }
+
+  // If the shared-audio track dies (she clicked "Stop sharing"), stop cleanly.
+  if (track) {
+    track.addEventListener('ended', () => {
+      active = false
+      try {
+        rec && rec.stop()
+      } catch (e) {
+        /* already stopped */
+      }
+    })
   }
 
   try {
@@ -120,4 +135,35 @@ export function startLiveListening({ lang = 'en-US', onFinal, onInterim, onError
 // open — Chrome on a computer. Safari and phones do not have it.
 export function pipSupported() {
   return typeof window !== 'undefined' && 'documentPictureInPicture' in window
+}
+
+// True where a screen share can carry system audio — the beta path that
+// captions the OTHER side of a call even with earphones in.
+export function systemCaptureSupported() {
+  return (
+    typeof navigator !== 'undefined' &&
+    !!(navigator.mediaDevices && navigator.mediaDevices.getDisplayMedia)
+  )
+}
+
+// Ask Chrome for a screen share that includes system audio. The user must pick
+// "Entire Screen" and switch on "Also share system audio" — a window or tab
+// share on macOS carries no audio, which we surface as 'no-system-audio'.
+export async function getSystemAudioTrack(md) {
+  const dev = md || navigator.mediaDevices
+  const stream = await dev.getDisplayMedia({
+    video: true,
+    audio: { suppressLocalAudioPlayback: false },
+    systemAudio: 'include',
+    monitorTypeSurfaces: 'include',
+    selfBrowserSurface: 'exclude',
+  })
+  const track = stream.getAudioTracks()[0]
+  if (!track) {
+    stream.getTracks().forEach((t) => t.stop())
+    const err = new Error('no-system-audio')
+    err.error = 'no-system-audio'
+    throw err
+  }
+  return { track, stream }
 }

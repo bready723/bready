@@ -17,7 +17,7 @@ import {
   startListening,
   micErrorMessage,
 } from '../lib/translate.js'
-import { startLiveListening, pipSupported } from '../lib/live.js'
+import { startLiveListening, pipSupported, systemCaptureSupported, getSystemAudioTrack } from '../lib/live.js'
 
 const AUTO_KEY = 'bready.autoT.v1'
 const loadAuto = () => {
@@ -134,6 +134,7 @@ export default function Translator({ country, onCountry }) {
   const [pipOn, setPipOn] = useState(false)
   const liveRef = useRef(null)
   const liveBoxRef = useRef(null)
+  const liveStreamRef = useRef(null) // the screen share carrying Zoom's audio
   const pipRef = useRef(null)
   const recRef = useRef(null)
   const micTimer = useRef(null)
@@ -189,10 +190,11 @@ export default function Translator({ country, onCountry }) {
   }
 
   // ---- Live captions ----
-  function startLive() {
+  function startLive(track) {
     setLiveMsg('')
     liveRef.current = startLiveListening({
       lang: inputById(inputLang).bcp,
+      track,
       onFinal: (line) => {
         setLiveLines((prev) => {
           const next = [...prev, { ts: Date.now(), text: line }].slice(-1000)
@@ -208,6 +210,30 @@ export default function Translator({ country, onCountry }) {
   function stopLive() {
     liveRef.current && liveRef.current.stop()
     liveRef.current = null
+    if (liveStreamRef.current) {
+      liveStreamRef.current.getTracks().forEach((t) => t.stop())
+      liveStreamRef.current = null
+    }
+  }
+
+  // The earphone path (beta): caption the call's own audio via a screen share,
+  // so the other side is heard even when nothing reaches the mic.
+  async function startZoomCapture() {
+    setLiveMsg('')
+    try {
+      const { track, stream } = await getSystemAudioTrack()
+      liveStreamRef.current = stream
+      startLive(track)
+      setLiveMsg('🎧 Captioning the call’s audio (beta) — earphones are fine in this mode.')
+    } catch (e) {
+      if ((e && e.error) === 'no-system-audio') {
+        setLiveMsg('No audio came with the share — pick “Entire Screen” and switch ON “Also share system audio”, then try again.')
+      } else if (e && /NotAllowed|Permission/i.test(e.name || '')) {
+        setLiveMsg('Share was cancelled — nothing captured.')
+      } else {
+        setLiveMsg('Couldn’t capture the call’s audio here — use the speaker trick or macOS Live Captions instead.')
+      }
+    }
   }
   function liveToText() {
     return liveLines.map((l) => `[${liveStamp(l.ts)}] ${l.text}`).join('\n')
@@ -313,6 +339,7 @@ export default function Translator({ country, onCountry }) {
   useEffect(
     () => () => {
       liveRef.current && liveRef.current.stop()
+      if (liveStreamRef.current) liveStreamRef.current.getTracks().forEach((t) => t.stop())
       if (pipRef.current && !pipRef.current.closed) pipRef.current.close()
     },
     [],
@@ -797,11 +824,16 @@ export default function Translator({ country, onCountry }) {
             </p>
           ) : (
             <>
-              <button className={`live-toggle${liveOn ? ' on' : ''}`} onClick={liveOn ? stopLive : startLive}>
+              <button className={`live-toggle${liveOn ? ' on' : ''}`} onClick={liveOn ? stopLive : () => startLive()}>
                 {liveOn ? '■  Stop listening' : '●  Start listening'}
               </button>
 
               <div className="live-tools">
+                {!liveOn && systemCaptureSupported() && (
+                  <button className="btn outline row live-float" onClick={startZoomCapture}>
+                    🎧 Caption Zoom audio (beta)
+                  </button>
+                )}
                 {pipSupported() && (
                   <button className="btn outline row live-float" onClick={openPip} disabled={pipOn}>
                     {pipOn ? 'Floating window open' : 'Float over Zoom ↗'}

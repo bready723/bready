@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest'
-import { startLiveListening } from './live.js'
+import { startLiveListening, getSystemAudioTrack } from './live.js'
 
 // A stand-in for Chrome's SpeechRecognition that the test can puppet: fire
 // results, errors, and ends on command, and count how many times it was built
@@ -126,6 +126,37 @@ describe('startLiveListening', () => {
     expect(errors).toEqual(['voice not supported'])
   })
 
+  it('hands a captured track to every session, restarts included', () => {
+    const starts = []
+    function Fake() {
+      this.start = (arg) => starts.push(arg)
+      this.stop = () => { this.onend && this.onend() }
+      Fake.built.push(this)
+    }
+    Fake.built = []
+    const listeners = {}
+    const track = { addEventListener: (ev, fn) => { listeners[ev] = fn } }
+    startLiveListening({ Ctor: Fake, track })
+    Fake.built[0].onend() // silence — restart
+    expect(starts).toEqual([track, track]) // the same share, both sessions
+  })
+
+  it('stops for good when the user ends the screen share', () => {
+    const states = []
+    function Fake() {
+      this.start = () => {}
+      this.stop = () => { this.onend && this.onend() }
+      Fake.built.push(this)
+    }
+    Fake.built = []
+    const listeners = {}
+    const track = { addEventListener: (ev, fn) => { listeners[ev] = fn } }
+    startLiveListening({ Ctor: Fake, track, onState: (v) => states.push(v) })
+    listeners.ended() // "Stop sharing" clicked in Chrome's bar
+    expect(Fake.built.length).toBe(1) // no restart on a dead source
+    expect(states).toEqual([true, false])
+  })
+
   it('reads from resultIndex so old finals are not re-emitted', () => {
     const { Fake, built } = fakeRecognition()
     const finals = []
@@ -140,5 +171,29 @@ describe('startLiveListening', () => {
       ],
     })
     expect(finals).toEqual(['first sentence.', 'second sentence.'])
+  })
+})
+
+describe('getSystemAudioTrack', () => {
+  const streamWith = (audioTracks) => ({
+    stopped: [],
+    getAudioTracks: () => audioTracks,
+    getTracks() {
+      return audioTracks.concat([{ stop: () => this.stopped.push('video') }])
+    },
+  })
+
+  it('returns the share audio track', async () => {
+    const track = { kind: 'audio' }
+    const md = { getDisplayMedia: async () => streamWith([track]) }
+    const got = await getSystemAudioTrack(md)
+    expect(got.track).toBe(track)
+  })
+
+  it('rejects and releases everything when the share has no audio', async () => {
+    const stream = streamWith([])
+    const md = { getDisplayMedia: async () => stream }
+    await expect(getSystemAudioTrack(md)).rejects.toMatchObject({ error: 'no-system-audio' })
+    expect(stream.stopped).toEqual(['video']) // nothing left recording
   })
 })
