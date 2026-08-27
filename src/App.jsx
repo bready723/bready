@@ -273,33 +273,37 @@ export default function App() {
           className={tab === 'rankings' ? 'active' : ''}
           style={{ color: tc('rankings') }}
           onClick={() => setTab('rankings')}
+          aria-label="Rankings"
+          title="Rankings"
         >
           <IconRank />
-          Rankings
         </button>
         <button
           className={tab === 'translate' ? 'active' : ''}
           style={{ color: tc('translate') }}
           onClick={() => setTab('translate')}
+          aria-label="Translate"
+          title="Translate"
         >
           <IconGlobe />
-          Translate
         </button>
         <button
           className={tab === 'fx' ? 'active' : ''}
           style={{ color: tc('fx') }}
           onClick={() => setTab('fx')}
+          aria-label="FX"
+          title="FX"
         >
           <IconFx />
-          FX
         </button>
         <button
           className={tab === 'explore' ? 'active' : ''}
           style={{ color: tc('explore') }}
           onClick={() => setTab('explore')}
+          aria-label="Explore"
+          title="Explore"
         >
           <IconExplore />
-          Explore
         </button>
       </nav>
 

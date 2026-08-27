@@ -32,7 +32,7 @@
 
   --radius: 14px;
   --radius-sm: 10px;
-  --tab-h: 62px;
+  --tab-h: 56px;
   --safe-bottom: env(safe-area-inset-bottom, 0px);
 }
 
@@ -123,23 +123,30 @@ input::placeholder, textarea::placeholder { color: #b9af9e; }
   flex-direction: column;
   align-items: center;
   justify-content: flex-start;
+  flex-direction: column;
+  align-items: center;
   gap: 3px;
-  padding: 2px 0;
-  font-family: var(--sans);
-  /* Four tabs instead of five, so each one can be read without squinting.
-     10px labels under 22px icons were sized for a five-across bar. */
-  font-size: 11.5px;
-  font-weight: 600;
-  letter-spacing: -0.005em;
+  padding: 4px 0 0;
+  /* Icons only — no labels — so each one is drawn a touch larger and does
+     all the talking on its own. */
   color: var(--soft);
   cursor: pointer;
 }
 .tabbar button svg {
-  width: 27px;
-  height: 27px;
+  width: 29px;
+  height: 29px;
   stroke-width: 1.85;
 }
 .tabbar button.active { color: var(--accent); }
+/* with no labels, the current tab needs a mark: a small dot in its own color */
+.tabbar button::after {
+  content: '';
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: transparent;
+}
+.tabbar button.active::after { background: currentColor; }
 /* Add tab keeps the brand gradient but is the SAME SIZE as the others
    (no oversized, raised circle). */
 .tabbar button.fab .fab-circle {
