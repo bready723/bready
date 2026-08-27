@@ -606,6 +606,37 @@ textarea.input { resize: vertical; min-height: 88px; }
 .script-row .t { font-family: var(--display); font-size: 17px; margin-top: 3px; }
 .script-tools { display: flex; gap: 8px; margin: 4px 0 14px; }
 
+/* ---- live captions (Translator ▸ Live) ---- */
+.live-toggle {
+  width: 100%; padding: 14px; border-radius: 12px; cursor: pointer;
+  font-family: var(--sans); font-size: 15px; font-weight: 700;
+  border: 1px solid var(--accent); background: var(--accent); color: #fdfbf7;
+}
+.live-toggle:active { transform: translateY(1px); }
+.live-toggle.on { background: #c23b2e; border-color: #c23b2e; }
+.live-tools { display: flex; gap: 8px; margin-top: 10px; flex-wrap: wrap; }
+/* the floating-window button matters most in a meeting — give it the row */
+.live-tools .live-float { flex: 1 1 100%; }
+.live-box {
+  margin-top: 12px; padding: 12px 14px; min-height: 190px; max-height: 330px;
+  overflow-y: auto; border: 1px solid var(--line-2); border-radius: var(--radius-sm);
+  background: var(--surface);
+}
+.live-line { font-size: 15px; line-height: 1.55; margin: 5px 0; }
+.live-line .t {
+  font-size: 10.5px; font-weight: 600; color: var(--faint);
+  margin-right: 8px; letter-spacing: 0.04em;
+}
+.live-interim { font-size: 15px; line-height: 1.55; margin: 5px 0; color: var(--soft); }
+/* red pulse on the Live subtab while the mic is open */
+.live-dot {
+  display: inline-block; width: 6px; height: 6px; border-radius: 50%;
+  background: #e04545; margin-left: 5px; vertical-align: 1.5px;
+  animation: live-pulse 1.4s ease-in-out infinite;
+}
+.subtab.on .live-dot { background: #fdfbf7; }
+@keyframes live-pulse { 50% { opacity: 0.35; } }
+
 /* ============ FX / Currency Calculator ============ */
 .fx-head { display: flex; align-items: baseline; justify-content: space-between; gap: 10px; }
 .fx-meta { font: 500 12px var(--sans); color: var(--soft); white-space: nowrap; }

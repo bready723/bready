@@ -17,6 +17,7 @@ import {
   startListening,
   micErrorMessage,
 } from '../lib/translate.js'
+import { startLiveListening, pipSupported } from '../lib/live.js'
 
 const AUTO_KEY = 'bready.autoT.v1'
 const loadAuto = () => {
@@ -42,6 +43,31 @@ const saveScript = (list) => {
     localStorage.setItem(SCRIPT_KEY, JSON.stringify(list))
   } catch (e) {
     /* quota — keep in memory only */
+  }
+}
+
+// Live captions (Zoom-meeting mode): every finished sentence lands here with a
+// clock time, and survives a reload — a dropped call must not eat the notes.
+const LIVE_KEY = 'bready.live.v1'
+const loadLive = () => {
+  try {
+    return JSON.parse(localStorage.getItem(LIVE_KEY)) || []
+  } catch (e) {
+    return []
+  }
+}
+const saveLive = (list) => {
+  try {
+    localStorage.setItem(LIVE_KEY, JSON.stringify(list))
+  } catch (e) {
+    /* quota — keep in memory only */
+  }
+}
+const liveStamp = (ts) => {
+  try {
+    return new Date(ts).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })
+  } catch (e) {
+    return ''
   }
 }
 
@@ -101,6 +127,14 @@ export default function Translator({ country, onCountry }) {
   const [pasteMsg, setPasteMsg] = useState('')
   const [copyMsg, setCopyMsg] = useState('')
   const [script, setScript] = useState(loadScript)
+  const [liveOn, setLiveOn] = useState(false)
+  const [liveInterim, setLiveInterim] = useState('')
+  const [liveLines, setLiveLines] = useState(loadLive)
+  const [liveMsg, setLiveMsg] = useState('')
+  const [pipOn, setPipOn] = useState(false)
+  const liveRef = useRef(null)
+  const liveBoxRef = useRef(null)
+  const pipRef = useRef(null)
   const recRef = useRef(null)
   const micTimer = useRef(null)
   const reqRef = useRef(0)
@@ -153,6 +187,136 @@ export default function Translator({ country, onCountry }) {
     setScript([])
     saveScript([])
   }
+
+  // ---- Live captions ----
+  function startLive() {
+    setLiveMsg('')
+    liveRef.current = startLiveListening({
+      lang: inputById(inputLang).bcp,
+      onFinal: (line) => {
+        setLiveLines((prev) => {
+          const next = [...prev, { ts: Date.now(), text: line }].slice(-1000)
+          saveLive(next)
+          return next
+        })
+      },
+      onInterim: setLiveInterim,
+      onState: setLiveOn,
+      onError: (e) => setLiveMsg(micErrorMessage(e)),
+    })
+  }
+  function stopLive() {
+    liveRef.current && liveRef.current.stop()
+    liveRef.current = null
+  }
+  function liveToText() {
+    return liveLines.map((l) => `[${liveStamp(l.ts)}] ${l.text}`).join('\n')
+  }
+  function copyLive() {
+    if (navigator.clipboard) navigator.clipboard.writeText(liveToText()).catch(() => {})
+  }
+  function downloadLive() {
+    const blob = new Blob([liveToText()], { type: 'text/plain;charset=utf-8' })
+    const url = URL.createObjectURL(blob)
+    const a = document.createElement('a')
+    a.href = url
+    a.download = 'bready-live-transcript.txt'
+    document.body.appendChild(a)
+    a.click()
+    document.body.removeChild(a)
+    setTimeout(() => URL.revokeObjectURL(url), 0)
+  }
+  function clearLive() {
+    setLiveLines([])
+    saveLive([])
+  }
+
+  // The always-on-top mini window (Chrome only). It gets its own tiny dark
+  // page — captions read best white-on-dark when floating over a Zoom call.
+  async function openPip() {
+    try {
+      const win = await window.documentPictureInPicture.requestWindow({ width: 440, height: 230 })
+      pipRef.current = win
+      const doc = win.document
+      doc.title = 'bready · live'
+      const style = doc.createElement('style')
+      style.textContent = `
+        html, body { margin: 0; height: 100%; background: #10151c; color: #f2efe9;
+          font: 14px/1.5 -apple-system, 'Instrument Sans', system-ui, sans-serif; }
+        body { display: flex; flex-direction: column; }
+        .bar { flex: 0 0 auto; display: flex; align-items: center; gap: 7px;
+          padding: 7px 12px; font-size: 11px; font-weight: 700; letter-spacing: .06em;
+          text-transform: uppercase; color: #8b93a1; border-bottom: 1px solid #222a35; }
+        #dot { width: 8px; height: 8px; border-radius: 50%; background: #e04545; }
+        #cap { flex: 1 1 auto; overflow-y: auto; padding: 10px 14px 12px; }
+        #cap .f { font-size: 16.5px; line-height: 1.5; margin: 5px 0; }
+        #cap .i { font-size: 16.5px; line-height: 1.5; margin: 5px 0; color: #8b93a1; }
+        #cap .empty { color: #8b93a1; font-size: 13px; }`
+      doc.head.appendChild(style)
+      const bar = doc.createElement('div')
+      bar.className = 'bar'
+      const dot = doc.createElement('span')
+      dot.id = 'dot'
+      bar.appendChild(dot)
+      bar.appendChild(doc.createTextNode('bready · live captions'))
+      const cap = doc.createElement('div')
+      cap.id = 'cap'
+      doc.body.appendChild(bar)
+      doc.body.appendChild(cap)
+      win.addEventListener('pagehide', () => {
+        pipRef.current = null
+        setPipOn(false)
+      })
+      setPipOn(true)
+    } catch (e) {
+      setLiveMsg('Couldn’t open the floating window in this browser.')
+    }
+  }
+
+  // Newest caption stays in view.
+  useEffect(() => {
+    if (liveBoxRef.current) liveBoxRef.current.scrollTop = liveBoxRef.current.scrollHeight
+  }, [liveLines, liveInterim])
+
+  // Mirror the captions into the floating window whenever they change.
+  useEffect(() => {
+    const win = pipRef.current
+    if (!win || win.closed) return
+    const doc = win.document
+    const cap = doc.getElementById('cap')
+    if (!cap) return
+    cap.textContent = ''
+    if (liveLines.length === 0 && !liveInterim) {
+      const d = doc.createElement('div')
+      d.className = 'empty'
+      d.textContent = liveOn ? 'Listening…' : 'Press Start in bready to begin.'
+      cap.appendChild(d)
+    }
+    for (const l of liveLines.slice(-8)) {
+      const d = doc.createElement('div')
+      d.className = 'f'
+      d.textContent = l.text
+      cap.appendChild(d)
+    }
+    if (liveInterim) {
+      const d = doc.createElement('div')
+      d.className = 'i'
+      d.textContent = liveInterim
+      cap.appendChild(d)
+    }
+    const dot = doc.getElementById('dot')
+    if (dot) dot.style.background = liveOn ? '#e04545' : '#3a4453'
+    cap.scrollTop = cap.scrollHeight
+  }, [liveLines, liveInterim, liveOn, pipOn])
+
+  // Leaving the Translator screen entirely: release the mic, close the window.
+  useEffect(
+    () => () => {
+      liveRef.current && liveRef.current.stop()
+      if (pipRef.current && !pipRef.current.closed) pipRef.current.close()
+    },
+    [],
+  )
 
   useEffect(() => {
     if (isCurated || auto[dest.lang]) return
@@ -468,6 +632,9 @@ export default function Translator({ country, onCountry }) {
         <button className={`subtab ${sub === 'script' ? 'on' : ''}`} onClick={() => setSub('script')}>
           <span className="subtab-lbl">Script</span>
         </button>
+        <button className={`subtab ${sub === 'live' ? 'on' : ''}`} onClick={() => setSub('live')}>
+          <span className="subtab-lbl">Live{liveOn && <span className="live-dot" />}</span>
+        </button>
       </div>
 
       {/* ---------- TRANSLATE ---------- */}
@@ -617,6 +784,69 @@ export default function Translator({ country, onCountry }) {
               </div>
             )
           })}
+        </div>
+      )}
+
+      {/* ---------- LIVE (meeting captions) ---------- */}
+      {sub === 'live' && (
+        <div style={{ marginTop: 14 }}>
+          {!voiceOk || isIOS ? (
+            <p className="muted" style={{ fontSize: 13, lineHeight: 1.6, margin: '4px 2px 0' }}>
+              Live captions need a computer — open bready in <strong>Chrome on your Mac</strong>.
+              (iPhone can’t keep the mic open for a whole call.)
+            </p>
+          ) : (
+            <>
+              <button className={`live-toggle${liveOn ? ' on' : ''}`} onClick={liveOn ? stopLive : startLive}>
+                {liveOn ? '■  Stop listening' : '●  Start listening'}
+              </button>
+
+              <div className="live-tools">
+                {pipSupported() && (
+                  <button className="btn outline row live-float" onClick={openPip} disabled={pipOn}>
+                    {pipOn ? 'Floating window open' : 'Float over Zoom ↗'}
+                  </button>
+                )}
+                {liveLines.length > 0 && (
+                  <>
+                    <button className="btn outline row" onClick={copyLive}>Copy all</button>
+                    <button className="btn outline row" onClick={downloadLive}>Download .txt</button>
+                    <button className="btn ghost row" onClick={clearLive}>Clear</button>
+                  </>
+                )}
+              </div>
+
+              {liveMsg && (
+                <p style={{ fontSize: 12.5, fontWeight: 600, color: 'var(--soft)', margin: '10px 2px 0', lineHeight: 1.5 }}>
+                  {liveMsg}
+                </p>
+              )}
+
+              <div className="live-box" ref={liveBoxRef}>
+                {liveLines.length === 0 && !liveInterim && (
+                  <p className="muted" style={{ fontSize: 13, lineHeight: 1.6, margin: 0 }}>
+                    {liveOn
+                      ? 'Listening… captions appear here as people speak.'
+                      : 'Press Start, then everything the mic hears is written here — and kept, even through a reload.'}
+                  </p>
+                )}
+                {liveLines.map((l, i) => (
+                  <div key={i} className="live-line">
+                    <span className="t">{liveStamp(l.ts)}</span>
+                    {l.text}
+                  </div>
+                ))}
+                {liveInterim && <div className="live-interim">{liveInterim}</div>}
+              </div>
+
+              <p className="muted" style={{ fontSize: 12, lineHeight: 1.6, margin: '12px 2px 0' }}>
+                🔊 To caption the <strong>other side</strong> of a Zoom call, play their voice
+                through your Mac’s <strong>speakers</strong> — with headphones on, only your own
+                voice is heard. Captions pause on long silences and restart on their own; a word can
+                slip at the seam.
+              </p>
+            </>
+          )}
         </div>
       )}
 
