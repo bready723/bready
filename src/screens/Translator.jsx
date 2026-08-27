@@ -257,8 +257,8 @@ export default function Translator({ country, onCountry }) {
     saveLive([])
   }
 
-  // The always-on-top mini window (Chrome only). It gets its own tiny dark
-  // page — captions read best white-on-dark when floating over a Zoom call.
+  // The always-on-top mini window (Chrome only). It wears the brand blue —
+  // the same #1D5BCE as the buttons — so it reads as bready at a glance.
   async function openPip() {
     try {
       const win = await window.documentPictureInPicture.requestWindow({ width: 440, height: 230 })
@@ -267,17 +267,18 @@ export default function Translator({ country, onCountry }) {
       doc.title = 'bready · live'
       const style = doc.createElement('style')
       style.textContent = `
-        html, body { margin: 0; height: 100%; background: #10151c; color: #f2efe9;
+        html, body { margin: 0; height: 100%; background: #1D5BCE; color: #fff;
           font: 14px/1.5 -apple-system, 'Instrument Sans', system-ui, sans-serif; }
         body { display: flex; flex-direction: column; }
         .bar { flex: 0 0 auto; display: flex; align-items: center; gap: 7px;
           padding: 7px 12px; font-size: 11px; font-weight: 700; letter-spacing: .06em;
-          text-transform: uppercase; color: #8b93a1; border-bottom: 1px solid #222a35; }
+          text-transform: uppercase; color: rgba(255,255,255,0.75);
+          border-bottom: 1px solid rgba(255,255,255,0.28); }
         #dot { width: 8px; height: 8px; border-radius: 50%; background: #e04545; }
         #cap { flex: 1 1 auto; overflow-y: auto; padding: 10px 14px 12px; }
         #cap .f { font-size: 16.5px; line-height: 1.5; margin: 5px 0; }
-        #cap .i { font-size: 16.5px; line-height: 1.5; margin: 5px 0; color: #8b93a1; }
-        #cap .empty { color: #8b93a1; font-size: 13px; }`
+        #cap .i { font-size: 16.5px; line-height: 1.5; margin: 5px 0; color: rgba(255,255,255,0.62); }
+        #cap .empty { color: rgba(255,255,255,0.62); font-size: 13px; }`
       doc.head.appendChild(style)
       const bar = doc.createElement('div')
       bar.className = 'bar'
@@ -331,7 +332,7 @@ export default function Translator({ country, onCountry }) {
       cap.appendChild(d)
     }
     const dot = doc.getElementById('dot')
-    if (dot) dot.style.background = liveOn ? '#e04545' : '#3a4453'
+    if (dot) dot.style.background = liveOn ? '#e04545' : 'rgba(255,255,255,0.35)'
     cap.scrollTop = cap.scrollHeight
   }, [liveLines, liveInterim, liveOn, pipOn])
 
