@@ -872,10 +872,10 @@ export default function Translator({ country, onCountry }) {
               </div>
 
               <p className="muted" style={{ fontSize: 12, lineHeight: 1.6, margin: '12px 2px 0' }}>
-                🔊 To caption the <strong>other side</strong> of a Zoom call, play their voice
-                through your Mac’s <strong>speakers</strong> — with headphones on, only your own
-                voice is heard. Captions pause on long silences and restart on their own; a word can
-                slip at the seam.
+                🔊 🎧 For a Zoom call, use <strong>Caption Zoom audio</strong> — it listens to the
+                call itself, so earphones are fine. (<strong>Start listening</strong> uses the mic:
+                good for in-person rooms and dictation.) Captions pause on long silences and restart
+                on their own; a word can slip at the seam.
               </p>
             </>
           )}
