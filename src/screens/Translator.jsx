@@ -136,6 +136,7 @@ export default function Translator({ country, onCountry }) {
   const liveBoxRef = useRef(null)
   const liveStreamRef = useRef(null) // the screen share carrying Zoom's audio
   const pipRef = useRef(null)
+  const pipToggleRef = useRef(null) // what the mini window's button does right now
   const recRef = useRef(null)
   const micTimer = useRef(null)
   const reqRef = useRef(0)
@@ -207,10 +208,13 @@ export default function Translator({ country, onCountry }) {
       onError: (e) => setLiveMsg(micErrorMessage(e)),
     })
   }
-  function stopLive() {
+  function stopLive(opts) {
     liveRef.current && liveRef.current.stop()
     liveRef.current = null
-    if (liveStreamRef.current) {
+    // The mini window pauses instead of hanging up: keeping the share alive
+    // means its Start needs no new picker dialog (a picker can't be opened
+    // from there anyway — Chrome wants the click in the main window).
+    if (!(opts && opts.keepShare) && liveStreamRef.current) {
       liveStreamRef.current.getTracks().forEach((t) => t.stop())
       liveStreamRef.current = null
     }
@@ -257,6 +261,17 @@ export default function Translator({ country, onCountry }) {
     saveLive([])
   }
 
+  // The mini window's button: Stop pauses (share kept), Start resumes on the
+  // kept share — or the mic when there is none.
+  pipToggleRef.current = liveOn
+    ? () => stopLive({ keepShare: true })
+    : () => {
+        const kept =
+          liveStreamRef.current &&
+          liveStreamRef.current.getAudioTracks().find((t) => t.readyState === 'live')
+        startLive(kept || undefined)
+      }
+
   // The always-on-top mini window (Chrome only). It wears the brand blue —
   // the same #1D5BCE as the buttons — so it reads as bready at a glance.
   async function openPip() {
@@ -271,9 +286,14 @@ export default function Translator({ country, onCountry }) {
           font: 14px/1.5 -apple-system, 'Instrument Sans', system-ui, sans-serif; }
         body { display: flex; flex-direction: column; }
         .bar { flex: 0 0 auto; display: flex; align-items: center; gap: 7px;
-          padding: 7px 12px; font-size: 11px; font-weight: 700; letter-spacing: .06em;
+          padding: 6px 8px 6px 12px; font-size: 11px; font-weight: 700; letter-spacing: .06em;
           text-transform: uppercase; color: rgba(255,255,255,0.75);
           border-bottom: 1px solid rgba(255,255,255,0.28); }
+        #pipbtn { margin-left: auto; cursor: pointer; font: inherit; font-size: 11px;
+          letter-spacing: .06em; text-transform: uppercase; color: #fff;
+          background: rgba(255,255,255,0.16); border: 1px solid rgba(255,255,255,0.45);
+          border-radius: 999px; padding: 4px 14px; }
+        #pipbtn:active { background: rgba(255,255,255,0.3); }
         #dot { width: 8px; height: 8px; border-radius: 50%; background: #e04545; }
         #cap { flex: 1 1 auto; overflow-y: auto; padding: 10px 14px 12px; }
         #cap .f { font-size: 16.5px; line-height: 1.5; margin: 5px 0; }
@@ -286,6 +306,13 @@ export default function Translator({ country, onCountry }) {
       dot.id = 'dot'
       bar.appendChild(dot)
       bar.appendChild(doc.createTextNode('bready · live captions'))
+      const pipBtn = doc.createElement('button')
+      pipBtn.id = 'pipbtn'
+      pipBtn.textContent = 'Start'
+      pipBtn.addEventListener('click', () => {
+        pipToggleRef.current && pipToggleRef.current()
+      })
+      bar.appendChild(pipBtn)
       const cap = doc.createElement('div')
       cap.id = 'cap'
       doc.body.appendChild(bar)
@@ -333,6 +360,8 @@ export default function Translator({ country, onCountry }) {
     }
     const dot = doc.getElementById('dot')
     if (dot) dot.style.background = liveOn ? '#e04545' : 'rgba(255,255,255,0.35)'
+    const pipBtn = doc.getElementById('pipbtn')
+    if (pipBtn) pipBtn.textContent = liveOn ? 'Stop' : 'Start'
     cap.scrollTop = cap.scrollHeight
   }, [liveLines, liveInterim, liveOn, pipOn])
 
