@@ -614,8 +614,21 @@ textarea.input { resize: vertical; min-height: 88px; }
 .script-tools { display: flex; gap: 8px; margin: 4px 0 14px; }
 
 /* ---- live captions (Translator ▸ Live) ---- */
+/* The caption language lives here, not in the translator's From bar: a meeting
+   language is set once and should survive every swap made at a bakery counter. */
+.live-lang { display: flex; align-items: center; gap: 10px; margin-bottom: 12px; }
+.live-lang .lbl {
+  flex-shrink: 0; font: 600 11px var(--sans); letter-spacing: 0.1em;
+  text-transform: uppercase; color: var(--faint);
+}
+.live-lang-btn {
+  width: 100%; height: 40px; display: flex; align-items: center; justify-content: space-between;
+  gap: 7px; font-family: var(--sans); font-size: 14.5px; font-weight: 600;
+  padding: 0 12px; border: 1px solid var(--line-2); border-radius: 10px;
+  background: var(--surface); color: var(--ink); cursor: pointer; text-align: left;
+}
 .live-toggle {
-  width: 100%; padding: 14px; border-radius: 12px; cursor: pointer;
+  width: 100%; margin-top: 12px; padding: 14px; border-radius: 12px; cursor: pointer;
   font-family: var(--sans); font-size: 15px; font-weight: 700;
   border: 1px solid var(--accent); background: var(--accent); color: #fdfbf7;
 }

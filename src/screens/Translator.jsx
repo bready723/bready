@@ -71,6 +71,38 @@ const liveStamp = (ts) => {
   }
 }
 
+// The captions' own language, separate from the translator's From — swapping
+// languages at the bakery counter must not change what next week's meeting
+// listens for. Chrome cannot auto-detect: the language has to be set up front.
+const LIVE_LANG_KEY = 'bready.liveLang.v1'
+const loadLiveLang = () => {
+  try {
+    const id = localStorage.getItem(LIVE_LANG_KEY)
+    return INPUT_LANGS.some((l) => l.id === id) ? id : 'en'
+  } catch (e) {
+    return 'en'
+  }
+}
+
+// The floating window reopens at the size it was last dragged to.
+const PIP_SIZE_KEY = 'bready.pipSize.v1'
+const loadPipSize = () => {
+  try {
+    const s = JSON.parse(localStorage.getItem(PIP_SIZE_KEY))
+    if (s && s.w >= 260 && s.h >= 140) return { width: s.w, height: s.h }
+  } catch (e) {
+    /* fall through to the default */
+  }
+  return { width: 440, height: 230 }
+}
+const savePipSize = (w, h) => {
+  try {
+    localStorage.setItem(PIP_SIZE_KEY, JSON.stringify({ w, h }))
+  } catch (e) {
+    /* quota — next open falls back to the default */
+  }
+}
+
 // Small speak button with a per-section accent color.
 function Speak({ onClick, color }) {
   return (
@@ -131,6 +163,8 @@ export default function Translator({ country, onCountry }) {
   const [liveInterim, setLiveInterim] = useState('')
   const [liveLines, setLiveLines] = useState(loadLive)
   const [liveMsg, setLiveMsg] = useState('')
+  const [liveLang, setLiveLang] = useState(loadLiveLang)
+  const [liveLangOpen, setLiveLangOpen] = useState(false)
   const [pipOn, setPipOn] = useState(false)
   const liveRef = useRef(null)
   const liveBoxRef = useRef(null)
@@ -191,10 +225,10 @@ export default function Translator({ country, onCountry }) {
   }
 
   // ---- Live captions ----
-  function startLive(track) {
+  function startLive(track, langId) {
     setLiveMsg('')
     liveRef.current = startLiveListening({
-      lang: inputById(inputLang).bcp,
+      lang: inputById(langId || liveLang).bcp,
       track,
       onFinal: (line) => {
         setLiveLines((prev) => {
@@ -208,6 +242,16 @@ export default function Translator({ country, onCountry }) {
       onError: (e) => setLiveMsg(micErrorMessage(e)),
     })
   }
+  // The screen share's audio track, if one is still running. Reusing it is what
+  // lets captions resume without Chrome asking to pick a screen all over again.
+  function keptTrack() {
+    return (
+      (liveStreamRef.current &&
+        liveStreamRef.current.getAudioTracks().find((t) => t.readyState === 'live')) ||
+      undefined
+    )
+  }
+
   function stopLive(opts) {
     liveRef.current && liveRef.current.stop()
     liveRef.current = null
@@ -239,6 +283,24 @@ export default function Translator({ country, onCountry }) {
       }
     }
   }
+  // Switching language mid-call restarts recognition on the same source, so the
+  // share survives and no picker appears. Chrome fixes a session's language at
+  // start(), so there is no way to change it without a restart.
+  function pickLiveLang(id) {
+    setLiveLang(id)
+    setLiveLangOpen(false)
+    try {
+      localStorage.setItem(LIVE_LANG_KEY, id)
+    } catch (e) {
+      /* quota — the choice still holds for this session */
+    }
+    if (liveRef.current) {
+      const track = keptTrack()
+      stopLive({ keepShare: true })
+      startLive(track, id)
+    }
+  }
+
   function liveToText() {
     return liveLines.map((l) => `[${liveStamp(l.ts)}] ${l.text}`).join('\n')
   }
@@ -265,18 +327,13 @@ export default function Translator({ country, onCountry }) {
   // kept share — or the mic when there is none.
   pipToggleRef.current = liveOn
     ? () => stopLive({ keepShare: true })
-    : () => {
-        const kept =
-          liveStreamRef.current &&
-          liveStreamRef.current.getAudioTracks().find((t) => t.readyState === 'live')
-        startLive(kept || undefined)
-      }
+    : () => startLive(keptTrack())
 
   // The always-on-top mini window (Chrome only). It wears the brand blue —
   // the same #1D5BCE as the buttons — so it reads as bready at a glance.
   async function openPip() {
     try {
-      const win = await window.documentPictureInPicture.requestWindow({ width: 440, height: 230 })
+      const win = await window.documentPictureInPicture.requestWindow(loadPipSize())
       pipRef.current = win
       const doc = win.document
       doc.title = 'bready · live'
@@ -317,6 +374,9 @@ export default function Translator({ country, onCountry }) {
       cap.id = 'cap'
       doc.body.appendChild(bar)
       doc.body.appendChild(cap)
+      win.addEventListener('resize', () => {
+        savePipSize(win.innerWidth, win.innerHeight)
+      })
       win.addEventListener('pagehide', () => {
         pipRef.current = null
         setPipOn(false)
@@ -854,6 +914,34 @@ export default function Translator({ country, onCountry }) {
             </p>
           ) : (
             <>
+              <div className="live-lang">
+                <span className="lbl">Listening in</span>
+                <div style={{ position: 'relative', flex: 1, minWidth: 0 }}>
+                  <button
+                    className="live-lang-btn"
+                    onClick={() => setLiveLangOpen((v) => !v)}
+                    aria-label="Choose the caption language"
+                  >
+                    <span style={{ overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>
+                      {inputById(liveLang).flag} {inputById(liveLang).label}
+                    </span>
+                    <Chevron />
+                  </button>
+                  {liveLangOpen && (
+                    <div className="dd-menu" style={{ maxHeight: 280, overflowY: 'auto' }}>
+                      {INPUT_LANGS.map((l) => (
+                        <button key={l.id} className="dd-item" onClick={() => pickLiveLang(l.id)}>
+                          {l.flag} {l.label}
+                        </button>
+                      ))}
+                    </div>
+                  )}
+                </div>
+              </div>
+              <p className="muted" style={{ fontSize: 11.5, margin: '6px 2px 0' }}>
+                Pick this before the call — Chrome can’t detect the language on its own.
+              </p>
+
               <button className={`live-toggle${liveOn ? ' on' : ''}`} onClick={liveOn ? stopLive : () => startLive()}>
                 {liveOn ? '■  Stop listening' : '●  Start listening'}
               </button>
@@ -861,12 +949,12 @@ export default function Translator({ country, onCountry }) {
               <div className="live-tools">
                 {!liveOn && systemCaptureSupported() && (
                   <button className="btn outline row live-float" onClick={startZoomCapture}>
-                    🎧 Caption Zoom audio (beta)
+                    🎧 Caption meeting audio (beta)
                   </button>
                 )}
                 {pipSupported() && (
                   <button className="btn outline row live-float" onClick={openPip} disabled={pipOn}>
-                    {pipOn ? 'Floating window open' : 'Float over Zoom ↗'}
+                    {pipOn ? 'Floating window open' : 'Float over the meeting ↗'}
                   </button>
                 )}
                 {liveLines.length > 0 && (
@@ -902,10 +990,15 @@ export default function Translator({ country, onCountry }) {
               </div>
 
               <p className="muted" style={{ fontSize: 12, lineHeight: 1.6, margin: '12px 2px 0' }}>
-                🔊 🎧 For a Zoom call, use <strong>Caption Zoom audio</strong> — it listens to the
-                call itself, so earphones are fine. (<strong>Start listening</strong> uses the mic:
-                good for in-person rooms and dictation.) Captions pause on long silences and restart
-                on their own; a word can slip at the seam.
+                🎧 For any meeting — Zoom, Google Meet, Slack huddle, Teams — use{' '}
+                <strong>Caption meeting audio</strong>. It listens to whatever your Mac is playing,
+                so earphones are fine. (<strong>Start listening</strong> uses the mic instead: good
+                for in-person rooms and dictation.)
+              </p>
+              <p className="muted" style={{ fontSize: 12, lineHeight: 1.6, margin: '8px 2px 0' }}>
+                ↗ The floating window sits on top of every app — drag it beside the meeting and pull
+                a corner to resize; it reopens at that size next time. Captions pause on long
+                silences and restart on their own, so a word can slip at the seam.
               </p>
             </>
           )}
