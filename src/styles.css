@@ -923,3 +923,7 @@ textarea.input { resize: vertical; min-height: 88px; }
   color: #fdfbf7; background: #c8382b; border-radius: 999px;
   font: 600 12px var(--sans); font-size: 12px; place-items: center;
 }
+.listen-of { font-size: 12px; color: var(--soft); margin: -8px 0 10px; }
+/* the jump list inside one file sits tighter than the file list */
+.listen-marks .listen-row { padding: 10px 0; }
+.listen-marks .listen-name { font-size: 14px; }

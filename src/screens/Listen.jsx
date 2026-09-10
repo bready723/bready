@@ -16,6 +16,8 @@ import {
   savePosition,
   clearPosition,
   keepStored,
+  readChapters,
+  chapterAt,
   SPEEDS,
   SKIP_SECONDS,
   RESUME_MIN,
@@ -49,6 +51,7 @@ export default function Listen({ active = true }) {
   const lastSave = useRef(0)
   const armTimer = useRef(null)
   const scrubRef = useRef(false)
+  const chaptersRef = useRef([])
 
   const [supported] = useState(hasIndexedDb)
   const [ready, setReady] = useState(false)
@@ -60,6 +63,7 @@ export default function Listen({ active = true }) {
   const [speed, setSpeed] = useState(1)
   const [repeat, setRepeat] = useState(true)
   const [positions, setPositions] = useState(loadPositions)
+  const [chapters, setChapters] = useState([]) // jump points inside one long file
   const [scrub, setScrub] = useState(null) // slider value while a drag is in flight
   const [armed, setArmed] = useState(null) // track id whose × was tapped once
   const [msg, setMsg] = useState(null)
@@ -88,6 +92,11 @@ export default function Listen({ active = true }) {
     [],
   )
 
+  const setChapterList = useCallback((list) => {
+    chaptersRef.current = list
+    setChapters(list)
+  }, [])
+
   // Point the element at a URL and start it, with no await in between.
   const attach = useCallback((track, url, { play }) => {
     const a = audioRef.current
@@ -108,6 +117,17 @@ export default function Listen({ active = true }) {
     if (play) a.play().catch(() => setPlaying(false))
   }, [])
 
+  // Read the chapter marks after playback has started, never before: this is the
+  // one thing that must not sit between `ended` and `play()`.
+  const loadChapters = useCallback(
+    async (track, blob) => {
+      setChapterList([])
+      const list = await readChapters(blob)
+      if (trackRef.current && trackRef.current.id === track.id && list.length > 1) setChapterList(list)
+    },
+    [setChapterList],
+  )
+
   const load = useCallback(
     async (track, { play = true } = {}) => {
       if (!audioRef.current || !track) return
@@ -117,6 +137,9 @@ export default function Listen({ active = true }) {
       if (ahead && ahead.id === track.id) {
         aheadRef.current = null
         attach(track, ahead.url, { play })
+        getBlob(track.id)
+          .then((blob) => blob && loadChapters(track, blob))
+          .catch(() => {})
         return
       }
       try {
@@ -126,11 +149,12 @@ export default function Listen({ active = true }) {
           return
         }
         attach(track, URL.createObjectURL(blob), { play })
+        loadChapters(track, blob)
       } catch (e) {
         setMsg('Could not open that file.')
       }
     },
-    [attach],
+    [attach, loadChapters],
   )
 
   // Keep the following chapter warm.
@@ -232,6 +256,13 @@ export default function Listen({ active = true }) {
 
   function goPrev() {
     const a = audioRef.current
+    const marks = chaptersRef.current
+    if (a && trackRef.current && marks.length > 1) {
+      const i = chapterAt(marks, a.currentTime)
+      // Like a car stereo: a few seconds in, previous means "restart this one".
+      if (a.currentTime - marks[i].start > 3) return seekTo(marks[i].start)
+      if (i > 0) return seekTo(marks[i - 1].start)
+    }
     // Like a car stereo: past the first few seconds, previous means restart.
     if (a && trackRef.current && a.currentTime > 3) {
       seekTo(0)
@@ -242,6 +273,12 @@ export default function Listen({ active = true }) {
   }
 
   function goNext() {
+    const a = audioRef.current
+    const marks = chaptersRef.current
+    if (a && trackRef.current && marks.length > 1) {
+      const i = chapterAt(marks, a.currentTime)
+      if (i + 1 < marks.length) return seekTo(marks[i + 1].start)
+    }
     const n = nextTrack(tracks, trackRef.current && trackRef.current.id, { repeat })
     if (n) load(n, { play: playing || !trackRef.current })
   }
@@ -258,16 +295,24 @@ export default function Listen({ active = true }) {
 
   // The lock screen reads this. Keyed to the track, so the Now Playing card is
   // not rebuilt several times a second by the elapsed-time updates.
+  const here = chapters.length > 1 ? chapterAt(chapters, elapsed) : -1
+  const hereTitle = here >= 0 ? chapters[here].title : null
   useEffect(() => {
     if (typeof navigator === 'undefined' || !('mediaSession' in navigator)) return
     try {
       navigator.mediaSession.metadata = current
-        ? new window.MediaMetadata({ title: titleFor(current.name), artist: 'bready · Listen', album: 'Listen' })
+        ? new window.MediaMetadata({
+            title: hereTitle || titleFor(current.name),
+            artist: hereTitle ? titleFor(current.name) : 'bready · Listen',
+            album: 'Listen',
+          })
         : null
     } catch (e) {
       /* older browsers */
     }
-  }, [current])
+    // keyed to the chapter, so the Now Playing card is rebuilt eight times in an
+    // hour rather than four times a second
+  }, [current, hereTitle])
 
   // Handlers register once and call through a ref, so they always run the latest
   // closures without being torn down and rebuilt on every render.
@@ -380,8 +425,9 @@ export default function Listen({ active = true }) {
       <section className="card listen-now" aria-label="Now playing">
         <div className="listen-label">Now playing</div>
         <div className="listen-track">
-          {current ? titleFor(current.name) : tracks.length ? 'Tap play to start' : 'Nothing yet'}
+          {current ? hereTitle || titleFor(current.name) : tracks.length ? 'Tap play to start' : 'Nothing yet'}
         </div>
+        {current && hereTitle && <div className="listen-of">{titleFor(current.name)}</div>}
         <input
           className="listen-seek"
           type="range"
@@ -444,8 +490,33 @@ export default function Listen({ active = true }) {
         </div>
       </section>
 
+      {chapters.length > 1 && (
+        <>
+          <div className="listen-head">
+            <span className="listen-label">In this file</span>
+          </div>
+          <ul className="listen-list listen-marks">
+            {chapters.map((c, i) => (
+              <li key={c.start} className={i === here ? 'on' : ''}>
+                <button
+                  className="listen-row"
+                  onClick={() => seekTo(c.start)}
+                  aria-current={i === here ? 'true' : undefined}
+                >
+                  <span className="num">{i + 1}</span>
+                  <span className="listen-name">
+                    {c.title.replace(/^\d+\.\s*/, '')}
+                    <small>{formatTime(c.start)}</small>
+                  </span>
+                </button>
+              </li>
+            ))}
+          </ul>
+        </>
+      )}
+
       <div className="listen-head">
-        <span className="listen-label">Chapters</span>
+        <span className="listen-label">{chapters.length > 1 ? 'Files' : 'Chapters'}</span>
         <button className="listen-add" onClick={() => fileRef.current && fileRef.current.click()} disabled={!supported}>
           Add audio
         </button>

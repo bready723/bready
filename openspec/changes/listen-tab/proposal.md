@@ -21,6 +21,9 @@ A fifth tab, **Listen**.
 - **Lock screen**: the Media Session API exposes title and transport controls, so
   the phone's lock screen and earbuds control playback.
 - **Remove**: two taps (× then Remove), no browser dialogs.
+- **Chapters**: one long file joined from parts carries `chpl` marks. HTML5 audio
+  ignores them, so they are parsed out of the file's header and shown as jump
+  points; next/previous then move between chapters rather than between files.
 - The player stays mounted once opened, so switching tabs does not stop the audio.
 
 ## Non-goals

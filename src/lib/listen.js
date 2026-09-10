@@ -231,3 +231,71 @@ export async function removeTrack(id) {
     db.close()
   }
 }
+
+// ---- chapters inside a single long file ----
+// An .m4a joined from parts carries a Nero-style `chpl` list in its `udta` atom.
+// HTML5 audio ignores it, so it is read here and turned into jump points: one
+// 49-minute file then behaves like the eight files it was made from.
+//
+// chpl payload: 4 bytes version+flags, 4 reserved, 1 count, then per chapter an
+// 8-byte big-endian start in 100-nanosecond units, a 1-byte title length, and
+// that many UTF-8 bytes.
+const CHPL_SCAN_BYTES = 2 * 1024 * 1024 // the atom sits in the header, before the audio
+
+export function parseChapters(buffer) {
+  try {
+    const bytes = new Uint8Array(buffer)
+    // find the 'chpl' fourcc
+    let at = -1
+    for (let i = 0; i + 3 < bytes.length; i++) {
+      if (bytes[i] === 0x63 && bytes[i + 1] === 0x68 && bytes[i + 2] === 0x70 && bytes[i + 3] === 0x6c) {
+        at = i + 4
+        break
+      }
+    }
+    if (at < 0) return []
+    const view = new DataView(bytes.buffer, bytes.byteOffset, bytes.byteLength)
+    if (at + 9 > bytes.length) return []
+    const count = bytes[at + 8]
+    if (!count || count > 512) return []
+    let p = at + 9
+    const decoder = new TextDecoder()
+    const out = []
+    for (let i = 0; i < count; i++) {
+      if (p + 9 > bytes.length) return out
+      // start is 100ns units; a Number is exact well past any real running time
+      const start = Number(view.getBigUint64(p)) / 10_000_000
+      p += 8
+      const len = bytes[p]
+      p += 1
+      if (p + len > bytes.length) return out
+      const title = decoder.decode(bytes.subarray(p, p + len))
+      p += len
+      if (Number.isFinite(start) && start >= 0) out.push({ start, title })
+    }
+    return out
+  } catch (e) {
+    return []
+  }
+}
+
+export async function readChapters(blob) {
+  try {
+    if (!blob || typeof blob.slice !== 'function') return []
+    const head = blob.slice(0, Math.min(CHPL_SCAN_BYTES, blob.size))
+    return parseChapters(await head.arrayBuffer())
+  } catch (e) {
+    return []
+  }
+}
+
+// Which chapter a moment belongs to; -1 when there are none.
+export function chapterAt(chapters, seconds) {
+  if (!chapters || !chapters.length) return -1
+  let i = -1
+  for (let k = 0; k < chapters.length; k++) {
+    if (chapters[k].start <= seconds + 0.25) i = k
+    else break
+  }
+  return i === -1 ? 0 : i
+}

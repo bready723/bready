@@ -5,9 +5,12 @@
 - [x] 1.4 `src/components/Icons.jsx`: IconListen, IconPlay, IconPause, IconBack15, IconFwd15, IconPrev, IconNext.
 - [x] 1.5 `src/styles.css`: `.listen-*` rules on the existing tokens.
 
+- [x] 1.6 Read `chpl` chapter marks off a joined file; jump list, chapter-aware next/previous, chapter title on the lock screen.
+
 ## 2. Tests
 - [x] 2.1 `src/lib/listen.test.js`: names, ordering, next/prev with repeat, time formatting, positions round-trip, file filter.
-- [x] 2.2 Coverage gate (`npm run test:coverage`) passes.
+- [x] 2.2 Chapter parsing: real atom, non-ASCII titles, truncated/garbage input, chapterAt boundaries.
+- [x] 2.3 Coverage gate (`npm run test:coverage`) passes.
 
 ## 3. Verify
 - [x] 3.1 `npm test`, `npm run build`.

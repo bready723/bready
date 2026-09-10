@@ -1,6 +1,8 @@
 import { describe, it, expect } from 'vitest'
 import {
   keepStored,
+  parseChapters,
+  chapterAt,
   parseName,
   titleFor,
   sortTracks,
@@ -157,5 +159,65 @@ describe('keepStored', () => {
   })
   it('never throws out to the caller', async () => {
     expect(await withNavigator({ persisted: async () => { throw new Error('x') } }, keepStored)).toBe(true)
+  })
+})
+
+// A minimal `chpl` atom, built the way ffmpeg writes one.
+function chpl(marks) {
+  const enc = new TextEncoder()
+  const titles = marks.map((m) => enc.encode(m.title))
+  const size = 9 + titles.reduce((n, t) => n + 9 + t.length, 0)
+  const b = new Uint8Array(4 + size)
+  b.set(enc.encode('chpl'), 0)
+  const v = new DataView(b.buffer)
+  v.setUint32(4, 0x01000000)
+  v.setUint32(8, 0)
+  b[12] = marks.length
+  let p = 13
+  marks.forEach((m, i) => {
+    v.setBigUint64(p, BigInt(Math.round(m.start * 10_000_000)))
+    p += 8
+    b[p] = titles[i].length
+    p += 1
+    b.set(titles[i], p)
+    p += titles[i].length
+  })
+  return b.buffer
+}
+
+describe('chapters inside one file', () => {
+  const marks = [
+    { start: 0, title: '1. The opening' },
+    { start: 289.1, title: '2. The middle' },
+    { start: 2705.4, title: '3. The end' },
+  ]
+
+  it('reads a chpl atom back', () => {
+    const got = parseChapters(chpl(marks))
+    expect(got.map((c) => c.title)).toEqual(['1. The opening', '2. The middle', '3. The end'])
+    expect(got[1].start).toBeCloseTo(289.1, 3)
+    expect(got[2].start).toBeCloseTo(2705.4, 3)
+  })
+  it('keeps non-ASCII titles intact', () => {
+    expect(parseChapters(chpl([{ start: 0, title: 'Café · 크루아상' }]))[0].title).toBe('Café · 크루아상')
+  })
+  it('returns nothing rather than throwing on junk', () => {
+    expect(parseChapters(new Uint8Array([1, 2, 3, 4]).buffer)).toEqual([])
+    expect(parseChapters(new ArrayBuffer(0))).toEqual([])
+    // a chpl header that claims more chapters than the bytes hold
+    const truncated = chpl(marks).slice(0, 20)
+    expect(Array.isArray(parseChapters(truncated))).toBe(true)
+  })
+
+  it('locates the chapter a moment belongs to', () => {
+    expect(chapterAt(marks, 0)).toBe(0)
+    expect(chapterAt(marks, 288)).toBe(0)
+    expect(chapterAt(marks, 289.1)).toBe(1)
+    expect(chapterAt(marks, 1000)).toBe(1)
+    expect(chapterAt(marks, 99999)).toBe(2)
+  })
+  it('is -1 when a file has no chapters', () => {
+    expect(chapterAt([], 10)).toBe(-1)
+    expect(chapterAt(null, 10)).toBe(-1)
   })
 })
