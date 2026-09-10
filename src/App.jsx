@@ -4,11 +4,12 @@ import Rankings from './screens/Rankings.jsx'
 import Translator from './screens/Translator.jsx'
 import Explore from './screens/Explore.jsx'
 import FX from './screens/FX.jsx'
+import Listen from './screens/Listen.jsx'
 import LogVisit from './screens/LogVisit.jsx'
 import BakeryDetail from './screens/BakeryDetail.jsx'
 import DiscoverDetail from './screens/DiscoverDetail.jsx'
 import SignIn from './screens/SignIn.jsx'
-import { IconRank, IconGlobe, IconExplore, IconFx } from './components/Icons.jsx'
+import { IconRank, IconGlobe, IconExplore, IconFx, IconListen } from './components/Icons.jsx'
 import { onAuthChange, isCloudConfigured } from './lib/auth.js'
 import { reconcileOnSignIn, pushChanges, markSynced, syncPhotos, resolvePhotos, explainCloudError } from './lib/cloud.js'
 
@@ -18,6 +19,7 @@ const TAB_COLORS = {
   rankings: ['#1AA7E8', 'rgba(26,167,232,0.55)'],
   translate: ['#7E36C9', 'rgba(126,54,201,0.55)'],
   fx: ['#B5299E', 'rgba(181,41,158,0.55)'],
+  listen: ['#5B3FD6', 'rgba(91,63,214,0.55)'],
   explore: ['#A9702E', 'rgba(169,112,46,0.55)'],
 }
 
@@ -41,6 +43,9 @@ export default function App() {
   const stateRef = useRef(state) // latest state, readable from async callbacks
   const syncedFor = useRef(null) // user id we have already reconciled for
   const [tab, setTab] = useState('rankings')
+  // Listen mounts on first open and then stays mounted (hidden), so leaving the
+  // tab does not stop the audio.
+  const [listenOpened, setListenOpened] = useState(false)
   const [logging, setLogging] = useState(false)
   const [prefill, setPrefill] = useState(null) // { name, area } when logging from Want-to-try
   const [detailId, setDetailId] = useState(null)
@@ -263,6 +268,7 @@ export default function App() {
       {tab === 'fx' && (
         <FX currency={state.fxCurrency} onCurrency={(fxCurrency) => update({ fxCurrency })} />
       )}
+      {listenOpened && <Listen active={tab === 'listen'} />}
 
       {showSignIn && (
         <SignIn user={user} onClose={() => setShowSignIn(false)} onSignedOut={() => setUser(null)} />
@@ -295,6 +301,18 @@ export default function App() {
           title="FX"
         >
           <IconFx />
+        </button>
+        <button
+          className={tab === 'listen' ? 'active' : ''}
+          style={{ color: tc('listen') }}
+          onClick={() => {
+            setListenOpened(true)
+            setTab('listen')
+          }}
+          aria-label="Listen"
+          title="Listen"
+        >
+          <IconListen />
         </button>
         <button
           className={tab === 'explore' ? 'active' : ''}

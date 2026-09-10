@@ -862,3 +862,64 @@ textarea.input { resize: vertical; min-height: 88px; }
   font-variant-numeric: tabular-nums; }
 .tip-row.total { margin-top: 8px; color: #fff; }
 .tip-row.total b { font-size: 30px; line-height: 1.1; }
+
+/* ---- Listen (local audio shelf) ---- */
+.listen-sub { color: var(--soft); font-size: 13px; margin: 6px 0 14px; }
+.listen-now { padding: 17px 18px 15px; }
+.listen-label { font: 600 10.5px var(--sans); letter-spacing: 0.12em; text-transform: uppercase; color: var(--ink); }
+.listen-track {
+  font-family: var(--display); font-weight: 500; font-size: 24px; line-height: 1.15; color: var(--ink);
+  margin: 8px 0 12px; min-height: 28px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
+}
+/* the native track is ~4px tall; the padding is what makes it a scrub target */
+.listen-seek { width: 100%; margin: 0; padding: 14px 0; accent-color: var(--accent); }
+.listen-seek:disabled { opacity: 0.45; }
+.listen-times {
+  display: flex; justify-content: space-between; margin-top: -2px;
+  font-size: 12px; color: var(--soft); font-variant-numeric: tabular-nums;
+}
+.listen-controls { display: flex; align-items: center; justify-content: space-between; margin: 12px 0 4px; }
+.listen-controls button {
+  width: 48px; height: 48px; border: 0; border-radius: 50%; background: none; color: var(--ink);
+  display: grid; place-items: center; cursor: pointer;
+}
+.listen-controls button svg { width: 26px; height: 26px; }
+.listen-controls button:disabled { color: var(--faint); cursor: default; }
+.listen-controls .listen-play { width: 64px; height: 64px; background: var(--accent); color: #fdfbf7; }
+.listen-controls .listen-play svg { width: 30px; height: 30px; }
+.listen-controls .listen-play:disabled { background: var(--line-2); color: var(--soft); }
+.listen-opts { margin-top: 10px; }
+.listen-opts .chip { min-height: 44px; }
+.listen-head { display: flex; align-items: center; justify-content: space-between; margin: 22px 0 6px; }
+.listen-add {
+  border: 0; border-radius: 999px; padding: 9px 16px; min-height: 44px; cursor: pointer;
+  font: 600 13px var(--sans); background: var(--accent); color: #fdfbf7;
+}
+.listen-add:disabled { background: var(--line-2); }
+.listen-empty { color: var(--ink-2); font-size: 14px; line-height: 1.45; margin-top: 8px; }
+.listen-msg { font-size: 13px; color: var(--ink-2); margin: 6px 0 0; }
+.listen-list { list-style: none; margin: 0; padding: 0; }
+.listen-list li { display: flex; align-items: center; border-bottom: 1px solid var(--line); }
+.listen-row {
+  flex: 1; min-width: 0; display: flex; align-items: center; gap: 12px; padding: 13px 0;
+  border: 0; background: none; text-align: left; color: var(--ink); font: inherit; cursor: pointer;
+}
+.listen-row .num {
+  width: 22px; flex-shrink: 0; text-align: center;
+  font-family: var(--display); font-style: italic; font-size: 15px; color: var(--faint);
+}
+.listen-list li.on .listen-row .num { color: var(--accent); }
+.listen-list li.on .listen-name { color: var(--accent); }
+.listen-name { flex: 1; min-width: 0; font-size: 15px; font-weight: 500; overflow-wrap: anywhere; }
+.listen-name small { display: block; color: var(--soft); font-size: 12px; font-weight: 400; margin-top: 2px; }
+.listen-x {
+  flex-shrink: 0; border: 0; background: none; color: var(--soft); cursor: pointer;
+  font-size: 22px; line-height: 1; padding: 0;
+  /* fixed width in both states, so arming Remove does not re-wrap the title;
+     the glyph sits at the list edge, where the Remove pill also ends */
+  min-width: 78px; min-height: 44px; display: grid; place-items: center end;
+}
+.listen-x.arm {
+  color: #fdfbf7; background: #c8382b; border-radius: 999px;
+  font: 600 12px var(--sans); font-size: 12px; place-items: center;
+}
