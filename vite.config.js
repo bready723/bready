@@ -18,6 +18,15 @@ export default defineConfig({
         clientsClaim: true,
         skipWaiting: true,
         cleanupOutdatedCaches: true,
+        // Quiz photos (~380) are not precached: each one is cached the first
+        // time it is shown, so the app update stays small and replays work offline.
+        runtimeCaching: [
+          {
+            urlPattern: ({ url }) => url.pathname.startsWith('/bready/quiz/'),
+            handler: 'CacheFirst',
+            options: { cacheName: 'quiz-photos', expiration: { maxEntries: 450 } },
+          },
+        ],
       },
       includeAssets: ['icon-192.png', 'icon-512.png', 'icon-maskable-512.png'],
       manifest: {
@@ -56,6 +65,12 @@ export default defineConfig({
           lines: 70,
         },
         'src/lib/calculator.js': {
+          statements: 90,
+          branches: 90,
+          functions: 90,
+          lines: 90,
+        },
+        'src/lib/quiz.js': {
           statements: 90,
           branches: 90,
           functions: 90,

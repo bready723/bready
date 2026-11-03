@@ -93,6 +93,17 @@ export function IconListen(props) {
   )
 }
 
+export function IconQuiz(props) {
+  // a face with a question mark: who is this?
+  return (
+    <svg {...base} strokeWidth="1.9" {...props}>
+      <circle cx="12" cy="12" r="9" />
+      <path d="M9.6 9.4a2.5 2.5 0 0 1 4.8.9c0 1.7-2.4 2.1-2.4 3.7" />
+      <path d="M12 17.2h.01" />
+    </svg>
+  )
+}
+
 export function IconPlay(props) {
   return (
     <svg {...base} fill="currentColor" stroke="none" {...props}>
