@@ -1062,8 +1062,8 @@ textarea.input { resize: vertical; min-height: 88px; }
 .q-progress { flex: 1; height: 7px; border-radius: 99px; background: rgba(27,20,48,.09); box-shadow: inset 0 1px 2px rgba(26,14,60,.15); overflow: hidden; }
 .q-progress i { display: block; height: 100%; border-radius: 99px; background: linear-gradient(90deg, #1aa7e8, #5b3fd6, #e0218a); transition: width .45s cubic-bezier(.2,.8,.2,1); }
 .q-quit {
-  appearance: none; border: 1px solid rgba(255,255,255,.95); cursor: pointer; width: 34px; height: 34px; border-radius: 50%;
-  background: rgba(255,255,255,.82); color: var(--q-muted); font-size: 14px;
+  appearance: none; border: 1px solid rgba(255,255,255,.95); cursor: pointer; width: 44px; height: 44px; flex: none; border-radius: 50%;
+  background: rgba(255,255,255,.82); color: var(--q-muted); font-size: 15px;
   box-shadow: inset 0 1px 0 #fff, 0 2px 6px -2px rgba(26,14,60,.25);
 }
 .q-photo { flex: 1 1 auto; min-height: 0; display: flex; padding: 8px; border-radius: 26px; }
