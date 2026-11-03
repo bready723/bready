@@ -1000,19 +1000,22 @@ textarea.input { resize: vertical; min-height: 88px; }
   font-weight: 760; letter-spacing: .005em;
 }
 .q-btn.ok::before, .q-btn.no::before {
-  content: ''; position: absolute; left: 6px; right: 6px; top: 3px; height: 46%; border-radius: 14px 14px 40% 40% / 14px 14px 18px 18px;
-  background: linear-gradient(180deg, rgba(255,255,255,.62), rgba(255,255,255,.08)); pointer-events: none; z-index: -1;
+  content: ''; position: absolute; left: 6px; right: 6px; top: 3px; height: 30%; border-radius: 14px 14px 40% 40% / 14px 14px 12px 12px;
+  background: linear-gradient(180deg, rgba(255,255,255,.62), rgba(255,255,255,0)); pointer-events: none; z-index: -1;
 }
+.q-btn.no::before { background: linear-gradient(180deg, rgba(255,255,255,.48), rgba(255,255,255,0)); }
 .q-btn.ok {
-  color: #f2fff8; text-shadow: 0 0 10px rgba(70,255,170,.95), 0 1px 0 rgba(0,80,40,.4);
-  background: linear-gradient(180deg, rgba(60,240,150,.62) 0%, rgba(18,196,112,.74) 55%, rgba(6,150,84,.82) 100%);
+  /* dark ink on neon green: white text measured 3.0:1 here, this is >= 7:1 */
+  color: #022a16; text-shadow: 0 1px 0 rgba(255,255,255,.45);
+  background: linear-gradient(180deg, rgba(110,255,185,.80) 0%, rgba(52,232,146,.84) 55%, rgba(24,206,120,.90) 100%);
   border: 1px solid rgba(170,255,210,.95);
   box-shadow: inset 0 1px 0 rgba(255,255,255,.75), inset 0 -8px 16px rgba(0,90,50,.35),
     0 0 0 1px rgba(60,255,160,.30), 0 0 18px rgba(40,255,150,.60), 0 0 36px rgba(40,255,150,.28), 0 10px 22px -8px rgba(0,110,60,.75);
 }
 .q-btn.no {
-  color: #fff3f6; text-shadow: 0 0 10px rgba(255,90,140,.95), 0 1px 0 rgba(90,0,30,.4);
-  background: linear-gradient(180deg, rgba(255,92,140,.62) 0%, rgba(238,40,98,.74) 55%, rgba(190,18,72,.84) 100%);
+  /* white on a deeper hot pink so the label clears 4.5:1 across the whole face */
+  color: #fff; text-shadow: 0 1px 1px rgba(80,0,28,.45);
+  background: linear-gradient(180deg, rgba(222,34,100,.88) 0%, rgba(200,16,78,.92) 55%, rgba(160,8,60,.95) 100%);
   border: 1px solid rgba(255,190,210,.95);
   box-shadow: inset 0 1px 0 rgba(255,255,255,.75), inset 0 -8px 16px rgba(110,0,40,.35),
     0 0 0 1px rgba(255,70,130,.30), 0 0 18px rgba(255,60,120,.60), 0 0 36px rgba(255,60,120,.28), 0 10px 22px -8px rgba(130,0,50,.75);
