@@ -1018,6 +1018,9 @@ textarea.input { resize: vertical; min-height: 88px; }
   box-shadow: inset 0 1px 0 #fff, inset 0 -1px 2px rgba(91,63,214,.15), 0 6px 14px -6px rgba(26,14,60,.4);
 }
 .q-row { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+/* keyboard / switch-control focus: visible ring in the brand indigo, never on tap */
+.quiz button:focus-visible, .quiz a:focus-visible { outline: 3px solid #5b3fd6; outline-offset: 3px; }
+.quiz button:focus:not(:focus-visible) { outline: none; }
 
 /* start */
 .q-start { display: grid; gap: 18px; padding-top: 10px; }
