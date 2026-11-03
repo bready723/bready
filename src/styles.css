@@ -1102,17 +1102,23 @@ textarea.input { resize: vertical; min-height: 88px; }
 .q-ring.hot .q-ring-num { color: var(--q-magenta); }
 
 .q-answer { margin: 0; }
-/* the name sits on the photo as a frosted caption, so revealing it costs no height */
+/* the name pops up in the middle of the photo (Sara's ask); revealing it costs no height */
 .q-name {
-  position: absolute !important; left: 8px; right: 8px; bottom: 8px; z-index: 2;
-  padding: 9px 14px 8px; text-align: center; border-radius: 16px;
-  background: linear-gradient(135deg, rgba(255,255,255,.86), rgba(255,255,255,.72));
+  position: absolute; left: 50%; top: 50%; z-index: 2; transform: translate(-50%, -50%);
+  width: max-content; max-width: calc(100% - 32px);
+  padding: 12px 24px 13px; text-align: center; border-radius: 22px;
+  background: linear-gradient(135deg, rgba(255,255,255,.92), rgba(255,255,255,.80));
   -webkit-backdrop-filter: blur(18px) saturate(180%); backdrop-filter: blur(18px) saturate(180%);
-  border: 1px solid rgba(255,255,255,.9);
-  box-shadow: inset 0 1px 0 #fff, 0 8px 20px -8px rgba(26,14,60,.45);
+  border: 1px solid rgba(255,255,255,.95);
+  box-shadow: inset 0 1px 0 #fff, 0 4px 10px rgba(26,14,60,.18), 0 18px 36px -12px rgba(26,14,60,.55);
 }
-.q-name-main { margin: 0; font: 760 22px/1.15 var(--sans); letter-spacing: -.02em; color: var(--q-ink); }
-.q-credit { margin: 2px 0 0; font-size: 10px; color: #7d7590; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.q-name-main { margin: 0; font: 780 28px/1.12 var(--sans); letter-spacing: -.025em; color: var(--q-ink); }
+/* photo credit: small grey type in the photo's bottom-right corner, on a faint chip so it reads on any photo */
+.q-credit {
+  position: absolute; right: 8px; bottom: 8px; z-index: 2; max-width: calc(100% - 16px); margin: 0;
+  padding: 2px 8px; border-radius: 8px; background: rgba(255,255,255,.78);
+  font-size: 11px; line-height: 1.4; color: #5f5875; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
+}
 
 /* end */
 .q-end { display: grid; gap: 14px; padding-top: 6px; }
@@ -1147,7 +1153,14 @@ textarea.input { resize: vertical; min-height: 88px; }
   .q-bg .b4 { animation-duration: 21s; animation-delay: -3s; }
   .quiz .glass { transition: transform .45s cubic-bezier(.2,.8,.2,1), box-shadow .45s; }
   .quiz .glass.tilt { transform: perspective(800px) rotateX(var(--rx, 0deg)) rotateY(var(--ry, 0deg)) translateY(-3px); transition: transform .12s ease-out, box-shadow .3s; }
-  .q-name, .q-answer, .q-start > *, .q-end > * { animation: q-rise .45s cubic-bezier(.2,.8,.2,1) backwards; }
+  .q-answer, .q-start > *, .q-end > * { animation: q-rise .45s cubic-bezier(.2,.8,.2,1) backwards; }
+  @keyframes q-pop {
+    0% { opacity: 0; transform: translate(-50%, -50%) scale(.55); }
+    60% { opacity: 1; transform: translate(-50%, -50%) scale(1.06); }
+    100% { transform: translate(-50%, -50%) scale(1); }
+  }
+  .q-name { animation: q-pop .42s cubic-bezier(.2,.8,.2,1) backwards; }
+  .q-credit { animation: bready-fadein .4s ease .2s backwards; }
   .q-start > :nth-child(3), .q-end > :nth-child(3) { animation-delay: .08s; }
   .q-start > :nth-child(4), .q-end > :nth-child(4) { animation-delay: .16s; }
   .q-ring.hot { animation: q-pulse 1s ease-in-out infinite; }

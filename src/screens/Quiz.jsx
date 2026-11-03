@@ -229,9 +229,9 @@ export default function Quiz() {
             {revealed && (
               <div className="q-name" key={'n' + s.index}>
                 <p className="q-name-main">{person.name}</p>
-                {credit && <p className="q-credit">{credit}</p>}
               </div>
             )}
+            {revealed && credit && <p className="q-credit">{credit}</p>}
           </div>
           <Ring secondsLeft={s.secondsLeft} running={s.phase === 'countdown'} stopped={revealed} />
         </div>
