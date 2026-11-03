@@ -72,7 +72,7 @@ function useFitHeight(ref, active) {
     const mo = new MutationObserver(fit)
     if (app) mo.observe(app, { childList: true })
     window.addEventListener('resize', fit)
-    return () => { ro.disconnect(); mo.disconnect(); window.removeEventListener('resize', fit) }
+    return () => { ro.disconnect(); mo.disconnect(); window.removeEventListener('resize', fit); el.style.height = '' }
   }, [ref, active])
 }
 
@@ -125,7 +125,7 @@ export default function Quiz() {
     return (
       <main className="screen quiz" ref={root}>
         <Backdrop />
-        <section className="q-start">
+        <section className="q-start" key="start">
           <div className="glass q-hero">
             <h1 className="q-title">Who Is This?</h1>
             <p className="q-lede">A face appears. Say the name before the timer hits zero.</p>
@@ -158,7 +158,7 @@ export default function Quiz() {
     return (
       <main className="screen quiz" ref={root}>
         <Backdrop />
-        <section className="q-end">
+        <section className="q-end" key="end">
           <div className="glass q-score">
             <p className="q-eyebrow light">Your score</p>
             <p className="q-score-num">
@@ -176,7 +176,7 @@ export default function Quiz() {
           </div>
           <div className="q-row">
             <button className="q-btn primary" onClick={() => start('replay')}>Replay</button>
-            <button className="q-btn ghost" onClick={() => dispatch({ type: 'stop' })}>Stop</button>
+            <button className="q-btn stop" onClick={() => dispatch({ type: 'stop' })}>Stop</button>
           </div>
           {result.correct < result.total && (
             <div className="glass q-missed">
@@ -185,7 +185,6 @@ export default function Quiz() {
                 {s.round.map((p, i) => (s.answers[i] ? null : (
                   <li key={p.id}>
                     <img src={photoUrl(p, BASE)} alt="" loading="lazy" />
-                    <span>{p.name}</span>
                   </li>
                 )))}
               </ul>
@@ -201,7 +200,7 @@ export default function Quiz() {
   return (
     <main className="screen quiz" ref={root}>
       <Backdrop />
-      <section className="q-play" ref={play}>
+      <section className="q-play" key="play" ref={play}>
         <div className="q-top">
           <span className="q-chip strong">{s.index + 1} / {s.round.length}</span>
           <div className="q-progress" aria-hidden="true">

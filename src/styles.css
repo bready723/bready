@@ -1003,6 +1003,11 @@ textarea.input { resize: vertical; min-height: 88px; }
   background: #2bff9a;
   box-shadow: 0 0 0 2px #a8ffd6 inset, 0 0 14px rgba(43,255,154,.95), 0 0 34px rgba(43,255,154,.55), 0 8px 18px -8px rgba(0,120,70,.6);
 }
+.q-btn.stop {
+  /* end screen: red-pink neon, a touch redder than "I got it wrong" */
+  font-weight: 780; color: #1a0610; border: 0; background: #ff3366;
+  box-shadow: 0 0 0 2px #ffb0c2 inset, 0 0 14px rgba(255,51,102,.95), 0 0 34px rgba(255,51,102,.55), 0 8px 18px -8px rgba(150,0,40,.6);
+}
 .q-btn.no {
   background: #ff3d8b;
   box-shadow: 0 0 0 2px #ffb3d1 inset, 0 0 14px rgba(255,61,139,.95), 0 0 34px rgba(255,61,139,.55), 0 8px 18px -8px rgba(140,0,60,.6);
