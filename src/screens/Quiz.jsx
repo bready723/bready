@@ -204,7 +204,7 @@ export default function Quiz() {
         <div className="q-top">
           <span className="q-chip strong">{s.index + 1} / {s.round.length}</span>
           <div className="q-progress" aria-hidden="true">
-            <i style={{ width: `${(s.index / s.round.length) * 100}%` }} />
+            <i style={{ transform: `scaleX(${s.index / s.round.length})` }} />
           </div>
           <button className="q-quit" onClick={() => dispatch({ type: 'stop' })} aria-label="Quit game">✕</button>
         </div>
