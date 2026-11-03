@@ -127,7 +127,6 @@ export default function Quiz() {
         <Backdrop />
         <section className="q-start">
           <div className="glass q-hero">
-            <p className="q-eyebrow">Face game</p>
             <h1 className="q-title">Who Is This?</h1>
             <p className="q-lede">A face appears. Say the name before the timer hits zero.</p>
             <div className="q-facts">

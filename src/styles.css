@@ -971,7 +971,7 @@ textarea.input { resize: vertical; min-height: 88px; }
 }
 .quiz .glass > * { position: relative; z-index: 1; }
 
-.q-eyebrow { margin: 0; font: 650 11px var(--sans); letter-spacing: .14em; text-transform: uppercase; color: var(--q-indigo); }
+.q-eyebrow { margin: 0; font: 650 12px var(--sans); letter-spacing: .12em; text-transform: uppercase; color: var(--q-indigo); }
 .q-eyebrow.light { color: rgba(255,255,255,.8); }
 .q-chip {
   display: inline-flex; align-items: center; padding: 6px 12px; border-radius: 999px;
