@@ -76,10 +76,10 @@ function useFitHeight(ref, active) {
   }, [ref, active])
 }
 
-function Ring({ secondsLeft, running }) {
+function Ring({ secondsLeft, running, stopped }) {
   const offset = RING_C * (1 - secondsLeft / SECONDS)
   return (
-    <div className={`q-ring${secondsLeft <= 2 && running ? ' hot' : ''}${secondsLeft === 0 ? ' done' : ''}`} role="timer" aria-label={`${secondsLeft} seconds left`}>
+    <div className={`q-ring${secondsLeft <= 2 && running ? ' hot' : ''}${secondsLeft === 0 ? ' done' : ''}${stopped ? ' stopped' : ''}`} role="timer" aria-label={`${secondsLeft} seconds left`}>
       <svg viewBox="0 0 100 100">
         <defs>
           <linearGradient id="q-ring-grad" x1="0" y1="0" x2="1" y2="1">
@@ -234,7 +234,7 @@ export default function Quiz() {
               </div>
             )}
           </div>
-          <Ring secondsLeft={s.secondsLeft} running={s.phase === 'countdown'} />
+          <Ring secondsLeft={s.secondsLeft} running={s.phase === 'countdown'} stopped={revealed} />
         </div>
 
         {revealed ? (

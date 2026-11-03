@@ -1080,6 +1080,8 @@ textarea.input { resize: vertical; min-height: 88px; }
   box-shadow: inset 0 1.5px 0 #fff, inset 0 -3px 8px rgba(91,63,214,.14), 0 3px 6px rgba(26,14,60,.25), 0 14px 26px -10px rgba(26,14,60,.55);
 }
 .quiz .q-ring.done .arc { opacity: 0; }
+/* once the name is out, the timer steps back so the eye goes to the name */
+.quiz .q-ring.stopped { opacity: .55; transform: scale(.86); transition: opacity .3s ease, transform .3s ease; }
 .q-ring svg { width: 100%; height: 100%; display: block; transform: rotate(-90deg); overflow: visible; }
 .q-ring .track { fill: none; stroke: rgba(27,20,48,.10); stroke-width: 9; }
 .q-ring .arc {
