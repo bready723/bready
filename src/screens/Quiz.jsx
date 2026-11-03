@@ -213,6 +213,13 @@ export default function Quiz() {
 
         <div className="glass q-photo">
           <div className="q-well">
+            {/* the same photo, blurred and cropped to fill: wide shots no longer leave empty bands */}
+            <div
+              key={'bg' + person.id}
+              className={`q-well-bg${s.phase === 'loading' ? ' pending' : ''}`}
+              style={{ backgroundImage: `url(${photoUrl(person, BASE)})` }}
+              aria-hidden="true"
+            />
             <img
               key={person.id}
               src={photoUrl(person, BASE)}
