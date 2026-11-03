@@ -1026,10 +1026,9 @@ textarea.input { resize: vertical; min-height: 88px; }
 .q-start { display: grid; gap: 18px; padding-top: 10px; }
 .q-hero { padding: 26px 22px 22px; }
 .q-title {
-  margin: 8px 0 6px; font: 760 40px/1.02 var(--sans); letter-spacing: -.035em;
-  background: linear-gradient(100deg, #1aa7e8 0%, #5b3fd6 52%, #e0218a 100%);
-  -webkit-background-clip: text; background-clip: text; color: transparent;
-  filter: drop-shadow(0 2px 0 rgba(255,255,255,.7));
+  /* solid ink: the brand gradient is reserved for the wordmark and the Add button */
+  margin: 0 0 6px; font: 760 40px/1.02 var(--sans); letter-spacing: -.035em; color: var(--q-ink);
+  text-shadow: 0 2px 0 rgba(255,255,255,.7);
 }
 .q-lede { margin: 0 0 18px; font-size: 15px; line-height: 1.4; color: var(--q-muted); }
 .q-facts { display: flex; flex-wrap: wrap; gap: 6px; }
