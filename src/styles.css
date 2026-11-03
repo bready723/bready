@@ -993,8 +993,35 @@ textarea.input { resize: vertical; min-height: 88px; }
 .q-btn:disabled { opacity: .45; }
 .q-btn.primary { background: linear-gradient(180deg, #6a4ff0 0%, #4a2fc0 60%, #3a1f9e 100%); }
 .q-btn.big { font-size: 19px; padding: 19px; border-radius: 22px; }
-.q-btn.ok { background: linear-gradient(180deg, #44a85d, #2a7a3e); }
-.q-btn.no { background: linear-gradient(180deg, #d65656, #a83232); }
+/* right / wrong: neon glass — translucent tint, bright rim, glossy top, glow */
+.q-btn.ok, .q-btn.no {
+  position: relative; overflow: hidden; isolation: isolate;
+  -webkit-backdrop-filter: blur(14px) saturate(180%); backdrop-filter: blur(14px) saturate(180%);
+  font-weight: 760; letter-spacing: .005em;
+}
+.q-btn.ok::before, .q-btn.no::before {
+  content: ''; position: absolute; left: 6px; right: 6px; top: 3px; height: 46%; border-radius: 14px 14px 40% 40% / 14px 14px 18px 18px;
+  background: linear-gradient(180deg, rgba(255,255,255,.62), rgba(255,255,255,.08)); pointer-events: none; z-index: -1;
+}
+.q-btn.ok {
+  color: #f2fff8; text-shadow: 0 0 10px rgba(70,255,170,.95), 0 1px 0 rgba(0,80,40,.4);
+  background: linear-gradient(180deg, rgba(60,240,150,.62) 0%, rgba(18,196,112,.74) 55%, rgba(6,150,84,.82) 100%);
+  border: 1px solid rgba(170,255,210,.95);
+  box-shadow: inset 0 1px 0 rgba(255,255,255,.75), inset 0 -8px 16px rgba(0,90,50,.35),
+    0 0 0 1px rgba(60,255,160,.30), 0 0 18px rgba(40,255,150,.60), 0 0 36px rgba(40,255,150,.28), 0 10px 22px -8px rgba(0,110,60,.75);
+}
+.q-btn.no {
+  color: #fff3f6; text-shadow: 0 0 10px rgba(255,90,140,.95), 0 1px 0 rgba(90,0,30,.4);
+  background: linear-gradient(180deg, rgba(255,92,140,.62) 0%, rgba(238,40,98,.74) 55%, rgba(190,18,72,.84) 100%);
+  border: 1px solid rgba(255,190,210,.95);
+  box-shadow: inset 0 1px 0 rgba(255,255,255,.75), inset 0 -8px 16px rgba(110,0,40,.35),
+    0 0 0 1px rgba(255,70,130,.30), 0 0 18px rgba(255,60,120,.60), 0 0 36px rgba(255,60,120,.28), 0 10px 22px -8px rgba(130,0,50,.75);
+}
+@media (prefers-reduced-motion: no-preference) {
+  @keyframes q-neon { 50% { filter: brightness(1.08) saturate(1.15); } }
+  .q-btn.ok, .q-btn.no { animation: q-neon 2.4s ease-in-out infinite; }
+  .q-btn.no { animation-delay: -1.2s; }
+}
 .q-btn.ghost {
   color: var(--q-ink);
   background: linear-gradient(180deg, rgba(255,255,255,.95), rgba(255,255,255,.72));
@@ -1026,7 +1053,8 @@ textarea.input { resize: vertical; min-height: 88px; }
 .q-credits { justify-self: center; font-size: 12.5px; color: var(--q-muted); text-decoration: underline; text-underline-offset: 3px; }
 
 /* play */
-.q-play { display: grid; gap: 12px; }
+.q-play { display: flex; flex-direction: column; gap: 10px; min-height: 0; }
+.q-play > .q-top, .q-play > .q-btn, .q-play > .q-row { flex: none; }
 .q-top { display: flex; align-items: center; gap: 10px; }
 .q-progress { flex: 1; height: 7px; border-radius: 99px; background: rgba(27,20,48,.09); box-shadow: inset 0 1px 2px rgba(26,14,60,.15); overflow: hidden; }
 .q-progress i { display: block; height: 100%; border-radius: 99px; background: linear-gradient(90deg, #1aa7e8, #5b3fd6, #e0218a); transition: width .45s cubic-bezier(.2,.8,.2,1); }
@@ -1035,10 +1063,10 @@ textarea.input { resize: vertical; min-height: 88px; }
   background: rgba(255,255,255,.82); color: var(--q-muted); font-size: 14px;
   box-shadow: inset 0 1px 0 #fff, 0 2px 6px -2px rgba(26,14,60,.25);
 }
-.q-photo { padding: 10px; border-radius: 28px; }
+.q-photo { flex: 1 1 auto; min-height: 0; display: flex; padding: 8px; border-radius: 26px; }
 .q-well {
-  position: relative; aspect-ratio: 4 / 5; max-height: calc(100dvh - 400px); min-height: 260px; width: 100%;
-  border-radius: 20px; overflow: hidden;
+  position: relative; flex: 1; min-height: 0; width: 100%;
+  border-radius: 19px; overflow: hidden;
   background: radial-gradient(120% 90% at 50% 0%, #ffffff 0%, #eeebf6 100%);
   box-shadow: inset 0 2px 10px rgba(26,14,60,.14), inset 0 -1px 0 rgba(255,255,255,.8);
 }
@@ -1065,11 +1093,18 @@ textarea.input { resize: vertical; min-height: 88px; }
 }
 .q-ring.hot .q-ring-num { color: var(--q-magenta); }
 
-.q-answer { display: grid; gap: 10px; }
-.q-name { padding: 14px 18px 13px; text-align: center; }
-.q-name-main { margin: 0; font: 760 27px/1.12 var(--sans); letter-spacing: -.025em; color: var(--q-ink); text-shadow: 0 1px 0 rgba(255,255,255,.7); }
-.q-name-alt { margin: 3px 0 0; font-size: 14px; font-weight: 600; color: var(--q-muted); }
-.q-credit { margin: 6px 0 0; font-size: 10.5px; color: #8a829c; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.q-answer { margin: 0; }
+/* the name sits on the photo as a frosted caption, so revealing it costs no height */
+.q-name {
+  position: absolute !important; left: 8px; right: 8px; bottom: 8px; z-index: 2;
+  padding: 9px 14px 8px; text-align: center; border-radius: 16px;
+  background: linear-gradient(135deg, rgba(255,255,255,.86), rgba(255,255,255,.72));
+  -webkit-backdrop-filter: blur(18px) saturate(180%); backdrop-filter: blur(18px) saturate(180%);
+  border: 1px solid rgba(255,255,255,.9);
+  box-shadow: inset 0 1px 0 #fff, 0 8px 20px -8px rgba(26,14,60,.45);
+}
+.q-name-main { margin: 0; font: 760 22px/1.15 var(--sans); letter-spacing: -.02em; color: var(--q-ink); }
+.q-credit { margin: 2px 0 0; font-size: 10px; color: #7d7590; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
 
 /* end */
 .q-end { display: grid; gap: 14px; padding-top: 6px; }
@@ -1104,7 +1139,7 @@ textarea.input { resize: vertical; min-height: 88px; }
   .q-bg .b4 { animation-duration: 21s; animation-delay: -3s; }
   .quiz .glass { transition: transform .45s cubic-bezier(.2,.8,.2,1), box-shadow .45s; }
   .quiz .glass.tilt { transform: perspective(800px) rotateX(var(--rx, 0deg)) rotateY(var(--ry, 0deg)) translateY(-3px); transition: transform .12s ease-out, box-shadow .3s; }
-  .q-answer, .q-start > *, .q-end > * { animation: q-rise .5s cubic-bezier(.2,.8,.2,1) backwards; }
+  .q-name, .q-answer, .q-start > *, .q-end > * { animation: q-rise .45s cubic-bezier(.2,.8,.2,1) backwards; }
   .q-start > :nth-child(3), .q-end > :nth-child(3) { animation-delay: .08s; }
   .q-start > :nth-child(4), .q-end > :nth-child(4) { animation-delay: .16s; }
   .q-ring.hot { animation: q-pulse 1s ease-in-out infinite; }

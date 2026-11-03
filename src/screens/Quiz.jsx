@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useReducer, useRef } from 'react'
+import { useEffect, useLayoutEffect, useMemo, useReducer, useRef } from 'react'
 import people from '../lib/people.json'
 import { ROUND_SIZE, SECONDS, pickRound, scoreOf, initialState, quizReducer, photoUrl, creditLine } from '../lib/quiz.js'
 
@@ -51,6 +51,31 @@ function useTilt(ref) {
   }, [ref])
 }
 
+// The play view must fit between whatever sits above it (app bar, a "Synced."
+// banner, the notch) and the tab bar, so the buttons never need a scroll.
+// Measure the real space instead of guessing with 100dvh.
+function useFitHeight(ref, active) {
+  useLayoutEffect(() => {
+    const el = ref.current
+    if (!el || !active) return
+    const fit = () => {
+      const bar = document.querySelector('.tabbar')
+      const bottom = bar ? bar.getBoundingClientRect().top : window.innerHeight
+      const top = el.getBoundingClientRect().top + window.scrollY - (document.scrollingElement?.scrollTop || 0)
+      el.style.height = Math.max(320, Math.floor(bottom - top - 12)) + 'px'
+    }
+    fit()
+    const ro = new ResizeObserver(fit)
+    ro.observe(document.body)
+    const app = document.querySelector('.app')
+    if (app) for (const c of app.children) ro.observe(c)
+    const mo = new MutationObserver(fit)
+    if (app) mo.observe(app, { childList: true })
+    window.addEventListener('resize', fit)
+    return () => { ro.disconnect(); mo.disconnect(); window.removeEventListener('resize', fit) }
+  }, [ref, active])
+}
+
 function Ring({ secondsLeft, running }) {
   const offset = RING_C * (1 - secondsLeft / SECONDS)
   return (
@@ -74,7 +99,10 @@ function Ring({ secondsLeft, running }) {
 export default function Quiz() {
   const [s, dispatch] = useReducer(quizReducer, initialState)
   const root = useRef(null)
+  const play = useRef(null)
   useTilt(root)
+  const playing = s.phase === 'loading' || s.phase === 'countdown' || s.phase === 'revealed'
+  useFitHeight(play, playing)
   const person = s.round[s.index]
 
   // one tick per second, only while counting down
@@ -108,6 +136,9 @@ export default function Quiz() {
               <span className="q-chip">{SECONDS} seconds each</span>
             </div>
           </div>
+          <button className="q-btn primary big" onClick={() => start('start')} disabled={!people.length}>
+            Start
+          </button>
           <div className="glass q-how">
             <p className="q-eyebrow">How to play</p>
             <ol>
@@ -116,9 +147,6 @@ export default function Quiz() {
               <li><b>3</b><span>Be honest: <strong>I got it right</strong> or <strong>I got it wrong</strong>. Each right answer is 5 points.</span></li>
             </ol>
           </div>
-          <button className="q-btn primary big" onClick={() => start('start')} disabled={!people.length}>
-            Start
-          </button>
           <a className="q-credits" href={`${BASE}quiz/credits.html`} target="_blank" rel="noreferrer">
             Photo credits
           </a>
@@ -174,7 +202,7 @@ export default function Quiz() {
   return (
     <main className="screen quiz" ref={root}>
       <Backdrop />
-      <section className="q-play">
+      <section className="q-play" ref={play}>
         <div className="q-top">
           <span className="q-chip strong">{s.index + 1} / {s.round.length}</span>
           <div className="q-progress" aria-hidden="true">
@@ -193,21 +221,20 @@ export default function Quiz() {
               onError={() => dispatch({ type: 'loaded' })}
               className={s.phase === 'loading' ? 'pending' : ''}
             />
+            {revealed && (
+              <div className="q-name" key={'n' + s.index}>
+                <p className="q-name-main">{person.name}</p>
+                {credit && <p className="q-credit">{credit}</p>}
+              </div>
+            )}
           </div>
           <Ring secondsLeft={s.secondsLeft} running={s.phase === 'countdown'} />
         </div>
 
         {revealed ? (
-          <div className="q-answer" key={'a' + s.index}>
-            <div className="glass q-name">
-              <p className="q-name-main">{person.name}</p>
-              {person.alt && <p className="q-name-alt">{person.alt}</p>}
-              {credit && <p className="q-credit">{credit}</p>}
-            </div>
-            <div className="q-row">
-              <button className="q-btn ok" onClick={() => dispatch({ type: 'answer', right: true })}>I got it right</button>
-              <button className="q-btn no" onClick={() => dispatch({ type: 'answer', right: false })}>I got it wrong</button>
-            </div>
+          <div className="q-row q-answer" key={'a' + s.index}>
+            <button className="q-btn ok" onClick={() => dispatch({ type: 'answer', right: true })}>I got it right</button>
+            <button className="q-btn no" onClick={() => dispatch({ type: 'answer', right: false })}>I got it wrong</button>
           </div>
         ) : (
           <button className="q-btn primary" onClick={() => dispatch({ type: 'reveal' })}>Show answer</button>
