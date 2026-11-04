@@ -24,9 +24,12 @@ FIX = {'Zandaya': 'Zendaya', 'Timothee Chamalet': 'Timothée Chalamet', 'Emenem'
 KEEP_DECK = {'안재홍', '조여정', 'Vin Diesel', '박세리', '최우식', '싸이', '적재', '성시경', 'Rory Mcllroy',
              'Post Malone', '김건모', '전도연', '이적', '조인성', 'Paul McCartney', '하하'}
 WRONG_MATCH = {'안재홍', '다나카'}  # Wikidata resolved to a different person: ignore it entirely
-DROP_NEW = {'Travis Kelce', 'Jannik Sinner', 'Caitlin Clark', 'Victor Wembanyama'}
-NEW_NAME = {'Lee Jae-myung': ('이재명', 'Lee Jae-myung'), 'Pope Leo XIV': ('Pope Leo XIV', None)}
-KOREAN_NEW = {'kpop', 'kdrama'}
+DROP_NEW = {'Travis Kelce', 'Jannik Sinner', 'Caitlin Clark', 'Victor Wembanyama',
+            # 2026-11-04 review: hard-to-guess photo or least widely known, to land on 500
+            'Zico (rapper)', 'Yoo Jae-suk', 'Ryu Hyun-jin', 'Choo Shin-soo', 'Lee Jung-hoo', 'Kim Yeon-koung', 'Kim Chae-won (singer, born 2000)', 'Matthew McConaughey', 'Ken Watanabe', 'Bono', 'Morgan Wallen', 'Luka Dončić', 'Ichiro Suzuki', 'Iga Świątek', 'Travis Scott', 'Doja Cat', 'Kylie Jenner', 'Mick Jagger', 'Chris Martin', 'Lee Soo-geun', 'Cho Jin-woong', 'Ra Mi-ran', 'Seo Hyun-jin', 'Go Min-si', 'Kim Da-mi', 'Park Hyung-sik', 'Ok Taec-yeon', 'Huh Yun-jin', 'Ningning', 'Sakura Miyawaki', 'Wi Ha-joon', 'Hiroyuki Sanada', 'Zhang Ziyi', 'Ice Spice', 'Karol G', 'Luka Modrić', 'Oscar Isaac', 'Barry Keoghan', 'Giannis Antetokounmpo', 'William, Prince of Wales', 'Warren Buffett', 'Ke Huy Quan', 'Sam Smith', 'Max Verstappen', 'Jamie Lee Curtis', 'Zlatan Ibrahimović', 'Jeff Goldblum', 'Cher', 'Zinedine Zidane', 'Lee Je-hoon', 'Seo Kang-joon', 'Ju Ji-hoon', 'Naomi Osaka'}
+NEW_NAME = {'Lee Jae-myung': ('이재명', 'Lee Jae-myung'), 'Pope Leo XIV': ('Pope Leo XIV', None),
+            'RM (musician)': ('RM', None), 'Faker (gamer)': ('페이커', None)}
+KOREAN_NEW = {'kpop', 'kdrama', 'kent', 'ksports', 'kother'}
 KOREAN_EN = {'Lee Kang-in', 'An Se-young', 'Lee Jae-myung'}
 qdir = os.path.join(repo, 'public', 'quiz'); os.makedirs(qdir, exist_ok=True)
 hangul = lambda s: bool(re.search('[가-힣]', s or ''))

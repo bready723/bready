@@ -1,6 +1,7 @@
 import { describe, it, expect } from 'vitest'
 import {
   ROUND_SIZE, SECONDS, shuffle, pickRound, scoreOf, initialState, quizReducer, photoUrl, creditLine,
+  HISTORY_KEY, HISTORY_MAX, loadHistory, addResult, saveHistory, summarize, isNewBest, playedLabel,
 } from './quiz.js'
 
 // a tiny deterministic random source: cycles through the given values
@@ -131,5 +132,59 @@ describe('photoUrl and creditLine', () => {
     expect(creditLine({ source: 'commons', credit: 'Raph_PH', license: 'CC BY 2.0' })).toBe('Photo: Raph_PH · CC BY 2.0')
     expect(creditLine({ source: 'commons', license: 'CC0' })).toBe('Photo: Wikimedia Commons · CC0')
     expect(creditLine({ source: 'deck' })).toBe('')
+  })
+})
+
+describe('score history', () => {
+  const memStore = (init) => { const m = new Map(init ? [[HISTORY_KEY, init]] : []); return { getItem: (k) => (m.has(k) ? m.get(k) : null), setItem: (k, v) => m.set(k, String(v)), m } }
+
+  it('starts empty, and survives missing or corrupt storage', () => {
+    expect(loadHistory(memStore())).toEqual([])
+    expect(loadHistory(memStore('{not json'))).toEqual([])
+    expect(loadHistory(memStore('{"a":1}'))).toEqual([])
+    expect(loadHistory(null)).toEqual([])
+    expect(loadHistory({ getItem: () => { throw new Error('blocked') } })).toEqual([])
+  })
+
+  it('drops malformed rows it cannot show', () => {
+    const raw = JSON.stringify([{ at: 1, score: 80, correct: 16, total: 20 }, { at: 'x' }, null])
+    expect(loadHistory(memStore(raw))).toEqual([{ at: 1, score: 80, correct: 16, total: 20 }])
+  })
+
+  it('adds the newest game first and keeps at most HISTORY_MAX', () => {
+    let h = []
+    for (let i = 0; i < HISTORY_MAX + 5; i++) h = addResult(h, { score: i, correct: i, total: 20 }, 1000 + i)
+    expect(h).toHaveLength(HISTORY_MAX)
+    expect(h[0]).toEqual({ at: 1000 + HISTORY_MAX + 4, score: HISTORY_MAX + 4, correct: HISTORY_MAX + 4, total: 20 })
+  })
+
+  it('round-trips through storage, and reports a blocked save', () => {
+    const store = memStore()
+    const h = addResult([], { score: 75, correct: 15, total: 20 }, 5)
+    expect(saveHistory(h, store)).toBe(true)
+    expect(loadHistory(store)).toEqual(h)
+    expect(saveHistory(h, { setItem: () => { throw new Error('full') } })).toBe(false)
+    expect(saveHistory(h, null)).toBe(false)
+  })
+
+  it('summarises best, games and average', () => {
+    expect(summarize([])).toEqual({ games: 0, best: null, average: null })
+    const h = [{ score: 70 }, { score: 90 }, { score: 81 }]
+    expect(summarize(h)).toEqual({ games: 3, best: 90, average: 80 })
+  })
+
+  it('flags a new best only when it beats an earlier game', () => {
+    expect(isNewBest([{ score: 90 }])).toBe(false)
+    expect(isNewBest([{ score: 90 }, { score: 85 }])).toBe(true)
+    expect(isNewBest([{ score: 85 }, { score: 85 }])).toBe(false)
+    expect(isNewBest([])).toBe(false)
+  })
+
+  it('labels when a game was played', () => {
+    const now = new Date(2026, 10, 4, 18, 0)
+    expect(playedLabel(new Date(2026, 10, 4, 17, 32).getTime(), now)).toMatch(/^Today 5:32\sPM$/)
+    expect(playedLabel(new Date(2026, 10, 3, 21, 5).getTime(), now)).toMatch(/^Yesterday 9:05\sPM$/)
+    expect(playedLabel(new Date(2026, 9, 28, 9, 0).getTime(), now)).toBe('Oct 28')
+    expect(playedLabel(new Date(2025, 9, 28, 9, 0).getTime(), now)).toBe('Oct 28, 2025')
   })
 })

@@ -1,6 +1,11 @@
-import { useEffect, useLayoutEffect, useMemo, useReducer, useRef } from 'react'
+import { useEffect, useLayoutEffect, useMemo, useReducer, useRef, useState } from 'react'
 import people from '../lib/people.json'
-import { ROUND_SIZE, SECONDS, pickRound, scoreOf, initialState, quizReducer, photoUrl, creditLine } from '../lib/quiz.js'
+import {
+  ROUND_SIZE, SECONDS, pickRound, scoreOf, initialState, quizReducer, photoUrl, creditLine,
+  loadHistory, addResult, saveHistory, summarize, isNewBest, playedLabel,
+} from '../lib/quiz.js'
+
+const BOARD_ROWS = 10
 
 const BASE = import.meta.env.BASE_URL
 const RING_R = 42
@@ -121,6 +126,20 @@ export default function Quiz() {
   const start = (type) => dispatch({ type, round: pickRound(people, ROUND_SIZE) })
   const result = useMemo(() => scoreOf(s.answers, s.round.length), [s.answers, s.round.length])
 
+  // scoreboard: every finished game is saved on this phone, once per round
+  const [history, setHistory] = useState(() => loadHistory())
+  const savedRound = useRef(null)
+  useEffect(() => {
+    if (s.phase !== 'done' || savedRound.current === s.round) return
+    savedRound.current = s.round
+    setHistory((h) => {
+      const next = addResult(h, scoreOf(s.answers, s.round.length))
+      saveHistory(next)
+      return next
+    })
+  }, [s.phase, s.round, s.answers])
+  const board = summarize(history)
+
   if (s.phase === 'idle') {
     return (
       <main className="screen quiz" ref={root}>
@@ -133,6 +152,7 @@ export default function Quiz() {
               <span className="q-chip">{people.length} faces</span>
               <span className="q-chip">{ROUND_SIZE} per game</span>
               <span className="q-chip">{SECONDS} seconds each</span>
+              {board.best !== null && <span className="q-chip best">Best {board.best}</span>}
             </div>
           </div>
           <button className="q-btn primary big" onClick={() => start('start')} disabled={!people.length}>
@@ -161,6 +181,7 @@ export default function Quiz() {
         <section className="q-end" key="end">
           <div className="glass q-score">
             <p className="q-eyebrow light">Your score</p>
+            {isNewBest(history) && savedRound.current === s.round && <p className="q-newbest">New best!</p>}
             <p className="q-score-num">
               {result.score}
               <span>/100</span>
@@ -178,6 +199,26 @@ export default function Quiz() {
             <button className="q-btn primary" onClick={() => start('replay')}>Replay</button>
             <button className="q-btn stop" onClick={() => dispatch({ type: 'stop' })}>Stop</button>
           </div>
+          {history.length > 0 && (
+            <div className="glass q-board">
+              <div className="q-board-head">
+                <p className="q-eyebrow">Scoreboard</p>
+                <p className="q-board-sum">
+                  Best <b>{board.best}</b> · Avg <b>{board.average}</b> · {board.games} {board.games === 1 ? 'game' : 'games'}
+                </p>
+              </div>
+              <ol>
+                {history.slice(0, BOARD_ROWS).map((h, i) => (
+                  <li key={h.at} className={`${i === 0 && savedRound.current === s.round ? 'now' : ''}${h.score === board.best ? ' top' : ''}`}>
+                    <span className="q-board-when">{i === 0 && savedRound.current === s.round ? 'This game' : playedLabel(h.at)}</span>
+                    <span className="q-board-bar" aria-hidden="true"><i style={{ transform: `scaleX(${h.score / 100})` }} /></span>
+                    <span className="q-board-score">{h.score}</span>
+                  </li>
+                ))}
+              </ol>
+              {history.length > BOARD_ROWS && <p className="q-board-more">Last {BOARD_ROWS} of {history.length} games</p>}
+            </div>
+          )}
           {result.correct < result.total && (
             <div className="glass q-missed">
               <p className="q-eyebrow">Missed</p>

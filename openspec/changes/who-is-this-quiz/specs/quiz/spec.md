@@ -69,3 +69,15 @@ Photos SHALL be served from `/quiz/` and cached by the service worker on first v
 #### Scenario: Offline replay
 - **WHEN** a photo was shown once while online and the phone is now offline
 - **THEN** that photo still displays
+
+### Requirement: Scoreboard of past games
+Every finished game SHALL be saved on this phone (localStorage `bready.quiz.v1`, newest first, at most 50) and shown on the end screen.
+
+#### Scenario: End of a game
+- **WHEN** the 20th answer is marked
+- **THEN** the game is saved once, and the end screen lists the last 10 games with when they were played and their score
+- **AND** shows best, average and number of games; "New best!" appears only when the game beats every earlier one
+
+#### Scenario: Quitting mid-game
+- **WHEN** the user taps ✕ before the 20th answer
+- **THEN** nothing is saved

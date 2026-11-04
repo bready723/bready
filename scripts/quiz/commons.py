@@ -56,7 +56,7 @@ for i in range(0, len(wi), 40):
         r['page'] = ii.get('descriptionurl'); r['thumb'] = ii.get('thumburl') or ii.get('url'); r['w'] = ii.get('width'); r['h'] = ii.get('height')
 for r in rows:
     lic = r.get('license') or ''
-    r['ok'] = bool(r.get('thumb') and re.match(r'(CC|Public domain|PD|GODL)', lic, re.I) and 'NC' not in lic and 'ND' not in lic and min(r.get('w') or 0, r.get('h') or 0) >= MIN_SHORT)
+    r['ok'] = bool(r.get('thumb') and re.match(r'(CC|Public domain|PD|GODL|KOGL|Attribution)', lic, re.I) and 'NC' not in lic and 'ND' not in lic and min(r.get('w') or 0, r.get('h') or 0) >= MIN_SHORT)
 json.dump(rows, open(outp, 'w'), ensure_ascii=False, indent=1)
 print(f"{sum(r['ok'] for r in rows)} of {len(rows)} usable")
 for r in rows:

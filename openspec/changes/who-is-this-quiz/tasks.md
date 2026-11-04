@@ -27,3 +27,7 @@
 - [x] 4.3 Commit on `ai-dev-trial`; push (auto-deploys); open `https://bready723.github.io/bready/`
       and play one full game.
 - [ ] 4.4 On the phone (Sara): add-to-home-screen app shows the Quiz tab; glass renders; tilt on press.
+
+## 5. Follow-ups (2026-11-04)
+- [x] 5.1 Pool to 500: 162 more Commons candidates, 53 dropped on review (hard-to-guess photo or least known).
+- [x] 5.2 Scoreboard: history in `quiz.js` (load/add/save/summarize/isNewBest/playedLabel, tested), end-screen card, Best chip on Start.

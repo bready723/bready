@@ -1139,6 +1139,31 @@ textarea.input { resize: vertical; min-height: 88px; }
 .q-dots i { width: 10px; height: 10px; border-radius: 50%; box-shadow: inset 0 1px 0 rgba(255,255,255,.5), 0 2px 4px rgba(0,0,0,.3); }
 .q-dots i.ok { background: #6ee08a; }
 .q-dots i.no { background: rgba(255,255,255,.28); }
+.q-chip.best { color: #fff; background: #5b3fd6; border-color: #5b3fd6; box-shadow: 0 2px 8px -2px rgba(91,63,214,.6); }
+.q-newbest {
+  display: inline-block; margin: 8px 0 0; padding: 4px 12px; border-radius: 99px;
+  font: 780 13px var(--sans); letter-spacing: .02em; color: #120a1c; background: #2bff9a;
+  box-shadow: 0 0 12px rgba(43,255,154,.8);
+}
+/* scoreboard: past games on this phone, newest first */
+.q-board { padding: 16px 16px 12px; }
+.q-board-head { display: flex; align-items: baseline; justify-content: space-between; gap: 10px; flex-wrap: wrap; }
+.q-board-sum { margin: 0; font-size: 13px; color: var(--q-muted); font-variant-numeric: tabular-nums; }
+.q-board-sum b { color: var(--q-ink); font-weight: 760; }
+.q-board ol { list-style: none; margin: 10px 0 0; padding: 0; display: grid; gap: 2px; }
+.q-board li {
+  display: grid; grid-template-columns: 7.5em 1fr 2.4em; align-items: center; gap: 10px;
+  padding: 7px 8px; border-radius: 10px; font-size: 13.5px; color: var(--q-ink);
+}
+.q-board li.now { background: rgba(91,63,214,.10); font-weight: 700; }
+.q-board-when { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; color: var(--q-muted); }
+.q-board li.now .q-board-when { color: #5b3fd6; }
+.q-board-bar { height: 8px; border-radius: 99px; background: rgba(27,20,48,.08); overflow: hidden; }
+.q-board-bar i { display: block; width: 100%; height: 100%; border-radius: 99px; background: #8f7cf0; transform-origin: left center; }
+.q-board li.now .q-board-bar i { background: #5b3fd6; }
+.q-board li.top .q-board-bar i { background: #1fd98a; }
+.q-board-score { text-align: right; font-weight: 760; font-variant-numeric: tabular-nums; }
+.q-board-more { margin: 6px 8px 0; font-size: 12px; color: var(--q-muted); }
 .q-missed { padding: 16px 16px 10px; }
 .q-missed ul { list-style: none; margin: 10px 0 0; padding: 0; display: grid; grid-template-columns: repeat(auto-fill, minmax(74px, 1fr)); gap: 10px 8px; }
 .q-missed li { display: grid; gap: 4px; align-content: start; text-align: center; font-size: 11.5px; line-height: 1.25; font-weight: 650; color: var(--q-ink); }

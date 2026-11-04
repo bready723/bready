@@ -68,3 +68,56 @@ export function creditLine(person) {
   if (person.source !== 'commons') return ''
   return `Photo: ${person.credit || 'Wikimedia Commons'} · ${person.license}`
 }
+
+// ---- score history: finished games, newest first, kept on this phone ----
+export const HISTORY_KEY = 'bready.quiz.v1'
+export const HISTORY_MAX = 50
+
+const defaultStore = () => (typeof localStorage !== 'undefined' ? localStorage : null)
+const isRow = (r) => r && Number.isFinite(r.at) && Number.isFinite(r.score) && Number.isFinite(r.correct) && Number.isFinite(r.total)
+
+export function loadHistory(store = defaultStore()) {
+  try {
+    const list = JSON.parse(store?.getItem(HISTORY_KEY) || '[]')
+    return Array.isArray(list) ? list.filter(isRow) : []
+  } catch {
+    return []
+  }
+}
+
+export function addResult(history, { score, correct, total }, at = Date.now()) {
+  return [{ at, score, correct, total }, ...history].slice(0, HISTORY_MAX)
+}
+
+export function saveHistory(history, store = defaultStore()) {
+  try {
+    if (!store) return false
+    store.setItem(HISTORY_KEY, JSON.stringify(history))
+    return true
+  } catch {
+    return false
+  }
+}
+
+export function summarize(history) {
+  if (!history.length) return { games: 0, best: null, average: null }
+  const scores = history.map((h) => h.score)
+  return { games: scores.length, best: Math.max(...scores), average: Math.round(scores.reduce((a, b) => a + b, 0) / scores.length) }
+}
+
+// history[0] is the game just played
+export function isNewBest(history) {
+  if (history.length < 2) return false
+  return history[0].score > Math.max(...history.slice(1).map((h) => h.score))
+}
+
+export function playedLabel(at, now = new Date()) {
+  const d = new Date(at)
+  const day = (x) => new Date(x.getFullYear(), x.getMonth(), x.getDate()).getTime()
+  const diff = Math.round((day(now) - day(d)) / 86400000)
+  const time = d.toLocaleTimeString('en-US', { hour: 'numeric', minute: '2-digit' })
+  if (diff === 0) return `Today ${time}`
+  if (diff === 1) return `Yesterday ${time}`
+  const opts = { month: 'short', day: 'numeric', ...(d.getFullYear() !== now.getFullYear() ? { year: 'numeric' } : {}) }
+  return d.toLocaleDateString('en-US', opts)
+}
