@@ -2,6 +2,7 @@ import { describe, it, expect } from 'vitest'
 import {
   ROUND_SIZE, SECONDS, shuffle, pickRound, scoreOf, initialState, quizReducer, photoUrl, creditLine,
   HISTORY_KEY, HISTORY_MAX, loadHistory, addResult, saveHistory, summarize, isNewBest, playedLabel,
+  NAME_MAX, DEFAULT_NAME, cleanName, nameOf, recentNames, renameLast, bestRow, loadName, saveName,
 } from './quiz.js'
 
 // a tiny deterministic random source: cycles through the given values
@@ -155,7 +156,7 @@ describe('score history', () => {
     let h = []
     for (let i = 0; i < HISTORY_MAX + 5; i++) h = addResult(h, { score: i, correct: i, total: 20 }, 1000 + i)
     expect(h).toHaveLength(HISTORY_MAX)
-    expect(h[0]).toEqual({ at: 1000 + HISTORY_MAX + 4, score: HISTORY_MAX + 4, correct: HISTORY_MAX + 4, total: 20 })
+    expect(h[0]).toEqual({ at: 1000 + HISTORY_MAX + 4, score: HISTORY_MAX + 4, correct: HISTORY_MAX + 4, total: 20, name: 'Player' })
   })
 
   it('round-trips through storage, and reports a blocked save', () => {
@@ -186,5 +187,59 @@ describe('score history', () => {
     expect(playedLabel(new Date(2026, 10, 3, 21, 5).getTime(), now)).toMatch(/^Yesterday 9:05\sPM$/)
     expect(playedLabel(new Date(2026, 9, 28, 9, 0).getTime(), now)).toBe('Oct 28')
     expect(playedLabel(new Date(2025, 9, 28, 9, 0).getTime(), now)).toBe('Oct 28, 2025')
+  })
+})
+
+describe('player names', () => {
+  const memStore = () => { const m = new Map(); return { getItem: (k) => (m.has(k) ? m.get(k) : null), setItem: (k, v) => m.set(k, String(v)), m } }
+
+  it('trims, collapses spaces, caps the length and falls back to Player', () => {
+    expect(cleanName('  Sara  ')).toBe('Sara')
+    expect(cleanName('Big   Bro')).toBe('Big Bro')
+    expect(cleanName('Abcdefghijklmnop')).toBe('Abcdefghijkl')
+    expect(cleanName('엄마')).toBe('엄마')
+    expect(cleanName('')).toBe(DEFAULT_NAME)
+    expect(cleanName('   ')).toBe(DEFAULT_NAME)
+    expect(cleanName(undefined)).toBe(DEFAULT_NAME)
+    expect([...cleanName('😀'.repeat(20))]).toHaveLength(NAME_MAX)
+  })
+
+  it('tags each game with a name; old rows without one read as Player', () => {
+    const h = addResult([{ at: 1, score: 60, correct: 12, total: 20 }], { score: 80, correct: 16, total: 20 }, 2, ' Mom ')
+    expect(h[0].name).toBe('Mom')
+    expect(nameOf(h[1])).toBe(DEFAULT_NAME)
+    expect(nameOf(null)).toBe(DEFAULT_NAME)
+  })
+
+  it('lists distinct recent names, newest first, without the fallback', () => {
+    const h = [{ name: 'Sara' }, { name: 'Mom' }, {}, { name: 'Sara' }, { name: 'Dad' }, { name: 'Kai' }, { name: 'Jin' }, { name: 'Zed' }]
+    expect(recentNames(h)).toEqual(['Sara', 'Mom', 'Dad', 'Kai', 'Jin'])
+    expect(recentNames(h, 2)).toEqual(['Sara', 'Mom'])
+    expect(recentNames([])).toEqual([])
+  })
+
+  it('renames the game just played without adding a row', () => {
+    const h = [{ at: 2, score: 80, name: 'Player' }, { at: 1, score: 60, name: 'Mom' }]
+    const r = renameLast(h, 'Sara')
+    expect(r).toHaveLength(2)
+    expect(r[0]).toEqual({ at: 2, score: 80, name: 'Sara' })
+    expect(r[1]).toBe(h[1])
+    expect(renameLast([], 'Sara')).toEqual([])
+  })
+
+  it('finds the best game, keeping the newest on a tie', () => {
+    expect(bestRow([])).toBe(null)
+    expect(bestRow([{ at: 3, score: 70 }, { at: 2, score: 90 }, { at: 1, score: 90 }])).toEqual({ at: 2, score: 90 })
+  })
+
+  it('remembers the last name, and survives blocked storage', () => {
+    const store = memStore()
+    expect(loadName(store)).toBe('')
+    expect(saveName('  Sara ', store)).toBe(true)
+    expect(loadName(store)).toBe('Sara')
+    expect(saveName('x', null)).toBe(false)
+    expect(saveName('x', { setItem: () => { throw new Error('full') } })).toBe(false)
+    expect(loadName({ getItem: () => { throw new Error('blocked') } })).toBe('')
+    expect(loadName(null)).toBe('')
   })
 })

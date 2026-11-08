@@ -81,3 +81,20 @@ Every finished game SHALL be saved on this phone (localStorage `bready.quiz.v1`,
 #### Scenario: Quitting mid-game
 - **WHEN** the user taps ✕ before the 20th answer
 - **THEN** nothing is saved
+
+### Requirement: Player name on each game
+Family members share one phone, so each saved game SHALL carry a player name (at most 12 characters, trimmed; "Player" when none). The last name used is kept in localStorage `bready.quiz.name`.
+
+#### Scenario: Picking who played
+- **WHEN** a game ends
+- **THEN** it is saved at once under the last name used, and a "Who played?" card shows chips for up to 5 recent names (the current one ticked) and "+ New name"
+- **AND** tapping a chip or saving a new name relabels that same game; no extra row is added
+
+#### Scenario: First game on the phone
+- **WHEN** no name has been used yet
+- **THEN** the card shows a name box and Save, without opening the keyboard by itself
+
+#### Scenario: Scoreboard rows
+- **WHEN** the scoreboard is shown
+- **THEN** each row shows the name with the time under it, and the summary names the holder of the best score
+- **AND** games saved before names existed show as "Player"

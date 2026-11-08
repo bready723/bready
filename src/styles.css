@@ -1145,6 +1145,25 @@ textarea.input { resize: vertical; min-height: 88px; }
   font: 780 13px var(--sans); letter-spacing: .02em; color: #120a1c; background: #2bff9a;
   box-shadow: 0 0 12px rgba(43,255,154,.8);
 }
+/* who played: one tap on a family name, or type a new one */
+.q-namecard { padding: 14px 16px 16px; }
+.q-name-picks { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 10px; }
+.q-name-chip {
+  min-height: 44px; padding: 0 16px; border-radius: 99px; border: 1.5px solid rgba(91,63,214,.35);
+  background: rgba(255,255,255,.7); color: var(--q-ink); font: 700 15px var(--sans); cursor: pointer;
+}
+.q-name-chip.on { background: #5b3fd6; border-color: #5b3fd6; color: #fff; box-shadow: 0 4px 12px -4px rgba(91,63,214,.7); }
+.q-name-chip.add { border-style: dashed; color: #5b3fd6; background: transparent; }
+.q-name-form { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; margin-top: 10px; }
+.q-name-input {
+  flex: 1 1 140px; min-width: 0; height: 48px; padding: 0 14px; border-radius: 14px;
+  border: 1.5px solid rgba(91,63,214,.4); background: rgba(255,255,255,.85); color: var(--q-ink);
+  font: 650 17px var(--sans); /* 16px+ stops iPhone zooming in */
+}
+.q-name-input:focus { outline: none; border-color: #5b3fd6; box-shadow: 0 0 0 3px rgba(91,63,214,.25); }
+.q-btn.save { flex: 0 0 auto; width: auto; min-height: 48px; padding: 0 22px; color: #120a1c; background: #2bff9a; border: 0; box-shadow: 0 0 12px rgba(43,255,154,.7); }
+.q-btn.save:disabled { opacity: .45; box-shadow: none; }
+.q-name-cancel { min-height: 44px; padding: 0 8px; border: 0; background: none; color: var(--q-muted); font: 650 14px var(--sans); cursor: pointer; }
 /* scoreboard: past games on this phone, newest first */
 .q-board { padding: 16px 16px 12px; }
 .q-board-head { display: flex; align-items: baseline; justify-content: space-between; gap: 10px; flex-wrap: wrap; }
@@ -1152,12 +1171,15 @@ textarea.input { resize: vertical; min-height: 88px; }
 .q-board-sum b { color: var(--q-ink); font-weight: 760; }
 .q-board ol { list-style: none; margin: 10px 0 0; padding: 0; display: grid; gap: 2px; }
 .q-board li {
-  display: grid; grid-template-columns: 7.5em 1fr 2.4em; align-items: center; gap: 10px;
+  display: grid; grid-template-columns: 8.5em 1fr 2.4em; align-items: center; gap: 10px;
   padding: 7px 8px; border-radius: 10px; font-size: 13.5px; color: var(--q-ink);
 }
 .q-board li.now { background: rgba(91,63,214,.10); font-weight: 700; }
-.q-board-when { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; color: var(--q-muted); }
-.q-board li.now .q-board-when { color: #5b3fd6; }
+.q-board-who { display: grid; min-width: 0; line-height: 1.2; }
+.q-board-who b, .q-board-who small { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.q-board-who b { font-weight: 720; }
+.q-board-who small { font-size: 11.5px; color: var(--q-muted); }
+.q-board li.now .q-board-who small { color: #5b3fd6; }
 .q-board-bar { height: 8px; border-radius: 99px; background: rgba(27,20,48,.08); overflow: hidden; }
 .q-board-bar i { display: block; width: 100%; height: 100%; border-radius: 99px; background: #8f7cf0; transform-origin: left center; }
 .q-board li.now .q-board-bar i { background: #5b3fd6; }

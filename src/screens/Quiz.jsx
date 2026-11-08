@@ -3,6 +3,7 @@ import people from '../lib/people.json'
 import {
   ROUND_SIZE, SECONDS, pickRound, scoreOf, initialState, quizReducer, photoUrl, creditLine,
   loadHistory, addResult, saveHistory, summarize, isNewBest, playedLabel,
+  NAME_MAX, DEFAULT_NAME, cleanName, nameOf, recentNames, renameLast, bestRow, loadName, saveName,
 } from '../lib/quiz.js'
 
 const BOARD_ROWS = 10
@@ -133,12 +134,22 @@ export default function Quiz() {
     if (s.phase !== 'done' || savedRound.current === s.round) return
     savedRound.current = s.round
     setHistory((h) => {
-      const next = addResult(h, scoreOf(s.answers, s.round.length))
+      const next = addResult(h, scoreOf(s.answers, s.round.length), Date.now(), loadName() || DEFAULT_NAME)
       saveHistory(next)
       return next
     })
   }, [s.phase, s.round, s.answers])
   const board = summarize(history)
+  const top = bestRow(history)
+  // "who played?": the game is already saved under the last name; picking a name relabels it
+  const setPlayer = (name) => {
+    saveName(name)
+    setHistory((h) => {
+      const next = renameLast(h, name)
+      saveHistory(next)
+      return next
+    })
+  }
 
   if (s.phase === 'idle') {
     return (
@@ -195,6 +206,9 @@ export default function Quiz() {
               ))}
             </div>
           </div>
+          {savedRound.current === s.round && history.length > 0 && (
+            <NameCard key={history[0].at} current={nameOf(history[0])} names={recentNames(history.slice(1))} onPick={setPlayer} />
+          )}
           <div className="q-row">
             <button className="q-btn primary" onClick={() => start('replay')}>Replay</button>
             <button className="q-btn stop" onClick={() => dispatch({ type: 'stop' })}>Stop</button>
@@ -204,13 +218,16 @@ export default function Quiz() {
               <div className="q-board-head">
                 <p className="q-eyebrow">Scoreboard</p>
                 <p className="q-board-sum">
-                  Best <b>{board.best}</b> · Avg <b>{board.average}</b> · {board.games} {board.games === 1 ? 'game' : 'games'}
+                  Best <b>{board.best}</b>{top && nameOf(top) !== DEFAULT_NAME ? <> by {nameOf(top)}</> : null} · Avg <b>{board.average}</b> · {board.games} {board.games === 1 ? 'game' : 'games'}
                 </p>
               </div>
               <ol>
                 {history.slice(0, BOARD_ROWS).map((h, i) => (
                   <li key={h.at} className={`${i === 0 && savedRound.current === s.round ? 'now' : ''}${h.score === board.best ? ' top' : ''}`}>
-                    <span className="q-board-when">{i === 0 && savedRound.current === s.round ? 'This game' : playedLabel(h.at)}</span>
+                    <span className="q-board-who">
+                      <b>{nameOf(h)}</b>
+                      <small>{i === 0 && savedRound.current === s.round ? 'This game' : playedLabel(h.at)}</small>
+                    </span>
                     <span className="q-board-bar" aria-hidden="true"><i style={{ transform: `scaleX(${h.score / 100})` }} /></span>
                     <span className="q-board-score">{h.score}</span>
                   </li>
@@ -287,6 +304,61 @@ export default function Quiz() {
         )}
       </section>
     </main>
+  )
+}
+
+// End of game: tap who played. The game is saved already, so skipping this is fine.
+function NameCard({ current, names, onPick }) {
+  const known = current !== DEFAULT_NAME
+  // fixed for the life of the card, so switching names never drops one from the list
+  const [picks, setPicks] = useState(() => (known ? [current, ...names.filter((n) => n !== current)] : names).slice(0, 5))
+  const [typing, setTyping] = useState(!known && !names.length)
+  const [draft, setDraft] = useState('')
+  const input = useRef(null)
+  // focus only after "+ New name" is tapped; focusing on arrival would pop the
+  // phone keyboard over the score
+  const asked = useRef(false)
+  useEffect(() => { if (typing && asked.current) input.current?.focus() }, [typing])
+  const submit = (e) => {
+    e.preventDefault()
+    if (!draft.trim()) return
+    const name = cleanName(draft)
+    setPicks((list) => [name, ...list.filter((n) => n !== name)].slice(0, 5))
+    onPick(name)
+    setTyping(false)
+  }
+  return (
+    <div className="glass q-namecard">
+      <p className="q-eyebrow">Who played?</p>
+      {typing ? (
+        <form className="q-name-form" onSubmit={submit}>
+          <input
+            ref={input}
+            className="q-name-input"
+            value={draft}
+            onChange={(e) => setDraft(e.target.value)}
+            maxLength={NAME_MAX}
+            placeholder="Your name"
+            aria-label="Your name"
+            enterKeyHint="done"
+            autoComplete="off"
+          />
+          <button className="q-btn save" type="submit" disabled={!draft.trim()}>Save</button>
+          {picks.length > 0 && (
+            <button className="q-name-cancel" type="button" onClick={() => setTyping(false)}>Cancel</button>
+          )}
+        </form>
+      ) : (
+        <div className="q-name-picks" role="group" aria-label="Who played?">
+          {picks.map((n) => (
+            <button key={n} type="button" className={`q-name-chip${n === current ? ' on' : ''}`} aria-pressed={n === current} onClick={() => n !== current && onPick(n)}>
+              {n === current && <span aria-hidden="true">✓ </span>}{n}
+            </button>
+          ))}
+          <button type="button" className="q-name-chip add" onClick={() => { asked.current = true; setDraft(''); setTyping(true) }}>+ New name</button>
+        </div>
+      )}
+    </div>
   )
 }
 

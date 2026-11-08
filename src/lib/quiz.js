@@ -85,8 +85,60 @@ export function loadHistory(store = defaultStore()) {
   }
 }
 
-export function addResult(history, { score, correct, total }, at = Date.now()) {
-  return [{ at, score, correct, total }, ...history].slice(0, HISTORY_MAX)
+export function addResult(history, { score, correct, total }, at = Date.now(), name = DEFAULT_NAME) {
+  return [{ at, score, correct, total, name: cleanName(name) }, ...history].slice(0, HISTORY_MAX)
+}
+
+// player names: family shares one phone, so each game is tagged with who played
+export const NAME_KEY = 'bready.quiz.name'
+export const NAME_MAX = 12
+export const DEFAULT_NAME = 'Player'
+
+export function cleanName(name) {
+  const s = String(name ?? '').replace(/\s+/g, ' ').trim()
+  return [...s].slice(0, NAME_MAX).join('').trim() || DEFAULT_NAME
+}
+
+export const nameOf = (row) => cleanName(row?.name)
+
+// distinct names, newest first; the "Player" fallback is not offered as a pick
+export function recentNames(history, n = 5) {
+  const out = []
+  for (const row of history) {
+    const name = nameOf(row)
+    if (name !== DEFAULT_NAME && !out.includes(name)) out.push(name)
+    if (out.length === n) break
+  }
+  return out
+}
+
+// the game just played is history[0]; Save renames it instead of adding a row
+export function renameLast(history, name) {
+  if (!history.length) return history
+  return [{ ...history[0], name: cleanName(name) }, ...history.slice(1)]
+}
+
+export function bestRow(history) {
+  return history.reduce((top, row) => (top && top.score >= row.score ? top : row), null)
+}
+
+export function loadName(store = defaultStore()) {
+  try {
+    const v = store?.getItem(NAME_KEY)
+    return v ? cleanName(v) : ''
+  } catch {
+    return ''
+  }
+}
+
+export function saveName(name, store = defaultStore()) {
+  try {
+    if (!store) return false
+    store.setItem(NAME_KEY, cleanName(name))
+    return true
+  } catch {
+    return false
+  }
 }
 
 export function saveHistory(history, store = defaultStore()) {

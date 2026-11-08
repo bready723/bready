@@ -31,3 +31,7 @@
 ## 5. Follow-ups (2026-11-04)
 - [x] 5.1 Pool to 500: 162 more Commons candidates, 53 dropped on review (hard-to-guess photo or least known).
 - [x] 5.2 Scoreboard: history in `quiz.js` (load/add/save/summarize/isNewBest/playedLabel, tested), end-screen card, Best chip on Start.
+
+## 6. Follow-ups (2026-11-07)
+- [x] 6.1 Player names: `cleanName/recentNames/renameLast/bestRow/loadName/saveName` in `quiz.js` (tested), "Who played?" card on the end screen, names on scoreboard rows.
+- [ ] 6.2 Pool to 1000 at the same mix (about 1/3 Korean).
