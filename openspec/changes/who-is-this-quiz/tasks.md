@@ -34,4 +34,4 @@
 
 ## 6. Follow-ups (2026-11-07)
 - [x] 6.1 Player names: `cleanName/recentNames/renameLast/bestRow/loadName/saveName` in `quiz.js` (tested), "Who played?" card on the end screen, names on scoreboard rows.
-- [ ] 6.2 Pool to 1000 at the same mix (about 1/3 Korean).
+- [x] 6.2 Pool to 1000 at the same mix (331 Korean): 939 more Commons candidates, 343 cut as least known (DROP_1000), 38 cut on the contact-sheet review (DROP_PHOTO). Photo cache maxEntries 1000.

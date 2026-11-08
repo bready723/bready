@@ -24,7 +24,7 @@ export default defineConfig({
           {
             urlPattern: ({ url }) => url.pathname.startsWith('/bready/quiz/'),
             handler: 'CacheFirst',
-            options: { cacheName: 'quiz-photos', expiration: { maxEntries: 450 } },
+            options: { cacheName: 'quiz-photos', expiration: { maxEntries: 1000 } },
           },
         ],
       },
