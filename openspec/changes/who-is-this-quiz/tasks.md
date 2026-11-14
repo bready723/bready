@@ -35,3 +35,4 @@
 ## 6. Follow-ups (2026-11-07)
 - [x] 6.1 Player names: `cleanName/recentNames/renameLast/bestRow/loadName/saveName` in `quiz.js` (tested), "Who played?" card on the end screen, names on scoreboard rows.
 - [x] 6.2 Pool to 1000 at the same mix (331 Korean): 939 more Commons candidates, 343 cut as least known (DROP_1000), 38 cut on the contact-sheet review (DROP_PHOTO). Photo cache maxEntries 1000.
+- [x] 6.3 Fewer sports faces (2026-11-14): 217 more well-known non-sports faces (91 Korean actors, idols, singers, TV hosts; 126 global stars) added on top of the 1000, so athletes drop from about 1 in 7 to about 1 in 8.5. Candidates in `scripts/quiz/more-people.csv`; 85 previously cut names skipped, 28 cut on the contact-sheet review. Photo cache maxEntries 1300.
