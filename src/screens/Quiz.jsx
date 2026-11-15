@@ -3,8 +3,10 @@ import people from '../lib/people.json'
 import {
   ROUND_SIZE, SECONDS, pickRound, scoreOf, initialState, quizReducer, photoUrl, creditLine,
   loadHistory, addResult, saveHistory, summarize, isNewBest, playedLabel,
-  NAME_MAX, DEFAULT_NAME, cleanName, nameOf, recentNames, renameLast, bestRow, loadName, saveName,
+  DEFAULT_NAME, nameOf, recentNames, renameLast, bestRow, loadName, saveName,
 } from '../lib/quiz.js'
+import { Backdrop, NameCard } from '../components/QuizParts.jsx'
+import WorldQuiz from './WorldQuiz.jsx'
 
 const BOARD_ROWS = 10
 
@@ -110,6 +112,7 @@ export default function Quiz() {
   const playing = s.phase === 'loading' || s.phase === 'countdown' || s.phase === 'revealed'
   useFitHeight(play, playing)
   const person = s.round[s.index]
+  const [world, setWorld] = useState(null) // 'capital' | 'flag' while a world quiz is open
 
   // one tick per second, only while counting down
   useEffect(() => {
@@ -152,33 +155,23 @@ export default function Quiz() {
   }
 
   if (s.phase === 'idle') {
+    if (world) return <WorldQuiz kind={world} onExit={() => setWorld(null)} />
     return (
       <main className="screen quiz" ref={root}>
         <Backdrop />
-        <section className="q-start" key="start">
-          <div className="glass q-hero">
-            <h1 className="q-title">Who Is This?</h1>
-            <p className="q-lede">A face appears. Say the name before the timer hits zero.</p>
-            <div className="q-facts">
-              <span className="q-chip">{people.length} faces</span>
-              <span className="q-chip">{ROUND_SIZE} per game</span>
-              <span className="q-chip">{SECONDS} seconds each</span>
-              {board.best !== null && <span className="q-chip best">Best {board.best}</span>}
+        <section className="q-hub" key="hub">
+          {[
+            ['Who Is This?', () => start('start'), !people.length],
+            ['Country → Capital', () => setWorld('capital')],
+            ['Flag → Country', () => setWorld('flag')],
+          ].map(([title, go, off]) => (
+            <div className="glass q-hub-card" key={title}>
+              <h2 className="q-hub-title">{title}</h2>
+              <button className="q-btn primary" onClick={go} disabled={off}>Start</button>
             </div>
-          </div>
-          <button className="q-btn primary big" onClick={() => start('start')} disabled={!people.length}>
-            Start
-          </button>
-          <div className="glass q-how">
-            <p className="q-eyebrow">How to play</p>
-            <ol>
-              <li><b>1</b><span>A face fills the screen and the <strong>5-second</strong> timer starts.</span></li>
-              <li><b>2</b><span>Say the name out loud, then tap <strong>Show answer</strong>, or wait for zero.</span></li>
-              <li><b>3</b><span>Be honest: <strong>I got it right</strong> or <strong>I got it wrong</strong>. Each right answer is 5 points.</span></li>
-            </ol>
-          </div>
+          ))}
           <a className="q-credits" href={`${BASE}quiz/credits.html`} target="_blank" rel="noreferrer">
-            Photo credits
+            Photo &amp; flag credits
           </a>
         </section>
       </main>
@@ -304,68 +297,5 @@ export default function Quiz() {
         )}
       </section>
     </main>
-  )
-}
-
-// End of game: tap who played. The game is saved already, so skipping this is fine.
-function NameCard({ current, names, onPick }) {
-  const known = current !== DEFAULT_NAME
-  // fixed for the life of the card, so switching names never drops one from the list
-  const [picks, setPicks] = useState(() => (known ? [current, ...names.filter((n) => n !== current)] : names).slice(0, 5))
-  const [typing, setTyping] = useState(!known && !names.length)
-  const [draft, setDraft] = useState('')
-  const input = useRef(null)
-  // focus only after "+ New name" is tapped; focusing on arrival would pop the
-  // phone keyboard over the score
-  const asked = useRef(false)
-  useEffect(() => { if (typing && asked.current) input.current?.focus() }, [typing])
-  const submit = (e) => {
-    e.preventDefault()
-    if (!draft.trim()) return
-    const name = cleanName(draft)
-    setPicks((list) => [name, ...list.filter((n) => n !== name)].slice(0, 5))
-    onPick(name)
-    setTyping(false)
-  }
-  return (
-    <div className="glass q-namecard">
-      <p className="q-eyebrow">Who played?</p>
-      {typing ? (
-        <form className="q-name-form" onSubmit={submit}>
-          <input
-            ref={input}
-            className="q-name-input"
-            value={draft}
-            onChange={(e) => setDraft(e.target.value)}
-            maxLength={NAME_MAX}
-            placeholder="Your name"
-            aria-label="Your name"
-            enterKeyHint="done"
-            autoComplete="off"
-          />
-          <button className="q-btn save" type="submit" disabled={!draft.trim()}>Save</button>
-          {picks.length > 0 && (
-            <button className="q-name-cancel" type="button" onClick={() => setTyping(false)}>Cancel</button>
-          )}
-        </form>
-      ) : (
-        <div className="q-name-picks" role="group" aria-label="Who played?">
-          {picks.map((n) => (
-            <button key={n} type="button" className={`q-name-chip${n === current ? ' on' : ''}`} aria-pressed={n === current} onClick={() => n !== current && onPick(n)}>
-              {n === current && <span aria-hidden="true">✓ </span>}{n}
-            </button>
-          ))}
-          <button type="button" className="q-name-chip add" onClick={() => { asked.current = true; setDraft(''); setTyping(true) }}>+ New name</button>
-        </div>
-      )}
-    </div>
-  )
-}
-
-function Backdrop() {
-  return (
-    <div className="q-bg" aria-hidden="true">
-      <i className="b1" /><i className="b2" /><i className="b3" /><i className="b4" />
-    </div>
   )
 }

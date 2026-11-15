@@ -26,6 +26,12 @@ export default defineConfig({
             handler: 'CacheFirst',
             options: { cacheName: 'quiz-photos', expiration: { maxEntries: 1300 } },
           },
+          {
+            // 190 country flags for the Flag → Country quiz, cached as they are shown
+            urlPattern: ({ url }) => url.pathname.startsWith('/bready/flags/'),
+            handler: 'CacheFirst',
+            options: { cacheName: 'quiz-flags', expiration: { maxEntries: 200 } },
+          },
         ],
       },
       includeAssets: ['icon-192.png', 'icon-512.png', 'icon-maskable-512.png'],
@@ -65,6 +71,12 @@ export default defineConfig({
           lines: 70,
         },
         'src/lib/calculator.js': {
+          statements: 90,
+          branches: 90,
+          functions: 90,
+          lines: 90,
+        },
+        'src/lib/world.js': {
           statements: 90,
           branches: 90,
           functions: 90,

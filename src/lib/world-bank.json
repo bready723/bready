@@ -1,0 +1,1332 @@
+[
+{
+"country": "United States",
+"capital": "Washington, D.C.",
+"code": "us",
+"tier": 1,
+"region": "Americas"
+},
+{
+"country": "United Kingdom",
+"capital": "London",
+"code": "gb",
+"tier": 1,
+"region": "Europe"
+},
+{
+"country": "France",
+"capital": "Paris",
+"code": "fr",
+"tier": 1,
+"region": "Europe"
+},
+{
+"country": "Germany",
+"capital": "Berlin",
+"code": "de",
+"tier": 1,
+"region": "Europe"
+},
+{
+"country": "Italy",
+"capital": "Rome",
+"code": "it",
+"tier": 1,
+"region": "Europe"
+},
+{
+"country": "Spain",
+"capital": "Madrid",
+"code": "es",
+"tier": 1,
+"region": "Europe"
+},
+{
+"country": "Portugal",
+"capital": "Lisbon",
+"code": "pt",
+"tier": 1,
+"region": "Europe"
+},
+{
+"country": "Netherlands",
+"capital": "Amsterdam",
+"code": "nl",
+"tier": 1,
+"region": "Europe"
+},
+{
+"country": "Belgium",
+"capital": "Brussels",
+"code": "be",
+"tier": 1,
+"region": "Europe"
+},
+{
+"country": "Switzerland",
+"capital": "Bern",
+"code": "ch",
+"tier": 1,
+"region": "Europe"
+},
+{
+"country": "Austria",
+"capital": "Vienna",
+"code": "at",
+"tier": 1,
+"region": "Europe"
+},
+{
+"country": "Greece",
+"capital": "Athens",
+"code": "gr",
+"tier": 1,
+"region": "Europe"
+},
+{
+"country": "Ireland",
+"capital": "Dublin",
+"code": "ie",
+"tier": 1,
+"region": "Europe"
+},
+{
+"country": "Sweden",
+"capital": "Stockholm",
+"code": "se",
+"tier": 1,
+"region": "Europe"
+},
+{
+"country": "Norway",
+"capital": "Oslo",
+"code": "no",
+"tier": 1,
+"region": "Europe"
+},
+{
+"country": "Denmark",
+"capital": "Copenhagen",
+"code": "dk",
+"tier": 1,
+"region": "Europe"
+},
+{
+"country": "Finland",
+"capital": "Helsinki",
+"code": "fi",
+"tier": 1,
+"region": "Europe"
+},
+{
+"country": "Iceland",
+"capital": "Reykjavik",
+"code": "is",
+"tier": 1,
+"region": "Europe"
+},
+{
+"country": "Poland",
+"capital": "Warsaw",
+"code": "pl",
+"tier": 1,
+"region": "Europe"
+},
+{
+"country": "Ukraine",
+"capital": "Kyiv",
+"code": "ua",
+"tier": 1,
+"region": "Europe"
+},
+{
+"country": "Russia",
+"capital": "Moscow",
+"code": "ru",
+"tier": 1,
+"region": "Europe"
+},
+{
+"country": "Turkey",
+"capital": "Ankara",
+"code": "tr",
+"tier": 1,
+"region": "Europe"
+},
+{
+"country": "Canada",
+"capital": "Ottawa",
+"code": "ca",
+"tier": 1,
+"region": "Americas"
+},
+{
+"country": "Mexico",
+"capital": "Mexico City",
+"code": "mx",
+"tier": 1,
+"region": "Americas"
+},
+{
+"country": "Brazil",
+"capital": "Brasília",
+"code": "br",
+"tier": 1,
+"region": "Americas"
+},
+{
+"country": "Argentina",
+"capital": "Buenos Aires",
+"code": "ar",
+"tier": 1,
+"region": "Americas"
+},
+{
+"country": "Chile",
+"capital": "Santiago",
+"code": "cl",
+"tier": 1,
+"region": "Americas"
+},
+{
+"country": "Peru",
+"capital": "Lima",
+"code": "pe",
+"tier": 1,
+"region": "Americas"
+},
+{
+"country": "Colombia",
+"capital": "Bogotá",
+"code": "co",
+"tier": 1,
+"region": "Americas"
+},
+{
+"country": "Venezuela",
+"capital": "Caracas",
+"code": "ve",
+"tier": 1,
+"region": "Americas"
+},
+{
+"country": "Cuba",
+"capital": "Havana",
+"code": "cu",
+"tier": 1,
+"region": "Americas"
+},
+{
+"country": "Jamaica",
+"capital": "Kingston",
+"code": "jm",
+"tier": 1,
+"region": "Americas"
+},
+{
+"country": "Japan",
+"capital": "Tokyo",
+"code": "jp",
+"tier": 1,
+"region": "Asia"
+},
+{
+"country": "China",
+"capital": "Beijing",
+"code": "cn",
+"tier": 1,
+"region": "Asia"
+},
+{
+"country": "South Korea",
+"capital": "Seoul",
+"code": "kr",
+"tier": 1,
+"region": "Asia"
+},
+{
+"country": "North Korea",
+"capital": "Pyongyang",
+"code": "kp",
+"tier": 1,
+"region": "Asia"
+},
+{
+"country": "India",
+"capital": "New Delhi",
+"code": "in",
+"tier": 1,
+"region": "Asia"
+},
+{
+"country": "Thailand",
+"capital": "Bangkok",
+"code": "th",
+"tier": 1,
+"region": "Asia"
+},
+{
+"country": "Vietnam",
+"capital": "Hanoi",
+"code": "vn",
+"tier": 1,
+"region": "Asia"
+},
+{
+"country": "Indonesia",
+"capital": "Jakarta",
+"code": "id",
+"tier": 1,
+"region": "Asia"
+},
+{
+"country": "Philippines",
+"capital": "Manila",
+"code": "ph",
+"tier": 1,
+"region": "Asia"
+},
+{
+"country": "Malaysia",
+"capital": "Kuala Lumpur",
+"code": "my",
+"tier": 1,
+"region": "Asia"
+},
+{
+"country": "Singapore",
+"capital": "Singapore",
+"code": "sg",
+"tier": 1,
+"region": "Asia"
+},
+{
+"country": "Australia",
+"capital": "Canberra",
+"code": "au",
+"tier": 1,
+"region": "Oceania"
+},
+{
+"country": "New Zealand",
+"capital": "Wellington",
+"code": "nz",
+"tier": 1,
+"region": "Oceania"
+},
+{
+"country": "Egypt",
+"capital": "Cairo",
+"code": "eg",
+"tier": 1,
+"region": "Africa"
+},
+{
+"country": "South Africa",
+"capital": "Pretoria",
+"code": "za",
+"tier": 1,
+"region": "Africa"
+},
+{
+"country": "Nigeria",
+"capital": "Abuja",
+"code": "ng",
+"tier": 1,
+"region": "Africa"
+},
+{
+"country": "Kenya",
+"capital": "Nairobi",
+"code": "ke",
+"tier": 1,
+"region": "Africa"
+},
+{
+"country": "Ethiopia",
+"capital": "Addis Ababa",
+"code": "et",
+"tier": 1,
+"region": "Africa"
+},
+{
+"country": "Morocco",
+"capital": "Rabat",
+"code": "ma",
+"tier": 1,
+"region": "Africa"
+},
+{
+"country": "Ghana",
+"capital": "Accra",
+"code": "gh",
+"tier": 1,
+"region": "Africa"
+},
+{
+"country": "Saudi Arabia",
+"capital": "Riyadh",
+"code": "sa",
+"tier": 1,
+"region": "Middle East"
+},
+{
+"country": "United Arab Emirates",
+"capital": "Abu Dhabi",
+"code": "ae",
+"tier": 1,
+"region": "Middle East"
+},
+{
+"country": "Qatar",
+"capital": "Doha",
+"code": "qa",
+"tier": 1,
+"region": "Middle East"
+},
+{
+"country": "Kuwait",
+"capital": "Kuwait City",
+"code": "kw",
+"tier": 1,
+"region": "Middle East"
+},
+{
+"country": "Israel",
+"capital": "Jerusalem",
+"code": "il",
+"tier": 1,
+"region": "Middle East"
+},
+{
+"country": "Iran",
+"capital": "Tehran",
+"code": "ir",
+"tier": 1,
+"region": "Middle East"
+},
+{
+"country": "Iraq",
+"capital": "Baghdad",
+"code": "iq",
+"tier": 1,
+"region": "Middle East"
+},
+{
+"country": "Pakistan",
+"capital": "Islamabad",
+"code": "pk",
+"tier": 1,
+"region": "Asia"
+},
+{
+"country": "Czech Republic",
+"capital": "Prague",
+"code": "cz",
+"tier": 2,
+"region": "Europe"
+},
+{
+"country": "Hungary",
+"capital": "Budapest",
+"code": "hu",
+"tier": 2,
+"region": "Europe"
+},
+{
+"country": "Romania",
+"capital": "Bucharest",
+"code": "ro",
+"tier": 2,
+"region": "Europe"
+},
+{
+"country": "Bulgaria",
+"capital": "Sofia",
+"code": "bg",
+"tier": 2,
+"region": "Europe"
+},
+{
+"country": "Serbia",
+"capital": "Belgrade",
+"code": "rs",
+"tier": 2,
+"region": "Europe"
+},
+{
+"country": "Croatia",
+"capital": "Zagreb",
+"code": "hr",
+"tier": 2,
+"region": "Europe"
+},
+{
+"country": "Bosnia and Herzegovina",
+"capital": "Sarajevo",
+"code": "ba",
+"tier": 2,
+"region": "Europe"
+},
+{
+"country": "Albania",
+"capital": "Tirana",
+"code": "al",
+"tier": 2,
+"region": "Europe"
+},
+{
+"country": "North Macedonia",
+"capital": "Skopje",
+"code": "mk",
+"tier": 2,
+"region": "Europe"
+},
+{
+"country": "Slovenia",
+"capital": "Ljubljana",
+"code": "si",
+"tier": 2,
+"region": "Europe"
+},
+{
+"country": "Slovakia",
+"capital": "Bratislava",
+"code": "sk",
+"tier": 2,
+"region": "Europe"
+},
+{
+"country": "Belarus",
+"capital": "Minsk",
+"code": "by",
+"tier": 2,
+"region": "Europe"
+},
+{
+"country": "Moldova",
+"capital": "Chișinău",
+"code": "md",
+"tier": 2,
+"region": "Europe"
+},
+{
+"country": "Lithuania",
+"capital": "Vilnius",
+"code": "lt",
+"tier": 2,
+"region": "Europe"
+},
+{
+"country": "Latvia",
+"capital": "Riga",
+"code": "lv",
+"tier": 2,
+"region": "Europe"
+},
+{
+"country": "Estonia",
+"capital": "Tallinn",
+"code": "ee",
+"tier": 2,
+"region": "Europe"
+},
+{
+"country": "Luxembourg",
+"capital": "Luxembourg City",
+"code": "lu",
+"tier": 2,
+"region": "Europe"
+},
+{
+"country": "Cyprus",
+"capital": "Nicosia",
+"code": "cy",
+"tier": 2,
+"region": "Europe"
+},
+{
+"country": "Malta",
+"capital": "Valletta",
+"code": "mt",
+"tier": 2,
+"region": "Europe"
+},
+{
+"country": "Georgia",
+"capital": "Tbilisi",
+"code": "ge",
+"tier": 2,
+"region": "Europe"
+},
+{
+"country": "Armenia",
+"capital": "Yerevan",
+"code": "am",
+"tier": 2,
+"region": "Europe"
+},
+{
+"country": "Azerbaijan",
+"capital": "Baku",
+"code": "az",
+"tier": 2,
+"region": "Europe"
+},
+{
+"country": "Kazakhstan",
+"capital": "Astana",
+"code": "kz",
+"tier": 2,
+"region": "Asia"
+},
+{
+"country": "Uzbekistan",
+"capital": "Tashkent",
+"code": "uz",
+"tier": 2,
+"region": "Asia"
+},
+{
+"country": "Mongolia",
+"capital": "Ulaanbaatar",
+"code": "mn",
+"tier": 2,
+"region": "Asia"
+},
+{
+"country": "Nepal",
+"capital": "Kathmandu",
+"code": "np",
+"tier": 2,
+"region": "Asia"
+},
+{
+"country": "Bangladesh",
+"capital": "Dhaka",
+"code": "bd",
+"tier": 2,
+"region": "Asia"
+},
+{
+"country": "Sri Lanka",
+"capital": "Sri Jayawardenepura Kotte",
+"code": "lk",
+"tier": 2,
+"region": "Asia"
+},
+{
+"country": "Myanmar",
+"capital": "Naypyidaw",
+"code": "mm",
+"tier": 2,
+"region": "Asia"
+},
+{
+"country": "Cambodia",
+"capital": "Phnom Penh",
+"code": "kh",
+"tier": 2,
+"region": "Asia"
+},
+{
+"country": "Laos",
+"capital": "Vientiane",
+"code": "la",
+"tier": 2,
+"region": "Asia"
+},
+{
+"country": "Taiwan",
+"capital": "Taipei",
+"code": "tw",
+"tier": 2,
+"region": "Asia"
+},
+{
+"country": "Jordan",
+"capital": "Amman",
+"code": "jo",
+"tier": 2,
+"region": "Middle East"
+},
+{
+"country": "Lebanon",
+"capital": "Beirut",
+"code": "lb",
+"tier": 2,
+"region": "Middle East"
+},
+{
+"country": "Syria",
+"capital": "Damascus",
+"code": "sy",
+"tier": 2,
+"region": "Middle East"
+},
+{
+"country": "Yemen",
+"capital": "Sana'a",
+"code": "ye",
+"tier": 2,
+"region": "Middle East"
+},
+{
+"country": "Oman",
+"capital": "Muscat",
+"code": "om",
+"tier": 2,
+"region": "Middle East"
+},
+{
+"country": "Bahrain",
+"capital": "Manama",
+"code": "bh",
+"tier": 2,
+"region": "Middle East"
+},
+{
+"country": "Ecuador",
+"capital": "Quito",
+"code": "ec",
+"tier": 2,
+"region": "Americas"
+},
+{
+"country": "Bolivia",
+"capital": "Sucre",
+"code": "bo",
+"tier": 2,
+"region": "Americas"
+},
+{
+"country": "Paraguay",
+"capital": "Asunción",
+"code": "py",
+"tier": 2,
+"region": "Americas"
+},
+{
+"country": "Uruguay",
+"capital": "Montevideo",
+"code": "uy",
+"tier": 2,
+"region": "Americas"
+},
+{
+"country": "Guyana",
+"capital": "Georgetown",
+"code": "gy",
+"tier": 2,
+"region": "Americas"
+},
+{
+"country": "Suriname",
+"capital": "Paramaribo",
+"code": "sr",
+"tier": 2,
+"region": "Americas"
+},
+{
+"country": "Panama",
+"capital": "Panama City",
+"code": "pa",
+"tier": 2,
+"region": "Americas"
+},
+{
+"country": "Costa Rica",
+"capital": "San José",
+"code": "cr",
+"tier": 2,
+"region": "Americas"
+},
+{
+"country": "Nicaragua",
+"capital": "Managua",
+"code": "ni",
+"tier": 2,
+"region": "Americas"
+},
+{
+"country": "Honduras",
+"capital": "Tegucigalpa",
+"code": "hn",
+"tier": 2,
+"region": "Americas"
+},
+{
+"country": "El Salvador",
+"capital": "San Salvador",
+"code": "sv",
+"tier": 2,
+"region": "Americas"
+},
+{
+"country": "Guatemala",
+"capital": "Guatemala City",
+"code": "gt",
+"tier": 2,
+"region": "Americas"
+},
+{
+"country": "Belize",
+"capital": "Belmopan",
+"code": "bz",
+"tier": 2,
+"region": "Americas"
+},
+{
+"country": "Dominican Republic",
+"capital": "Santo Domingo",
+"code": "do",
+"tier": 2,
+"region": "Americas"
+},
+{
+"country": "Haiti",
+"capital": "Port-au-Prince",
+"code": "ht",
+"tier": 2,
+"region": "Americas"
+},
+{
+"country": "Trinidad and Tobago",
+"capital": "Port of Spain",
+"code": "tt",
+"tier": 2,
+"region": "Americas"
+},
+{
+"country": "Bahamas",
+"capital": "Nassau",
+"code": "bs",
+"tier": 2,
+"region": "Americas"
+},
+{
+"country": "Barbados",
+"capital": "Bridgetown",
+"code": "bb",
+"tier": 2,
+"region": "Americas"
+},
+{
+"country": "Senegal",
+"capital": "Dakar",
+"code": "sn",
+"tier": 2,
+"region": "Africa"
+},
+{
+"country": "Ivory Coast",
+"capital": "Yamoussoukro",
+"code": "ci",
+"tier": 2,
+"region": "Africa"
+},
+{
+"country": "Cameroon",
+"capital": "Yaoundé",
+"code": "cm",
+"tier": 2,
+"region": "Africa"
+},
+{
+"country": "Angola",
+"capital": "Luanda",
+"code": "ao",
+"tier": 2,
+"region": "Africa"
+},
+{
+"country": "Zambia",
+"capital": "Lusaka",
+"code": "zm",
+"tier": 2,
+"region": "Africa"
+},
+{
+"country": "Zimbabwe",
+"capital": "Harare",
+"code": "zw",
+"tier": 2,
+"region": "Africa"
+},
+{
+"country": "Uganda",
+"capital": "Kampala",
+"code": "ug",
+"tier": 2,
+"region": "Africa"
+},
+{
+"country": "Rwanda",
+"capital": "Kigali",
+"code": "rw",
+"tier": 2,
+"region": "Africa"
+},
+{
+"country": "Eswatini",
+"capital": "Mbabane",
+"code": "sz",
+"tier": 3,
+"region": "Africa"
+},
+{
+"country": "Lesotho",
+"capital": "Maseru",
+"code": "ls",
+"tier": 3,
+"region": "Africa"
+},
+{
+"country": "Botswana",
+"capital": "Gaborone",
+"code": "bw",
+"tier": 3,
+"region": "Africa"
+},
+{
+"country": "Namibia",
+"capital": "Windhoek",
+"code": "na",
+"tier": 3,
+"region": "Africa"
+},
+{
+"country": "Malawi",
+"capital": "Lilongwe",
+"code": "mw",
+"tier": 3,
+"region": "Africa"
+},
+{
+"country": "Mozambique",
+"capital": "Maputo",
+"code": "mz",
+"tier": 3,
+"region": "Africa"
+},
+{
+"country": "Tanzania",
+"capital": "Dodoma",
+"code": "tz",
+"tier": 3,
+"region": "Africa"
+},
+{
+"country": "Burundi",
+"capital": "Gitega",
+"code": "bi",
+"tier": 3,
+"region": "Africa"
+},
+{
+"country": "Djibouti",
+"capital": "Djibouti City",
+"code": "dj",
+"tier": 3,
+"region": "Africa"
+},
+{
+"country": "Eritrea",
+"capital": "Asmara",
+"code": "er",
+"tier": 3,
+"region": "Africa"
+},
+{
+"country": "Somalia",
+"capital": "Mogadishu",
+"code": "so",
+"tier": 3,
+"region": "Africa"
+},
+{
+"country": "Sudan",
+"capital": "Khartoum",
+"code": "sd",
+"tier": 3,
+"region": "Africa"
+},
+{
+"country": "South Sudan",
+"capital": "Juba",
+"code": "ss",
+"tier": 3,
+"region": "Africa"
+},
+{
+"country": "Chad",
+"capital": "N'Djamena",
+"code": "td",
+"tier": 3,
+"region": "Africa"
+},
+{
+"country": "Niger",
+"capital": "Niamey",
+"code": "ne",
+"tier": 3,
+"region": "Africa"
+},
+{
+"country": "Mali",
+"capital": "Bamako",
+"code": "ml",
+"tier": 3,
+"region": "Africa"
+},
+{
+"country": "Burkina Faso",
+"capital": "Ouagadougou",
+"code": "bf",
+"tier": 3,
+"region": "Africa"
+},
+{
+"country": "Mauritania",
+"capital": "Nouakchott",
+"code": "mr",
+"tier": 3,
+"region": "Africa"
+},
+{
+"country": "Guinea",
+"capital": "Conakry",
+"code": "gn",
+"tier": 3,
+"region": "Africa"
+},
+{
+"country": "Guinea-Bissau",
+"capital": "Bissau",
+"code": "gw",
+"tier": 3,
+"region": "Africa"
+},
+{
+"country": "Sierra Leone",
+"capital": "Freetown",
+"code": "sl",
+"tier": 3,
+"region": "Africa"
+},
+{
+"country": "Liberia",
+"capital": "Monrovia",
+"code": "lr",
+"tier": 3,
+"region": "Africa"
+},
+{
+"country": "Togo",
+"capital": "Lomé",
+"code": "tg",
+"tier": 3,
+"region": "Africa"
+},
+{
+"country": "Benin",
+"capital": "Porto-Novo",
+"code": "bj",
+"tier": 3,
+"region": "Africa"
+},
+{
+"country": "Central African Republic",
+"capital": "Bangui",
+"code": "cf",
+"tier": 3,
+"region": "Africa"
+},
+{
+"country": "Gabon",
+"capital": "Libreville",
+"code": "ga",
+"tier": 3,
+"region": "Africa"
+},
+{
+"country": "Republic of the Congo",
+"capital": "Brazzaville",
+"code": "cg",
+"tier": 3,
+"region": "Africa"
+},
+{
+"country": "Democratic Republic of the Congo",
+"capital": "Kinshasa",
+"code": "cd",
+"tier": 3,
+"region": "Africa"
+},
+{
+"country": "Equatorial Guinea",
+"capital": "Malabo",
+"code": "gq",
+"tier": 3,
+"region": "Africa"
+},
+{
+"country": "São Tomé and Príncipe",
+"capital": "São Tomé",
+"code": "st",
+"tier": 3,
+"region": "Africa"
+},
+{
+"country": "Comoros",
+"capital": "Moroni",
+"code": "km",
+"tier": 3,
+"region": "Africa"
+},
+{
+"country": "Madagascar",
+"capital": "Antananarivo",
+"code": "mg",
+"tier": 3,
+"region": "Africa"
+},
+{
+"country": "Mauritius",
+"capital": "Port Louis",
+"code": "mu",
+"tier": 3,
+"region": "Africa"
+},
+{
+"country": "Seychelles",
+"capital": "Victoria",
+"code": "sc",
+"tier": 3,
+"region": "Africa"
+},
+{
+"country": "Maldives",
+"capital": "Malé",
+"code": "mv",
+"tier": 3,
+"region": "Asia"
+},
+{
+"country": "Bhutan",
+"capital": "Thimphu",
+"code": "bt",
+"tier": 3,
+"region": "Asia"
+},
+{
+"country": "Brunei",
+"capital": "Bandar Seri Begawan",
+"code": "bn",
+"tier": 3,
+"region": "Asia"
+},
+{
+"country": "Timor-Leste",
+"capital": "Dili",
+"code": "tl",
+"tier": 3,
+"region": "Asia"
+},
+{
+"country": "Papua New Guinea",
+"capital": "Port Moresby",
+"code": "pg",
+"tier": 3,
+"region": "Oceania"
+},
+{
+"country": "Solomon Islands",
+"capital": "Honiara",
+"code": "sb",
+"tier": 3,
+"region": "Oceania"
+},
+{
+"country": "Vanuatu",
+"capital": "Port Vila",
+"code": "vu",
+"tier": 3,
+"region": "Oceania"
+},
+{
+"country": "Fiji",
+"capital": "Suva",
+"code": "fj",
+"tier": 3,
+"region": "Oceania"
+},
+{
+"country": "Samoa",
+"capital": "Apia",
+"code": "ws",
+"tier": 3,
+"region": "Oceania"
+},
+{
+"country": "Tonga",
+"capital": "Nuku'alofa",
+"code": "to",
+"tier": 3,
+"region": "Oceania"
+},
+{
+"country": "Kiribati",
+"capital": "Tarawa",
+"code": "ki",
+"tier": 3,
+"region": "Oceania"
+},
+{
+"country": "Tuvalu",
+"capital": "Funafuti",
+"code": "tv",
+"tier": 3,
+"region": "Oceania"
+},
+{
+"country": "Nauru",
+"capital": "Yaren",
+"code": "nr",
+"tier": 3,
+"region": "Oceania"
+},
+{
+"country": "Palau",
+"capital": "Ngerulmud",
+"code": "pw",
+"tier": 3,
+"region": "Oceania"
+},
+{
+"country": "Marshall Islands",
+"capital": "Majuro",
+"code": "mh",
+"tier": 3,
+"region": "Oceania"
+},
+{
+"country": "Micronesia",
+"capital": "Palikir",
+"code": "fm",
+"tier": 3,
+"region": "Oceania"
+},
+{
+"country": "Kyrgyzstan",
+"capital": "Bishkek",
+"code": "kg",
+"tier": 3,
+"region": "Asia"
+},
+{
+"country": "Tajikistan",
+"capital": "Dushanbe",
+"code": "tj",
+"tier": 3,
+"region": "Asia"
+},
+{
+"country": "Turkmenistan",
+"capital": "Ashgabat",
+"code": "tm",
+"tier": 3,
+"region": "Asia"
+},
+{
+"country": "Kosovo",
+"capital": "Pristina",
+"code": "xk",
+"tier": 3,
+"region": "Europe"
+},
+{
+"country": "Montenegro",
+"capital": "Podgorica",
+"code": "me",
+"tier": 3,
+"region": "Europe"
+},
+{
+"country": "Liechtenstein",
+"capital": "Vaduz",
+"code": "li",
+"tier": 3,
+"region": "Europe"
+},
+{
+"country": "Andorra",
+"capital": "Andorra la Vella",
+"code": "ad",
+"tier": 3,
+"region": "Europe"
+},
+{
+"country": "Monaco",
+"capital": "Monaco",
+"code": "mc",
+"tier": 3,
+"region": "Europe"
+},
+{
+"country": "San Marino",
+"capital": "San Marino",
+"code": "sm",
+"tier": 3,
+"region": "Europe"
+},
+{
+"country": "Vatican City",
+"capital": "Vatican City",
+"code": "va",
+"tier": 3,
+"region": "Europe"
+},
+{
+"country": "Dominica",
+"capital": "Roseau",
+"code": "dm",
+"tier": 3,
+"region": "Americas"
+},
+{
+"country": "Saint Lucia",
+"capital": "Castries",
+"code": "lc",
+"tier": 3,
+"region": "Americas"
+},
+{
+"country": "Grenada",
+"capital": "St. George's",
+"code": "gd",
+"tier": 3,
+"region": "Americas"
+},
+{
+"country": "Saint Kitts and Nevis",
+"capital": "Basseterre",
+"code": "kn",
+"tier": 3,
+"region": "Americas"
+},
+{
+"country": "Saint Vincent and the Grenadines",
+"capital": "Kingstown",
+"code": "vc",
+"tier": 3,
+"region": "Americas"
+},
+{
+"country": "Cape Verde",
+"capital": "Praia",
+"code": "cv",
+"tier": 3,
+"region": "Africa"
+}
+]

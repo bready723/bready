@@ -135,7 +135,7 @@ for f in os.listdir(qdir):
 json.dump(people, open(os.path.join(repo, 'src', 'lib', 'people.json'), 'w'), ensure_ascii=False, indent=0)
 with open(os.path.join(qdir, 'CREDITS.md'), 'w') as f:
     f.write('# Who Is This? — photo credits\n\nPhotos from Wikimedia Commons, used under the licence shown. '
-            'Each was resized to 640 px. All other photos come from a personal slide deck.\n\n| Person | Author | Licence | Source |\n|---|---|---|---|\n')
+            'Each was resized to 640 px. All other photos come from a personal slide deck. Country flags come from [flag-icons](https://github.com/lipis/flag-icons) by Panayiotis Lipiridis, MIT licence (see `public/flags/LICENSE.txt`).\n\n| Person | Author | Licence | Source |\n|---|---|---|---|\n')
     for p in sorted((p for p in people if p.get('source') == 'commons'), key=lambda p: p['name']):
         f.write(f"| {p['name']} | {(p.get('credit') or 'unknown').replace('|', '/')} | {p['license']} | [file page]({p['url']}) |\n")
 import html as H
@@ -148,7 +148,7 @@ open(os.path.join(qdir, 'credits.html'), 'w').write(
     'table{border-collapse:collapse;width:100%}td,th{padding:6px 8px;border-bottom:1px solid #e6e2ef;text-align:left;vertical-align:top}'
     'th{color:#5a5170;font-weight:600}a{color:#5b3fd6}</style><h1>Who Is This? — photo credits</h1>'
     f'<p>{sum(1 for p in people if p.get("source") == "commons")} photos from Wikimedia Commons, used under the licence shown and resized to 640 px. '
-    'All other photos come from a personal slide deck.</p><table><tr><th>Person</th><th>Author</th><th>Licence</th><th>Source</th></tr>\n'
+    'All other photos come from a personal slide deck. Country flags come from <a href="https://github.com/lipis/flag-icons">flag-icons</a> by Panayiotis Lipiridis, MIT licence (<a href="../flags/LICENSE.txt">licence text</a>).</p><table><tr><th>Person</th><th>Author</th><th>Licence</th><th>Source</th></tr>\n'
     + rows + '</table>\n')
 print(json.dumps({k: (v if isinstance(v, int) else len(v)) for k, v in log.items()}))
 print('new skipped:', ', '.join(log['new_skipped']))

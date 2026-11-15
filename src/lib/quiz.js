@@ -76,9 +76,9 @@ export const HISTORY_MAX = 50
 const defaultStore = () => (typeof localStorage !== 'undefined' ? localStorage : null)
 const isRow = (r) => r && Number.isFinite(r.at) && Number.isFinite(r.score) && Number.isFinite(r.correct) && Number.isFinite(r.total)
 
-export function loadHistory(store = defaultStore()) {
+export function loadHistory(store = defaultStore(), key = HISTORY_KEY) {
   try {
-    const list = JSON.parse(store?.getItem(HISTORY_KEY) || '[]')
+    const list = JSON.parse(store?.getItem(key) || '[]')
     return Array.isArray(list) ? list.filter(isRow) : []
   } catch {
     return []
@@ -141,10 +141,10 @@ export function saveName(name, store = defaultStore()) {
   }
 }
 
-export function saveHistory(history, store = defaultStore()) {
+export function saveHistory(history, store = defaultStore(), key = HISTORY_KEY) {
   try {
     if (!store) return false
-    store.setItem(HISTORY_KEY, JSON.stringify(history))
+    store.setItem(key, JSON.stringify(history))
     return true
   } catch {
     return false

@@ -1,6 +1,6 @@
 # Who Is This? — photo credits
 
-Photos from Wikimedia Commons, used under the licence shown. Each was resized to 640 px. All other photos come from a personal slide deck.
+Photos from Wikimedia Commons, used under the licence shown. Each was resized to 640 px. All other photos come from a personal slide deck. Country flags come from [flag-icons](https://github.com/lipis/flag-icons) by Panayiotis Lipiridis, MIT licence (see `public/flags/LICENSE.txt`).
 
 | Person | Author | Licence | Source |
 |---|---|---|---|
