@@ -1260,3 +1260,122 @@ textarea.input { resize: vertical; min-height: 88px; }
   .w-choice { min-height: 50px; padding: 10px 16px; }
   .w-play { gap: 12px; }
 }
+
+/* ============================================================
+   Glass theme for every tab (Sara, 2026-11-15: "make other tabs
+   look glassy too"). Same frosted-glass language as the Quiz tab:
+   soft blue → magenta wash behind, frosted cards, and buttons that
+   are tinted glass with coloured labels instead of solid fills.
+   Layouts and features are unchanged; this block only restyles.
+   ============================================================ */
+:root {
+  --g-fill: linear-gradient(135deg, rgba(255,255,255,.78) 0%, rgba(255,255,255,.6) 55%, rgba(255,255,255,.5) 100%);
+  --g-blur: blur(22px) saturate(180%);
+  --g-rim: rgba(255,255,255,.9);
+  --g-edge: rgba(91,63,214,.14);
+  --g-depth: inset 0 1px 0 rgba(255,255,255,.95), 0 2px 3px rgba(26,14,60,.06), 0 12px 26px -14px rgba(26,14,60,.35);
+  --g-btn: linear-gradient(180deg, rgba(255,255,255,.76) 0%, rgba(232,238,255,.56) 55%, rgba(205,218,255,.5) 100%);
+  --g-btn-depth: inset 0 1.5px 0 rgba(255,255,255,.95), inset 0 -8px 16px -10px rgba(29,91,206,.38), 0 8px 18px -10px rgba(26,14,60,.42);
+  --g-pink: linear-gradient(180deg, rgba(255,255,255,.76) 0%, rgba(255,230,242,.6) 55%, rgba(255,196,222,.52) 100%);
+  --g-pink-depth: inset 0 1.5px 0 rgba(255,255,255,.95), inset 0 -8px 16px -10px rgba(224,33,138,.4), 0 8px 18px -10px rgba(120,0,60,.4);
+  --g-ink-blue: #1747a6;
+  --g-ink-pink: #b0125c;
+}
+
+/* the wash behind every screen */
+.app {
+  isolation: isolate;
+  background:
+    radial-gradient(70% 40% at 100% 0%, rgba(26,167,232,.24), rgba(26,167,232,0) 60%),
+    radial-gradient(70% 40% at 0% 100%, rgba(224,33,138,.16), rgba(224,33,138,0) 60%),
+    linear-gradient(165deg, #f5f4fb 0%, #f1eff7 55%, #f5eff2 100%);
+}
+.app::before {
+  content: ''; position: fixed; inset: 0; z-index: -1; pointer-events: none;
+  background:
+    radial-gradient(22rem 22rem at -10% 8%, rgba(26,167,232,.30), transparent 70%),
+    radial-gradient(18rem 18rem at 110% 30%, rgba(224,33,138,.20), transparent 70%),
+    radial-gradient(20rem 20rem at 30% 75%, rgba(91,63,214,.18), transparent 70%);
+}
+.appbar, .tabbar {
+  background: rgba(255,255,255,.62) !important;
+  -webkit-backdrop-filter: var(--g-blur); backdrop-filter: var(--g-blur);
+  border-color: rgba(255,255,255,.7) !important;
+}
+/* full-screen overlays need an opaque base, so they get the wash too */
+.tr-big, .detail { background: linear-gradient(165deg, #f5f4fb 0%, #f1eff7 55%, #f5eff2 100%); }
+
+/* frosted cards and fields */
+.card, .versus-card, .phrase, .tr-select, .tr-in, .dd-menu, .searchbar, .stat-card,
+.glossary-strip .gcard, .script-row, .live-box, .platform-btn, .detail .action-pill,
+.input, .signin-input, .fx-card, .listen-now, .bread-tag, .score-circle {
+  background: var(--g-fill);
+  -webkit-backdrop-filter: var(--g-blur); backdrop-filter: var(--g-blur);
+  border: 1px solid var(--g-rim); border-bottom-color: var(--g-edge);
+  box-shadow: var(--g-depth);
+}
+.fx-card { border-radius: 20px; }
+/* small controls: translucent, no blur (there are many of them) */
+.chip, .filter-chip, .segment button, .subtab, .live-lang-btn, .tip-clear, .tip-pct, .fx-cur,
+.fx-key.num, .fx-key.fn, .appbar .signin-chip, .fx-periods button.on {
+  background: rgba(255,255,255,.62);
+  border: 1px solid var(--g-rim);
+  box-shadow: inset 0 1px 0 rgba(255,255,255,.95), 0 4px 10px -8px rgba(26,14,60,.4);
+}
+.fx-key.fn { color: var(--ink-2); background: rgba(236,232,248,.7); }
+.fx-periods { background: rgba(255,255,255,.4); }
+
+/* buttons: tinted glass with a coloured label instead of a solid fill */
+.btn, .signin-primary, .listen-add, .live-toggle, .tr-swap, .fx-swap, .fx-key.op,
+.listen-controls .listen-play, .chip.on, .filter-chip.on, .segment button.on, .subtab.on {
+  color: var(--g-ink-blue) !important; text-shadow: 0 1px 0 rgba(255,255,255,.7);
+  background: var(--g-btn) !important;
+  -webkit-backdrop-filter: var(--g-blur); backdrop-filter: var(--g-blur);
+  border: 1px solid var(--g-rim) !important; border-bottom-color: rgba(29,91,206,.24) !important;
+  box-shadow: var(--g-btn-depth) !important;
+}
+.chip.on, .filter-chip.on, .segment button.on, .subtab.on { font-weight: 700; }
+.subtab.on .live-dot { background: #e04545; }
+.fx-swap { border-width: 3px !important; }
+.btn:disabled, .listen-add:disabled, .listen-controls .listen-play:disabled, .signin-primary:disabled {
+  color: var(--soft) !important; opacity: .7;
+}
+.fx-key.op.armed { background: rgba(29,91,206,.16) !important; box-shadow: inset 0 0 0 2px var(--accent) !important; }
+/* the "hot" ones (equals, stop recording, delete, chosen tip) wear pink glass */
+.fx-key.eq, .tip-pct.on, .live-toggle.on, .listen-x.arm {
+  color: var(--g-ink-pink) !important; text-shadow: 0 1px 0 rgba(255,255,255,.7);
+  background: var(--g-pink) !important;
+  border: 1px solid var(--g-rim) !important; border-bottom-color: rgba(224,33,138,.26) !important;
+  box-shadow: var(--g-pink-depth) !important;
+}
+
+/* the big coloured panels become tinted glass with dark text */
+.tr-out, .fx-to, .inspire-banner {
+  color: var(--g-ink-blue);
+  background: linear-gradient(140deg, rgba(255,255,255,.72) 0%, rgba(226,235,255,.62) 55%, rgba(200,214,255,.55) 100%);
+  -webkit-backdrop-filter: var(--g-blur); backdrop-filter: var(--g-blur);
+  border: 1px solid var(--g-rim); border-bottom-color: rgba(29,91,206,.22);
+  box-shadow: inset 0 1.5px 0 rgba(255,255,255,.95), inset 0 -18px 30px -24px rgba(29,91,206,.45), 0 14px 28px -16px rgba(26,14,60,.45);
+}
+.fx-display, .tip-out {
+  background: linear-gradient(140deg, rgba(255,255,255,.72) 0%, rgba(255,232,244,.62) 55%, rgba(255,200,226,.55) 100%);
+  -webkit-backdrop-filter: var(--g-blur); backdrop-filter: var(--g-blur);
+  border: 1px solid var(--g-rim); border-bottom-color: rgba(224,33,138,.22);
+  box-shadow: inset 0 1.5px 0 rgba(255,255,255,.95), inset 0 -18px 30px -24px rgba(224,33,138,.45), 0 14px 28px -16px rgba(120,0,60,.35);
+}
+.tr-out .tr-tag, .inspire-banner .eyebrow { color: rgba(23,71,166,.65); }
+.tr-out .rom { color: rgba(23,71,166,.82); }
+.tr-out .say, .tr-out-btn { background: rgba(255,255,255,.6); color: var(--g-ink-blue); box-shadow: inset 0 1px 0 #fff, 0 3px 8px -5px rgba(26,14,60,.35); }
+.tr-out .say:active, .tr-out-btn:active { background: rgba(255,255,255,.85); }
+.inspire-banner { border-width: 1px; }
+.inspire-banner .line { color: var(--g-ink-blue); }
+.fx-to .fx-label, .fx-to .fx-num { color: var(--g-ink-blue); }
+.fx-to.on { box-shadow: 0 0 0 3px rgba(29,91,206,.18), inset 0 1.5px 0 rgba(255,255,255,.95); }
+.fx-krw { color: var(--g-ink-blue); border-color: rgba(29,91,206,.22); background: rgba(255,255,255,.55); }
+.fx-display-expr { color: rgba(176,18,92,.7); }
+.fx-display-big { color: var(--g-ink-pink); }
+.tip-row { color: rgba(176,18,92,.75); }
+.tip-row b, .tip-row.total { color: var(--g-ink-pink); }
+.fx-to .fx-label { color: rgba(23,71,166,.7); }
+.fx-num-input.white { color: var(--g-ink-blue); }
+.fx-num-input.white::placeholder { color: rgba(23,71,166,.4); }

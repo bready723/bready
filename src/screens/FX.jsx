@@ -13,11 +13,8 @@ import {
 
 const MAGENTA = '#e0218a'
 // A gradient hairline border (bready brand) around a card of `bg`.
-const gradBorder = (bg) => ({
-  border: '2px solid transparent',
-  borderRadius: 20,
-  background: `linear-gradient(${bg},${bg}) padding-box, var(--brand-gradient) border-box`,
-})
+// cards are frosted glass now (styles.css, glass theme); the old gradient edge is gone
+const gradBorder = () => ({ borderRadius: 20 })
 
 const PERIODS = [
   { key: 7, label: '1W' },
@@ -204,7 +201,7 @@ export default function FX({ currency, onCurrency }) {
 
       {/* ---------- TO (KRW) — editable ---------- */}
       <div className="fx-card fx-to" style={{ marginTop: 12 }}>
-        <div className="fx-label" style={{ color: 'rgba(255,255,255,0.72)' }}>To</div>
+        <div className="fx-label">To</div>
         <div className="fx-row">
           <input
             className="fx-num-input white"
