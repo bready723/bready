@@ -113,6 +113,8 @@ export default function Quiz() {
   useFitHeight(play, playing)
   const person = s.round[s.index]
   const [world, setWorld] = useState(null) // 'capital' | 'flag' while a world quiz is open
+  const hub = useRef(null)
+  useFitHeight(hub, s.phase === 'idle' && !world) // the three cards fill the screen down to the tab bar
 
   // one tick per second, only while counting down
   useEffect(() => {
@@ -159,7 +161,7 @@ export default function Quiz() {
     return (
       <main className="screen quiz" ref={root}>
         <Backdrop />
-        <section className="q-hub" key="hub">
+        <section className="q-hub" key="hub" ref={hub}>
           {[
             ['Who Is This?', () => start('start'), !people.length],
             ['Country → Capital', () => setWorld('capital')],
@@ -167,7 +169,7 @@ export default function Quiz() {
           ].map(([title, go, off]) => (
             <div className="glass q-hub-card" key={title}>
               <h2 className="q-hub-title">{title}</h2>
-              <button className="q-btn primary" onClick={go} disabled={off}>Start</button>
+              <button className="q-btn primary big" onClick={go} disabled={off}>Start</button>
             </div>
           ))}
           <a className="q-credits" href={`${BASE}quiz/credits.html`} target="_blank" rel="noreferrer">
