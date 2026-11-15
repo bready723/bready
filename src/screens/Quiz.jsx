@@ -169,7 +169,7 @@ export default function Quiz() {
           ].map(([title, go, off]) => (
             <div className="glass q-hub-card" key={title}>
               <h2 className="q-hub-title">{title}</h2>
-              <button className="q-btn primary big" onClick={go} disabled={off}>Start</button>
+              <button className="q-btn glassy big" onClick={go} disabled={off}>Start</button>
             </div>
           ))}
           <a className="q-credits" href={`${BASE}quiz/credits.html`} target="_blank" rel="noreferrer">
