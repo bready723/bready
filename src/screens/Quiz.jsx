@@ -172,7 +172,7 @@ export default function Quiz() {
               <button className="q-btn glassy big" onClick={go} disabled={off}>Start</button>
             </div>
           ))}
-          <a className="q-credits" href={`${BASE}quiz/credits.html`} target="_blank" rel="noreferrer">
+          <a className="q-credits" href={`${BASE}quiz/credits.html`}>
             Photo &amp; flag credits
           </a>
         </section>

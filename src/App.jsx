@@ -44,7 +44,13 @@ export default function App() {
   const [state, setState] = useState(loadState)
   const stateRef = useRef(state) // latest state, readable from async callbacks
   const syncedFor = useRef(null) // user id we have already reconciled for
-  const [tab, setTab] = useState('rankings')
+  // ?tab=quiz (e.g. the credits page's Back button) opens that tab, then the address is tidied
+  const [tab, setTab] = useState(() => {
+    const want = new URLSearchParams(window.location.search).get('tab')
+    if (!want) return 'rankings'
+    window.history.replaceState(null, '', window.location.pathname + window.location.hash)
+    return Object.hasOwn(TAB_COLORS, want) ? want : 'rankings'
+  })
   // Listen mounts on first open and then stays mounted (hidden), so leaving the
   // tab does not stop the audio.
   const [listenOpened, setListenOpened] = useState(false)

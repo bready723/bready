@@ -18,6 +18,8 @@ export default defineConfig({
         clientsClaim: true,
         skipWaiting: true,
         cleanupOutdatedCaches: true,
+        // the credits page is a real page, not an app route: let the browser load it
+        navigateFallbackDenylist: [/\/quiz\/credits\.html$/],
         // Quiz photos (~380) are not precached: each one is cached the first
         // time it is shown, so the app update stays small and replays work offline.
         runtimeCaching: [

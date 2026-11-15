@@ -143,10 +143,10 @@ rows = ''.join(f"<tr><td>{H.escape(p['name'])}</td><td>{H.escape(p.get('credit')
                f"<td><a href=\"{H.escape(p['url'])}\">file page</a></td></tr>\n"
                for p in sorted((p for p in people if p.get('source') == 'commons'), key=lambda p: p['name']))
 open(os.path.join(qdir, 'credits.html'), 'w').write(
-    '<!doctype html><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">'
-    '<title>Who Is This? — photo credits</title><style>body{font:15px/1.45 -apple-system,system-ui,sans-serif;margin:24px;color:#1b1430}'
-    'table{border-collapse:collapse;width:100%}td,th{padding:6px 8px;border-bottom:1px solid #e6e2ef;text-align:left;vertical-align:top}'
-    'th{color:#5a5170;font-weight:600}a{color:#5b3fd6}</style><h1>Who Is This? — photo credits</h1>'
+    '<!doctype html><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">'
+    '<title>Photo &amp; flag credits</title><style>body{font:15px/1.45 -apple-system,system-ui,sans-serif;margin:24px;color:#1b1430}'
+    'table{border-collapse:collapse;width:100%}td,th{padding:6px 8px;border-bottom:1px solid #e6e2ef;text-align:left;vertical-align:top;overflow-wrap:anywhere}'
+    'th{color:#5a5170;font-weight:600}a{color:#5b3fd6}.back{position:sticky;top:0;z-index:1;display:flex;align-items:center;margin:-24px -24px 16px;padding:calc(env(safe-area-inset-top) + 10px) 16px 10px;background:rgba(255,255,255,.92);-webkit-backdrop-filter:blur(12px);backdrop-filter:blur(12px);border-bottom:1px solid #e6e2ef}.back a{display:inline-flex;align-items:center;min-height:44px;padding:0 14px;border-radius:99px;background:#efeafd;color:#4a2fc0;font-weight:700;text-decoration:none}</style><nav class="back"><a href="../?tab=quiz">← Back to quizzes</a></nav><h1>Photo &amp; flag credits</h1>'
     f'<p>{sum(1 for p in people if p.get("source") == "commons")} photos from Wikimedia Commons, used under the licence shown and resized to 640 px. '
     'All other photos come from a personal slide deck. Country flags come from <a href="https://github.com/lipis/flag-icons">flag-icons</a> by Panayiotis Lipiridis, MIT licence (<a href="../flags/LICENSE.txt">licence text</a>).</p><table><tr><th>Person</th><th>Author</th><th>Licence</th><th>Source</th></tr>\n'
     + rows + '</table>\n')
