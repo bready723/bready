@@ -94,7 +94,7 @@ export default function WorldQuiz({ kind, onExit }) {
             <NameCard key={history[0].at} current={nameOf(history[0])} names={recentNames(history.slice(1))} onPick={setPlayer} />
           )}
           <div className="q-row">
-            <button className="q-btn primary" onClick={replay}>Replay</button>
+            <button className="q-btn glassy" onClick={replay}>Replay</button>
             <button className="q-btn stop" onClick={onExit}>Back</button>
           </div>
           {misses.length > 0 && (

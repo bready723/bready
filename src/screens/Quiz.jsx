@@ -205,7 +205,7 @@ export default function Quiz() {
             <NameCard key={history[0].at} current={nameOf(history[0])} names={recentNames(history.slice(1))} onPick={setPlayer} />
           )}
           <div className="q-row">
-            <button className="q-btn primary" onClick={() => start('replay')}>Replay</button>
+            <button className="q-btn glassy" onClick={() => start('replay')}>Replay</button>
             <button className="q-btn stop" onClick={() => dispatch({ type: 'stop' })}>Stop</button>
           </div>
           {history.length > 0 && (
@@ -295,7 +295,7 @@ export default function Quiz() {
             <button className="q-btn no" onClick={() => dispatch({ type: 'answer', right: false })}>I got it wrong</button>
           </div>
         ) : (
-          <button className="q-btn primary" onClick={() => dispatch({ type: 'reveal' })}>Show answer</button>
+          <button className="q-btn glassy" onClick={() => dispatch({ type: 'reveal' })}>Show answer</button>
         )}
       </section>
     </main>

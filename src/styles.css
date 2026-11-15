@@ -993,29 +993,24 @@ textarea.input { resize: vertical; min-height: 88px; }
 .q-btn:disabled { opacity: .45; }
 .q-btn.primary { background: linear-gradient(180deg, #6a4ff0 0%, #4a2fc0 60%, #3a1f9e 100%); }
 .q-btn.big { font-size: 19px; padding: 19px; border-radius: 22px; }
-/* right / wrong: plain neon (Sara, 2026-11-03: "glassy button not works, just make it neon").
-   Solid electric colour, no gloss, no see-through tint; the glow does the work.
-   Dark labels: they read 7:1+ on both neons, white would not. */
-.q-btn.ok, .q-btn.no {
-  font-weight: 780; letter-spacing: .005em; color: #120a1c; text-shadow: none; border: 0;
+/* right / wrong / stop: frosted glass with a soft tint (Sara, 2026-11-15: "glassy, modern and chic";
+   replaces the 2026-11-03 neon). Coloured label carries the meaning; contrast stays 4.5:1+. */
+.q-btn.ok, .q-btn.no, .q-btn.stop {
+  font-weight: 760; text-shadow: 0 1px 0 rgba(255,255,255,.7);
+  -webkit-backdrop-filter: blur(16px) saturate(170%); backdrop-filter: blur(16px) saturate(170%);
+  border: 1px solid rgba(255,255,255,.9);
 }
 .q-btn.ok {
-  background: #2bff9a;
-  box-shadow: 0 0 0 2px #a8ffd6 inset, 0 0 14px rgba(43,255,154,.95), 0 0 34px rgba(43,255,154,.55), 0 8px 18px -8px rgba(0,120,70,.6);
+  color: #0a6b42;
+  background: linear-gradient(180deg, rgba(255,255,255,.74) 0%, rgba(215,255,235,.62) 55%, rgba(150,235,195,.58) 100%);
+  border-bottom-color: rgba(20,160,95,.3);
+  box-shadow: inset 0 1.5px 0 rgba(255,255,255,.95), inset 0 -8px 16px -10px rgba(20,170,100,.45), 0 8px 18px -10px rgba(0,90,50,.45);
 }
-.q-btn.stop {
-  /* end screen: red-pink neon, a touch redder than "I got it wrong" */
-  font-weight: 780; color: #1a0610; border: 0; background: #ff3366;
-  box-shadow: 0 0 0 2px #ffb0c2 inset, 0 0 14px rgba(255,51,102,.95), 0 0 34px rgba(255,51,102,.55), 0 8px 18px -8px rgba(150,0,40,.6);
-}
-.q-btn.no {
-  background: #ff3d8b;
-  box-shadow: 0 0 0 2px #ffb3d1 inset, 0 0 14px rgba(255,61,139,.95), 0 0 34px rgba(255,61,139,.55), 0 8px 18px -8px rgba(140,0,60,.6);
-}
-@media (prefers-reduced-motion: no-preference) {
-  @keyframes q-neon { 50% { filter: brightness(1.08) saturate(1.15); } }
-  .q-btn.ok, .q-btn.no { animation: q-neon 2.4s ease-in-out infinite; }
-  .q-btn.no { animation-delay: -1.2s; }
+.q-btn.no, .q-btn.stop {
+  color: #b0124f;
+  background: linear-gradient(180deg, rgba(255,255,255,.74) 0%, rgba(255,228,240,.55) 55%, rgba(255,190,215,.45) 100%);
+  border-bottom-color: rgba(220,40,110,.3);
+  box-shadow: inset 0 1.5px 0 rgba(255,255,255,.95), inset 0 -8px 16px -10px rgba(225,40,120,.45), 0 8px 18px -10px rgba(120,0,50,.45);
 }
 .q-btn.ghost {
   color: var(--q-ink);
@@ -1192,14 +1187,25 @@ textarea.input { resize: vertical; min-height: 88px; }
 .w-choices { display: grid; gap: 10px; }
 .w-choice {
   appearance: none; width: 100%; min-height: 56px; padding: 12px 16px; border-radius: 16px; cursor: pointer;
-  text-align: left; font: 700 17px/1.2 var(--sans); color: var(--q-ink);
-  background: rgba(255,255,255,.82); border: 1.5px solid rgba(91,63,214,.22);
-  box-shadow: inset 0 1px 0 #fff, 0 6px 14px -8px rgba(26,14,60,.45);
-  transition: transform .15s ease, background .2s, border-color .2s, opacity .2s;
+  text-align: left; font: 700 17px/1.2 var(--sans); color: var(--q-ink); text-shadow: 0 1px 0 rgba(255,255,255,.7);
+  background: linear-gradient(180deg, rgba(255,255,255,.74) 0%, rgba(240,236,255,.52) 60%, rgba(222,214,255,.42) 100%);
+  -webkit-backdrop-filter: blur(16px) saturate(170%); backdrop-filter: blur(16px) saturate(170%);
+  border: 1px solid rgba(255,255,255,.9); border-bottom-color: rgba(91,63,214,.2);
+  box-shadow: inset 0 1.5px 0 rgba(255,255,255,.95), inset 0 -8px 16px -12px rgba(91,63,214,.35), 0 8px 18px -12px rgba(26,14,60,.45);
+  transition: transform .15s ease, background .25s, border-color .25s, opacity .25s, color .25s;
 }
 .w-choice:active { transform: scale(.98); }
-.w-choice.right { color: #120a1c; background: #2bff9a; border-color: #2bff9a; box-shadow: 0 0 14px rgba(43,255,154,.75); }
-.w-choice.wrong { color: #fff; background: #ff3d6e; border-color: #ff3d6e; box-shadow: 0 0 14px rgba(255,61,110,.6); }
+/* answered: tinted glass, strong enough to read at a glance */
+.w-choice.right {
+  color: #0a6b42; border-color: rgba(30,200,120,.65);
+  background: linear-gradient(180deg, rgba(225,255,240,.85) 0%, rgba(160,240,200,.7) 100%);
+  box-shadow: inset 0 1.5px 0 rgba(255,255,255,.95), 0 0 0 2px rgba(30,200,120,.35), 0 8px 18px -10px rgba(0,90,50,.5);
+}
+.w-choice.wrong {
+  color: #b0124f; border-color: rgba(230,50,120,.6);
+  background: linear-gradient(180deg, rgba(255,232,242,.85) 0%, rgba(255,180,210,.7) 100%);
+  box-shadow: inset 0 1.5px 0 rgba(255,255,255,.95), 0 0 0 2px rgba(230,50,120,.3), 0 8px 18px -10px rgba(120,0,50,.5);
+}
 .w-choice.dim { opacity: .45; }
 .w-score { display: grid; justify-items: center; gap: 6px; padding: 22px 20px 20px; text-align: center; }
 .w-ring { position: relative; width: 150px; height: 150px; }
