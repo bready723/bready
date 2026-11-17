@@ -26,13 +26,19 @@ export default defineConfig({
           {
             urlPattern: ({ url }) => url.pathname.startsWith('/bready/quiz/'),
             handler: 'CacheFirst',
-            options: { cacheName: 'quiz-photos', expiration: { maxEntries: 1300 } },
+            options: { cacheName: 'quiz-photos', expiration: { maxEntries: 1600 } },
           },
           {
             // 190 country flags for the Flag → Country quiz, cached as they are shown
             urlPattern: ({ url }) => url.pathname.startsWith('/bready/flags/'),
             handler: 'CacheFirst',
             options: { cacheName: 'quiz-flags', expiration: { maxEntries: 200 } },
+          },
+          {
+            // brand logos for the Logo Quiz, cached as they are shown
+            urlPattern: ({ url }) => url.pathname.startsWith('/bready/logos/'),
+            handler: 'CacheFirst',
+            options: { cacheName: 'quiz-logos', expiration: { maxEntries: 800 } },
           },
         ],
       },

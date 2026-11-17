@@ -1054,6 +1054,10 @@ textarea.input { resize: vertical; min-height: 88px; }
   transition: opacity .25s ease;
 }
 .q-well img.pending, .q-well-bg.pending { opacity: 0; }
+.q-well.logo { background: #fff; }
+.q-well.logo img { inset: 12%; width: 76%; height: 76%; }
+.q-missed.logo img { aspect-ratio: 1; object-fit: contain; padding: 10px; background: #fff; }
+.q-missed.logo li span { overflow-wrap: anywhere; }
 
 .quiz .q-ring {
   position: absolute; right: 18px; top: 18px; z-index: 3; width: 76px; height: 76px; border-radius: 50%; padding: 6px;
@@ -1166,9 +1170,50 @@ textarea.input { resize: vertical; min-height: 88px; }
 .q-missed li { display: grid; gap: 4px; align-content: start; text-align: center; font-size: 11.5px; line-height: 1.25; font-weight: 650; color: var(--q-ink); }
 .q-missed img { width: 100%; aspect-ratio: 4 / 5; object-fit: cover; object-position: 50% 20%; border-radius: 12px; background: #eeebf6; box-shadow: 0 4px 10px -4px rgba(26,14,60,.4); }
 
-/* quiz hub: three cards, title + Start only (Sara, 2026-11-15) */
-.q-hub { display: flex; flex-direction: column; gap: 14px; padding-top: 10px; min-height: 0; }
-.q-hub-card { flex: 1 1 0; min-height: 0; display: flex; flex-direction: column; justify-content: space-between; gap: 14px; padding: 22px 18px 18px; }
+/* quiz hub: four picture tiles, 2×2, the whole tile is the button (Sara, 2026-11-17) */
+.q-hub { display: flex; flex-direction: column; gap: 10px; padding-top: 10px; min-height: 0; }
+.q-tiles { flex: 1 1 auto; min-height: 0; display: grid; grid-template-columns: 1fr 1fr; grid-template-rows: 1fr 1fr; gap: 12px; }
+.quiz .q-tile {
+  appearance: none; cursor: pointer; font: inherit; color: var(--q-ink); text-align: left;
+  min-width: 0; min-height: 0; padding: 10px 10px 12px; border-radius: 26px;
+  display: flex; flex-direction: column; gap: 8px;
+}
+.quiz .q-tile:disabled { opacity: .5; cursor: default; }
+.quiz .q-tile:active { transform: scale(.97); }
+/* soft per-quiz tint over the frosted glass, no solid fills */
+.quiz .q-tile.t-face { background: linear-gradient(150deg, rgba(225,244,255,.82) 0%, rgba(255,255,255,.6) 55%, rgba(205,232,255,.55) 100%); }
+.quiz .q-tile.t-capital { background: linear-gradient(150deg, rgba(234,229,255,.84) 0%, rgba(255,255,255,.6) 55%, rgba(219,210,255,.55) 100%); }
+.quiz .q-tile.t-flag { background: linear-gradient(150deg, rgba(255,232,244,.84) 0%, rgba(255,255,255,.6) 55%, rgba(255,212,232,.55) 100%); }
+.quiz .q-tile.t-logo { background: linear-gradient(150deg, rgba(255,241,224,.86) 0%, rgba(255,255,255,.6) 55%, rgba(255,226,200,.55) 100%); }
+.q-tile-art { flex: 1 1 auto; min-height: 0; position: relative; display: block; container-type: size; }
+.q-tile-foot { flex: none; display: grid; gap: 6px; padding: 0 4px; }
+.q-tile-title { font: 760 18px/1.12 var(--sans); letter-spacing: -.025em; color: var(--q-ink); overflow-wrap: anywhere; }
+.q-tile-title i { font-style: normal; color: var(--q-indigo); }
+.q-tile-chip {
+  justify-self: start; padding: 3px 10px; border-radius: 99px;
+  font: 700 12px var(--sans); color: #4a2fc0; font-variant-numeric: tabular-nums;
+  background: rgba(255,255,255,.8); border: 1px solid rgba(255,255,255,.95);
+  box-shadow: inset 0 1px 0 #fff, 0 2px 6px -3px rgba(26,14,60,.3);
+}
+.q-tile-chip.new { color: #b0124f; }
+/* the picture stack: three cards fanned out, the middle one on top */
+.q-tile-stack { position: absolute; inset: 0; }
+.q-tile-card {
+  position: absolute; left: 50%; top: 50%; height: min(86cqh, 72cqw); aspect-ratio: 4 / 5;
+  overflow: hidden; border-radius: 14px; background: #fff;
+  border: 2px solid #fff; box-shadow: 0 2px 4px rgba(26,14,60,.15), 0 10px 18px -8px rgba(26,14,60,.5);
+  transform: translate(-50%, -50%);
+}
+.q-tile-card img { display: block; width: 100%; height: 100%; object-fit: cover; object-position: 50% 22%; }
+.q-tile-card.c0 { transform: translate(-92%, -46%) rotate(-10deg); }
+.q-tile-card.c2 { transform: translate(-8%, -46%) rotate(10deg); }
+.q-tile-card.c1 { z-index: 1; transform: translate(-50%, -52%); }
+.flag .q-tile-card { height: min(56cqh, 42cqw); aspect-ratio: 4 / 3; border-radius: 8px; }
+.flag .q-tile-card.c0 { transform: translate(-86%, -32%) rotate(-9deg); }
+.flag .q-tile-card.c2 { transform: translate(-14%, -68%) rotate(9deg); }
+.logo .q-tile-card { height: min(70cqh, 52cqw); aspect-ratio: 1; border-radius: 16px; }
+.logo .q-tile-card img { object-fit: contain; padding: 14%; }
+.q-tile-globe { position: absolute; left: 50%; top: 50%; height: 92%; max-width: 92%; transform: translate(-50%, -50%); filter: drop-shadow(0 10px 14px rgba(26,14,60,.28)); }
 .q-btn.glassy {
   color: #4a2fc0; text-shadow: 0 1px 0 rgba(255,255,255,.7);
   background: linear-gradient(180deg, rgba(255,255,255,.72) 0%, rgba(236,232,255,.5) 55%, rgba(214,206,255,.42) 100%);
@@ -1176,8 +1221,7 @@ textarea.input { resize: vertical; min-height: 88px; }
   border: 1px solid rgba(255,255,255,.9); border-bottom-color: rgba(91,63,214,.22);
   box-shadow: inset 0 1.5px 0 rgba(255,255,255,.95), inset 0 -8px 16px -10px rgba(91,63,214,.35), 0 8px 18px -10px rgba(26,14,60,.45);
 }
-.q-hub > .q-credits { flex: none; margin: -6px 0 0; align-self: center; }
-.q-hub-title { margin: 0; font: 760 28px/1.08 var(--sans); letter-spacing: -.03em; color: var(--q-ink); }
+.q-hub > .q-credits { flex: none; margin: -4px 0 0; align-self: center; }
 
 /* world quizzes: country → capital, flag → country. No timer; tap one of four. */
 .w-play { display: grid; gap: 14px; padding-top: 4px; }
@@ -1238,7 +1282,7 @@ textarea.input { resize: vertical; min-height: 88px; }
   .q-bg .b4 { animation-duration: 21s; animation-delay: -3s; }
   .quiz .glass { transition: transform .45s cubic-bezier(.2,.8,.2,1), box-shadow .45s; }
   .quiz .glass.tilt { transform: perspective(800px) rotateX(var(--rx, 0deg)) rotateY(var(--ry, 0deg)) translateY(-3px); transition: transform .12s ease-out, box-shadow .3s; }
-  .q-answer, .q-hub > *, .q-end > * { animation: q-rise .45s cubic-bezier(.2,.8,.2,1) backwards; }
+  .q-answer, .q-hub > *, .q-tile, .q-end > * { animation: q-rise .45s cubic-bezier(.2,.8,.2,1) backwards; }
   @keyframes q-pop {
     0% { opacity: 0; transform: translate(-50%, -50%) scale(.55); }
     60% { opacity: 1; transform: translate(-50%, -50%) scale(1.06); }
@@ -1246,8 +1290,9 @@ textarea.input { resize: vertical; min-height: 88px; }
   }
   .q-name { animation: q-pop .42s cubic-bezier(.2,.8,.2,1) backwards; }
   .q-credit { animation: bready-fadein .4s ease .2s backwards; }
-  .q-hub > :nth-child(3), .q-end > :nth-child(3) { animation-delay: .08s; }
-  .q-hub > :nth-child(4), .q-end > :nth-child(4) { animation-delay: .16s; }
+  .q-end > :nth-child(3), .q-tile:nth-child(2) { animation-delay: .06s; }
+  .q-end > :nth-child(4), .q-tile:nth-child(3) { animation-delay: .12s; }
+  .q-tile:nth-child(4) { animation-delay: .18s; }
   .q-ring.hot { animation: q-pulse 1s ease-in-out infinite; }
   @keyframes q-pulse { 50% { box-shadow: var(--q-depth), 0 0 0 6px rgba(224,33,138,.18); } }
 }

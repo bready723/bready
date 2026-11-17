@@ -59,18 +59,20 @@ export function quizReducer(state, action) {
   }
 }
 
-export function photoUrl(person, base = '/') {
-  return `${base.replace(/\/$/, '')}/quiz/${person.file}`
+// `dir`: 'quiz' for faces, 'logos' for the Logo Quiz
+export function photoUrl(person, base = '/', dir = 'quiz') {
+  return `${base.replace(/\/$/, '')}/${dir}/${person.file}`
 }
 
 // CC BY / BY-SA ask for credit where the photo is shown.
-export function creditLine(person) {
+export function creditLine(person, label = 'Photo') {
   if (person.source !== 'commons') return ''
-  return `Photo: ${person.credit || 'Wikimedia Commons'} · ${person.license}`
+  return `${label}: ${person.credit || 'Wikimedia Commons'} · ${person.license}`
 }
 
 // ---- score history: finished games, newest first, kept on this phone ----
 export const HISTORY_KEY = 'bready.quiz.v1'
+export const LOGO_HISTORY_KEY = 'bready.logo.v1'
 export const HISTORY_MAX = 50
 
 const defaultStore = () => (typeof localStorage !== 'undefined' ? localStorage : null)
@@ -155,6 +157,17 @@ export function summarize(history) {
   if (!history.length) return { games: 0, best: null, average: null }
   const scores = history.map((h) => h.score)
   return { games: scores.length, best: Math.max(...scores), average: Math.round(scores.reduce((a, b) => a + b, 0) / scores.length) }
+}
+
+// hub tile chip: best score so far, or "New" before the first game
+export function bestLabel(history) {
+  const { best } = summarize(history || [])
+  return best === null ? 'New' : `Best ${best}`
+}
+
+// a few random items for a hub tile's picture stack
+export function sampleArt(pool, n = 3, rng = Math.random) {
+  return pickRound(pool || [], n, rng)
 }
 
 // history[0] is the game just played

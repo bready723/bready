@@ -1,0 +1,156 @@
+key,name,crop
+car:Toyota,Toyota,1
+car:Mazda,Mazda,1
+car:Mitsubishi Motors,Mitsubishi,1
+car:Lexus,Lexus,1
+car:Infiniti,Infiniti,1
+car:Acura,Acura,1
+car:Buick,Buick,1
+"car:Tesla, Inc.",Tesla,1
+car:Volkswagen,Volkswagen,0
+car:Audi,Audi,0
+car:Mercedes-Benz,Mercedes-Benz,1
+car:Opel,Opel,1
+car:Citroën,Citroën,1
+car:Maserati,Maserati,1
+car:Rolls-Royce Motor Cars,Rolls-Royce,0
+car:Smart (marque),Smart,1
+car:Suzuki,Suzuki,1
+car:Texaco,Texaco,1
+tech:Microsoft,Microsoft,1
+tech:Meta Platforms,Meta,1
+tech:Facebook,Facebook,0
+tech:Instagram,Instagram,0
+tech:WhatsApp,WhatsApp,0
+tech:Threads (social network),Threads,0
+tech:Twitter,X (Twitter),0
+tech:Pinterest,Pinterest,1
+tech:Telegram (software),Telegram,0
+tech:Signal (software),Signal,1
+tech:Skype,Skype,0
+tech:Slack (software),Slack,1
+tech:Spotify,Spotify,1
+tech:Netflix,Netflix,1
+tech:Apple TV+,Apple TV,1
+tech:Airbnb,Airbnb,1
+tech:DoorDash,DoorDash,1
+tech:Instacart,Instacart,1
+tech:Cash App,Cash App,0
+tech:Mastercard,Mastercard,0
+tech:Shopify,Shopify,1
+tech:Dropbox,Dropbox,1
+tech:Google Drive,Google Drive,0
+tech:Gmail,Gmail,0
+tech:Google Chrome,Google Chrome,0
+tech:Opera (web browser),Opera,0
+tech:Android (operating system),Android,1
+tech:Windows,Windows,1
+tech:Linux,Linux,0
+tech:Ubuntu,Ubuntu,1
+tech:PlayStation,PlayStation,1
+tech:Steam (service),Steam,1
+tech:Electronic Arts,EA (Electronic Arts),1
+tech:Ubisoft,Ubisoft,1
+tech:Adobe Photoshop,Photoshop,0
+tech:Figma,Figma,0
+tech:Wikipedia,Wikipedia,0
+tech:ChatGPT,ChatGPT,0
+tech:Xiaomi,Xiaomi,0
+tech:Motorola,Motorola,1
+tech:Ericsson,Ericsson,1
+tech:Beats Electronics,Beats,0
+tech:Fitbit,Fitbit,1
+tech:Bing (search engine),Bing,1
+tech:Bitcoin,Bitcoin,0
+tech:Ethereum,Ethereum,0
+tech:AT&T,AT&T,1
+tech:T-Mobile US,T-Mobile,1
+tech:Vodafone,Vodafone,1
+tech:Bosch (company),Bosch,1
+tech:Nest Labs,Google,1
+tech:Google Maps,Google Maps,0
+food:McDonald's,McDonald's,1
+food:Jägermeister,Jägermeister,1
+"fashion:Nike, Inc.",Nike,0
+fashion:Adidas,Adidas,0
+fashion:Reebok,Reebok,0
+fashion:Under Armour,Under Armour,1
+fashion:Converse (shoe company),Converse,1
+fashion:Lululemon,Lululemon,0
+fashion:Uniqlo,Uniqlo,1
+fashion:Gucci,Gucci,0
+fashion:Rolex,Rolex,1
+fashion:Omega SA,Omega,1
+retail:Target Corporation,Target,1
+retail:Stop & Shop,Stop & Shop,1
+retail:7-Eleven,7-Eleven,1
+retail:Chase Bank,Chase,1
+retail:HSBC,HSBC,1
+retail:Prudential Financial,Prudential,1
+airline:Delta Air Lines,Delta,1
+airline:American Airlines,American Airlines,0
+airline:Air Canada,Air Canada,1
+airline:Lufthansa,Lufthansa,1
+airline:Turkish Airlines,Turkish Airlines,1
+sport:Major League Baseball,MLB,0
+sport:Premier League,Premier League,1
+sport:Olympic Games,Olympics,0
+sport:Formula One,Formula 1,0
+sport:WWE,WWE,0
+sport:New York Mets,New York Mets,0
+sport:Boston Red Sox,Boston Red Sox,0
+sport:Los Angeles Dodgers,Los Angeles Dodgers,0
+sport:San Francisco Giants,San Francisco Giants,0
+sport:Philadelphia Phillies,Philadelphia Phillies,0
+sport:Atlanta Braves,Atlanta Braves,0
+sport:Houston Astros,Houston Astros,0
+sport:St. Louis Cardinals,St. Louis Cardinals,0
+sport:Dallas Cowboys,Dallas Cowboys,0
+sport:Green Bay Packers,Green Bay Packers,0
+sport:San Francisco 49ers,San Francisco 49ers,0
+sport:New York Giants,New York Giants,0
+sport:Buffalo Bills,Buffalo Bills,0
+sport:Montreal Canadiens,Montreal Canadiens,0
+sport:Detroit Red Wings,Detroit Red Wings,0
+sport:FC Barcelona,FC Barcelona,0
+sport:Borussia Dortmund,Borussia Dortmund,0
+sport:AC Milan,AC Milan,0
+sport:Inter Milan,Inter Milan,0
+media:NBC,NBC,1
+media:MTV,MTV,0
+media:National Geographic,National Geographic,1
+media:Comedy Central,Comedy Central,1
+media:DC Comics,DC Comics,0
+media:Batman,Batman,0
+media:Superman,Superman,0
+media:Red Cross,Red Cross,1
+media:United Nations,United Nations,1
+media:World Health Organization,World Health Organization,0
+media:Harvard University,Harvard University,1
+media:Apple Music,Apple,1
+media:SoundCloud,SoundCloud,1
+media:Paralympic Games,Paralympics,0
+media:FIFA World Cup,FIFA World Cup,0
+media:Super Bowl,Super Bowl,0
+kbrand:Hyundai Motor Company,현대자동차,1
+kbrand:LG Corporation,LG,1
+kbrand:Lotte Corporation,롯데,0
+kbrand:Shinsegae,신세계,1
+kbrand:Hanwha Group,한화,1
+kbrand:GS Group,GS,1
+kbrand:KakaoTalk,카카오톡,0
+kbrand:Kakao Bank,카카오뱅크,1
+kbrand:Korean Air,대한항공,1
+kbrand:Seoul Broadcasting System,SBS,1
+kbrand:Nongshim,농심,1
+kbrand:Kia Tigers,KIA 타이거즈,0
+kbrand:Samsung Lions,삼성 라이온즈,0
+kbrand:Doosan Bears,두산 베어스,0
+kbrand:T1 (esports),T1,0
+kbrand:KB Kookmin Bank,KB국민은행,1
+kbrand:Shinhan Bank,신한은행,1
+kbrand:Woori Bank,우리은행,1
+kbrand:Pinkfong,핑크퐁,1
+kbrand:Ssangyong Motor,쌍용자동차,1
+kbrand:Renault Korea,르노,0
+kbrand:Seoul,서울시,0

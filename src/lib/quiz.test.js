@@ -1,7 +1,7 @@
 import { describe, it, expect } from 'vitest'
 import {
   ROUND_SIZE, SECONDS, shuffle, pickRound, scoreOf, initialState, quizReducer, photoUrl, creditLine,
-  HISTORY_KEY, HISTORY_MAX, loadHistory, addResult, saveHistory, summarize, isNewBest, playedLabel,
+  HISTORY_KEY, LOGO_HISTORY_KEY, bestLabel, sampleArt, HISTORY_MAX, loadHistory, addResult, saveHistory, summarize, isNewBest, playedLabel,
   NAME_MAX, DEFAULT_NAME, cleanName, nameOf, recentNames, renameLast, bestRow, loadName, saveName,
 } from './quiz.js'
 
@@ -129,6 +129,12 @@ describe('photoUrl and creditLine', () => {
     expect(photoUrl({ file: 'a.jpg' }, '/bready/')).toBe('/bready/quiz/a.jpg')
     expect(photoUrl({ file: 'a.jpg' }, '/bready')).toBe('/bready/quiz/a.jpg')
   })
+  it('serves logos from their own folder', () => {
+    expect(photoUrl({ file: 'l1.png' }, '/bready/', 'logos')).toBe('/bready/logos/l1.png')
+  })
+  it('labels logo credits as logos', () => {
+    expect(creditLine({ source: 'commons', credit: 'Nike', license: 'Public domain' }, 'Logo')).toBe('Logo: Nike · Public domain')
+  })
   it('credits Commons photos only', () => {
     expect(creditLine({ source: 'commons', credit: 'Raph_PH', license: 'CC BY 2.0' })).toBe('Photo: Raph_PH · CC BY 2.0')
     expect(creditLine({ source: 'commons', license: 'CC0' })).toBe('Photo: Wikimedia Commons · CC0')
@@ -241,5 +247,23 @@ describe('player names', () => {
     expect(saveName('x', { setItem: () => { throw new Error('full') } })).toBe(false)
     expect(loadName({ getItem: () => { throw new Error('blocked') } })).toBe('')
     expect(loadName(null)).toBe('')
+  })
+})
+
+describe('quiz hub tiles', () => {
+  it('shows the best score, or New before the first game', () => {
+    expect(bestLabel([])).toBe('New')
+    expect(bestLabel(undefined)).toBe('New')
+    expect(bestLabel([{ score: 40 }, { score: 85 }, { score: 70 }])).toBe('Best 85')
+  })
+  it('keeps the logo scoreboard apart from the faces one', () => {
+    expect(LOGO_HISTORY_KEY).not.toBe(HISTORY_KEY)
+  })
+  it('picks distinct items for the picture stack, and copes with tiny or missing pools', () => {
+    const art = sampleArt(people(10), 3, seq(0.1, 0.5, 0.9))
+    expect(art).toHaveLength(3)
+    expect(new Set(art.map((p) => p.id)).size).toBe(3)
+    expect(sampleArt(people(2), 3)).toHaveLength(2)
+    expect(sampleArt(undefined)).toEqual([])
   })
 })
