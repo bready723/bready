@@ -167,3 +167,31 @@ export async function getSystemAudioTrack(md) {
   }
   return { track, stream }
 }
+
+// ---- Live translation: each finished caption line, translated underneath ----
+
+// What to translate into when nothing was picked yet: English, unless the
+// meeting itself is in English — then Korean.
+export function defaultLiveTarget(listenId) {
+  return listenId === 'en' ? 'ko' : 'en'
+}
+
+// 'off', or the same language as the meeting, means captions only.
+export function wantsTranslation(listenId, toId) {
+  if (!toId || toId === 'off') return false
+  return toId !== listenId
+}
+
+// A translation arrives later than its line: attach it to the line with that
+// timestamp, leaving the list untouched when the line is gone (e.g. cleared).
+export function withTranslation(lines, ts, tr) {
+  if (!lines.some((l) => l.ts === ts)) return lines
+  return lines.map((l) => (l.ts === ts ? { ...l, tr } : l))
+}
+
+// Copy / download text: "[10:42] original" and, when there is one, "→ translation".
+export function transcriptText(lines, stamp = () => '') {
+  return lines
+    .map((l) => `[${stamp(l.ts)}] ${l.text}` + (l.tr && l.tr !== l.text ? `\n        → ${l.tr}` : ''))
+    .join('\n')
+}

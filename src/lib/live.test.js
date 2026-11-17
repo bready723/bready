@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest'
-import { startLiveListening, getSystemAudioTrack } from './live.js'
+import { startLiveListening, getSystemAudioTrack, defaultLiveTarget, wantsTranslation, withTranslation, transcriptText } from './live.js'
 
 // A stand-in for Chrome's SpeechRecognition that the test can puppet: fire
 // results, errors, and ends on command, and count how many times it was built
@@ -195,5 +195,29 @@ describe('getSystemAudioTrack', () => {
     const md = { getDisplayMedia: async () => stream }
     await expect(getSystemAudioTrack(md)).rejects.toMatchObject({ error: 'no-system-audio' })
     expect(stream.stopped).toEqual(['video']) // nothing left recording
+  })
+})
+
+
+describe('live translation helpers', () => {
+  it('translates into English by default, Korean when the meeting is in English', () => {
+    expect(defaultLiveTarget('fr')).toBe('en')
+    expect(defaultLiveTarget('ko')).toBe('en')
+    expect(defaultLiveTarget('en')).toBe('ko')
+  })
+  it('skips translation when off or when both sides are the same language', () => {
+    expect(wantsTranslation('fr', 'en')).toBe(true)
+    expect(wantsTranslation('en', 'en')).toBe(false)
+    expect(wantsTranslation('fr', 'off')).toBe(false)
+    expect(wantsTranslation('fr', undefined)).toBe(false)
+  })
+  it('attaches a late translation to the right line only', () => {
+    const lines = [{ ts: 1, text: 'Bonjour' }, { ts: 2, text: 'Merci' }]
+    expect(withTranslation(lines, 2, 'Thank you')).toEqual([{ ts: 1, text: 'Bonjour' }, { ts: 2, text: 'Merci', tr: 'Thank you' }])
+    expect(withTranslation(lines, 9, 'x')).toBe(lines)
+  })
+  it('writes the transcript with translations under their lines', () => {
+    const lines = [{ ts: 1, text: 'Bonjour', tr: 'Hello' }, { ts: 2, text: 'OK', tr: 'OK' }, { ts: 3, text: 'Merci' }]
+    expect(transcriptText(lines, (t) => `t${t}`)).toBe('[t1] Bonjour\n        → Hello\n[t2] OK\n[t3] Merci')
   })
 })

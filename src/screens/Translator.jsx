@@ -17,7 +17,10 @@ import {
   startListening,
   micErrorMessage,
 } from '../lib/translate.js'
-import { startLiveListening, pipSupported, systemCaptureSupported, getSystemAudioTrack } from '../lib/live.js'
+import {
+  startLiveListening, pipSupported, systemCaptureSupported, getSystemAudioTrack,
+  defaultLiveTarget, wantsTranslation, withTranslation, transcriptText,
+} from '../lib/live.js'
 
 const AUTO_KEY = 'bready.autoT.v1'
 const loadAuto = () => {
@@ -82,6 +85,20 @@ const loadLiveLang = () => {
   } catch (e) {
     return 'en'
   }
+}
+
+// What Live translates each caption line into ('off' = captions only). Its own
+// setting, like the listening language: a meeting partner's language is not the
+// bakery counter's.
+const LIVE_TO_KEY = 'bready.liveTo.v1'
+const loadLiveTo = (listenId) => {
+  try {
+    const id = localStorage.getItem(LIVE_TO_KEY)
+    if (id === 'off' || INPUT_LANGS.some((l) => l.id === id)) return id
+  } catch (e) {
+    /* fall through */
+  }
+  return defaultLiveTarget(listenId)
 }
 
 // The floating window reopens at the size it was last dragged to.
@@ -165,6 +182,12 @@ export default function Translator({ country, onCountry }) {
   const [liveMsg, setLiveMsg] = useState('')
   const [liveLang, setLiveLang] = useState(loadLiveLang)
   const [liveLangOpen, setLiveLangOpen] = useState(false)
+  const [liveTo, setLiveTo] = useState(() => loadLiveTo(loadLiveLang()))
+  const [liveToOpen, setLiveToOpen] = useState(false)
+  const liveToRef = useRef(liveTo) // read inside the recogniser's callback
+  liveToRef.current = liveTo
+  const liveLangRef = useRef(liveLang)
+  liveLangRef.current = liveLang
   const [pipOn, setPipOn] = useState(false)
   const liveRef = useRef(null)
   const liveBoxRef = useRef(null)
@@ -231,11 +254,26 @@ export default function Translator({ country, onCountry }) {
       lang: inputById(langId || liveLang).bcp,
       track,
       onFinal: (line) => {
+        const ts = Date.now()
         setLiveLines((prev) => {
-          const next = [...prev, { ts: Date.now(), text: line }].slice(-1000)
+          const next = [...prev, { ts, text: line }].slice(-1000)
           saveLive(next)
           return next
         })
+        // translate the finished line; it shows up under the original about a second later
+        const from = inputById(langId || liveLangRef.current)
+        const toId = liveToRef.current
+        if (!wantsTranslation(from.id, toId)) return
+        translateText(line, inputById(toId).bcp, from.lang)
+          .then((tr) => {
+            if (!tr) return
+            setLiveLines((prev) => {
+              const next = withTranslation(prev, ts, tr)
+              if (next !== prev) saveLive(next)
+              return next
+            })
+          })
+          .catch(() => {})
       },
       onInterim: setLiveInterim,
       onState: setLiveOn,
@@ -302,7 +340,16 @@ export default function Translator({ country, onCountry }) {
   }
 
   function liveToText() {
-    return liveLines.map((l) => `[${liveStamp(l.ts)}] ${l.text}`).join('\n')
+    return transcriptText(liveLines, liveStamp)
+  }
+  function pickLiveTo(id) {
+    setLiveTo(id)
+    setLiveToOpen(false)
+    try {
+      localStorage.setItem(LIVE_TO_KEY, id)
+    } catch (e) {
+      /* quota — the choice still holds for this session */
+    }
   }
   function copyLive() {
     if (navigator.clipboard) navigator.clipboard.writeText(liveToText()).catch(() => {})
@@ -355,6 +402,8 @@ export default function Translator({ country, onCountry }) {
         #cap { flex: 1 1 auto; overflow-y: auto; padding: 10px 14px 12px; }
         #cap .f { font-size: 16.5px; line-height: 1.5; margin: 5px 0; }
         #cap .i { font-size: 16.5px; line-height: 1.5; margin: 5px 0; color: rgba(255,255,255,0.62); }
+        #cap .o { font-size: 12.5px; line-height: 1.4; margin: 9px 0 0; color: rgba(255,255,255,0.7); }
+        #cap .o + .f { margin-top: 1px; font-weight: 650; }
         #cap .empty { color: rgba(255,255,255,0.62); font-size: 13px; }`
       doc.head.appendChild(style)
       const bar = doc.createElement('div')
@@ -407,9 +456,16 @@ export default function Translator({ country, onCountry }) {
       cap.appendChild(d)
     }
     for (const l of liveLines.slice(-8)) {
+      // translated: the original small on top, the translation large under it
+      if (l.tr && l.tr !== l.text) {
+        const o = doc.createElement('div')
+        o.className = 'o'
+        o.textContent = l.text
+        cap.appendChild(o)
+      }
       const d = doc.createElement('div')
       d.className = 'f'
-      d.textContent = l.text
+      d.textContent = l.tr || l.text
       cap.appendChild(d)
     }
     if (liveInterim) {
@@ -942,6 +998,37 @@ export default function Translator({ country, onCountry }) {
                 Pick this before the call — Chrome can’t detect the language on its own.
               </p>
 
+              <div className="live-lang" style={{ marginTop: 10 }}>
+                <span className="lbl">Translate into</span>
+                <div style={{ position: 'relative', flex: 1, minWidth: 0 }}>
+                  <button
+                    className="live-lang-btn"
+                    onClick={() => setLiveToOpen((v) => !v)}
+                    aria-label="Choose the translation language"
+                  >
+                    <span style={{ overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>
+                      {liveTo === 'off' ? 'Off — captions only' : `${inputById(liveTo).flag} ${inputById(liveTo).label}`}
+                    </span>
+                    <Chevron />
+                  </button>
+                  {liveToOpen && (
+                    <div className="dd-menu" style={{ maxHeight: 280, overflowY: 'auto' }}>
+                      <button className="dd-item" onClick={() => pickLiveTo('off')}>Off — captions only</button>
+                      {INPUT_LANGS.map((l) => (
+                        <button key={l.id} className="dd-item" onClick={() => pickLiveTo(l.id)}>
+                          {l.flag} {l.label}
+                        </button>
+                      ))}
+                    </div>
+                  )}
+                </div>
+              </div>
+              {wantsTranslation(liveLang, liveTo) && (
+                <p className="muted" style={{ fontSize: 11.5, margin: '6px 2px 0' }}>
+                  Each finished sentence is translated about a second after it appears.
+                </p>
+              )}
+
               <button className={`live-toggle${liveOn ? ' on' : ''}`} onClick={liveOn ? stopLive : () => startLive()}>
                 {liveOn ? '■  Stop listening' : '●  Start listening'}
               </button>
@@ -977,13 +1064,14 @@ export default function Translator({ country, onCountry }) {
                   <p className="muted" style={{ fontSize: 13, lineHeight: 1.6, margin: 0 }}>
                     {liveOn
                       ? 'Listening… captions appear here as people speak.'
-                      : 'Press Start, then everything the mic hears is written here — and kept, even through a reload.'}
+                      : 'Press Start, then everything the mic hears is written here, with its translation — and kept, even through a reload.'}
                   </p>
                 )}
                 {liveLines.map((l, i) => (
                   <div key={i} className="live-line">
                     <span className="t">{liveStamp(l.ts)}</span>
                     {l.text}
+                    {l.tr && l.tr !== l.text && <div className="live-tr">{l.tr}</div>}
                   </div>
                 ))}
                 {liveInterim && <div className="live-interim">{liveInterim}</div>}
@@ -991,8 +1079,9 @@ export default function Translator({ country, onCountry }) {
 
               <p className="muted" style={{ fontSize: 12, lineHeight: 1.6, margin: '12px 2px 0' }}>
                 🎧 For any meeting — Zoom, Google Meet, Slack huddle, Teams — use{' '}
-                <strong>Caption meeting audio</strong>. It listens to whatever your Mac is playing,
-                so earphones are fine. (<strong>Start listening</strong> uses the mic instead: good
+                <strong>Caption meeting audio</strong>, in the app or the browser. It listens to whatever
+                your Mac is playing, so earphones are fine: share <strong>Entire Screen</strong> and turn on
+                <strong>Also share system audio</strong>. (<strong>Start listening</strong> uses the mic instead: good
                 for in-person rooms and dictation.)
               </p>
               <p className="muted" style={{ fontSize: 12, lineHeight: 1.6, margin: '8px 2px 0' }}>
