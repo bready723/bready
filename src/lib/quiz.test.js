@@ -1,7 +1,7 @@
 import { describe, it, expect } from 'vitest'
 import {
   ROUND_SIZE, SECONDS, shuffle, pickRound, scoreOf, initialState, quizReducer, photoUrl, creditLine,
-  HISTORY_KEY, LOGO_HISTORY_KEY, bestLabel, sampleArt, HISTORY_MAX, loadHistory, addResult, saveHistory, summarize, isNewBest, playedLabel,
+  HISTORY_KEY, LOGO_HISTORY_KEY, renameAll, bestLabel, sampleArt, HISTORY_MAX, loadHistory, addResult, saveHistory, summarize, isNewBest, playedLabel,
   NAME_MAX, DEFAULT_NAME, cleanName, nameOf, recentNames, renameLast, bestRow, loadName, saveName,
 } from './quiz.js'
 
@@ -265,5 +265,19 @@ describe('quiz hub tiles', () => {
     expect(new Set(art.map((p) => p.id)).size).toBe(3)
     expect(sampleArt(people(2), 3)).toHaveLength(2)
     expect(sampleArt(undefined)).toEqual([])
+  })
+})
+
+describe('renameAll', () => {
+  const rows = [{ at: 3, score: 20, name: 's' }, { at: 2, score: 50, name: 'Mom' }, { at: 1, score: 40, name: 's' }]
+  it('fixes a typo on every game saved under that name', () => {
+    expect(renameAll(rows, 's', 'Sara').map((r) => r.name)).toEqual(['Sara', 'Mom', 'Sara'])
+  })
+  it('leaves other names and unchanged names alone', () => {
+    expect(renameAll(rows, 'Mom', 'Mom')).toBe(rows)
+    expect(renameAll(rows, 'Dad', 'Sara')).toEqual(rows)
+  })
+  it('cleans the new name like any other', () => {
+    expect(renameAll(rows, 's', '  Sara   Kim  ')[0].name).toBe('Sara Kim')
   })
 })

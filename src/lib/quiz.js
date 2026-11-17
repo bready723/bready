@@ -120,6 +120,13 @@ export function renameLast(history, name) {
   return [{ ...history[0], name: cleanName(name) }, ...history.slice(1)]
 }
 
+// fixing a typo'd name: every game saved under it on this scoreboard takes the new one
+export function renameAll(history, from, to) {
+  const old = cleanName(from), name = cleanName(to)
+  if (old === name) return history
+  return history.map((row) => (nameOf(row) === old ? { ...row, name } : row))
+}
+
 export function bestRow(history) {
   return history.reduce((top, row) => (top && top.score >= row.score ? top : row), null)
 }

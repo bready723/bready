@@ -2,7 +2,7 @@ import { useEffect, useLayoutEffect, useMemo, useReducer, useRef, useState } fro
 import {
   ROUND_SIZE, SECONDS, pickRound, scoreOf, initialState, quizReducer, photoUrl, creditLine,
   loadHistory, addResult, saveHistory, summarize, isNewBest, playedLabel,
-  DEFAULT_NAME, nameOf, recentNames, renameLast, bestRow, loadName, saveName,
+  DEFAULT_NAME, nameOf, recentNames, renameLast, renameAll, bestRow, loadName, saveName,
 } from '../lib/quiz.js'
 import { Backdrop, NameCard } from '../components/QuizParts.jsx'
 
@@ -150,6 +150,15 @@ export default function FaceGame({ pool, dir = 'quiz', storeKey, logo = false, o
   const board = summarize(history)
   const top = bestRow(history)
   // "who played?": the game is already saved under the last name; picking a name relabels it
+  // a typo'd name, fixed: every game under it on this scoreboard takes the new name
+  const fixName = (from, to) => {
+    saveName(to)
+    setHistory((h) => {
+      const next = renameAll(h, from, to)
+      saveHistory(next, STORE, storeKey)
+      return next
+    })
+  }
   const setPlayer = (name) => {
     saveName(name)
     setHistory((h) => {
@@ -183,7 +192,7 @@ export default function FaceGame({ pool, dir = 'quiz', storeKey, logo = false, o
             </div>
           </div>
           {savedRound.current === s.round && history.length > 0 && (
-            <NameCard key={history[0].at} current={nameOf(history[0])} names={recentNames(history.slice(1))} onPick={setPlayer} />
+            <NameCard key={history[0].at} current={nameOf(history[0])} names={recentNames(history.slice(1))} onPick={setPlayer} onRename={fixName} />
           )}
           <div className="q-row">
             <button className="q-btn glassy" onClick={() => dispatch({ type: 'replay', round: fresh() })}>Replay</button>

@@ -2,7 +2,7 @@ import { useEffect, useMemo, useReducer, useRef, useState } from 'react'
 import bank from '../lib/world-bank.json'
 import {
   addResult, bestRow, DEFAULT_NAME, loadHistory, loadName, nameOf, playedLabel,
-  recentNames, renameLast, saveHistory, saveName, summarize, isNewBest,
+  recentNames, renameLast, renameAll, saveHistory, saveName, summarize, isNewBest,
 } from '../lib/quiz.js'
 import {
   answerOf, flagUrl, historyKey, isRight, loadMissed, makeRound, nextMissed,
@@ -57,6 +57,15 @@ export default function WorldQuiz({ kind, onExit }) {
     })
   }, [s.phase, s.round, s.picks, kind, key])
 
+  // a typo'd name, fixed: every game under it on this scoreboard takes the new name
+  const fixName = (from, to) => {
+    saveName(to)
+    setHistory((h) => {
+      const next = renameAll(h, from, to)
+      saveHistory(next, STORE, key)
+      return next
+    })
+  }
   const setPlayer = (name) => {
     saveName(name)
     setHistory((h) => {
@@ -91,7 +100,7 @@ export default function WorldQuiz({ kind, onExit }) {
             </p>
           </div>
           {thisGame && history.length > 0 && (
-            <NameCard key={history[0].at} current={nameOf(history[0])} names={recentNames(history.slice(1))} onPick={setPlayer} />
+            <NameCard key={history[0].at} current={nameOf(history[0])} names={recentNames(history.slice(1))} onPick={setPlayer} onRename={fixName} />
           )}
           <div className="q-row">
             <button className="q-btn glassy" onClick={replay}>Replay</button>

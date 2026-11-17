@@ -1132,6 +1132,7 @@ textarea.input { resize: vertical; min-height: 88px; }
   background: rgba(255,255,255,.7); color: var(--q-ink); font: 700 15px var(--sans); cursor: pointer;
 }
 .q-name-chip.on { background: #5b3fd6; border-color: #5b3fd6; color: #fff; box-shadow: 0 4px 12px -4px rgba(91,63,214,.7); }
+.q-name-edit { margin-left: 8px; font-size: 13px; opacity: .85; }
 .q-name-chip.add { border-style: dashed; color: #5b3fd6; background: transparent; }
 .q-name-form { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; margin-top: 10px; }
 .q-name-input {
