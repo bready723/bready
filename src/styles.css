@@ -1095,6 +1095,39 @@ textarea.input { resize: vertical; min-height: 88px; }
   box-shadow: inset 0 1px 0 #fff, 0 4px 10px rgba(26,14,60,.18), 0 18px 36px -12px rgba(26,14,60,.55);
 }
 .q-name-main { margin: 0; font: 780 28px/1.12 var(--sans); letter-spacing: -.025em; color: var(--q-ink); }
+.q-name-alt { margin: 4px 0 0; font: 650 15px/1.25 var(--sans); color: var(--q-muted); }
+.q-name-sub { margin: 6px 0 0; font: 700 15px/1.25 var(--sans); color: var(--q-indigo); }
+a.q-credit { text-decoration: none; color: #4a2fc0; font-weight: 650; }
+/* Guess the Song: a record spins while the clip plays; the cover shows with the answer */
+.q-well.song { background: radial-gradient(120% 90% at 50% 0%, #f4fffa 0%, #dcefe8 100%); }
+.q-disc {
+  position: absolute; left: 50%; top: 46%; width: min(62cqw, 62cqh, 240px); aspect-ratio: 1; transform: translate(-50%, -50%);
+  border-radius: 50%; display: grid; place-items: center;
+  background: repeating-radial-gradient(circle, #24203a 0 2px, #2e2948 2px 4px);
+  box-shadow: inset 0 0 0 6px #1b1730, 0 18px 34px -14px rgba(26,14,60,.6);
+}
+.q-well.song { container-type: size; }
+.q-disc::after { content: ''; position: absolute; inset: 0; border-radius: 50%; background: conic-gradient(from 30deg, transparent 0 12%, rgba(255,255,255,.16) 16%, transparent 22% 62%, rgba(255,255,255,.12) 66%, transparent 72%); }
+.q-disc.on { animation: q-spin 2.4s linear infinite; }
+.q-disc-label {
+  width: 36%; aspect-ratio: 1; border-radius: 50%; display: grid; place-items: center;
+  background: linear-gradient(135deg, #1aa7e8, #5b3fd6 55%, #e0218a); color: #fff; font: 800 26px var(--sans);
+  box-shadow: inset 0 0 0 3px rgba(255,255,255,.35);
+}
+.q-eq { position: absolute; left: 50%; bottom: 7%; transform: translateX(-50%); display: flex; gap: 4px; align-items: flex-end; height: 22px; }
+.q-eq i { width: 5px; height: 30%; border-radius: 3px; background: #5b3fd6; opacity: .75; }
+.q-eq.on i { animation: q-eq .8s ease-in-out infinite alternate; }
+.q-eq.on i:nth-child(2) { animation-delay: -.3s; }
+.q-eq.on i:nth-child(3) { animation-delay: -.55s; }
+.q-eq.on i:nth-child(4) { animation-delay: -.15s; }
+.q-eq.on i:nth-child(5) { animation-delay: -.45s; }
+@keyframes q-spin { from { transform: translate(-50%, -50%) rotate(0); } to { transform: translate(-50%, -50%) rotate(360deg); } }
+@keyframes q-eq { from { height: 20%; } to { height: 100%; } }
+@media (prefers-reduced-motion: reduce) { .q-disc.on, .q-eq.on i { animation: none; } }
+.q-tapplay { position: absolute; left: 50%; bottom: 18px; transform: translateX(-50%); z-index: 3; width: auto; padding: 0 22px; }
+.q-missed.song img { aspect-ratio: 1; object-position: center; }
+.q-missed.movie img { aspect-ratio: 2 / 3; object-position: center; }
+.q-missed.song li span, .q-missed.movie li span { overflow-wrap: anywhere; }
 /* photo credit: small grey type in the photo's bottom-right corner, on a faint chip so it reads on any photo */
 .q-credit {
   position: absolute; right: 8px; bottom: 8px; z-index: 2; max-width: calc(100% - 16px); margin: 0;
@@ -1175,7 +1208,7 @@ textarea.input { resize: vertical; min-height: 88px; }
 
 /* quiz hub: four picture tiles, 2×2, the whole tile is the button (Sara, 2026-11-17) */
 .q-hub { display: flex; flex-direction: column; gap: 10px; padding-top: 10px; min-height: 0; }
-.q-tiles { flex: 1 1 auto; min-height: 0; display: grid; grid-template-columns: 1fr 1fr; grid-template-rows: 1fr 1fr; gap: 12px; }
+.q-tiles { flex: 1 1 auto; min-height: 0; display: grid; grid-template-columns: 1fr 1fr; grid-auto-rows: 1fr; gap: 10px; }
 .quiz .q-tile {
   appearance: none; cursor: pointer; font: inherit; color: var(--q-ink); text-align: left;
   min-width: 0; min-height: 0; padding: 10px 10px 12px; border-radius: 26px;
@@ -1188,6 +1221,8 @@ textarea.input { resize: vertical; min-height: 88px; }
 .quiz .q-tile.t-capital { background: linear-gradient(150deg, rgba(234,229,255,.84) 0%, rgba(255,255,255,.6) 55%, rgba(219,210,255,.55) 100%); }
 .quiz .q-tile.t-flag { background: linear-gradient(150deg, rgba(255,232,244,.84) 0%, rgba(255,255,255,.6) 55%, rgba(255,212,232,.55) 100%); }
 .quiz .q-tile.t-logo { background: linear-gradient(150deg, rgba(255,241,224,.86) 0%, rgba(255,255,255,.6) 55%, rgba(255,226,200,.55) 100%); }
+.quiz .q-tile.t-song { background: linear-gradient(150deg, rgba(220,250,238,.86) 0%, rgba(255,255,255,.6) 55%, rgba(196,240,222,.55) 100%); }
+.quiz .q-tile.t-movie { background: linear-gradient(150deg, rgba(255,250,214,.86) 0%, rgba(255,255,255,.6) 55%, rgba(250,236,186,.55) 100%); }
 .q-tile-art { flex: 1 1 auto; min-height: 0; position: relative; display: block; container-type: size; }
 .q-tile-foot { flex: none; display: grid; gap: 6px; padding: 0 4px; }
 .q-tile-title { font: 760 18px/1.12 var(--sans); letter-spacing: -.025em; color: var(--q-ink); overflow-wrap: anywhere; }
@@ -1199,6 +1234,13 @@ textarea.input { resize: vertical; min-height: 88px; }
   box-shadow: inset 0 1px 0 #fff, 0 2px 6px -3px rgba(26,14,60,.3);
 }
 .q-tile-chip.new { color: #b0124f; }
+/* six tiles on a small phone (iPhone SE): smaller type so the pictures keep their room */
+@media (max-width: 360px), (max-height: 700px) {
+  .quiz .q-tile { padding: 8px 8px 10px; gap: 6px; border-radius: 22px; }
+  .q-tile-title { font-size: 15px; }
+  .q-tile-foot { gap: 4px; padding: 0 2px; }
+  .q-tile-chip { font-size: 11px; padding: 2px 8px; }
+}
 /* the picture stack: three cards fanned out, the middle one on top */
 .q-tile-stack { position: absolute; inset: 0; }
 .q-tile-card {
@@ -1216,6 +1258,10 @@ textarea.input { resize: vertical; min-height: 88px; }
 .flag .q-tile-card.c2 { transform: translate(-14%, -68%) rotate(9deg); }
 .logo .q-tile-card { height: min(70cqh, 52cqw); aspect-ratio: 1; border-radius: 16px; }
 .logo .q-tile-card img { object-fit: contain; padding: 14%; }
+.cover .q-tile-card { height: min(76cqh, 50cqw); aspect-ratio: 1; border-radius: 10px; }
+.cover .q-tile-card img { object-position: center; }
+.poster .q-tile-card { height: min(90cqh, 80cqw); aspect-ratio: 2 / 3; border-radius: 8px; }
+.poster .q-tile-card img { object-position: center; }
 .q-tile-globe { position: absolute; left: 50%; top: 50%; height: 92%; max-width: 92%; transform: translate(-50%, -50%); filter: drop-shadow(0 10px 14px rgba(26,14,60,.28)); }
 .q-btn.glassy {
   color: #4a2fc0; text-shadow: 0 1px 0 rgba(255,255,255,.7);
@@ -1296,6 +1342,8 @@ textarea.input { resize: vertical; min-height: 88px; }
   .q-end > :nth-child(3), .q-tile:nth-child(2) { animation-delay: .06s; }
   .q-end > :nth-child(4), .q-tile:nth-child(3) { animation-delay: .12s; }
   .q-tile:nth-child(4) { animation-delay: .18s; }
+  .q-tile:nth-child(5) { animation-delay: .24s; }
+  .q-tile:nth-child(6) { animation-delay: .30s; }
   .q-ring.hot { animation: q-pulse 1s ease-in-out infinite; }
   @keyframes q-pulse { 50% { box-shadow: var(--q-depth), 0 0 0 6px rgba(224,33,138,.18); } }
 }

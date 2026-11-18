@@ -25,16 +25,28 @@ export function scoreOf(answers, total) {
   return { correct, total, score: total > 0 ? Math.round((correct * 100) / total) : 0 }
 }
 
-// phase: idle → loading (photo on its way) → countdown → revealed → … → done
-export const initialState = { phase: 'idle', round: [], index: 0, secondsLeft: SECONDS, answers: [] }
+// Guess the Song: half Korean songs, half global, shuffled together. When one
+// side runs short the other fills the round.
+export function pickMixed(pool, n = ROUND_SIZE, rng = Math.random) {
+  const kr = shuffle(pool.filter((x) => x.kr), rng)
+  const world = shuffle(pool.filter((x) => !x.kr), rng)
+  const half = Math.ceil(n / 2)
+  const a = kr.slice(0, Math.max(half, n - world.length))
+  const b = world.slice(0, n - a.length)
+  return shuffle([...a, ...b], rng).slice(0, n)
+}
 
-const question = (state, index) => ({ ...state, phase: 'loading', index, secondsLeft: SECONDS })
+// phase: idle → loading (photo on its way) → countdown → revealed → … → done
+// seconds: the clock for each question (5 for pictures, longer for songs)
+export const initialState = { phase: 'idle', round: [], index: 0, seconds: SECONDS, secondsLeft: SECONDS, answers: [] }
+
+const question = (state, index) => ({ ...state, phase: 'loading', index, secondsLeft: state.seconds })
 
 export function quizReducer(state, action) {
   switch (action.type) {
     case 'start':
     case 'replay':
-      return question({ ...initialState, round: action.round }, 0)
+      return question({ ...initialState, round: action.round, seconds: action.seconds || state.seconds || SECONDS }, 0)
     case 'loaded':
       // The clock starts only once the photo is on screen, so a slow network
       // never eats the five seconds.
@@ -59,20 +71,33 @@ export function quizReducer(state, action) {
   }
 }
 
-// `dir`: 'quiz' for faces, 'logos' for the Logo Quiz
+// `dir`: 'quiz' for faces, 'logos' for the Logo Quiz. Songs and movies carry
+// their own picture address (Apple / TMDB), streamed at play time.
 export function photoUrl(person, base = '/', dir = 'quiz') {
+  if (person.art) return person.art
   return `${base.replace(/\/$/, '')}/${dir}/${person.file}`
 }
 
 // CC BY / BY-SA ask for credit where the photo is shown.
 export function creditLine(person, label = 'Photo') {
+  if (person.preview) return 'Preview: Apple Music'
+  if (person.source === 'tmdb') return 'Image: TMDB'
   if (person.source !== 'commons') return ''
   return `${label}: ${person.credit || 'Wikimedia Commons'} · ${person.license}`
+}
+
+// the small line under a revealed song or movie: "Artist · 2019"
+export function subLine(item) {
+  const who = item.artist && item.altArtist ? `${item.artist} (${item.altArtist})` : item.artist
+  return [who, item.year].filter(Boolean).join(' · ')
 }
 
 // ---- score history: finished games, newest first, kept on this phone ----
 export const HISTORY_KEY = 'bready.quiz.v1'
 export const LOGO_HISTORY_KEY = 'bready.logo.v1'
+export const SONG_HISTORY_KEY = 'bready.song.v1'
+export const MOVIE_HISTORY_KEY = 'bready.movie.v1'
+export const SONG_SECONDS = 10
 export const HISTORY_MAX = 50
 
 const defaultStore = () => (typeof localStorage !== 'undefined' ? localStorage : null)

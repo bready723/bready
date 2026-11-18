@@ -1759,3 +1759,7 @@ Logos from Wikimedia Commons, used under the licence shown; the brands are trade
 | 핑크퐁 | Pinkfong | CC BY 3.0 | [file page](https://commons.wikimedia.org/wiki/File:Pinkfong_logo.svg) |
 | 한화 | Hanwha Group | Public domain | [file page](https://commons.wikimedia.org/wiki/File:Hanwha_logo.svg) |
 | 현대자동차 | Hyundai Motor Company | Public domain | [file page](https://commons.wikimedia.org/wiki/File:Hyundai_Motor_Company_logo.svg) |
+
+## Guess the Song and Guess the Movie
+
+Guess the Song plays 30-second previews and shows album covers streamed from Apple Music; each answer links to the song on Apple Music. Guess the Movie shows posters and stills streamed from TMDB (The Movie Database). This product uses the TMDB API but is not endorsed or certified by TMDB. Movie data and images: https://www.themoviedb.org

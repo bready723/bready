@@ -1,11 +1,16 @@
 import { useCallback, useMemo, useRef, useState } from 'react'
 import people from '../lib/people.json'
 import logos from '../lib/logos.json'
+import songs from '../lib/songs.json'
+import movies from '../lib/movies.json'
 import bank from '../lib/world-bank.json'
-import { HISTORY_KEY, LOGO_HISTORY_KEY, loadHistory, bestLabel, sampleArt, photoUrl } from '../lib/quiz.js'
+import {
+  HISTORY_KEY, LOGO_HISTORY_KEY, SONG_HISTORY_KEY, MOVIE_HISTORY_KEY, SONG_SECONDS,
+  loadHistory, bestLabel, sampleArt, photoUrl, pickMixed,
+} from '../lib/quiz.js'
 import { historyKey, flagUrl } from '../lib/world.js'
 import { Backdrop } from '../components/QuizParts.jsx'
-import FaceGame, { useFitHeight, useTilt } from './FaceGame.jsx'
+import FaceGame, { useFitHeight, useTilt, unlockAudio } from './FaceGame.jsx'
 import WorldQuiz from './WorldQuiz.jsx'
 
 const BASE = import.meta.env.BASE_URL
@@ -54,22 +59,26 @@ function Stack({ srcs, kind }) {
 }
 
 export default function Quiz() {
-  const [open, setOpen] = useState(null) // 'face' | 'logo' | 'capital' | 'flag'
+  const [open, setOpen] = useState(null) // 'face' | 'logo' | 'capital' | 'flag' | 'song' | 'movie'
   const back = useCallback(() => setOpen(null), [])
   const root = useRef(null)
   const hub = useRef(null)
   useTilt(root)
-  useFitHeight(hub, open === null) // the four tiles fill the screen down to the tab bar
+  useFitHeight(hub, open === null) // the six tiles fill the screen down to the tab bar
 
   // a fresh picture stack every time the hub shows
   const art = useMemo(() => ({
     face: sampleArt(people).map((p) => photoUrl(p, BASE)),
     logo: sampleArt(logos).map((p) => photoUrl(p, BASE, 'logos')),
     flag: sampleArt(bank).map((c) => flagUrl(c, BASE)),
+    song: sampleArt(songs).map((x) => x.art),
+    movie: sampleArt(movies).map((x) => x.art),
   }), [open]) // eslint-disable-line react-hooks/exhaustive-deps
 
   if (open === 'face') return <FaceGame pool={people} storeKey={HISTORY_KEY} onExit={back} />
-  if (open === 'logo') return <FaceGame pool={logos} dir="logos" storeKey={LOGO_HISTORY_KEY} logo onExit={back} />
+  if (open === 'logo') return <FaceGame pool={logos} dir="logos" storeKey={LOGO_HISTORY_KEY} kind="logo" onExit={back} />
+  if (open === 'song') return <FaceGame pool={songs} storeKey={SONG_HISTORY_KEY} kind="song" pick={pickMixed} seconds={SONG_SECONDS} onExit={back} />
+  if (open === 'movie') return <FaceGame pool={movies} storeKey={MOVIE_HISTORY_KEY} kind="movie" onExit={back} />
   if (open === 'capital' || open === 'flag') return <WorldQuiz kind={open} onExit={back} />
 
   const tiles = [
@@ -77,7 +86,9 @@ export default function Quiz() {
     { id: 'capital', title: <>Country <i>→</i> Capital</>, label: 'Country to Capital', key: historyKey('capital'), art: <GlobeArt /> },
     { id: 'flag', title: <>Flag <i>→</i> Country</>, label: 'Flag to Country', key: historyKey('flag'), art: <Stack srcs={art.flag} kind="flag" /> },
     { id: 'logo', title: 'Logo Quiz', key: LOGO_HISTORY_KEY, off: !logos.length, art: <Stack srcs={art.logo} kind="logo" /> },
-  ]
+    { id: 'song', title: 'Guess the Song', key: SONG_HISTORY_KEY, off: !songs.length, art: <Stack srcs={art.song} kind="cover" /> },
+    { id: 'movie', title: 'Guess the Movie', key: MOVIE_HISTORY_KEY, off: !movies.length, art: <Stack srcs={art.movie} kind="poster" /> },
+  ].filter((t) => t.id !== 'movie' || movies.length) // the movie tile appears once its list is built
 
   return (
     <main className="screen quiz" ref={root}>
@@ -90,7 +101,7 @@ export default function Quiz() {
               <button
                 key={t.id}
                 className={`glass q-tile t-${t.id}`}
-                onClick={() => setOpen(t.id)}
+                onClick={() => { if (t.id === 'song') unlockAudio(); setOpen(t.id) }}
                 disabled={t.off}
                 aria-label={`${t.label || t.title}, ${chip}`}
               >
@@ -104,7 +115,7 @@ export default function Quiz() {
           })}
         </div>
         <a className="q-credits" href={`${BASE}quiz/credits.html`}>
-          Photo, flag &amp; logo credits
+          Credits
         </a>
       </section>
     </main>

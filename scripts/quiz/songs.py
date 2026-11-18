@@ -1,0 +1,134 @@
+"""Build the Guess the Song pool (src/lib/songs.json) from Apple's free catalogue data.
+
+Usage: python3 -I scripts/quiz/songs.py <work-dir> [playlist.html ...]
+- Recent charts: Apple Music "most played" top 100 for the US and Korea (public RSS feed).
+- All-time favourites: scripts/quiz/songs-classics.csv (store,artist,title), found with the
+  iTunes Search API (about 20 calls a minute, so this part is slow; answers are cached).
+- Playlists: a saved music.apple.com playlist page (shared link). The playlist link itself
+  is never written to the repo.
+Every song is looked up in the US and Korean stores for names, the 30-second preview and the
+cover. Explicit tracks and songs without a preview are left out (family game).
+The app streams previews and covers from Apple at play time; nothing is copied into the repo.
+Each song is tagged kr (Korean) or not, so a game can be half Korean, half global.
+"""
+import csv, json, os, re, sys, time, urllib.parse, urllib.request, urllib.error
+UA = {'User-Agent': 'quiz-song-lookup/0.1 (personal non-commercial script)'}
+HERE = os.path.dirname(os.path.abspath(__file__))
+REPO = os.path.dirname(os.path.dirname(HERE))
+work = sys.argv[1]; os.makedirs(work, exist_ok=True)
+cache_p = os.path.join(work, 'songs-cache.json')
+cache = json.load(open(cache_p)) if os.path.exists(cache_p) else {}
+HANGUL = re.compile('[가-힣]')
+
+def get(url, pause):
+    if url in cache: return cache[url]
+    for i in range(8):
+        try:
+            d = json.load(urllib.request.urlopen(urllib.request.Request(url, headers=UA), timeout=60))
+            cache[url] = d; json.dump(cache, open(cache_p, 'w')); time.sleep(pause); return d
+        except urllib.error.HTTPError as e:
+            w = 20 * (i + 1); print(f'  {e.code}, waiting {w}s', file=sys.stderr); time.sleep(w)
+        except Exception as e:
+            print('  retry', e, file=sys.stderr); time.sleep(5 * (i + 1))
+    raise SystemExit('gave up: ' + url)
+
+norm = lambda s: re.sub(r'[^0-9a-z가-힣]', '', (s or '').lower())
+def same(a, b):
+    a, b = norm(a), norm(b)
+    return bool(a and b) and (a in b or b in a)
+
+ids = {}  # trackId -> store it came from ('us' / 'kr')
+krset = set()  # ids known to be Korean songs (Korea chart, Korean favourites)
+# 1. recent charts
+for st in ('us', 'kr'):
+    feed = get(f'https://rss.marketingtools.apple.com/api/v2/{st}/music/most-played/100/songs.json', 1)['feed']
+    for r in feed['results']:
+        ids.setdefault(r['id'], st)
+        if st == 'kr': krset.add(r['id'])
+# 2. all-time favourites
+BAD = re.compile(r'karaoke|instrumental|inst\.|live|remix|cover|tribute|sped up|slowed|acoustic ver|(chinese|japanese|actors?|extended|edm|orchestra) ver|edition', re.I)
+ODD = re.compile(r'version|ver\.|mix|edit\b|remaster|bonus', re.I)  # allowed, but the plain original comes first
+# The Korean store's search answers nothing, so Korean favourites are searched in the US
+# store (which understands Korean words but answers in English) and the candidates are
+# checked against their Korean-store names in one batched lookup.
+missing, kr_wait = [], []
+for row in csv.DictReader(open(os.path.join(HERE, 'songs-classics.csv'), encoding='utf-8')):
+    # artist / title may list other spellings after '|': 싸이|PSY, 강남스타일|Gangnam Style
+    row['artists'], row['titles'] = row['artist'].split('|'), [t.split(' (')[0] for t in row['title'].split('|')]
+    row['artist'], row['title'] = row['artists'][0], row['title'].split('|')[0]
+    q = urllib.parse.urlencode({'term': f"{row['artist']} {row['title']}", 'country': 'us', 'entity': 'song', 'limit': 15})
+    res = [r for r in get('https://itunes.apple.com/search?' + q, 3.2).get('results', [])
+           if not BAD.search(r.get('trackName', '') + ' ' + r.get('collectionName', ''))]
+    res.sort(key=lambda r: (r.get('trackExplicitness') == 'explicit', not r.get('previewUrl'), bool(ODD.search(r.get('trackName', '')))))
+    if row['store'] == 'kr':
+        kr_wait.append((row, [(str(r['trackId']), r.get('artistName'), r.get('trackName')) for r in res[:6]])); continue
+    ok = [r for r in res if same(r.get('artistName'), row['artist']) and same(r.get('trackName'), row['title'].split(' (')[0])]
+    if ok: ids.setdefault(str(ok[0]['trackId']), 'us')
+    else: missing.append(f"{row['artist']} - {row['title']}")
+cand = sorted({c for _, cs in kr_wait for c, _, _ in cs}); krinfo = {}
+for i in range(0, len(cand), 150):
+    q = urllib.parse.urlencode({'id': ','.join(cand[i:i + 150]), 'country': 'kr', 'entity': 'song'})
+    for r in get('https://itunes.apple.com/lookup?' + q, 3.2).get('results', []):
+        if r.get('wrapperType') == 'track': krinfo[str(r['trackId'])] = r
+for row, cs in kr_wait:
+    # the artist must match in either spelling (트와이스 / TWICE) so a knock-off is never picked
+    # (names can differ by language too, so any listed spelling of the artist and title counts)
+    anyof = lambda x, names: any(same(x, n) for n in names)
+    who = lambda c, ua: anyof(ua, row['artists']) or (c in krinfo and anyof(krinfo[c].get('artistName'), row['artists']))
+    hit = next((c for c, ua, ut in cs if who(c, ua) and (anyof(ut, row['titles']) or (c in krinfo and anyof(krinfo[c].get('trackName'), row['titles'])))), None)
+    if hit: ids.setdefault(hit, 'kr'); krset.add(hit)
+    else: missing.append(f"{row['artist']} - {row['title']}")
+# 3. playlists (saved page html)
+for path in sys.argv[2:]:
+    h = open(path, encoding='utf-8').read()
+    for sid in re.findall(r'"kind":"song","identifiers":\{"storeAdamID":"(\d+)"', h):
+        ids.setdefault(sid, 'us')
+
+# 4. look every id up in both stores
+info = {'us': {}, 'kr': {}}
+allid = sorted(ids)
+for st in ('us', 'kr'):
+    for i in range(0, len(allid), 150):
+        q = urllib.parse.urlencode({'id': ','.join(allid[i:i + 150]), 'country': st, 'entity': 'song'})
+        for r in get('https://itunes.apple.com/lookup?' + q, 3.2).get('results', []):
+            if r.get('wrapperType') == 'track': info[st][str(r['trackId'])] = r
+
+# an artist with any Korean song counts as Korean (K-pop groups also sing in English)
+kr_artists = set()
+for sid in allid:
+    for st in ('us', 'kr'):
+        r = info[st].get(sid)
+        if r and (sid in krset or 'K-Pop' in r.get('primaryGenreName', '') or HANGUL.search(r.get('artistName', '') + r.get('trackName', ''))):
+            kr_artists.add(r.get('artistId'))
+songs, seen, dropped = [], set(), {'explicit': 0, 'no preview': 0, 'not found': 0, 'duplicate': 0}
+for sid in allid:
+    us, kr = info['us'].get(sid), info['kr'].get(sid)
+    base = us or kr
+    if not base: dropped['not found'] += 1; continue
+    if base.get('trackExplicitness') == 'explicit': dropped['explicit'] += 1; continue
+    pv = (us or {}).get('previewUrl') or (kr or {}).get('previewUrl')
+    if not pv: dropped['no preview'] += 1; continue
+    korean = (sid in krset or base.get('artistId') in kr_artists or 'K-Pop' in ((us or {}).get('primaryGenreName', ''), (kr or {}).get('primaryGenreName', ''))
+              or bool(kr and HANGUL.search(kr.get('artistName', '') + kr.get('trackName', '')))
+              or bool(HANGUL.search(base.get('artistName', '') + base.get('trackName', ''))))
+    clean = lambda s: re.sub(r'\s*[\(\[][^\)\]]*(feat|with |from |remaster|version|bonus track|ver\.|radio edit)[^\)\]]*[\)\]]|\s+-\s+(\d{4} )?remaster(ed)?.*$', '', s or '', flags=re.I).strip()
+    main = kr if korean and kr else base
+    other = base if main is kr else kr
+    name, artist = clean(main['trackName']), main['artistName']
+    key = norm(name) + '|' + norm(artist.split(',')[0].split('&')[0])
+    if key in seen: dropped['duplicate'] += 1; continue
+    seen.add(key)
+    e = {'id': 's' + sid, 'name': name, 'artist': artist,
+         'art': re.sub(r'/\d+x\d+bb\.', '/600x600bb.', base['artworkUrl100']),
+         'preview': pv, 'link': re.sub(r'[?&]uo=\d+', '', base['trackViewUrl']).split('&')[0], 'year': (base.get('releaseDate') or '')[:4]}
+    if other:
+        oname, oartist = clean(other['trackName']), other['artistName']
+        if norm(oname) != norm(name): e['alt'] = oname
+        if norm(oartist) != norm(artist): e['altArtist'] = oartist
+    if korean: e['kr'] = True
+    songs.append(e)
+
+json.dump(songs, open(os.path.join(REPO, 'src', 'lib', 'songs.json'), 'w'), ensure_ascii=False, indent=0)
+kr_n = sum(1 for s in songs if s.get('kr'))
+print(f'songs {len(songs)} (Korean {kr_n}, global {len(songs) - kr_n}) | dropped {dropped}')
+print('classics not found:', '; '.join(missing) or 'none')

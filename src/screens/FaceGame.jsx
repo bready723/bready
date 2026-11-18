@@ -1,14 +1,32 @@
 import { useEffect, useLayoutEffect, useMemo, useReducer, useRef, useState } from 'react'
 import {
-  ROUND_SIZE, SECONDS, pickRound, scoreOf, initialState, quizReducer, photoUrl, creditLine,
+  ROUND_SIZE, pickRound, scoreOf, initialState, quizReducer, photoUrl, creditLine, subLine,
   loadHistory, addResult, saveHistory, summarize, isNewBest, playedLabel,
   DEFAULT_NAME, nameOf, recentNames, renameLast, renameAll, bestRow, loadName, saveName,
 } from '../lib/quiz.js'
 import { Backdrop, NameCard } from '../components/QuizParts.jsx'
 
-// One timed "say it out loud" game, used by Who Is This? (faces) and the Logo Quiz.
-// pool: [{id,name,file,...}]; dir: public folder of the images; storeKey: scoreboard key;
-// logo: white card, no blurred fill, "Logo:" credit.
+// One timed "say it out loud" game, used by Who Is This? (faces), the Logo Quiz,
+// Guess the Song and Guess the Movie.
+// pool: [{id,name,file|art,...}]; dir: public folder of the images; storeKey: scoreboard key;
+// kind: 'face' | 'logo' (white card, no blurred fill) | 'song' (plays the clip, cover
+// hidden until the answer) | 'movie'; pick: how a round is drawn; seconds: clock per question.
+
+// One audio element for the whole app. iOS only lets a page play sound that a tap
+// started, and remembers that per element: the hub tile's tap "unlocks" this one
+// (a tiny silent clip), so every song after that can start on its own.
+const SILENT = 'data:audio/wav;base64,UklGRjQAAABXQVZFZm10IBAAAAABAAEAQB8AAIA+AAACABAAZGF0YRAAAAAAAAAAAAAAAAAAAAAAAAAA'
+let player = null
+function songPlayer() {
+  if (!player && typeof Audio !== 'undefined') player = new Audio()
+  return player
+}
+export function unlockAudio() {
+  const a = songPlayer()
+  if (!a) return
+  a.src = SILENT
+  a.play().catch(() => {})
+}
 
 const BOARD_ROWS = 10
 const BASE = import.meta.env.BASE_URL
@@ -61,7 +79,7 @@ export function useTilt(ref) {
   }, [ref])
 }
 
-// The view must fit between whatever sits above it (app bar, a "Synced."
+// The view must fit between whatever sits above it (app bar, a sync-error
 // banner, the notch) and the tab bar, so the buttons never need a scroll.
 // Measure the real space instead of guessing with 100dvh.
 export function useFitHeight(ref, active) {
@@ -86,8 +104,8 @@ export function useFitHeight(ref, active) {
   }, [ref, active])
 }
 
-function Ring({ secondsLeft, running, stopped }) {
-  const offset = RING_C * (1 - secondsLeft / SECONDS)
+function Ring({ secondsLeft, total, running, stopped }) {
+  const offset = RING_C * (1 - secondsLeft / total)
   return (
     <div className={`q-ring${secondsLeft <= 2 && running ? ' hot' : ''}${secondsLeft === 0 ? ' done' : ''}${stopped ? ' stopped' : ''}`} role="timer" aria-label={`${secondsLeft} seconds left`}>
       <svg viewBox="0 0 100 100">
@@ -106,9 +124,22 @@ function Ring({ secondsLeft, running, stopped }) {
   )
 }
 
-export default function FaceGame({ pool, dir = 'quiz', storeKey, logo = false, onExit }) {
-  const fresh = () => pickRound(pool, ROUND_SIZE)
-  const [s, dispatch] = useReducer(quizReducer, initialState, () => quizReducer(initialState, { type: 'start', round: fresh() }))
+// the spinning record shown while a song plays (the cover would give it away)
+function Disc({ spinning }) {
+  return (
+    <>
+      <div className={`q-disc${spinning ? ' on' : ''}`} aria-hidden="true">
+        <span className="q-disc-label">♪</span>
+      </div>
+      <span className={`q-eq${spinning ? ' on' : ''}`} aria-hidden="true"><i /><i /><i /><i /><i /></span>
+    </>
+  )
+}
+
+export default function FaceGame({ pool, dir = 'quiz', storeKey, kind = 'face', pick = pickRound, seconds, onExit }) {
+  const logo = kind === 'logo', song = kind === 'song'
+  const fresh = () => pick(pool, ROUND_SIZE)
+  const [s, dispatch] = useReducer(quizReducer, initialState, () => quizReducer(initialState, { type: 'start', round: fresh(), seconds }))
   const root = useRef(null)
   const play = useRef(null)
   useTilt(root)
@@ -132,6 +163,25 @@ export default function FaceGame({ pool, dir = 'quiz', storeKey, logo = false, o
     const next = s.round[s.index + 1]
     if (next && s.phase === 'countdown') new Image().src = url(next)
   }, [s.round, s.index, s.phase]) // eslint-disable-line react-hooks/exhaustive-deps
+
+  // songs: start the clip; the clock starts once it is actually playing. If the phone
+  // refuses to start sound by itself, a "Tap to play" button appears instead.
+  const [blocked, setBlocked] = useState(false)
+  useEffect(() => {
+    if (!song || s.phase !== 'loading') return
+    const a = songPlayer()
+    if (!a) return dispatch({ type: 'loaded' })
+    const onPlaying = () => { setBlocked(false); dispatch({ type: 'loaded' }) }
+    const onError = () => dispatch({ type: 'reveal' }) // clip gone: show the answer
+    a.addEventListener('playing', onPlaying)
+    a.addEventListener('error', onError)
+    a.src = s.round[s.index].preview
+    a.play().catch((e) => { if (e?.name === 'NotAllowedError') setBlocked(true) })
+    return () => { a.removeEventListener('playing', onPlaying); a.removeEventListener('error', onError) }
+  }, [song, s.phase, s.index, s.round])
+  // silence when the game ends or the screen closes
+  useEffect(() => { if (song && (s.phase === 'done' || s.phase === 'idle')) songPlayer()?.pause() }, [song, s.phase])
+  useEffect(() => () => { if (song) songPlayer()?.pause() }, [song])
 
   const result = useMemo(() => scoreOf(s.answers, s.round.length), [s.answers, s.round.length])
 
@@ -195,7 +245,7 @@ export default function FaceGame({ pool, dir = 'quiz', storeKey, logo = false, o
             <NameCard key={history[0].at} current={nameOf(history[0])} names={recentNames(history.slice(1))} onPick={setPlayer} onRename={fixName} />
           )}
           <div className="q-row">
-            <button className="q-btn glassy" onClick={() => dispatch({ type: 'replay', round: fresh() })}>Replay</button>
+            <button className="q-btn glassy" onClick={() => { if (song) unlockAudio(); dispatch({ type: 'replay', round: fresh(), seconds }) }}>Replay</button>
             <button className="q-btn stop" onClick={() => dispatch({ type: 'stop' })}>Stop</button>
           </div>
           {history.length > 0 && (
@@ -222,13 +272,13 @@ export default function FaceGame({ pool, dir = 'quiz', storeKey, logo = false, o
             </div>
           )}
           {result.correct < result.total && (
-            <div className={`glass q-missed${logo ? ' logo' : ''}`}>
+            <div className={`glass q-missed ${kind}`}>
               <p className="q-eyebrow">Missed</p>
               <ul>
                 {s.round.map((p, i) => (s.answers[i] ? null : (
                   <li key={p.id}>
                     <img src={url(p)} alt="" loading="lazy" />
-                    {logo && <span>{p.name}</span>}
+                    {kind !== 'face' && <span>{p.name}</span>}
                   </li>
                 )))}
               </ul>
@@ -241,6 +291,8 @@ export default function FaceGame({ pool, dir = 'quiz', storeKey, logo = false, o
 
   const revealed = s.phase === 'revealed'
   const credit = creditLine(item, logo ? 'Logo' : 'Photo')
+  const sub = subLine(item)
+  const ask = { face: 'Who is this?', logo: 'Which brand is this?', movie: 'Which movie is this?', song: 'Which song is this?' }[kind]
   return (
     <main className="screen quiz" ref={root}>
       <Backdrop />
@@ -254,9 +306,13 @@ export default function FaceGame({ pool, dir = 'quiz', storeKey, logo = false, o
         </div>
 
         <div className="glass q-photo">
-          <div className={`q-well${logo ? ' logo' : ''}`}>
+          <div className={`q-well ${kind}`}>
+            {song && !revealed && <Disc spinning={s.phase === 'countdown'} />}
+            {song && blocked && s.phase === 'loading' && (
+              <button className="q-btn glassy q-tapplay" onClick={() => songPlayer()?.play().catch(() => {})}>▶ Tap to play</button>
+            )}
             {/* faces: the same photo, blurred and cropped to fill, so wide shots leave no empty bands */}
-            {!logo && (
+            {!logo && (!song || revealed) && (
               <div
                 key={'bg' + item.id}
                 className={`q-well-bg${s.phase === 'loading' ? ' pending' : ''}`}
@@ -264,22 +320,28 @@ export default function FaceGame({ pool, dir = 'quiz', storeKey, logo = false, o
                 aria-hidden="true"
               />
             )}
-            <img
-              key={item.id}
-              src={url(item)}
-              alt={revealed ? item.name : logo ? 'Which brand is this?' : 'Who is this?'}
-              onLoad={() => dispatch({ type: 'loaded' })}
-              onError={() => dispatch({ type: 'loaded' })}
-              className={s.phase === 'loading' ? 'pending' : ''}
-            />
+            {(!song || revealed) && (
+              <img
+                key={item.id}
+                src={url(item)}
+                alt={revealed ? item.name : ask}
+                onLoad={() => { if (!song) dispatch({ type: 'loaded' }) }}
+                onError={() => { if (!song) dispatch({ type: 'loaded' }) }}
+                className={s.phase === 'loading' ? 'pending' : ''}
+              />
+            )}
             {revealed && (
               <div className="q-name" key={'n' + s.index}>
                 <p className="q-name-main">{item.name}</p>
+                {item.alt && <p className="q-name-alt">{item.alt}</p>}
+                {(song || kind === 'movie') && sub && <p className="q-name-sub">{sub}</p>}
               </div>
             )}
-            {revealed && credit && <p className="q-credit">{credit}</p>}
+            {revealed && credit && (item.link
+              ? <a className="q-credit" href={item.link} target="_blank" rel="noreferrer">{credit} ↗</a>
+              : <p className="q-credit">{credit}</p>)}
           </div>
-          <Ring secondsLeft={s.secondsLeft} running={s.phase === 'countdown'} stopped={revealed} />
+          <Ring secondsLeft={s.secondsLeft} total={s.seconds} running={s.phase === 'countdown'} stopped={revealed} />
         </div>
 
         {revealed ? (

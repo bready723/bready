@@ -146,15 +146,22 @@ if logos:
         f.write('\n## Logo Quiz — logo credits\n\nLogos from Wikimedia Commons, used under the licence shown; the brands are trademarks of their owners. Some were cropped to the symbol.\n\n| Brand | Author | Licence | Source |\n|---|---|---|---|\n')
         for p in logos:
             f.write(f"| {p['name']} | {(p.get('credit') or 'unknown').replace('|', '/')} | {p['license']} | [file page]({p['url']}) |\n")
+# Guess the Song / Guess the Movie: nothing is copied into the app, but the sources are named
+MEDIA_NOTE = ('Guess the Song plays 30-second previews and shows album covers streamed from Apple Music; each answer links to the song on Apple Music. '
+              'Guess the Movie shows posters and stills streamed from TMDB (The Movie Database). '
+              'This product uses the TMDB API but is not endorsed or certified by TMDB.')
+with open(os.path.join(qdir, 'CREDITS.md'), 'a') as f:
+    f.write('\n## Guess the Song and Guess the Movie\n\n' + MEDIA_NOTE + ' Movie data and images: https://www.themoviedb.org\n')
 import html as H
 rows = ''.join(f"<tr><td>{H.escape(p['name'])}</td><td>{H.escape(p.get('credit') or 'unknown')}</td><td>{H.escape(p['license'])}</td>"
                f"<td><a href=\"{H.escape(p['url'])}\">file page</a></td></tr>\n"
                for p in sorted((p for p in people if p.get('source') == 'commons'), key=lambda p: p['name']))
 open(os.path.join(qdir, 'credits.html'), 'w').write(
     '<!doctype html><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">'
-    '<title>Photo, flag &amp; logo credits</title><style>body{font:15px/1.45 -apple-system,system-ui,sans-serif;margin:24px;color:#1b1430}'
+    '<title>Credits</title><style>body{font:15px/1.45 -apple-system,system-ui,sans-serif;margin:24px;color:#1b1430}'
     'table{border-collapse:collapse;width:100%}td,th{padding:6px 8px;border-bottom:1px solid #e6e2ef;text-align:left;vertical-align:top}td:nth-child(-n+2){overflow-wrap:anywhere}td:nth-child(n+3),th{white-space:nowrap}@media(max-width:480px){body{font-size:13.5px;margin:24px 12px}td,th{padding:6px 4px}body .back{margin:-24px -12px 16px}}'
-    'th{color:#5a5170;font-weight:600}a{color:#5b3fd6}.back{position:sticky;top:0;z-index:1;display:flex;align-items:center;margin:-24px -24px 16px;padding:calc(env(safe-area-inset-top) + 10px) 16px 10px;background:rgba(255,255,255,.92);-webkit-backdrop-filter:blur(12px);backdrop-filter:blur(12px);border-bottom:1px solid #e6e2ef}.back a{display:inline-flex;align-items:center;min-height:44px;padding:0 14px;border-radius:99px;background:#efeafd;color:#4a2fc0;font-weight:700;text-decoration:none}</style><nav class="back"><a href="../?tab=quiz">← Back to quizzes</a></nav><h1>Photo, flag &amp; logo credits</h1>'
+    'th{color:#5a5170;font-weight:600}a{color:#5b3fd6}.back{position:sticky;top:0;z-index:1;display:flex;align-items:center;margin:-24px -24px 16px;padding:calc(env(safe-area-inset-top) + 10px) 16px 10px;background:rgba(255,255,255,.92);-webkit-backdrop-filter:blur(12px);backdrop-filter:blur(12px);border-bottom:1px solid #e6e2ef}.back a{display:inline-flex;align-items:center;min-height:44px;padding:0 14px;border-radius:99px;background:#efeafd;color:#4a2fc0;font-weight:700;text-decoration:none}</style><nav class="back"><a href="../?tab=quiz">← Back to quizzes</a></nav><h1>Credits</h1>'
+    f'<h2 id="media">Songs &amp; movies</h2><p>{H.escape(MEDIA_NOTE)} <a href="https://www.themoviedb.org">themoviedb.org</a></p><h2 id="photos">Photos &amp; flags</h2>'
     f'<p>{sum(1 for p in people if p.get("source") == "commons")} photos from Wikimedia Commons, used under the licence shown and resized to 640 px. '
     'All other photos come from a personal slide deck. Country flags come from <a href="https://github.com/lipis/flag-icons">flag-icons</a> by Panayiotis Lipiridis, MIT licence (<a href="../flags/LICENSE.txt">licence text</a>).</p><table><tr><th>Person</th><th>Author</th><th>Licence</th><th>Source</th></tr>\n'
     + rows + '</table>\n'

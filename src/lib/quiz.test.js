@@ -3,6 +3,7 @@ import {
   ROUND_SIZE, SECONDS, shuffle, pickRound, scoreOf, initialState, quizReducer, photoUrl, creditLine,
   HISTORY_KEY, LOGO_HISTORY_KEY, renameAll, bestLabel, sampleArt, HISTORY_MAX, loadHistory, addResult, saveHistory, summarize, isNewBest, playedLabel,
   NAME_MAX, DEFAULT_NAME, cleanName, nameOf, recentNames, renameLast, bestRow, loadName, saveName,
+  pickMixed, subLine, SONG_HISTORY_KEY, MOVIE_HISTORY_KEY, SONG_SECONDS,
 } from './quiz.js'
 
 // a tiny deterministic random source: cycles through the given values
@@ -279,5 +280,55 @@ describe('renameAll', () => {
   })
   it('cleans the new name like any other', () => {
     expect(renameAll(rows, 's', '  Sara   Kim  ')[0].name).toBe('Sara Kim')
+  })
+})
+
+describe('Guess the Song / Guess the Movie', () => {
+  const songs = (nk, nw) => [
+    ...Array.from({ length: nk }, (_, i) => ({ id: `k${i}`, name: `K ${i}`, kr: true })),
+    ...Array.from({ length: nw }, (_, i) => ({ id: `w${i}`, name: `W ${i}` })),
+  ]
+
+  it('draws half Korean, half global songs', () => {
+    const r = pickMixed(songs(40, 40), 20)
+    expect(r).toHaveLength(20)
+    expect(r.filter((x) => x.kr)).toHaveLength(10)
+    expect(new Set(r.map((x) => x.id)).size).toBe(20)
+  })
+
+  it('fills from the other side when one runs short', () => {
+    expect(pickMixed(songs(3, 40), 20).filter((x) => x.kr)).toHaveLength(3)
+    expect(pickMixed(songs(40, 4), 20).filter((x) => !x.kr)).toHaveLength(4)
+    expect(pickMixed(songs(2, 3), 20)).toHaveLength(5)
+    expect(pickMixed([], 20)).toEqual([])
+  })
+
+  it('songs get a longer clock, and replay keeps it', () => {
+    const round = songs(1, 1)
+    let s = quizReducer(initialState, { type: 'start', round, seconds: SONG_SECONDS })
+    expect(s.secondsLeft).toBe(10)
+    s = quizReducer(s, { type: 'loaded' })
+    s = quizReducer(s, { type: 'reveal' })
+    s = quizReducer(s, { type: 'answer', right: true })
+    expect(s.secondsLeft).toBe(10)
+    s = quizReducer(s, { type: 'replay', round })
+    expect(s.seconds).toBe(10)
+    expect(quizReducer(initialState, { type: 'start', round }).secondsLeft).toBe(SECONDS)
+  })
+
+  it('songs and movies load pictures from their own address and credit the source', () => {
+    const song = { id: 's1', name: 'Gee', artist: 'Girls\' Generation', year: '2009', art: 'https://a/600x600bb.jpg', preview: 'https://p.m4a' }
+    expect(photoUrl(song, '/bready/')).toBe('https://a/600x600bb.jpg')
+    expect(creditLine(song)).toBe('Preview: Apple Music')
+    expect(subLine(song)).toBe("Girls' Generation · 2009")
+    const movie = { id: 'm1', name: 'Up', year: '2009', art: 'https://image.tmdb.org/x.jpg', source: 'tmdb' }
+    expect(creditLine(movie)).toBe('Image: TMDB')
+    expect(subLine(movie)).toBe('2009')
+    expect(subLine({ name: 'x' })).toBe('')
+    expect(subLine({ artist: '뉴진스', altArtist: 'NewJeans', year: '2023' })).toBe('뉴진스 (NewJeans) · 2023')
+  })
+
+  it('each game keeps its own scoreboard', () => {
+    expect(new Set([HISTORY_KEY, LOGO_HISTORY_KEY, SONG_HISTORY_KEY, MOVIE_HISTORY_KEY]).size).toBe(4)
   })
 })

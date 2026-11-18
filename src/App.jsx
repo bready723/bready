@@ -36,7 +36,9 @@ function cloudMessage(result) {
     case 'download-failed':
       return { tone: 'bad', text: `Could not load your account: ${explainCloudError(result.error)}` }
     default:
-      return { tone: 'good', text: 'Synced.' }
+      // nothing changed: the "Synced" pill in the header already says so, and a
+      // banner would push the quiz tiles down (Sara, 2026-11-18)
+      return null
   }
 }
 
@@ -82,7 +84,6 @@ export default function App() {
     if (syncedFor.current === user.id) return
     syncedFor.current = user.id
     let cancelled = false
-    setCloudStatus({ tone: 'busy', text: 'Syncing…' })
     // Read the current state through a ref, not by peeking inside a state
     // updater: React is free to call an updater more than once, which would
     // start the upload twice.
