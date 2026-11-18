@@ -47,6 +47,10 @@ def top(n, **q):
         out += res; page += 1
     return out[:n]
 
+# from the poster review (2026-11-18): pictures that still show the title get the next
+# textless picture; posters too adult for a family game are left out
+NEXT_PICTURE = {157350: 'Divergent', 200085: 'The Flu', 933131: 'Badland Hunters', 507089: "Five Nights at Freddy's"}
+LEAVE_OUT = {1280: '3-Iron', 22536: 'Thirst', 933260: 'The Substance'}
 groups = [
     ('en', top(200, with_original_language='en', without_genres='16')),
     ('ko', top(60, with_original_language='ko')),
@@ -56,12 +60,13 @@ groups = [
 movies, seen, skipped = [], set(), []
 for g, rows in groups:
     for m in rows:
-        if m['id'] in seen: continue
+        if m['id'] in seen or m['id'] in LEAVE_OUT: continue
         seen.add(m['id'])
         imgs = get(f"/movie/{m['id']}/images", include_image_language='null')
         rank = lambda x: (x.get('vote_count', 0) > 0, x.get('vote_average', 0), x.get('width', 0))
         posters = sorted([p for p in imgs.get('posters', []) if not p.get('iso_639_1')], key=rank, reverse=True)
         stills = sorted([p for p in imgs.get('backdrops', []) if not p.get('iso_639_1')], key=rank, reverse=True)
+        if m['id'] in NEXT_PICTURE: posters, stills = posters[1:], stills[1:]
         if posters: art, shape = 'https://image.tmdb.org/t/p/w500' + posters[0]['file_path'], 'poster'
         elif stills: art, shape = 'https://image.tmdb.org/t/p/w780' + stills[0]['file_path'], 'still'
         else: skipped.append(m['title']); continue
