@@ -182,3 +182,35 @@ fashion:Asics,ASICS,1
 retail:Macy's,Macy's,1
 food:Domino's,Domino's,1
 food:Pizza Hut,Pizza Hut,1
+car:Honda#symbol,Honda,0
+car:Subaru#symbol,Subaru,1
+car:Chevrolet#symbol,Chevrolet,1
+car:Cadillac#symbol,Cadillac,1
+car:Chrysler#symbol,Chrysler,1
+car:Rivian#symbol,Rivian,0
+car:Polestar#symbol,Polestar,0
+car:Harley-Davidson#symbol,Harley-Davidson,0
+car:Yamaha Motor Company#symbol,Yamaha,1
+car:Kawasaki Heavy Industries#symbol,Kawasaki,0
+food:Jack in the Box#symbol,Jack in the Box,0
+food:Whataburger#symbol,Whataburger,1
+food:Gatorade#symbol,Gatorade,1
+food:General Mills#symbol,General Mills,1
+food:Sapporo Brewery#symbol,Sapporo,1
+food:Nespresso#symbol,Nespresso,0
+food:Evian#symbol,Evian,1
+fashion:Skechers#symbol,Skechers,1
+retail:Publix#symbol,Publix,0
+retail:Sam's Club#symbol,Sam's Club,0
+retail:United States Postal Service#symbol,USPS,0
+retail:State Farm#symbol,State Farm,1
+retail:MetLife#symbol,MetLife,1
+car:Valero Energy#symbol,Valero,1
+car:Citgo#symbol,Citgo,1
+car:Petronas#symbol,Petronas,1
+food:Chili's#symbol,Chili's,1
+fashion:Volcom#symbol,Volcom,0
+retail:Kmart#symbol,Kmart,1
+retail:Circle K#symbol,Circle K,0
+"retail:Square, Inc.#symbol",Square,0
+car:Lamborghini#symbol,Lamborghini,0

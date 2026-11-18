@@ -50,6 +50,20 @@ for i in range(0, len(fd), 50):
         e = ents.get(r['qid'], {}); c = e.get('claims', {})
         r['en'] = e.get('labels', {}).get('en', {}).get('value'); r['ko'] = e.get('labels', {}).get('ko', {}).get('value')
         r['names'] = [c2['mainsnak']['datavalue']['value'] for p in ('P8972', 'P2910', 'P154') for c2 in c.get(p, []) if c2['mainsnak'].get('datavalue')]
+        r['cat'] = next((c2['mainsnak']['datavalue']['value'] for c2 in c.get('P373', []) if c2['mainsnak'].get('datavalue')), None)
+# LOGO_SEARCH=cat: also list the files in the brand's Commons "<category> logos" category
+# (a plain category listing, much less rate-limited than the full-text search)
+if os.environ.get('LOGO_SEARCH') == 'cat':
+    want = {r['key']: list(dict.fromkeys(x for x in (r.get('cat'), re.sub(r'\s*\(.*\)$', '', r.get('en') or '')) if x)) for r in fd}
+    allc = sorted({f'Category:{c} logos' for cs in want.values() for c in cs}); has = set()
+    for i in range(0, len(allc), 50):  # which "<x> logos" categories exist and hold files (50 per request)
+        q = get('https://commons.wikimedia.org/w/api.php', {'action': 'query', 'format': 'json', 'prop': 'categoryinfo', 'titles': '|'.join(allc[i:i + 50])})['query']
+        nm = {x['to']: x['from'] for x in q.get('normalized', [])}
+        has |= {nm.get(p['title'], p['title']) for p in q.get('pages', {}).values() if p.get('categoryinfo', {}).get('files')}
+    for r in fd:
+        for cat in [c for c in want[r['key']] if f'Category:{c} logos' in has]:
+            s = get('https://commons.wikimedia.org/w/api.php', {'action': 'query', 'format': 'json', 'list': 'categorymembers', 'cmtype': 'file', 'cmlimit': 40, 'cmtitle': f'Category:{cat} logos'})
+            r['names'] = list(dict.fromkeys(r['names'] + [x['title'][5:] for x in s.get('query', {}).get('categorymembers', [])]))[:30]
 SEARCH = os.environ.get('LOGO_SEARCH', '1') == '1'  # LOGO_SEARCH=0: Wikidata files only (fast)
 for r in (fd if SEARCH else []):
     if r.get('skip_search'): continue
