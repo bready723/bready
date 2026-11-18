@@ -214,3 +214,88 @@ retail:Kmart#symbol,Kmart,1
 retail:Circle K#symbol,Circle K,0
 "retail:Square, Inc.#symbol",Square,0
 car:Lamborghini#symbol,Lamborghini,0
+food:Coca-Cola#part,Coca-Cola,1
+food:Heinz#part,Heinz,1
+food:Lay's#part,Lay's,1
+food:Oreo#part,Oreo,1
+food:KitKat#part,Kit Kat,1
+food:M&M's#part,M&M's,1
+food:Snickers#part,Snickers,1
+food:Twix#part,Twix,1
+food:Cheetos#part,Cheetos,1
+food:Fanta#part,Fanta,1
+food:Sprite (drink)#part,Sprite,1
+food:Mountain Dew#part,Mountain Dew,1
+food:Nutella#part,Nutella,1
+food:Milka#part,Milka,1
+food:Tropicana Products#part,Tropicana,1
+food:Heineken#part,Heineken,1
+food:Stella Artois#part,Stella Artois,1
+food:Absolut Vodka#part,Absolut,1
+food:Jell-O#part,Jell-O,1
+food:Burger King#part,Burger King,1
+food:KFC#part,KFC,1
+food:Popeyes#part,Popeyes,1
+food:Papa John's#part,Papa John's,1
+food:Dunkin'#part,Dunkin',1
+food:Tim Hortons#part,Tim Hortons,1
+food:Dairy Queen#part,Dairy Queen,1
+food:Arby's#part,Arby's,1
+food:IHOP#part,IHOP,1
+food:Denny's#part,Denny's,1
+food:Tic Tac#part,Tic Tac,1
+food:Chupa Chups#part,Chupa Chups,1
+food:A&W Root Beer#part,A&W,1
+food:Chiquita#part,Chiquita,1
+fashion:The North Face#part,The North Face,1
+fashion:Old Navy#part,Old Navy,1
+fashion:H&M#part,H&M,1
+fashion:Zara (retailer)#part,Zara,1
+fashion:Swatch#part,Swatch,1
+fashion:Nivea#part,Nivea,1
+fashion:Gillette#part,Gillette,1
+fashion:Colgate (toothpaste)#part,Colgate,1
+retail:Tide (brand)#part,Tide,1
+retail:Costco#part,Costco,1
+retail:Lidl#part,Lidl,1
+retail:Aldi#part,Aldi,1
+retail:IKEA#part,IKEA,1
+retail:Home Depot#part,The Home Depot,1
+retail:GameStop#part,GameStop,1
+retail:FedEx#part,FedEx,1
+retail:DHL#part,DHL,1
+retail:Geico#part,GEICO,1
+retail:Barbie#part,Barbie,1
+retail:Nerf#part,Nerf,1
+retail:Play-Doh#part,Play-Doh,1
+retail:Post-it Note#part,Post-it,1
+retail:Kleenex#part,Kleenex,1
+car:Avis Car Rental#part,Avis,1
+car:Hertz Global Holdings#part,Hertz,1
+"retail:Toys ""R"" Us#part","Toys ""R"" Us",1
+car:Ford Motor Company#part,Ford,1
+car:Jeep#part,Jeep,1
+car:Fiat Automobiles#part,Fiat,1
+car:Land Rover#part,Land Rover,1
+car:BP#part,BP,1
+car:ExxonMobil#part,ExxonMobil,1
+car:Gulf Oil#part,Gulf,1
+car:Castrol#part,Castrol,1
+tech:YouTube#symbol,YouTube,1
+tech:TikTok#symbol,TikTok,0
+tech:LinkedIn#symbol,LinkedIn,0
+tech:Twitch (service)#symbol,Twitch,0
+tech:Paramount+#symbol,Paramount+,0
+tech:Peacock (streaming service)#symbol,Peacock,0
+tech:Uber#symbol,Uber,0
+tech:PayPal#symbol,PayPal,0
+tech:Mozilla Firefox#symbol,Firefox,0
+tech:Safari (web browser)#symbol,Safari,0
+tech:macOS#symbol,Finder (Mac),0
+tech:Xbox#symbol,Xbox,0
+tech:Atari#symbol,Atari,1
+tech:Roblox#symbol,Roblox,0
+tech:Pokémon#symbol,Pokémon,0
+tech:Adobe Inc.#symbol,Adobe,1
+tech:HP Inc.#symbol,HP,0
+tech:Cisco#symbol,Cisco,1

@@ -1460,21 +1460,30 @@ Logos from Wikimedia Commons, used under the licence shown; the brands are trade
 | Brand | Author | Licence | Source |
 |---|---|---|---|
 | 7-Eleven | Seven & I Holdings | Public domain | [file page](https://commons.wikimedia.org/wiki/File:7-Eleven_logo_2021.svg) |
+| A&W | A&W Root Beer | Public domain | [file page](https://commons.wikimedia.org/wiki/File:A%26W_Root_Beer_logo.svg) |
 | AC Milan | A.C. Milan Uploaded by Vargklo at en.wikipedia | Public domain | [file page](https://commons.wikimedia.org/wiki/File:Logo_of_AC_Milan.svg) |
 | ASICS | Unknown authorUnknown author | Public domain | [file page](https://commons.wikimedia.org/wiki/File:Asics_Logo.svg) |
 | AT&T | AT&T | Public domain | [file page](https://commons.wikimedia.org/wiki/File:AT%26T_logo_2016.svg) |
+| Absolut | Unknown authorUnknown author | Public domain | [file page](https://commons.wikimedia.org/wiki/File:Logo-absolut.svg) |
 | Acura | Basavarajtalwar | Public domain | [file page](https://commons.wikimedia.org/wiki/File:Acura_logo.svg) |
 | Adidas | Adidas | Public domain | [file page](https://commons.wikimedia.org/wiki/File:Adidas_2022_logo.svg) |
+| Adobe | Adobe Systems | CC BY-SA 4.0 | [file page](https://commons.wikimedia.org/wiki/File:Adobe_Logo_Standard.svg) |
 | Air Canada | Air Canada | Public domain | [file page](https://commons.wikimedia.org/wiki/File:Air_Canada_2017.svg) |
 | Air Jordan | Manuelmiguelh | CC BY-SA 4.0 | [file page](https://commons.wikimedia.org/wiki/File:Air_Jordan.jpg) |
 | Airbnb | DesignStudio | Public domain | [file page](https://commons.wikimedia.org/wiki/File:Airbnb_Logo_B%C3%A9lo.svg) |
+| Aldi | Hpmachine | CC BY-SA 4.0 | [file page](https://commons.wikimedia.org/wiki/File:Aldi_Logo_2017.png) |
 | Amazon | Amazon.com, Inc. | Public domain | [file page](https://commons.wikimedia.org/wiki/File:Amazon_icon.svg) |
 | American Airlines | American Airlines | Public domain | [file page](https://commons.wikimedia.org/wiki/File:AA_Symbol.svg) |
 | Android | Android | CC BY 3.0 | [file page](https://commons.wikimedia.org/wiki/File:Android_2023_3D_logo_and_wordmark.svg) |
 | Apple | Apple | Public domain | [file page](https://commons.wikimedia.org/wiki/File:Apple_Music_Logo_(2026).svg) |
 | Apple TV | Apple Inc. | Public domain | [file page](https://commons.wikimedia.org/wiki/File:Apple_TV_logo.svg) |
+| Arby's | Arby's | Public domain | [file page](https://commons.wikimedia.org/wiki/File:Arby%27s_logo.svg) |
+| Atari | Atari | Public domain | [file page](https://commons.wikimedia.org/wiki/File:Atari_Games_logo.png) |
 | Atlanta Braves | The original uploader was Kalel2007 at English Wikipedia. | Public domain | [file page](https://commons.wikimedia.org/wiki/File:Atlanta_Braves_Insignia.svg) |
 | Audi | Strichpunkt / KMS Team | Public domain | [file page](https://commons.wikimedia.org/wiki/File:Audi-Logo_2016.svg) |
+| Avis | Avis | Public domain | [file page](https://commons.wikimedia.org/wiki/File:Avis_logo.svg) |
+| BP | Unknown authorUnknown author | Public domain | [file page](https://commons.wikimedia.org/wiki/File:Bp_logo89.svg) |
+| Barbie | Mattel, Inc. | Public domain | [file page](https://commons.wikimedia.org/wiki/File:Barbie_Logo.svg) |
 | Batman | DC Comics | Public domain | [file page](https://commons.wikimedia.org/wiki/File:Batman_yellow_oval_logo_with_DC_copyright.svg) |
 | Beats | Beats Electronics, LLC | Public domain | [file page](https://commons.wikimedia.org/wiki/File:Beats_Electronics_logo.svg) |
 | Bing | Microsoft | Public domain | [file page](https://commons.wikimedia.org/wiki/File:Bing_Fluent_Logo_Text.svg) |
@@ -1485,42 +1494,65 @@ Logos from Wikimedia Commons, used under the licence shown; the brands are trade
 | Buffalo Bills | Logo by Stevens Wright, vectorization by Based5290 | Public domain | [file page](https://commons.wikimedia.org/wiki/File:Buffalo_Bills_logo_1974-present.svg) |
 | Buick | Unknown authorUnknown author | Public domain | [file page](https://commons.wikimedia.org/wiki/File:Buick_logo_1980.png) |
 | Burberry | Burberry Group Plc. | Public domain | [file page](https://commons.wikimedia.org/wiki/File:Logo_Burberry_02.svg) |
+| Burger King | Burger King | Public domain | [file page](https://commons.wikimedia.org/wiki/File:BurgerKingLogoOld.svg) |
 | Cadillac | Cadillac | Public domain | [file page](https://commons.wikimedia.org/wiki/File:Cadillac_Logo_2021.svg) |
 | Carhartt | Carhartt | Public domain | [file page](https://commons.wikimedia.org/wiki/File:Carhartt_logo.svg) |
 | Cash App | Square, Inc | Public domain | [file page](https://commons.wikimedia.org/wiki/File:Square_Cash_app_logo.svg) |
+| Castrol | Castrol | Public domain | [file page](https://commons.wikimedia.org/wiki/File:Castrol_logo_2023.svg) |
 | Champion | Champion USA | Public domain | [file page](https://commons.wikimedia.org/wiki/File:Champion_USA_logo.svg) |
 | Chase | Original: JPMorgan Chase Vectorization: en:User:Closeapple | Public domain | [file page](https://commons.wikimedia.org/wiki/File:Chase_logo_2007.svg) |
 | ChatGPT | OpenAI | Public domain | [file page](https://commons.wikimedia.org/wiki/File:OpenAI_logo_2025_(symbol).svg) |
+| Cheetos | Frito-Lay | Public domain | [file page](https://commons.wikimedia.org/wiki/File:Cheetos_logo.svg) |
 | Chevrolet | Unknown authorUnknown author | Public domain | [file page](https://commons.wikimedia.org/wiki/File:Chevrolet_simple_logo.svg) |
 | Chili's | Brinker International | Public domain | [file page](https://commons.wikimedia.org/wiki/File:Chili%27s_Logo.svg) |
+| Chiquita | Chiquita Brands International | CC BY-SA 4.0 | [file page](https://commons.wikimedia.org/wiki/File:Chiquita_logo_2019.svg) |
 | Chrysler | Original image: Chrysler Group LLC SVG version: Angelus | Public domain | [file page](https://commons.wikimedia.org/wiki/File:Chrysler_Group_logo.svg) |
+| Chupa Chups | Chupa Chups, Salvador Dalí | Public domain | [file page](https://commons.wikimedia.org/wiki/File:Chupa_Chups_logo_(NO_R).svg) |
 | Circle K | サークルKサンクス | Public domain | [file page](https://commons.wikimedia.org/wiki/File:Circle_K_logomark.svg) |
+| Cisco | Cisco | Public domain | [file page](https://commons.wikimedia.org/wiki/File:Cisco_logo.svg) |
 | Citgo | Citgo | Public domain | [file page](https://commons.wikimedia.org/wiki/File:Citgo_logo.svg) |
 | Citroën | Citroën | Public domain | [file page](https://commons.wikimedia.org/wiki/File:Citroen_2022.svg) |
+| Coca-Cola | The Coca-Cola Company | Public domain | [file page](https://commons.wikimedia.org/wiki/File:Coca-Cola_logo.svg) |
+| Colgate | Colgate | Public domain | [file page](https://commons.wikimedia.org/wiki/File:Colgate_logo_red.svg) |
 | Columbia | Columbia The original uploader was Fallschirmjäger at English Wikipedia. | Public domain | [file page](https://commons.wikimedia.org/wiki/File:Columbia_Sportswear_Co_logo.svg) |
 | Comedy Central | Comedy Partners - Skydance Corporation, Skydance | Public domain | [file page](https://commons.wikimedia.org/wiki/File:Comedy_Central_2018.svg) |
 | Converse | Converse?; Bernardo Pereira; Quibik | Public domain | [file page](https://commons.wikimedia.org/wiki/File:Converse_logo.svg) |
+| Costco | Costco Wholesale Corporation | Public domain | [file page](https://commons.wikimedia.org/wiki/File:Costco_old_logo.svg) |
 | DC Comics | Skydance Corporation, Skydance | Public domain | [file page](https://commons.wikimedia.org/wiki/File:DC_Comics_2024.svg) |
+| DHL | Presumably DHL | Public domain | [file page](https://commons.wikimedia.org/wiki/File:DHL_Logo.svg) |
+| Dairy Queen | Dairy Queen | Public domain | [file page](https://commons.wikimedia.org/wiki/File:Dairy_Queen_Bahamas.png) |
 | Dallas Cowboys | Opertinicy | Public domain | [file page](https://commons.wikimedia.org/wiki/File:Dallas_Cowboys.svg) |
 | Delta | Delta Air Lines | Public domain | [file page](https://commons.wikimedia.org/wiki/File:Delta_logo.svg) |
+| Denny's | DFO, LLC. | Public domain | [file page](https://commons.wikimedia.org/wiki/File:Denny%27s_Logo_06.2022.svg) |
 | Detroit Red Wings | Unknown authorUnknown author | Public domain | [file page](https://commons.wikimedia.org/wiki/File:Detroit_Red_Wings_logo.png) |
 | Domino's | Domino's Pizza Inc. | Public domain | [file page](https://commons.wikimedia.org/wiki/File:Domino%27s_2025.svg) |
 | DoorDash | DoorDash | Public domain | [file page](https://commons.wikimedia.org/wiki/File:DoorDash_Logo.svg) |
 | Dropbox | Dropbox, Inc. | Public domain | [file page](https://commons.wikimedia.org/wiki/File:Dropbox_logo_2017.svg) |
+| Dunkin' | Basrizal Abdullah | Public domain | [file page](https://commons.wikimedia.org/wiki/File:Logo_Dunkin_Donuts.png) |
 | EA (Electronic Arts) | Electronic Arts - Skylight Collective | Public domain | [file page](https://commons.wikimedia.org/wiki/File:Electronic_Arts_2020.svg) |
 | Ericsson | Original: Ericsson Vectorization: Fishbulb - Powered by PogoBox | Public domain | [file page](https://commons.wikimedia.org/wiki/File:Ericsson_(2018).svg) |
 | Ethereum | GitR0n1n | Public domain | [file page](https://commons.wikimedia.org/wiki/File:Ethereum-icon-purple.svg) |
 | Evian | TeoWing (talk) | Public domain | [file page](https://commons.wikimedia.org/wiki/File:Evian_Logo.png) |
+| ExxonMobil | The original uploader was KUsam at English Wikipedia. | Public domain | [file page](https://commons.wikimedia.org/wiki/File:Exxon_Mobil_Logo.svg) |
 | FC Barcelona | HAMDANI 72 | CC0 | [file page](https://commons.wikimedia.org/wiki/File:Football_Club_Barcelona_Color_Update.png) |
 | FIFA World Cup | Djuradj Vujcic | CC BY 2.0 | [file page](https://commons.wikimedia.org/wiki/File:FIFA_World_Cup_Trophy_photo_by_Djuradj_Vujcic.jpg) |
 | Facebook | Original: Facebook, Inc. Vector: Tkgd2007 | Public domain | [file page](https://commons.wikimedia.org/wiki/File:F_icon.svg) |
+| Fanta | Paul Nahverkehr | Public domain | [file page](https://commons.wikimedia.org/wiki/File:Fanta_logo_(2018).png) |
+| FedEx | Logo: FedEx File: The original uploader was Tkgd2007 at English Wikipedia. | Public domain | [file page](https://commons.wikimedia.org/wiki/File:FedEx_Corporation_-_2016_Logo.svg) |
 | Fendi | Fendi | Public domain | [file page](https://commons.wikimedia.org/wiki/File:Fendi_logo.svg) |
+| Fiat | Fiat Automobiles | Public domain | [file page](https://commons.wikimedia.org/wiki/File:Fiat_Automobiles_logo.svg) |
 | Figma | Figma | Public domain | [file page](https://commons.wikimedia.org/wiki/File:Figma-logo.svg) |
+| Finder (Mac) | Alessandro Moises | CC BY-SA 4.0 | [file page](https://commons.wikimedia.org/wiki/File:Mi_icono_principal.svg) |
+| Firefox | Mozilla Corporation | CC BY 3.0 | [file page](https://commons.wikimedia.org/wiki/File:Firefox_logo,_2017.svg) |
 | Fitbit | Unknown authorUnknown author | Public domain | [file page](https://commons.wikimedia.org/wiki/File:Fitbit_logo16.svg) |
+| Ford | Ford Motor Company | Public domain | [file page](https://commons.wikimedia.org/wiki/File:Ford_logo_flat.svg) |
 | Formula 1 | Liberty Media | Public domain | [file page](https://commons.wikimedia.org/wiki/File:Formula_One_logo.svg) |
+| GEICO | GEICO.png: Dream out loud. The original uploader was Dream out loud at English W | Public domain | [file page](https://commons.wikimedia.org/wiki/File:Geico_logo.svg) |
 | GS | GS Group | Public domain | [file page](https://commons.wikimedia.org/wiki/File:GS_logo_(South_Korean_company).svg) |
+| GameStop | McGarrah Jessee | Public domain | [file page](https://commons.wikimedia.org/wiki/File:GameStop_Logo.svg) |
 | Gatorade | Gatorade | Public domain | [file page](https://commons.wikimedia.org/wiki/File:Gatorade_logo.svg) |
 | General Mills | The original uploader was CoolKid1993 at English Wikipedia. | Public domain | [file page](https://commons.wikimedia.org/wiki/File:General_Mills_logo.svg) |
+| Gillette | P&G, User:Stepshep | Public domain | [file page](https://commons.wikimedia.org/wiki/File:Gillette_logo.svg) |
 | Givenchy | Paul Barnes | Public domain | [file page](https://commons.wikimedia.org/wiki/File:Givenchy_-_logo_(France,_2003).svg) |
 | Gmail | Google | Public domain | [file page](https://commons.wikimedia.org/wiki/File:Gmail_icon_(2026).svg) |
 | Google | Google LLC | Public domain | [file page](https://commons.wikimedia.org/wiki/File:Google_Nest_logo.svg) |
@@ -1529,32 +1561,50 @@ Logos from Wikimedia Commons, used under the licence shown; the brands are trade
 | Google Maps | Google Inc. | Public domain | [file page](https://commons.wikimedia.org/wiki/File:Google_Maps_icon_(2026).svg) |
 | Green Bay Packers | This vector image was created with Adobe Illustrator by Daris Bayliss, and then  | Public domain | [file page](https://commons.wikimedia.org/wiki/File:Green_Bay_Packers_logo.svg) |
 | Gucci | Tsange | Public domain | [file page](https://commons.wikimedia.org/wiki/File:1960s_Gucci_Logo.svg) |
+| Gulf | Gulf Oil | Public domain | [file page](https://commons.wikimedia.org/wiki/File:Gulf_Oil_logo.svg) |
+| H&M | H & M Hennes & Mauritz AB | Public domain | [file page](https://commons.wikimedia.org/wiki/File:H%26M_old_logo.svg) |
+| HP | HP Inc. | Public domain | [file page](https://commons.wikimedia.org/wiki/File:HP_logo_2025.svg) |
 | HSBC | HSBC | Public domain | [file page](https://commons.wikimedia.org/wiki/File:HSBC_logo_(2018).svg) |
 | Harley-Davidson | Harley-Davidson Motor Company SVG by CMetalCore This W3C-unspecified vector imag | Public domain | [file page](https://commons.wikimedia.org/wiki/File:Harley-Davidson_logo.svg) |
 | Harvard University | Pierre la Rose | Public domain | [file page](https://commons.wikimedia.org/wiki/File:Harvard_University_logo.svg) |
+| Heineken | Heineken | Public domain | [file page](https://commons.wikimedia.org/wiki/File:Heineken_logo_(1).png) |
+| Heinz | H. J. Heinz Company | Public domain | [file page](https://commons.wikimedia.org/wiki/File:Heinz_logo.svg) |
+| Hertz | Hertz Corporation | Public domain | [file page](https://commons.wikimedia.org/wiki/File:Hertz_Car_Rental_logo.svg) |
 | Honda | Honda Motor Co., Ltd. and its subsidiaries and affiliates. | Public domain | [file page](https://commons.wikimedia.org/wiki/File:Honda_auto_logo.svg) |
 | Houston Astros | Houston-Astros-Logo.svg: Houston Astros derivative work: Trlkly | Public domain | [file page](https://commons.wikimedia.org/wiki/File:Houston_Astros_cap_logo.svg) |
 | Hublot | HUBLOT SA | Public domain | [file page](https://commons.wikimedia.org/wiki/File:Hublot_logo.svg) |
+| IHOP | International House of Pancakes | Public domain | [file page](https://commons.wikimedia.org/wiki/File:IHOP_logo.svg) |
+| IKEA | unknown | Public domain | [file page](https://commons.wikimedia.org/wiki/File:Ikea-logo.png) |
 | Infiniti | Infiniti Worldwide | Public domain | [file page](https://commons.wikimedia.org/wiki/File:Infiniti_logo_2023.svg) |
 | Instacart | Instacart | Public domain | [file page](https://commons.wikimedia.org/wiki/File:Instacart_logo_and_wordmark.svg) |
 | Instagram | Instagram | Public domain | [file page](https://commons.wikimedia.org/wiki/File:Instagram_logo_2022.svg) |
 | Inter Milan | FC Internazionale Milano S.p.A. / Bureau Borsche | Public domain | [file page](https://commons.wikimedia.org/wiki/File:FC_Internazionale_Milano_2021.svg) |
 | Jack Wolfskin | Jack Wolfskin | Public domain | [file page](https://commons.wikimedia.org/wiki/File:Logo_Jack_Wolfskin_2022.png) |
 | Jack in the Box | Jack in the Box | Public domain | [file page](https://commons.wikimedia.org/wiki/File:Jack_in_the_Box_Logo.svg) |
+| Jeep | de:Benutzer:Gaspard | Public domain | [file page](https://commons.wikimedia.org/wiki/File:Jeep.svg) |
+| Jell-O | Unknown authorUnknown author | Public domain | [file page](https://commons.wikimedia.org/wiki/File:Jello_brand_logo.png) |
 | Jägermeister | Presse jaegermeister | CC BY-SA 4.0 | [file page](https://commons.wikimedia.org/wiki/File:J%C3%A4germeister-Logo.tif) |
 | KB국민은행 | KB Financial Group | Public domain | [file page](https://commons.wikimedia.org/wiki/File:KB_logo.svg) |
+| KFC | Kentucky Fried Chicken | Public domain | [file page](https://commons.wikimedia.org/wiki/File:KFC_logo.png) |
 | KIA 타이거즈 | Kia Tigers | Public domain | [file page](https://commons.wikimedia.org/wiki/File:Kia_Tigers_insignia.svg) |
 | Kawasaki | SVG by HHE99 | Public domain | [file page](https://commons.wikimedia.org/wiki/File:Kawasaki_K_Logo.svg) |
+| Kit Kat | Anonykitten | Public domain | [file page](https://commons.wikimedia.org/wiki/File:Logo_of_the_KitKat.svg) |
+| Kleenex | Kimberly-Clark (designed by Turner Duckworth) | Public domain | [file page](https://commons.wikimedia.org/wiki/File:Kleenex_2024.svg) |
 | Kmart | Kmart | Public domain | [file page](https://commons.wikimedia.org/wiki/File:Kmart_logo.svg) |
 | LG | LG Corporation | Public domain | [file page](https://commons.wikimedia.org/wiki/File:LG_logo_(2014).svg) |
 | Lacoste | Unknown authorUnknown author | Public domain | [file page](https://commons.wikimedia.org/wiki/File:Logo_Lacoste_2026.svg) |
 | Lamborghini | Fuhdge | CC0 | [file page](https://commons.wikimedia.org/wiki/File:Lambologo.png) |
+| Land Rover | Jaguar Land Rover Automotive PLC | Public domain | [file page](https://commons.wikimedia.org/wiki/File:Land_Rover_2023.svg) |
+| Lay's | Pepsico | Public domain | [file page](https://commons.wikimedia.org/wiki/File:Lay%27s_Logo_2025.png) |
 | Lexus | Gaspard | Public domain | [file page](https://commons.wikimedia.org/wiki/File:Lexus.svg) |
+| Lidl | Wyatt123456Fan | CC0 | [file page](https://commons.wikimedia.org/wiki/File:Lidl_logo.svg) |
+| LinkedIn | LinkedIn | Public domain | [file page](https://commons.wikimedia.org/wiki/File:LinkedIn_icon.svg) |
 | Linux | Larry Ewing, Simon Budig, Garrett LeSage | Attribution | [file page](https://commons.wikimedia.org/wiki/File:Tux.svg) |
 | Los Angeles Dodgers | The original uploader was King of Hearts at English Wikipedia.Converted by me to | Public domain | [file page](https://commons.wikimedia.org/wiki/File:LA_Dodgers.svg) |
 | Louis Vuitton | Louis Vuitton | Public domain | [file page](https://commons.wikimedia.org/wiki/File:LV_Monogram.svg) |
 | Lufthansa | Lufthansa Group | Public domain | [file page](https://commons.wikimedia.org/wiki/File:Lufthansa_Logo_2018.svg) |
 | Lululemon | Lululemon Athletica. The original uploader was Esrever at English Wikipedia.. La | Public domain | [file page](https://commons.wikimedia.org/wiki/File:Lululemon_Athletica_logo.svg) |
+| M&M's | Nina593562 | CC BY-SA 4.0 | [file page](https://commons.wikimedia.org/wiki/File:M%26M%27s_2019.svg) |
 | MLB | Jerry Nicholas Dior (1932 – 2015) | Public domain | [file page](https://commons.wikimedia.org/wiki/File:Major_League_Baseball_logo.svg) |
 | MTV | Viacom International Inc. | Public domain | [file page](https://commons.wikimedia.org/wiki/File:MTV-2021.svg) |
 | Macy's | Macy's | Public domain | [file page](https://commons.wikimedia.org/wiki/File:Macy%27s_logo.svg) |
@@ -1566,39 +1616,56 @@ Logos from Wikimedia Commons, used under the licence shown; the brands are trade
 | MetLife | MetLife | Public domain | [file page](https://commons.wikimedia.org/wiki/File:MetLife_logo.svg) |
 | Meta | Meta Platforms | Public domain | [file page](https://commons.wikimedia.org/wiki/File:Meta_Platforms_Inc._logo.svg) |
 | Microsoft | Microsoft Corporation — Jason Wells | Public domain | [file page](https://commons.wikimedia.org/wiki/File:Microsoft_logo_(2012).svg) |
+| Milka | Unknown authorUnknown author | Public domain | [file page](https://commons.wikimedia.org/wiki/File:Milka_Logo_(crop).svg) |
 | Mitsubishi | Mitsubishi Motors Corporation | Public domain | [file page](https://commons.wikimedia.org/wiki/File:Mitsubishi_motors_new_logo.svg) |
 | Montreal Canadiens | Montreal Canadiens | Public domain | [file page](https://commons.wikimedia.org/wiki/File:Montreal_Canadiens.svg) |
 | Motorola | Unknown authorUnknown author | Public domain | [file page](https://commons.wikimedia.org/wiki/File:Motorola-Logo.svg) |
+| Mountain Dew | PepsiCo | Public domain | [file page](https://commons.wikimedia.org/wiki/File:Mountain_Dew_2025_logo.svg) |
 | NBC | ™/®Comcast (via NBCUniversal) | Public domain | [file page](https://commons.wikimedia.org/wiki/File:NBC_logo_2022_(vertical).svg) |
 | National Geographic | Chermayeff & Geismar & Haviv for National Geographic Society (since 2019 | Public domain | [file page](https://commons.wikimedia.org/wiki/File:Natgeologo.svg) |
+| Nerf | Hasbro | Public domain | [file page](https://commons.wikimedia.org/wiki/File:Nerf_logo.svg) |
 | Nespresso | Nespresso | Public domain | [file page](https://commons.wikimedia.org/wiki/File:Monogramme_Nespresso.png) |
 | Netflix | TM/®Netflix Inc. | Public domain | [file page](https://commons.wikimedia.org/wiki/File:Netflix_2015_logo.svg) |
 | New York Giants | Opertinicy at en.wikipedia | Public domain | [file page](https://commons.wikimedia.org/wiki/File:New_York_Giants_logo.svg) |
 | New York Mets | The New York Mets | Public domain | [file page](https://commons.wikimedia.org/wiki/File:New_York_Mets_Insignia.svg) |
 | Nike | Carolyn Davidson, Nike | Public domain | [file page](https://commons.wikimedia.org/wiki/File:Logo_NIKE.svg) |
+| Nivea | BDF MEXICO SA DE CV | CC BY-SA 4.0 | [file page](https://commons.wikimedia.org/wiki/File:Brandmark_NIVEA_RGB_600px_transp.png) |
+| Nutella | Ferrero | Public domain | [file page](https://commons.wikimedia.org/wiki/File:Logo_Nutella.svg) |
 | Oakley | Oakley, Inc. | Public domain | [file page](https://commons.wikimedia.org/wiki/File:Oakley_logo.svg) |
+| Old Navy | Old Navy | Public domain | [file page](https://commons.wikimedia.org/wiki/File:Old_Navy_Logo.svg) |
 | Olympics | Antonsusi | Public domain | [file page](https://commons.wikimedia.org/wiki/File:Olympic_Rings_Icon.svg) |
 | Omega | Omega | Public domain | [file page](https://commons.wikimedia.org/wiki/File:Omega_Logo.svg) |
 | On | On AG | Public domain | [file page](https://commons.wikimedia.org/wiki/File:On-cloud-logo-white-background.svg) |
 | Opel | Opel | Public domain | [file page](https://commons.wikimedia.org/wiki/File:Opel_logo_2023.svg) |
 | Opera | Opera | Public domain | [file page](https://commons.wikimedia.org/wiki/File:Opera_2015_icon.svg) |
+| Oreo | Mondelēz International | Public domain | [file page](https://commons.wikimedia.org/wiki/File:Oreo_2026.svg) |
+| Papa John's | Papa Johns | Public domain | [file page](https://commons.wikimedia.org/wiki/File:Papa_Johns_logo.svg) |
 | Paralympics | International Paralympic Committee | Public domain | [file page](https://commons.wikimedia.org/wiki/File:IPC_logo_(2019).svg) |
+| Paramount+ | Paramount Global | Public domain | [file page](https://commons.wikimedia.org/wiki/File:Paramount%2B_favicon.svg) |
+| PayPal | PayPal (Original design by Pentagram) | Public domain | [file page](https://commons.wikimedia.org/wiki/File:PayPal_2024_(Icon).svg) |
+| Peacock | NBCUniversal | Public domain | [file page](https://commons.wikimedia.org/wiki/File:NBCUniversal_Peacock_Logo_(2026;_icon).svg) |
 | Petronas | Petronas | Public domain | [file page](https://commons.wikimedia.org/wiki/File:PETRONAS-logo.svg) |
 | Philadelphia Phillies | The original uploader was Kalel2007 at English Wikipedia. | Public domain | [file page](https://commons.wikimedia.org/wiki/File:Philadelphia_Phillies_Insignia.svg) |
 | Photoshop | Adobe Inc. | Public domain | [file page](https://commons.wikimedia.org/wiki/File:Adobe_Photoshop_CC_icon.svg) |
 | Pinterest | Grilli Type, Pinterest (Andreas Helin, Michelle Van Houten and Simon Blockley) a | Public domain | [file page](https://commons.wikimedia.org/wiki/File:Pinterest_Logo_3.svg) |
 | Pizza Hut | This logo was devised when the chain was still functioning independently, and th | Public domain | [file page](https://commons.wikimedia.org/wiki/File:Pizza_Hut_(2019).svg) |
+| Play-Doh | Unknown authorUnknown author | Public domain | [file page](https://commons.wikimedia.org/wiki/File:Play_doh_craftbrand_logo.svg) |
 | PlayStation | Sony Interactive Entertainment | Public domain | [file page](https://commons.wikimedia.org/wiki/File:PlayStation_logo_and_wordmark.svg) |
+| Pokémon | Andreuvv | Public domain | [file page](https://commons.wikimedia.org/wiki/File:Pok%C3%A9_Ball_icon.svg) |
 | Polestar | Unknown artistUnknown artist | Public domain | [file page](https://commons.wikimedia.org/wiki/File:Polestar_logo_2020.svg) |
+| Popeyes | Popeyes | Public domain | [file page](https://commons.wikimedia.org/wiki/File:Logo_Popeyes_en_letras.png) |
+| Post-it | Post-it | Public domain | [file page](https://commons.wikimedia.org/wiki/File:Post-it-2020.svg) |
 | Premier League | Premier League | Public domain | [file page](https://commons.wikimedia.org/wiki/File:Pl-logo-light.svg) |
 | Prudential | Prudential do Brasil Seguros de Vida S.A. | CC BY-SA 3.0 | [file page](https://commons.wikimedia.org/wiki/File:Logo-prudential-do-brasil.png) |
 | Publix | Unknown authorUnknown author | Public domain | [file page](https://commons.wikimedia.org/wiki/File:Publix_Retail_Logo.png) |
 | Red Cross | International Red Cross and Red Crescent Movement | Public domain | [file page](https://commons.wikimedia.org/wiki/File:Red_Cross,_Red_Crescent,_Red_Crystal_logo.svg) |
 | Reebok | Reebok | Public domain | [file page](https://commons.wikimedia.org/wiki/File:Reebok_red_logo.svg) |
 | Rivian | Rivian Automotive | Public domain | [file page](https://commons.wikimedia.org/wiki/File:Rivian_Logo_Mark_Gold.png) |
+| Roblox | Roblox Corporation | CC BY 4.0 | [file page](https://commons.wikimedia.org/wiki/File:Roblox_2022_Logo.png) |
 | Rolex | Hans Wilsdorf | Public domain | [file page](https://commons.wikimedia.org/wiki/File:Logo_da_Rolex.png) |
 | Rolls-Royce | unknown | Public domain | [file page](https://commons.wikimedia.org/wiki/File:Rolls-Royce_Motor_Cars_logo.svg) |
 | SBS | Seoul Broadcasting System | Public domain | [file page](https://commons.wikimedia.org/wiki/File:Seoul_Broadcasting_System_logo.svg) |
+| Safari | Font Awesome | CC BY 4.0 | [file page](https://commons.wikimedia.org/wiki/File:Font_Awesome_5_brands_safari.svg) |
 | Salomon | SALOMON S.A.S. | Public domain | [file page](https://commons.wikimedia.org/wiki/File:Salomon_logo.svg) |
 | Sam's Club | Walmart | Public domain | [file page](https://commons.wikimedia.org/wiki/File:Sam%27s_Club_2026_(symbol).svg) |
 | San Francisco 49ers | San Francisco 49ers, User:Stepshep | Public domain | [file page](https://commons.wikimedia.org/wiki/File:San_Francisco_49ers_logo.svg) |
@@ -1610,29 +1677,44 @@ Logos from Wikimedia Commons, used under the licence shown; the brands are trade
 | Skype | Skype Technologies | Public domain | [file page](https://commons.wikimedia.org/wiki/File:Skype_logo_(2019%E2%80%93present).svg) |
 | Slack | Slack Technologies | Public domain | [file page](https://commons.wikimedia.org/wiki/File:Slack_Technologies_Logo.svg) |
 | Smart | Smart Automobile | Public domain | [file page](https://commons.wikimedia.org/wiki/File:Smart_2022.svg) |
+| Snickers | Mars Inc. | Public domain | [file page](https://commons.wikimedia.org/wiki/File:Snickers_2025.svg) |
 | SoundCloud | Soundcloud | Public domain | [file page](https://commons.wikimedia.org/wiki/File:Soundcloud_logo.svg) |
 | Spotify | Spotify AB, Dinamo Typefaces | Public domain | [file page](https://commons.wikimedia.org/wiki/File:2024_Spotify_Logo.svg) |
+| Sprite | TAC PlazaMaster | Public domain | [file page](https://commons.wikimedia.org/wiki/File:Sprite_2022.svg) |
 | Square | Logo: Square Inc. File: Hydrargyrum | Public domain | [file page](https://commons.wikimedia.org/wiki/File:Square,_Inc._-_Square_logo.svg) |
 | St. Louis Cardinals | Unknown authorUnknown author | Public domain | [file page](https://commons.wikimedia.org/wiki/File:St_Louis_Cardinals_Cap_Insignia.svg) |
 | State Farm | Chermayeff & Geismar Studio for State Farm | Public domain | [file page](https://commons.wikimedia.org/wiki/File:State_Farm_logo.svg) |
 | Steam | DemonDays64, modification of Valve Corporation file | Public domain | [file page](https://commons.wikimedia.org/wiki/File:Steam_2016_logo_black.svg) |
+| Stella Artois | See the ticket in the Permission field below. | CC BY-SA 3.0 | [file page](https://commons.wikimedia.org/wiki/File:Stella_Artois_new_logo.png) |
 | Stop & Shop | Unknown authorUnknown author | Public domain | [file page](https://commons.wikimedia.org/wiki/File:Stop_%26_Shop_Logo.svg) |
 | Subaru | Subaru Corporation | Public domain | [file page](https://commons.wikimedia.org/wiki/File:Subaru_logo_(transparent).svg) |
 | Subway | 292Jacob | CC BY-SA 4.0 | [file page](https://commons.wikimedia.org/wiki/File:Subway_icon.svg) |
 | Super Bowl | Teo's89 | CC BY-SA 4.0 | [file page](https://commons.wikimedia.org/wiki/File:Lombardi_Trophy.png) |
 | Superman | DC Comics, Inc. A subsidiary of Warner Bros. Discovery (c)2015. | Public domain | [file page](https://commons.wikimedia.org/wiki/File:Superman_shield.svg) |
 | Suzuki | Suzuki Motor Corporation | Public domain | [file page](https://commons.wikimedia.org/wiki/File:Suzuki_logo_2025.svg) |
+| Swatch | Unknown authorUnknown author | Public domain | [file page](https://commons.wikimedia.org/wiki/File:Swatch_Logo.svg) |
 | T-Mobile | T-Mobile US | Public domain | [file page](https://commons.wikimedia.org/wiki/File:T-Mobile_US_Logo_2022_RGB_Magenta_on_Transparent.svg) |
 | T1 | T1 | Public domain | [file page](https://commons.wikimedia.org/wiki/File:T1_esports_logo.svg) |
 | Target | The original uploader was bob vaans from vans refrigaton at English Wikipedia. | Public domain | [file page](https://commons.wikimedia.org/wiki/File:Target_logo.svg) |
 | Telegram | Telegram FZ LLC | Public domain | [file page](https://commons.wikimedia.org/wiki/File:Telegram_2019_Logo.svg) |
 | Tesla | Tesla | Public domain | [file page](https://commons.wikimedia.org/wiki/File:Tesla_Motors.svg) |
 | Texaco | Unknown authorUnknown author | Public domain | [file page](https://commons.wikimedia.org/wiki/File:Texacologo.svg) |
+| The Home Depot | The Hone Depot | Public domain | [file page](https://commons.wikimedia.org/wiki/File:The_Home_Depot_logo_(Quebec).svg) |
+| The North Face | VF Corporation | Public domain | [file page](https://commons.wikimedia.org/wiki/File:The_North_Face_logo.svg) |
 | Threads | Meta Platforms, Inc. | Public domain | [file page](https://commons.wikimedia.org/wiki/File:Threads_2026_logo.svg) |
+| Tic Tac | Unknown | Public domain | [file page](https://commons.wikimedia.org/wiki/File:Tic_Tac_logo_2022-present.png) |
+| Tide | Guobenwei | CC BY-SA 3.0 | [file page](https://commons.wikimedia.org/wiki/File:Tide_logo-01.svg) |
+| TikTok | Ionic Team (https://github.com/ionic-team / http://ionic.io/) Archive link: http | Public domain | [file page](https://commons.wikimedia.org/wiki/File:Ionicons_logo-tiktok.svg) |
+| Tim Hortons | The original uploader was TorontoStorm at English Wikipedia. | Public domain | [file page](https://commons.wikimedia.org/wiki/File:Tim_Hortons_logo.svg) |
 | Timberland | Timberland | Public domain | [file page](https://commons.wikimedia.org/wiki/File:Timberland-logo.png) |
 | Toyota | Toyota Motor Corporation | Public domain | [file page](https://commons.wikimedia.org/wiki/File:Toyota.svg) |
+| Toys "R" Us | Toys "R" Us Canada | Public domain | [file page](https://commons.wikimedia.org/wiki/File:Toys_%22R%22_Us_Canada_logo_(2018).svg) |
+| Tropicana | Unknown authorUnknown author | Public domain | [file page](https://commons.wikimedia.org/wiki/File:Tropicana_brand_logo.svg) |
 | Turkish Airlines | Turkish Airlines | Public domain | [file page](https://commons.wikimedia.org/wiki/File:Turkish_Airlines_logo_2019_compact.svg) |
+| Twitch | Twitch Interactive, Inc. | Public domain | [file page](https://commons.wikimedia.org/wiki/File:Twitch_Glitch_Logo_Purple.svg) |
+| Twix | Mars | Public domain | [file page](https://commons.wikimedia.org/wiki/File:Twix_logo_2025.svg) |
 | USPS | United States Postal Service | Public domain | [file page](https://commons.wikimedia.org/wiki/File:USPS_-_Eagle_Icon.svg) |
+| Uber | Uber Technologies Inc. | Public domain | [file page](https://commons.wikimedia.org/wiki/File:Uber_App_Icon.svg) |
 | Ubisoft | Ubisoft | Public domain | [file page](https://commons.wikimedia.org/wiki/File:Ubisoft_logo.svg) |
 | Ubuntu | Canonical Ltd. | Public domain | [file page](https://commons.wikimedia.org/wiki/File:Ubuntu-logo-2022.svg) |
 | Umbro | Umbro, converted to SVG by FireDragonValo | Public domain | [file page](https://commons.wikimedia.org/wiki/File:Umbro_2024_logo.svg) |
@@ -1654,8 +1736,11 @@ Logos from Wikimedia Commons, used under the licence shown; the brands are trade
 | Windows | Original work: Microsoft Corporation Windows 11 logo.svg: Multiple editors; see  | Public domain | [file page](https://commons.wikimedia.org/wiki/File:Windows_logo_and_wordmark_-_2021.svg) |
 | World Health Organization | Font: Adrian Frutiger Logotype: The World Health Organization | Public domain | [file page](https://commons.wikimedia.org/wiki/File:World_Health_Organization_emblem_(cropped).svg) |
 | X (Twitter) | Sawyer Merritt on Twitter | Public domain | [file page](https://commons.wikimedia.org/wiki/File:X_logo_2023.svg) |
+| Xbox | Microsoft Corporation. | Public domain | [file page](https://commons.wikimedia.org/wiki/File:Xbox_Logo.svg) |
 | Xiaomi | Xiaomi | Public domain | [file page](https://commons.wikimedia.org/wiki/File:Xiaomi_logo_(2021-).svg) |
 | Yamaha | Yamaha | Public domain | [file page](https://commons.wikimedia.org/wiki/File:Yamaha_Motor_Co_logo.svg) |
+| YouTube | Original: YouTube Vector: Jarould | Public domain | [file page](https://commons.wikimedia.org/wiki/File:YouTube_dark_logo_2017.svg) |
+| Zara | Vector version: Anonymous contributor at brandsoftheworld.com Original: Zara | Public domain | [file page](https://commons.wikimedia.org/wiki/File:ZARA.svg) |
 | 네이버 | Gapo | Public domain | [file page](https://commons.wikimedia.org/wiki/File:Naver_logo_initial.svg) |
 | 농심 | Nong Shim Ltd. | Public domain | [file page](https://commons.wikimedia.org/wiki/File:Nongshim_Logo.svg) |
 | 대한항공 | Korean Air (designed by Lippincott) | Public domain | [file page](https://commons.wikimedia.org/wiki/File:Korean_Air_2025.svg) |

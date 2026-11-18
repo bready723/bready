@@ -1997,5 +1997,784 @@
 "credit": "Fuhdge",
 "license": "CC0",
 "url": "https://commons.wikimedia.org/wiki/File:Lambologo.png"
+},
+{
+"id": "lq2813",
+"name": "Coca-Cola",
+"file": "lq2813.png",
+"source": "commons",
+"credit": "The Coca-Cola Company",
+"license": "Public domain",
+"url": "https://commons.wikimedia.org/wiki/File:Coca-Cola_logo.svg"
+},
+{
+"id": "lq850324",
+"name": "Heinz",
+"file": "lq850324.png",
+"source": "commons",
+"credit": "H. J. Heinz Company",
+"license": "Public domain",
+"url": "https://commons.wikimedia.org/wiki/File:Heinz_logo.svg",
+"alt": "H. J. Heinz Company"
+},
+{
+"id": "lq723513",
+"name": "Lay's",
+"file": "lq723513.png",
+"source": "commons",
+"credit": "Pepsico",
+"license": "Public domain",
+"url": "https://commons.wikimedia.org/wiki/File:Lay%27s_Logo_2025.png",
+"alt": "Lay’s"
+},
+{
+"id": "lq138585",
+"name": "Oreo",
+"file": "lq138585.png",
+"source": "commons",
+"credit": "Mondelēz International",
+"license": "Public domain",
+"url": "https://commons.wikimedia.org/wiki/File:Oreo_2026.svg"
+},
+{
+"id": "lq367251",
+"name": "Kit Kat",
+"file": "lq367251.png",
+"source": "commons",
+"credit": "Anonykitten",
+"license": "Public domain",
+"url": "https://commons.wikimedia.org/wiki/File:Logo_of_the_KitKat.svg"
+},
+{
+"id": "lq739550",
+"name": "M&M's",
+"file": "lq739550.png",
+"source": "commons",
+"credit": "Nina593562",
+"license": "CC BY-SA 4.0",
+"url": "https://commons.wikimedia.org/wiki/File:M%26M%27s_2019.svg"
+},
+{
+"id": "lq714179",
+"name": "Snickers",
+"file": "lq714179.png",
+"source": "commons",
+"credit": "Mars Inc.",
+"license": "Public domain",
+"url": "https://commons.wikimedia.org/wiki/File:Snickers_2025.svg"
+},
+{
+"id": "lq869733",
+"name": "Twix",
+"file": "lq869733.png",
+"source": "commons",
+"credit": "Mars",
+"license": "Public domain",
+"url": "https://commons.wikimedia.org/wiki/File:Twix_logo_2025.svg"
+},
+{
+"id": "lq484544",
+"name": "Cheetos",
+"file": "lq484544.png",
+"source": "commons",
+"credit": "Frito-Lay",
+"license": "Public domain",
+"url": "https://commons.wikimedia.org/wiki/File:Cheetos_logo.svg"
+},
+{
+"id": "lq9935",
+"name": "Fanta",
+"file": "lq9935.png",
+"source": "commons",
+"credit": "Paul Nahverkehr",
+"license": "Public domain",
+"url": "https://commons.wikimedia.org/wiki/File:Fanta_logo_(2018).png"
+},
+{
+"id": "lq206978",
+"name": "Sprite",
+"file": "lq206978.png",
+"source": "commons",
+"credit": "TAC PlazaMaster",
+"license": "Public domain",
+"url": "https://commons.wikimedia.org/wiki/File:Sprite_2022.svg"
+},
+{
+"id": "lq896",
+"name": "Mountain Dew",
+"file": "lq896.png",
+"source": "commons",
+"credit": "PepsiCo",
+"license": "Public domain",
+"url": "https://commons.wikimedia.org/wiki/File:Mountain_Dew_2025_logo.svg"
+},
+{
+"id": "lq212193",
+"name": "Nutella",
+"file": "lq212193.png",
+"source": "commons",
+"credit": "Ferrero",
+"license": "Public domain",
+"url": "https://commons.wikimedia.org/wiki/File:Logo_Nutella.svg"
+},
+{
+"id": "lq757388",
+"name": "Milka",
+"file": "lq757388.png",
+"source": "commons",
+"credit": "Unknown authorUnknown author",
+"license": "Public domain",
+"url": "https://commons.wikimedia.org/wiki/File:Milka_Logo_(crop).svg"
+},
+{
+"id": "lq1846049",
+"name": "Tropicana",
+"file": "lq1846049.png",
+"source": "commons",
+"credit": "Unknown authorUnknown author",
+"license": "Public domain",
+"url": "https://commons.wikimedia.org/wiki/File:Tropicana_brand_logo.svg",
+"alt": "Tropicana Products"
+},
+{
+"id": "lq854383",
+"name": "Heineken",
+"file": "lq854383.png",
+"source": "commons",
+"credit": "Heineken",
+"license": "Public domain",
+"url": "https://commons.wikimedia.org/wiki/File:Heineken_logo_(1).png"
+},
+{
+"id": "lq929276",
+"name": "Stella Artois",
+"file": "lq929276.png",
+"source": "commons",
+"credit": "See the ticket in the Permission field below.",
+"license": "CC BY-SA 3.0",
+"url": "https://commons.wikimedia.org/wiki/File:Stella_Artois_new_logo.png"
+},
+{
+"id": "lq332378",
+"name": "Absolut",
+"file": "lq332378.png",
+"source": "commons",
+"credit": "Unknown authorUnknown author",
+"license": "Public domain",
+"url": "https://commons.wikimedia.org/wiki/File:Logo-absolut.svg",
+"alt": "Absolut Vodka"
+},
+{
+"id": "lq1686705",
+"name": "Jell-O",
+"file": "lq1686705.png",
+"source": "commons",
+"credit": "Unknown authorUnknown author",
+"license": "Public domain",
+"url": "https://commons.wikimedia.org/wiki/File:Jello_brand_logo.png"
+},
+{
+"id": "lq177054",
+"name": "Burger King",
+"file": "lq177054.png",
+"source": "commons",
+"credit": "Burger King",
+"license": "Public domain",
+"url": "https://commons.wikimedia.org/wiki/File:BurgerKingLogoOld.svg"
+},
+{
+"id": "lq524757",
+"name": "KFC",
+"file": "lq524757.png",
+"source": "commons",
+"credit": "Kentucky Fried Chicken",
+"license": "Public domain",
+"url": "https://commons.wikimedia.org/wiki/File:KFC_logo.png"
+},
+{
+"id": "lq1330910",
+"name": "Popeyes",
+"file": "lq1330910.png",
+"source": "commons",
+"credit": "Popeyes",
+"license": "Public domain",
+"url": "https://commons.wikimedia.org/wiki/File:Logo_Popeyes_en_letras.png"
+},
+{
+"id": "lq2759586",
+"name": "Papa John's",
+"file": "lq2759586.png",
+"source": "commons",
+"credit": "Papa Johns",
+"license": "Public domain",
+"url": "https://commons.wikimedia.org/wiki/File:Papa_Johns_logo.svg"
+},
+{
+"id": "lq847743",
+"name": "Dunkin'",
+"file": "lq847743.png",
+"source": "commons",
+"credit": "Basrizal Abdullah",
+"license": "Public domain",
+"url": "https://commons.wikimedia.org/wiki/File:Logo_Dunkin_Donuts.png"
+},
+{
+"id": "lq175106",
+"name": "Tim Hortons",
+"file": "lq175106.png",
+"source": "commons",
+"credit": "The original uploader was TorontoStorm at English Wikipedia.",
+"license": "Public domain",
+"url": "https://commons.wikimedia.org/wiki/File:Tim_Hortons_logo.svg"
+},
+{
+"id": "lq1141226",
+"name": "Dairy Queen",
+"file": "lq1141226.png",
+"source": "commons",
+"credit": "Dairy Queen",
+"license": "Public domain",
+"url": "https://commons.wikimedia.org/wiki/File:Dairy_Queen_Bahamas.png"
+},
+{
+"id": "lq630866",
+"name": "Arby's",
+"file": "lq630866.png",
+"source": "commons",
+"credit": "Arby's",
+"license": "Public domain",
+"url": "https://commons.wikimedia.org/wiki/File:Arby%27s_logo.svg"
+},
+{
+"id": "lq1185675",
+"name": "IHOP",
+"file": "lq1185675.png",
+"source": "commons",
+"credit": "International House of Pancakes",
+"license": "Public domain",
+"url": "https://commons.wikimedia.org/wiki/File:IHOP_logo.svg"
+},
+{
+"id": "lq1189695",
+"name": "Denny's",
+"file": "lq1189695.png",
+"source": "commons",
+"credit": "DFO, LLC.",
+"license": "Public domain",
+"url": "https://commons.wikimedia.org/wiki/File:Denny%27s_Logo_06.2022.svg"
+},
+{
+"id": "lq1050530",
+"name": "Tic Tac",
+"file": "lq1050530.png",
+"source": "commons",
+"credit": "Unknown",
+"license": "Public domain",
+"url": "https://commons.wikimedia.org/wiki/File:Tic_Tac_logo_2022-present.png"
+},
+{
+"id": "lq938535",
+"name": "Chupa Chups",
+"file": "lq938535.png",
+"source": "commons",
+"credit": "Chupa Chups, Salvador Dalí",
+"license": "Public domain",
+"url": "https://commons.wikimedia.org/wiki/File:Chupa_Chups_logo_(NO_R).svg"
+},
+{
+"id": "lq15267446",
+"name": "A&W",
+"file": "lq15267446.png",
+"source": "commons",
+"credit": "A&W Root Beer",
+"license": "Public domain",
+"url": "https://commons.wikimedia.org/wiki/File:A%26W_Root_Beer_logo.svg",
+"alt": "A&W Root Beer"
+},
+{
+"id": "lq1074666",
+"name": "Chiquita",
+"file": "lq1074666.png",
+"source": "commons",
+"credit": "Chiquita Brands International",
+"license": "CC BY-SA 4.0",
+"url": "https://commons.wikimedia.org/wiki/File:Chiquita_logo_2019.svg",
+"alt": "Chiquita Brands International"
+},
+{
+"id": "lq152784",
+"name": "The North Face",
+"file": "lq152784.png",
+"source": "commons",
+"credit": "VF Corporation",
+"license": "Public domain",
+"url": "https://commons.wikimedia.org/wiki/File:The_North_Face_logo.svg",
+"alt": "The North Face, Inc."
+},
+{
+"id": "lq2735242",
+"name": "Old Navy",
+"file": "lq2735242.png",
+"source": "commons",
+"credit": "Old Navy",
+"license": "Public domain",
+"url": "https://commons.wikimedia.org/wiki/File:Old_Navy_Logo.svg"
+},
+{
+"id": "lq188326",
+"name": "H&M",
+"file": "lq188326.png",
+"source": "commons",
+"credit": "H & M Hennes & Mauritz AB",
+"license": "Public domain",
+"url": "https://commons.wikimedia.org/wiki/File:H%26M_old_logo.svg"
+},
+{
+"id": "lq147662",
+"name": "Zara",
+"file": "lq147662.png",
+"source": "commons",
+"credit": "Vector version: Anonymous contributor at brandsoftheworld.com Original: Zara",
+"license": "Public domain",
+"url": "https://commons.wikimedia.org/wiki/File:ZARA.svg"
+},
+{
+"id": "lq573422",
+"name": "Swatch",
+"file": "lq573422.png",
+"source": "commons",
+"credit": "Unknown authorUnknown author",
+"license": "Public domain",
+"url": "https://commons.wikimedia.org/wiki/File:Swatch_Logo.svg"
+},
+{
+"id": "lq337408",
+"name": "Nivea",
+"file": "lq337408.png",
+"source": "commons",
+"credit": "BDF MEXICO SA DE CV",
+"license": "CC BY-SA 4.0",
+"url": "https://commons.wikimedia.org/wiki/File:Brandmark_NIVEA_RGB_600px_transp.png"
+},
+{
+"id": "lq503592",
+"name": "Gillette",
+"file": "lq503592.png",
+"source": "commons",
+"credit": "P&G, User:Stepshep",
+"license": "Public domain",
+"url": "https://commons.wikimedia.org/wiki/File:Gillette_logo.svg"
+},
+{
+"id": "lq2523492",
+"name": "Colgate",
+"file": "lq2523492.png",
+"source": "commons",
+"credit": "Colgate",
+"license": "Public domain",
+"url": "https://commons.wikimedia.org/wiki/File:Colgate_logo_red.svg"
+},
+{
+"id": "lq2024644",
+"name": "Tide",
+"file": "lq2024644.png",
+"source": "commons",
+"credit": "Guobenwei",
+"license": "CC BY-SA 3.0",
+"url": "https://commons.wikimedia.org/wiki/File:Tide_logo-01.svg"
+},
+{
+"id": "lq715583",
+"name": "Costco",
+"file": "lq715583.png",
+"source": "commons",
+"credit": "Costco Wholesale Corporation",
+"license": "Public domain",
+"url": "https://commons.wikimedia.org/wiki/File:Costco_old_logo.svg"
+},
+{
+"id": "lq151954",
+"name": "Lidl",
+"file": "lq151954.png",
+"source": "commons",
+"credit": "Wyatt123456Fan",
+"license": "CC0",
+"url": "https://commons.wikimedia.org/wiki/File:Lidl_logo.svg"
+},
+{
+"id": "lq125054",
+"name": "Aldi",
+"file": "lq125054.png",
+"source": "commons",
+"credit": "Hpmachine",
+"license": "CC BY-SA 4.0",
+"url": "https://commons.wikimedia.org/wiki/File:Aldi_Logo_2017.png"
+},
+{
+"id": "lq54078",
+"name": "IKEA",
+"file": "lq54078.png",
+"source": "commons",
+"credit": null,
+"license": "Public domain",
+"url": "https://commons.wikimedia.org/wiki/File:Ikea-logo.png"
+},
+{
+"id": "lq864407",
+"name": "The Home Depot",
+"file": "lq864407.png",
+"source": "commons",
+"credit": "The Hone Depot",
+"license": "Public domain",
+"url": "https://commons.wikimedia.org/wiki/File:The_Home_Depot_logo_(Quebec).svg"
+},
+{
+"id": "lq202210",
+"name": "GameStop",
+"file": "lq202210.png",
+"source": "commons",
+"credit": "McGarrah Jessee",
+"license": "Public domain",
+"url": "https://commons.wikimedia.org/wiki/File:GameStop_Logo.svg"
+},
+{
+"id": "lq459477",
+"name": "FedEx",
+"file": "lq459477.png",
+"source": "commons",
+"credit": "Logo: FedEx File: The original uploader was Tkgd2007 at English Wikipedia.",
+"license": "Public domain",
+"url": "https://commons.wikimedia.org/wiki/File:FedEx_Corporation_-_2016_Logo.svg"
+},
+{
+"id": "lq489815",
+"name": "DHL",
+"file": "lq489815.png",
+"source": "commons",
+"credit": "Presumably DHL",
+"license": "Public domain",
+"url": "https://commons.wikimedia.org/wiki/File:DHL_Logo.svg"
+},
+{
+"id": "lq1498689",
+"name": "GEICO",
+"file": "lq1498689.png",
+"source": "commons",
+"credit": "GEICO.png: Dream out loud. The original uploader was Dream out loud at English W",
+"license": "Public domain",
+"url": "https://commons.wikimedia.org/wiki/File:Geico_logo.svg"
+},
+{
+"id": "lq167447",
+"name": "Barbie",
+"file": "lq167447.png",
+"source": "commons",
+"credit": "Mattel, Inc.",
+"license": "Public domain",
+"url": "https://commons.wikimedia.org/wiki/File:Barbie_Logo.svg"
+},
+{
+"id": "lq1891883",
+"name": "Nerf",
+"file": "lq1891883.png",
+"source": "commons",
+"credit": "Hasbro",
+"license": "Public domain",
+"url": "https://commons.wikimedia.org/wiki/File:Nerf_logo.svg"
+},
+{
+"id": "lq1346099",
+"name": "Play-Doh",
+"file": "lq1346099.png",
+"source": "commons",
+"credit": "Unknown authorUnknown author",
+"license": "Public domain",
+"url": "https://commons.wikimedia.org/wiki/File:Play_doh_craftbrand_logo.svg"
+},
+{
+"id": "lq181331",
+"name": "Post-it",
+"file": "lq181331.png",
+"source": "commons",
+"credit": "Post-it",
+"license": "Public domain",
+"url": "https://commons.wikimedia.org/wiki/File:Post-it-2020.svg"
+},
+{
+"id": "lq1371867",
+"name": "Kleenex",
+"file": "lq1371867.png",
+"source": "commons",
+"credit": "Kimberly-Clark (designed by Turner Duckworth)",
+"license": "Public domain",
+"url": "https://commons.wikimedia.org/wiki/File:Kleenex_2024.svg"
+},
+{
+"id": "lq791136",
+"name": "Avis",
+"file": "lq791136.png",
+"source": "commons",
+"credit": "Avis",
+"license": "Public domain",
+"url": "https://commons.wikimedia.org/wiki/File:Avis_logo.svg",
+"alt": "AVIS"
+},
+{
+"id": "lq1543874",
+"name": "Hertz",
+"file": "lq1543874.png",
+"source": "commons",
+"credit": "Hertz Corporation",
+"license": "Public domain",
+"url": "https://commons.wikimedia.org/wiki/File:Hertz_Car_Rental_logo.svg",
+"alt": "The Hertz Corporation"
+},
+{
+"id": "lq696334",
+"name": "Toys \"R\" Us",
+"file": "lq696334.png",
+"source": "commons",
+"credit": "Toys \"R\" Us Canada",
+"license": "Public domain",
+"url": "https://commons.wikimedia.org/wiki/File:Toys_%22R%22_Us_Canada_logo_(2018).svg"
+},
+{
+"id": "lq44294",
+"name": "Ford",
+"file": "lq44294.png",
+"source": "commons",
+"credit": "Ford Motor Company",
+"license": "Public domain",
+"url": "https://commons.wikimedia.org/wiki/File:Ford_logo_flat.svg",
+"alt": "Ford Motor Company"
+},
+{
+"id": "lq30113",
+"name": "Jeep",
+"file": "lq30113.png",
+"source": "commons",
+"credit": "de:Benutzer:Gaspard",
+"license": "Public domain",
+"url": "https://commons.wikimedia.org/wiki/File:Jeep.svg"
+},
+{
+"id": "lq27597",
+"name": "Fiat",
+"file": "lq27597.png",
+"source": "commons",
+"credit": "Fiat Automobiles",
+"license": "Public domain",
+"url": "https://commons.wikimedia.org/wiki/File:Fiat_Automobiles_logo.svg"
+},
+{
+"id": "lq35907",
+"name": "Land Rover",
+"file": "lq35907.png",
+"source": "commons",
+"credit": "Jaguar Land Rover Automotive PLC",
+"license": "Public domain",
+"url": "https://commons.wikimedia.org/wiki/File:Land_Rover_2023.svg"
+},
+{
+"id": "lq152057",
+"name": "BP",
+"file": "lq152057.png",
+"source": "commons",
+"credit": "Unknown authorUnknown author",
+"license": "Public domain",
+"url": "https://commons.wikimedia.org/wiki/File:Bp_logo89.svg"
+},
+{
+"id": "lq156238",
+"name": "ExxonMobil",
+"file": "lq156238.png",
+"source": "commons",
+"credit": "The original uploader was KUsam at English Wikipedia.",
+"license": "Public domain",
+"url": "https://commons.wikimedia.org/wiki/File:Exxon_Mobil_Logo.svg"
+},
+{
+"id": "lq1296860",
+"name": "Gulf",
+"file": "lq1296860.png",
+"source": "commons",
+"credit": "Gulf Oil",
+"license": "Public domain",
+"url": "https://commons.wikimedia.org/wiki/File:Gulf_Oil_logo.svg",
+"alt": "Gulf Oil"
+},
+{
+"id": "lq1049970",
+"name": "Castrol",
+"file": "lq1049970.png",
+"source": "commons",
+"credit": "Castrol",
+"license": "Public domain",
+"url": "https://commons.wikimedia.org/wiki/File:Castrol_logo_2023.svg"
+},
+{
+"id": "lq866",
+"name": "YouTube",
+"file": "lq866.png",
+"source": "commons",
+"credit": "Original: YouTube Vector: Jarould",
+"license": "Public domain",
+"url": "https://commons.wikimedia.org/wiki/File:YouTube_dark_logo_2017.svg"
+},
+{
+"id": "lq48938223",
+"name": "TikTok",
+"file": "lq48938223.png",
+"source": "commons",
+"credit": "Ionic Team (https://github.com/ionic-team / http://ionic.io/) Archive link: http",
+"license": "Public domain",
+"url": "https://commons.wikimedia.org/wiki/File:Ionicons_logo-tiktok.svg"
+},
+{
+"id": "lq213660",
+"name": "LinkedIn",
+"file": "lq213660.png",
+"source": "commons",
+"credit": "LinkedIn",
+"license": "Public domain",
+"url": "https://commons.wikimedia.org/wiki/File:LinkedIn_icon.svg"
+},
+{
+"id": "lq4555537",
+"name": "Twitch",
+"file": "lq4555537.png",
+"source": "commons",
+"credit": "Twitch Interactive, Inc.",
+"license": "Public domain",
+"url": "https://commons.wikimedia.org/wiki/File:Twitch_Glitch_Logo_Purple.svg"
+},
+{
+"id": "lq27903045",
+"name": "Paramount+",
+"file": "lq27903045.png",
+"source": "commons",
+"credit": "Paramount Global",
+"license": "Public domain",
+"url": "https://commons.wikimedia.org/wiki/File:Paramount%2B_favicon.svg"
+},
+{
+"id": "lq67765302",
+"name": "Peacock",
+"file": "lq67765302.png",
+"source": "commons",
+"credit": "NBCUniversal",
+"license": "Public domain",
+"url": "https://commons.wikimedia.org/wiki/File:NBCUniversal_Peacock_Logo_(2026;_icon).svg"
+},
+{
+"id": "lq780442",
+"name": "Uber",
+"file": "lq780442.png",
+"source": "commons",
+"credit": "Uber Technologies Inc.",
+"license": "Public domain",
+"url": "https://commons.wikimedia.org/wiki/File:Uber_App_Icon.svg"
+},
+{
+"id": "lq483959",
+"name": "PayPal",
+"file": "lq483959.png",
+"source": "commons",
+"credit": "PayPal (Original design by Pentagram)",
+"license": "Public domain",
+"url": "https://commons.wikimedia.org/wiki/File:PayPal_2024_(Icon).svg"
+},
+{
+"id": "lq698",
+"name": "Firefox",
+"file": "lq698.png",
+"source": "commons",
+"credit": "Mozilla Corporation",
+"license": "CC BY 3.0",
+"url": "https://commons.wikimedia.org/wiki/File:Firefox_logo,_2017.svg",
+"alt": "Mozilla Firefox"
+},
+{
+"id": "lq35773",
+"name": "Safari",
+"file": "lq35773.png",
+"source": "commons",
+"credit": "Font Awesome",
+"license": "CC BY 4.0",
+"url": "https://commons.wikimedia.org/wiki/File:Font_Awesome_5_brands_safari.svg"
+},
+{
+"id": "lq14116",
+"name": "Finder (Mac)",
+"file": "lq14116.png",
+"source": "commons",
+"credit": "Alessandro Moises",
+"license": "CC BY-SA 4.0",
+"url": "https://commons.wikimedia.org/wiki/File:Mi_icono_principal.svg",
+"alt": "macOS"
+},
+{
+"id": "lq15281614",
+"name": "Xbox",
+"file": "lq15281614.png",
+"source": "commons",
+"credit": "Microsoft Corporation.",
+"license": "Public domain",
+"url": "https://commons.wikimedia.org/wiki/File:Xbox_Logo.svg"
+},
+{
+"id": "lq207922",
+"name": "Atari",
+"file": "lq207922.png",
+"source": "commons",
+"credit": "Atari",
+"license": "Public domain",
+"url": "https://commons.wikimedia.org/wiki/File:Atari_Games_logo.png"
+},
+{
+"id": "lq692989",
+"name": "Roblox",
+"file": "lq692989.png",
+"source": "commons",
+"credit": "Roblox Corporation",
+"license": "CC BY 4.0",
+"url": "https://commons.wikimedia.org/wiki/File:Roblox_2022_Logo.png"
+},
+{
+"id": "lq864",
+"name": "Pokémon",
+"file": "lq864.png",
+"source": "commons",
+"credit": "Andreuvv",
+"license": "Public domain",
+"url": "https://commons.wikimedia.org/wiki/File:Pok%C3%A9_Ball_icon.svg"
+},
+{
+"id": "lq11463",
+"name": "Adobe",
+"file": "lq11463.png",
+"source": "commons",
+"credit": "Adobe Systems",
+"license": "CC BY-SA 4.0",
+"url": "https://commons.wikimedia.org/wiki/File:Adobe_Logo_Standard.svg"
+},
+{
+"id": "lq21404084",
+"name": "HP",
+"file": "lq21404084.png",
+"source": "commons",
+"credit": "HP Inc.",
+"license": "Public domain",
+"url": "https://commons.wikimedia.org/wiki/File:HP_logo_2025.svg",
+"alt": "HP Inc."
+},
+{
+"id": "lq173395",
+"name": "Cisco",
+"file": "lq173395.png",
+"source": "commons",
+"credit": "Cisco",
+"license": "Public domain",
+"url": "https://commons.wikimedia.org/wiki/File:Cisco_logo.svg"
 }
 ]
