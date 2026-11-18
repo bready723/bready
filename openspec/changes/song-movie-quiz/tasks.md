@@ -9,6 +9,6 @@
 ## 4. Verify
 - [x] 4.1 Songs: tests, build; hub at 390×844 and 320×640 (smaller type on small phones); full song round played: clip starts on the tile tap, next clip starts by itself, stops at the end; clips are 30 s stereo AAC ~256 kbps
 - [x] 4.2 Movies: six-tile hub at 390×844 and 320×640; full round played (poster, 5 s ring, title + year + Korean title, TMDB credit, missed posters)
-- [ ] 4.3 Sara: sound on her iPhone
+- [x] 4.3 Sara checked sound on her iPhone (2026-11-18): "sounds okay"
 ## 5. Space for six tiles
 - [x] 5.1 No "Syncing…" / plain "Synced." banner under the header (the header pill already shows it); banners stay for real news (items backed up or loaded, errors)
