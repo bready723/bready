@@ -295,6 +295,15 @@ export default function App() {
           <IconRank />
         </button>
         <button
+          className={tab === 'explore' ? 'active' : ''}
+          style={{ color: tc('explore') }}
+          onClick={() => setTab('explore')}
+          aria-label="Explore"
+          title="Explore"
+        >
+          <IconExplore />
+        </button>
+        <button
           className={tab === 'translate' ? 'active' : ''}
           style={{ color: tc('translate') }}
           onClick={() => setTab('translate')}
@@ -323,15 +332,6 @@ export default function App() {
           title="Listen"
         >
           <IconListen />
-        </button>
-        <button
-          className={tab === 'explore' ? 'active' : ''}
-          style={{ color: tc('explore') }}
-          onClick={() => setTab('explore')}
-          aria-label="Explore"
-          title="Explore"
-        >
-          <IconExplore />
         </button>
         <button
           className={tab === 'quiz' ? 'active' : ''}
