@@ -304,15 +304,6 @@ export default function App() {
           <IconExplore />
         </button>
         <button
-          className={tab === 'translate' ? 'active' : ''}
-          style={{ color: tc('translate') }}
-          onClick={() => setTab('translate')}
-          aria-label="Translate"
-          title="Translate"
-        >
-          <IconGlobe />
-        </button>
-        <button
           className={tab === 'fx' ? 'active' : ''}
           style={{ color: tc('fx') }}
           onClick={() => setTab('fx')}
@@ -320,6 +311,15 @@ export default function App() {
           title="FX"
         >
           <IconFx />
+        </button>
+        <button
+          className={tab === 'translate' ? 'active' : ''}
+          style={{ color: tc('translate') }}
+          onClick={() => setTab('translate')}
+          aria-label="Translate"
+          title="Translate"
+        >
+          <IconGlobe />
         </button>
         <button
           className={tab === 'listen' ? 'active' : ''}
