@@ -38,15 +38,16 @@ def same(a, b):
     return bool(a and b) and (a in b or b in a)
 
 ids = {}  # trackId -> store it came from ('us' / 'kr')
-krset = set()  # ids known to be Korean songs (Korea chart, Korean favourites)
+krset = set()  # ids known to be Korean songs (Korean favourites)
+# The Korea chart also lists global hits (Bieber, Ariana Grande), so a chart song counts as
+# Korean only when its name or genre says so (checked below), never just for charting there.
 # 1. recent charts
 for st in ('us', 'kr'):
     feed = get(f'https://rss.marketingtools.apple.com/api/v2/{st}/music/most-played/100/songs.json', 1)['feed']
     for r in feed['results']:
         ids.setdefault(r['id'], st)
-        if st == 'kr': krset.add(r['id'])
 # 2. all-time favourites
-BAD = re.compile(r'karaoke|instrumental|inst\.|live|remix|cover|tribute|sped up|slowed|acoustic ver|(chinese|japanese|actors?|extended|edm|orchestra) ver|edition', re.I)
+BAD = re.compile(r'karaoke|revisited|instrumental|inst\.|live|remix|cover|tribute|sped up|slowed|acoustic ver|(chinese|japanese|actors?|extended|edm|orchestra) ver|edition', re.I)
 ODD = re.compile(r'version|ver\.|mix|edit\b|remaster|bonus', re.I)  # allowed, but the plain original comes first
 # The Korean store's search answers nothing, so Korean favourites are searched in the US
 # store (which understands Korean words but answers in English) and the candidates are
@@ -100,6 +101,10 @@ for sid in allid:
         r = info[st].get(sid)
         if r and (sid in krset or 'K-Pop' in r.get('primaryGenreName', '') or HANGUL.search(r.get('artistName', '') + r.get('trackName', ''))):
             kr_artists.add(r.get('artistId'))
+# hand fixes after checking the list (2026-11-19): K-pop acts the store files under Pop,
+# and a Western singer whose Korean-store name is written in Hangul
+KOREAN_ARTISTS = {'ALLDAY PROJECT', 'MEOVV'}
+NOT_KOREAN = {'Lady Gaga'}
 songs, seen, dropped = [], set(), {'explicit': 0, 'no preview': 0, 'not found': 0, 'duplicate': 0}
 for sid in allid:
     us, kr = info['us'].get(sid), info['kr'].get(sid)
@@ -111,7 +116,10 @@ for sid in allid:
     korean = (sid in krset or base.get('artistId') in kr_artists or 'K-Pop' in ((us or {}).get('primaryGenreName', ''), (kr or {}).get('primaryGenreName', ''))
               or bool(kr and HANGUL.search(kr.get('artistName', '') + kr.get('trackName', '')))
               or bool(HANGUL.search(base.get('artistName', '') + base.get('trackName', ''))))
-    clean = lambda s: re.sub(r'\s*[\(\[][^\)\]]*(feat|with |from |remaster|version|bonus track|ver\.|radio edit)[^\)\]]*[\)\]]|\s+-\s+(\d{4} )?remaster(ed)?.*$', '', s or '', flags=re.I).strip()
+    clean = lambda s: re.sub(r'\s*[\(\[][^\)\]]*(feat|with |from |remaster|version|bonus track|ver\.|radio edit|single)[^\)\]]*[\)\]]|\s+-\s+(\d{4} )?remaster(ed)?.*$', '', s or '', flags=re.I).strip()
+    first = base.get('artistName', '').split(' & ')[0].split(',')[0]
+    if first in NOT_KOREAN: korean = False
+    if first in KOREAN_ARTISTS: korean = True
     main = kr if korean and kr else base
     other = base if main is kr else kr
     name, artist = clean(main['trackName']), main['artistName']

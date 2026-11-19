@@ -3,7 +3,7 @@
 Usage: python3 -I scripts/quiz/movies.py <work-dir>
 Needs TMDB_KEY in the repo's .env (never committed; never written to the cache or output).
 Pool: the best-known movies by number of TMDB votes —
-  ~180 English-language, ~60 Korean, ~60 animated, plus ~30 recent hits (2023+).
+  ~280 English-language, ~90 Korean, ~90 animated, plus ~50 recent hits (2023+).
 Picture: a "textless" poster (TMDB marks posters with no language = no title text); when a
 movie has none, a still from the film (also textless). Movies with neither are left out.
 The app loads the image from TMDB at play time; only the address is stored here.
@@ -49,13 +49,17 @@ def top(n, **q):
 
 # from the poster review (2026-11-18): pictures that still show the title get the next
 # textless picture; posters too adult for a family game are left out
+# (second review 2026-11-19, pool to 500)
 NEXT_PICTURE = {157350: 'Divergent', 200085: 'The Flu', 933131: 'Badland Hunters', 507089: "Five Nights at Freddy's"}
-LEAVE_OUT = {1280: '3-Iron', 22536: 'Thirst', 933260: 'The Substance'}
+LEAVE_OUT = {1280: '3-Iron', 22536: 'Thirst', 933260: 'The Substance',
+             73: 'American History X', 1359: 'American Psycho', 216015: 'Fifty Shades of Grey', 123377: 'Pieta', 432836: 'Memoir of a Murderer (every picture shows a title)',
+             # concert / making-of films: not something to guess from a picture
+             740996: 'BLACKPINK: Light Up the Sky', 611291: 'Bring the Soul', 568300: 'BTS World Tour', 1412113: 'Squid Game: Making Season 2', 553512: 'Burn the Stage'}
 groups = [
-    ('en', top(200, with_original_language='en', without_genres='16')),
-    ('ko', top(60, with_original_language='ko')),
-    ('anim', top(60, with_genres='16')),
-    ('new', top(30, **{'primary_release_date.gte': '2023-01-01', 'with_original_language': 'en'})),
+    ('en', top(300, with_original_language='en', without_genres='16')),
+    ('ko', top(90, with_original_language='ko')),
+    ('anim', top(90, with_genres='16')),
+    ('new', top(50, **{'primary_release_date.gte': '2023-01-01', 'with_original_language': 'en'})),
 ]
 movies, seen, skipped = [], set(), []
 for g, rows in groups:

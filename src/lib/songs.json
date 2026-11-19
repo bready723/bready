@@ -29,6 +29,17 @@
 "year": "1995"
 },
 {
+"id": "s1037732951",
+"name": "Dumb Dumb",
+"artist": "레드벨벳",
+"art": "https://is1-ssl.mzstatic.com/image/thumb/Music124/v4/50/14/73/50147387-10df-0069-2a32-8bad4cdac40d/mzm.mexlgnue.jpg/600x600bb.jpg",
+"preview": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview221/v4/6f/d0/61/6fd06148-11ef-6cf1-65ca-e0ce7eaf4f69/mzaf_8254656774253000602.plus.aac.p.m4a",
+"link": "https://music.apple.com/us/album/dumb-dumb/1037732950?i=1037732951",
+"year": "2015",
+"altArtist": "Red Velvet",
+"kr": true
+},
+{
 "id": "s1040171627",
 "name": "History",
 "artist": "One Direction",
@@ -36,6 +47,17 @@
 "preview": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview221/v4/65/0d/30/650d3045-8c3e-8d39-ec5a-47590d6ca63e/mzaf_14086237768381656737.plus.aac.p.m4a",
 "link": "https://music.apple.com/us/album/history/1040170924?i=1040171627",
 "year": "2015"
+},
+{
+"id": "s1046202717",
+"name": "I",
+"artist": "태연",
+"art": "https://is1-ssl.mzstatic.com/image/thumb/Music115/v4/9a/49/b2/9a49b2d2-2501-2fc7-60eb-2b8ff34a1412/TAEYEON-DIGITAL20COVER.jpg/600x600bb.jpg",
+"preview": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview221/v4/ed/37/0d/ed370d6f-bcbd-c934-d928-e8c1ea6c3188/mzaf_14994410066029023182.plus.aac.p.m4a",
+"link": "https://music.apple.com/us/album/i-feat-verbal-jint/1046202716?i=1046202717",
+"year": "2015",
+"altArtist": "TAEYEON",
+"kr": true
 },
 {
 "id": "s1060455878",
@@ -69,6 +91,15 @@
 "kr": true
 },
 {
+"id": "s1062400330",
+"name": "Jolene",
+"artist": "Dolly Parton",
+"art": "https://is1-ssl.mzstatic.com/image/thumb/Music124/v4/0b/f8/1e/0bf81e88-de6e-aba3-9fd4-e7407bfbcc31/886445438048.jpg/600x600bb.jpg",
+"preview": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview221/v4/fc/bf/b6/fcbfb6fa-5293-1bb8-f250-7feaf5183892/mzaf_10820724967096911306.plus.aac.p.m4a",
+"link": "https://music.apple.com/us/album/jolene/1062400323?i=1062400330",
+"year": "1973"
+},
+{
 "id": "s1081949488",
 "name": "You Can't Hurry Love",
 "artist": "Phil Collins",
@@ -76,6 +107,17 @@
 "preview": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview211/v4/3d/c3/ac/3dc3ac8f-a2b5-eee9-bbc2-ff61d406610c/mzaf_6334281421922254386.plus.aac.p.m4a",
 "link": "https://music.apple.com/us/album/you-cant-hurry-love/1081948293?i=1081949488",
 "year": "1982"
+},
+{
+"id": "s1085466017",
+"name": "짧은 치마",
+"artist": "AOA",
+"art": "https://is1-ssl.mzstatic.com/image/thumb/Music124/v4/12/29/6d/12296d07-c7bb-13b1-b489-4dc377d423d2/AOA.jpg/600x600bb.jpg",
+"preview": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview221/v4/d3/c6/80/d3c6806a-94dc-3036-b443-a64da8ca9bb3/mzaf_3048349454165564470.plus.aac.p.m4a",
+"link": "https://music.apple.com/us/album/miniskirt/1085465781?i=1085466017",
+"year": "2014",
+"alt": "Miniskirt",
+"kr": true
 },
 {
 "id": "s1097861842",
@@ -123,6 +165,15 @@
 "preview": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview221/v4/a3/30/8e/a3308eed-d8b7-e0b3-f09d-5e1b0f4d660a/mzaf_8517946447501075134.plus.aac.p.m4a",
 "link": "https://music.apple.com/us/album/viva-la-vida/1122773394?i=1122773680",
 "year": "2008"
+},
+{
+"id": "s1122776155",
+"name": "The Scientist",
+"artist": "Coldplay",
+"art": "https://is1-ssl.mzstatic.com/image/thumb/Music115/v4/b9/b4/2a/b9b42ad1-1e25-5096-da43-497a247e69a3/190295978051.jpg/600x600bb.jpg",
+"preview": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview221/v4/ae/a6/27/aea62715-e6ae-9562-ba81-1f969a2ee2fa/mzaf_9054259057357054559.plus.aac.p.m4a",
+"link": "https://music.apple.com/us/album/the-scientist/1122775993?i=1122776155",
+"year": "2002"
 },
 {
 "id": "s1122782283",
@@ -186,6 +237,15 @@
 "year": "1995"
 },
 {
+"id": "s1154239184",
+"name": "CAN'T STOP THE FEELING!",
+"artist": "Justin Timberlake",
+"art": "https://is1-ssl.mzstatic.com/image/thumb/Music125/v4/68/19/43/68194388-efa7-3afe-8a15-a4c3eebef1f6/886445915211.jpg/600x600bb.jpg",
+"preview": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview211/v4/86/41/2d/86412d20-2f4d-39fc-221b-3f643d7c99c6/mzaf_9909715182585785919.plus.aac.p.m4a",
+"link": "https://music.apple.com/us/album/cant-stop-the-feeling/1154238159?i=1154239184",
+"year": "2016"
+},
+{
 "id": "s1160082180",
 "name": "Basket Case",
 "artist": "Green Day",
@@ -193,6 +253,15 @@
 "preview": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview211/v4/d3/2b/fe/d32bfe59-ce6f-2130-7445-589be60c4b17/mzaf_14529423277593289725.plus.aac.p.m4a",
 "link": "https://music.apple.com/us/album/basket-case/1160081985?i=1160082180",
 "year": "1994"
+},
+{
+"id": "s1161504024",
+"name": "24K Magic",
+"artist": "Bruno Mars",
+"art": "https://is1-ssl.mzstatic.com/image/thumb/Music125/v4/e3/47/a0/e347a0cc-87ce-5d05-d560-176c7d48f66e/075679904119.jpg/600x600bb.jpg",
+"preview": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview221/v4/45/c4/cb/45c4cb28-670f-f1fe-9678-7fa1601bbb5a/mzaf_2006385778979520718.plus.aac.p.m4a",
+"link": "https://music.apple.com/us/album/24k-magic/1161503945?i=1161504024",
+"year": "2016"
 },
 {
 "id": "s1164757333",
@@ -345,6 +414,16 @@
 "link": "https://music.apple.com/us/album/everything/1242154383?i=1242155576",
 "year": "2016",
 "altArtist": "The Black Skirts",
+"kr": true
+},
+{
+"id": "s1246203196",
+"name": "FANTASTIC BABY",
+"artist": "BIGBANG",
+"art": "https://is1-ssl.mzstatic.com/image/thumb/Music127/v4/63/3f/7e/633f7e9e-3680-0a03-001e-afbbd404544f/ANTCD-23364.jpg/600x600bb.jpg",
+"preview": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview211/v4/82/4a/a2/824aa255-479f-b28a-8909-02fa6c957cc1/mzaf_8499853547568315455.plus.aac.p.m4a",
+"link": "https://music.apple.com/us/album/fantastic-baby/1246203192?i=1246203196",
+"year": "2013",
 "kr": true
 },
 {
@@ -517,6 +596,29 @@
 "kr": true
 },
 {
+"id": "s1315576194",
+"name": "한숨",
+"artist": "이하이",
+"art": "https://is1-ssl.mzstatic.com/image/thumb/Music124/v4/6a/02/68/6a0268e0-ebb8-234d-7b16-20de470ced4d/LEEHI_HALF01_4000.jpg/600x600bb.jpg",
+"preview": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview211/v4/32/df/a9/32dfa906-46bd-d850-643c-eca65c6f9b4a/mzaf_13487126979164441054.plus.aac.p.m4a",
+"link": "https://music.apple.com/us/album/breathe/1315575138?i=1315576194",
+"year": "2016",
+"alt": "BREATHE",
+"altArtist": "LEEHI",
+"kr": true
+},
+{
+"id": "s1315917630",
+"name": "붐바야",
+"artist": "BLACKPINK",
+"art": "https://is1-ssl.mzstatic.com/image/thumb/Music125/v4/66/1f/06/661f06a5-a04a-be0a-8683-4ff5123bda1e/blackpink_fin0807.jpg/600x600bb.jpg",
+"preview": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview221/v4/f5/46/c7/f546c741-3a63-2cbf-f968-a0844d98d00d/mzaf_948908014375762131.plus.aac.p.m4a",
+"link": "https://music.apple.com/us/album/boombayah/1315917456?i=1315917630",
+"year": "2016",
+"alt": "BOOMBAYAH",
+"kr": true
+},
+{
 "id": "s1316404636",
 "name": "Antifreeze",
 "artist": "검정치마",
@@ -612,6 +714,16 @@
 "link": "https://music.apple.com/us/album/i-am-the-best/1338689900?i=1338689927",
 "year": "2011",
 "alt": "I Am the Best",
+"kr": true
+},
+{
+"id": "s1339060468",
+"name": "Fire",
+"artist": "2NE1",
+"art": "https://is1-ssl.mzstatic.com/image/thumb/Music115/v4/ad/54/17/ad54177e-3f63-2e84-67f0-640627feeb97/8806384562958.jpg/600x600bb.jpg",
+"preview": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview221/v4/d8/7c/cf/d87ccf14-2a5c-d59c-9ee5-c8567042e3ac/mzaf_4855774095911635485.plus.aac.p.m4a",
+"link": "https://music.apple.com/us/album/fire/1339060465?i=1339060468",
+"year": "2009",
 "kr": true
 },
 {
@@ -713,6 +825,15 @@
 "kr": true
 },
 {
+"id": "s1408861013",
+"name": "Can't Get You out of My Head",
+"artist": "Kylie Minogue",
+"art": "https://is1-ssl.mzstatic.com/image/thumb/Music115/v4/b4/0e/50/b40e50f8-6b9c-0d7a-13a6-fb42abc4c9ff/190295583996.jpg/600x600bb.jpg",
+"preview": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview221/v4/51/1d/98/511d986a-466e-672b-a17b-94b8e8db8440/mzaf_6812590879014063051.plus.aac.p.m4a",
+"link": "https://music.apple.com/us/album/cant-get-you-out-of-my-head/1408860044?i=1408861013",
+"year": "2012"
+},
+{
 "id": "s1411628233",
 "name": "Believer",
 "artist": "Imagine Dragons",
@@ -752,6 +873,15 @@
 "year": "1976"
 },
 {
+"id": "s1422721989",
+"name": "Sweet Caroline",
+"artist": "Neil Diamond",
+"art": "https://is1-ssl.mzstatic.com/image/thumb/Music122/v4/11/5a/12/115a123b-d3b6-b661-e2a3-88d6e137e25a/17UMGIM03521.rgb.jpg/600x600bb.jpg",
+"preview": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview211/v4/ad/4f/a3/ad4fa361-9ee5-0799-1ca7-6900ffecc216/mzaf_11795694173831798173.plus.aac.p.m4a",
+"link": "https://music.apple.com/us/album/sweet-caroline/1422721391?i=1422721989",
+"year": "1969"
+},
+{
 "id": "s1422955211",
 "name": "Livin' On a Prayer",
 "artist": "Bon Jovi",
@@ -781,13 +911,12 @@
 {
 "id": "s1434371887",
 "name": "Shallow",
-"artist": "Lady Gaga & 브래들리 쿠퍼",
+"artist": "Lady Gaga & Bradley Cooper",
 "art": "https://is1-ssl.mzstatic.com/image/thumb/Music115/v4/b1/9f/ef/b19fef51-79de-a940-e8ab-9e4e07b04d96/18UMGIM53752.rgb.jpg/600x600bb.jpg",
 "preview": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview211/v4/0c/cc/ed/0ccced59-6e6f-f0a0-0c9a-d20bfd475052/mzaf_26600833784075363.plus.aac.p.m4a",
 "link": "https://music.apple.com/us/album/shallow/1434371867?i=1434371887",
 "year": "2018",
-"altArtist": "Lady Gaga & Bradley Cooper",
-"kr": true
+"altArtist": "Lady Gaga & 브래들리 쿠퍼"
 },
 {
 "id": "s1434693246",
@@ -866,8 +995,7 @@
 "art": "https://is1-ssl.mzstatic.com/image/thumb/Music126/v4/73/08/1a/73081a96-0f7c-b5f8-2757-5c17fb714323/12UMGIM31899.rgb.jpg/600x600bb.jpg",
 "preview": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview221/v4/ea/b4/da/eab4da01-c422-c640-1ac3-97d746c5871c/mzaf_12363686639555987211.plus.aac.p.m4a",
 "link": "https://music.apple.com/us/album/beauty-and-a-beat-feat-nicki-minaj/1440650852?i=1440650961",
-"year": "2012",
-"kr": true
+"year": "2012"
 },
 {
 "id": "s1440661545",
@@ -876,8 +1004,16 @@
 "art": "https://is1-ssl.mzstatic.com/image/thumb/Music116/v4/b9/0a/b4/b90ab45a-07b1-0bcc-331c-c496a21d07e4/10UMGIM01134.rgb.jpg/600x600bb.jpg",
 "preview": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview211/v4/89/66/d3/8966d3cb-68eb-5f2c-fef8-4ac420721387/mzaf_3044382270474258872.plus.aac.p.m4a",
 "link": "https://music.apple.com/us/album/baby-feat-ludacris/1440661543?i=1440661545",
-"year": "2010",
-"kr": true
+"year": "2010"
+},
+{
+"id": "s1440743544",
+"name": "(I Can't Get No) Satisfaction",
+"artist": "The Rolling Stones",
+"art": "https://is1-ssl.mzstatic.com/image/thumb/Music113/v4/6b/8c/5b/6b8c5bc2-cbf3-5d48-ac10-565dd728802b/13ABKIM00023.rgb.jpg/600x600bb.jpg",
+"preview": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview211/v4/ee/4d/28/ee4d28cd-a465-1334-2863-efda9ea9669b/mzaf_8440807812349084607.plus.aac.p.m4a",
+"link": "https://music.apple.com/us/album/i-cant-get-no-satisfaction/1440743344?i=1440743544",
+"year": "1965"
 },
 {
 "id": "s1440754487",
@@ -978,8 +1114,7 @@
 "art": "https://is1-ssl.mzstatic.com/image/thumb/Music122/v4/e9/1a/4e/e91a4eb9-31e7-89fb-3aad-e8172e534bb6/09UMGIM42295.rgb.jpg/600x600bb.jpg",
 "preview": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview211/v4/cc/76/16/cc7616a3-6871-35a7-d6aa-18c4d370a9da/mzaf_12054412432986820041.plus.aac.p.m4a",
 "link": "https://music.apple.com/us/album/bad-romance/1440814077?i=1440814279",
-"year": "2009",
-"kr": true
+"year": "2009"
 },
 {
 "id": "s1440814425",
@@ -1033,8 +1168,7 @@
 "art": "https://is1-ssl.mzstatic.com/image/thumb/Music116/v4/75/11/84/751184b0-77df-1eff-bb20-dac03247425d/15UMGIM59808.rgb.jpg/600x600bb.jpg",
 "preview": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview211/v4/66/eb/29/66eb29c0-c2f9-d9df-8af3-3bf2562c9d7c/mzaf_4099789285264521999.plus.aac.p.m4a",
 "link": "https://music.apple.com/us/album/sorry/1440829460?i=1440829610",
-"year": "2015",
-"kr": true
+"year": "2015"
 },
 {
 "id": "s1440833891",
@@ -1044,6 +1178,15 @@
 "preview": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview221/v4/b0/fa/c9/b0fac9c6-2dc8-cfd8-cc49-a3fea7033f77/mzaf_12445742056192329951.plus.aac.p.m4a",
 "link": "https://music.apple.com/us/album/yesterday/1440833098?i=1440833891",
 "year": "1965"
+},
+{
+"id": "s1440843863",
+"name": "Wouldn't It Be Nice",
+"artist": "The Beach Boys",
+"art": "https://is1-ssl.mzstatic.com/image/thumb/Music126/v4/f4/85/d9/f485d9dc-97e3-7422-7688-55a44d64d431/13UABIM03512.rgb.jpg/600x600bb.jpg",
+"preview": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview221/v4/50/6c/b7/506cb75b-3606-8979-ecb5-90103c600b25/mzaf_8794274738753466606.plus.aac.p.m4a",
+"link": "https://music.apple.com/us/album/wouldnt-it-be-nice/1440842926?i=1440843863",
+"year": "1966"
 },
 {
 "id": "s1440853776",
@@ -1064,6 +1207,15 @@
 "year": "2014"
 },
 {
+"id": "s1440855997",
+"name": "Moves Like Jagger",
+"artist": "Maroon 5",
+"art": "https://is1-ssl.mzstatic.com/image/thumb/Music125/v4/5f/6e/4c/5f6e4c8b-eba6-f722-caf4-c5773dea7fa1/14UMGIM27067.rgb.jpg/600x600bb.jpg",
+"preview": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview211/v4/18/c4/2f/18c42f87-27ee-b6ae-c7a8-f38843495329/mzaf_18090131545377638234.plus.aac.p.m4a",
+"link": "https://music.apple.com/us/album/moves-like-jagger-feat-christina-aguilera/1440855974?i=1440855997",
+"year": "2010"
+},
+{
 "id": "s1440858129",
 "name": "Fly Me to the Moon",
 "artist": "프랭크 시나트라",
@@ -1073,6 +1225,15 @@
 "year": "2008",
 "altArtist": "Frank Sinatra",
 "kr": true
+},
+{
+"id": "s1440861294",
+"name": "Mamma Mia",
+"artist": "ABBA",
+"art": "https://is1-ssl.mzstatic.com/image/thumb/Music125/v4/8a/5d/a4/8a5da415-562c-c7f3-0801-2bd251947ac3/14UMGIM07609.rgb.jpg/600x600bb.jpg",
+"preview": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview211/v4/b6/11/b6/b611b634-d2ea-3413-19be-b3c19daddfe5/mzaf_11228048896593074702.plus.aac.p.m4a",
+"link": "https://music.apple.com/us/album/mamma-mia/1440861160?i=1440861294",
+"year": "1975"
 },
 {
 "id": "s1440863122",
@@ -1120,6 +1281,15 @@
 "year": "2011"
 },
 {
+"id": "s1440882897",
+"name": "Every Breath You Take",
+"artist": "The Police",
+"art": "https://is1-ssl.mzstatic.com/image/thumb/Music211/v4/42/b7/db/42b7dbe1-d13f-c600-5b78-daa57c5d0f08/06UMGIM50761.rgb.jpg/600x600bb.jpg",
+"preview": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview221/v4/6c/b4/79/6cb47947-0860-8788-95b1-a2b0a908f342/mzaf_4654925634744235278.plus.aac.p.m4a",
+"link": "https://music.apple.com/us/album/every-breath-you-take/1440882817?i=1440882897",
+"year": "1983"
+},
+{
 "id": "s1440891171",
 "name": "Mr. Brightside",
 "artist": "The Killers",
@@ -1147,6 +1317,24 @@
 "year": "2017"
 },
 {
+"id": "s1440910931",
+"name": "Rocket Man (I Think It's Going to Be a Long Long Time)",
+"artist": "Elton John",
+"art": "https://is1-ssl.mzstatic.com/image/thumb/Music116/v4/75/b6/da/75b6da76-a3e0-6a77-cbe5-ad6c42cb0692/06UMGIM48050.rgb.jpg/600x600bb.jpg",
+"preview": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview211/v4/8c/09/6d/8c096da7-10b6-422b-51b6-f1f97a66380d/mzaf_5290536375751623365.plus.aac.p.m4a",
+"link": "https://music.apple.com/us/album/rocket-man-i-think-its-going-to-be-a-long-long-time/1440910513?i=1440910931",
+"year": "1972"
+},
+{
+"id": "s1440912105",
+"name": "I Want You Back",
+"artist": "Jackson 5",
+"art": "https://is1-ssl.mzstatic.com/image/thumb/Music211/v4/74/00/cd/7400cdf5-08e3-afb7-f95d-6be9ebd9149a/06UMGIM01808.rgb.jpg/600x600bb.jpg",
+"preview": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview221/v4/ba/7f/f1/ba7ff184-abb0-bf2c-6753-a0e7f403a7e6/mzaf_1765862273056490208.plus.aac.p.m4a",
+"link": "https://music.apple.com/us/album/i-want-you-back/1440912101?i=1440912105",
+"year": "1969"
+},
+{
 "id": "s1440924808",
 "name": "Love Story",
 "artist": "Taylor Swift",
@@ -1154,6 +1342,15 @@
 "preview": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview211/v4/44/8a/a4/448aa432-42ae-8075-fe00-5f2deffe9896/mzaf_13232029737890307916.plus.aac.p.m4a",
 "link": "https://music.apple.com/us/album/love-story/1440924803?i=1440924808",
 "year": "2008"
+},
+{
+"id": "s1440935808",
+"name": "Blank Space",
+"artist": "Taylor Swift",
+"art": "https://is1-ssl.mzstatic.com/image/thumb/Music221/v4/89/4a/4a/894a4ab9-b0b0-9ea5-ca41-8da0b9b79453/14UMDIM03405.rgb.jpg/600x600bb.jpg",
+"preview": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview221/v4/97/b4/f6/97b4f65f-f334-771c-a4f5-5e7b9b42634f/mzaf_17056874752218225925.plus.aac.p.m4a",
+"link": "https://music.apple.com/us/album/blank-space/1440935467?i=1440935808",
+"year": "2014"
 },
 {
 "id": "s1440936016",
@@ -1199,6 +1396,15 @@
 "preview": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview211/v4/7b/45/22/7b452241-882c-409b-3a9b-23306b14286a/mzaf_8588243939716013218.plus.aac.p.m4a",
 "link": "https://music.apple.com/us/album/umbrella-feat-ja%C3%BF-z/1441154435?i=1441154437",
 "year": "2007"
+},
+{
+"id": "s1441164589",
+"name": "Here Comes the Sun",
+"artist": "The Beatles",
+"art": "https://is1-ssl.mzstatic.com/image/thumb/Music112/v4/df/db/61/dfdb615d-47f8-06e9-9533-b96daccc029f/18UMGIM31076.rgb.jpg/600x600bb.jpg",
+"preview": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview211/v4/cd/7d/83/cd7d834f-34bf-7be0-1647-0fb0920d25a7/mzaf_5281747653026802926.plus.aac.p.m4a",
+"link": "https://music.apple.com/us/album/here-comes-the-sun/1441164426?i=1441164589",
+"year": "1969"
 },
 {
 "id": "s1441164738",
@@ -1293,6 +1499,15 @@
 "year": "1978"
 },
 {
+"id": "s1444032015",
+"name": "Rockin' Around the Christmas Tree",
+"artist": "Brenda Lee",
+"art": "https://is1-ssl.mzstatic.com/image/thumb/Music116/v4/d4/ea/6b/d4ea6b89-f9ac-f476-270d-66931315bc4c/06UMGIM02727.rgb.jpg/600x600bb.jpg",
+"preview": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview211/v4/b6/ff/a3/b6ffa3d2-5ec6-18fe-d003-fc3f9a6dcb4b/mzaf_2762704732138933406.plus.aac.p.m4a",
+"link": "https://music.apple.com/us/album/rockin-around-the-christmas-tree-single/1444032014?i=1444032015",
+"year": "1958"
+},
+{
 "id": "s1444109116",
 "name": "I Miss You",
 "artist": "Klymaxx",
@@ -1309,6 +1524,15 @@
 "preview": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview211/v4/5f/33/54/5f33545e-5e8a-bd85-6f87-c73adee42ed3/mzaf_6122661814949472555.plus.aac.p.m4a",
 "link": "https://music.apple.com/us/album/all-about-you/1444127899?i=1444128384",
 "year": "2005"
+},
+{
+"id": "s1444321282",
+"name": "Diamonds",
+"artist": "Rihanna",
+"art": "https://is1-ssl.mzstatic.com/image/thumb/Music116/v4/a0/1a/10/a01a1080-7b1d-e475-a03c-394e5cbba66c/12UMGIM53876.rgb.jpg/600x600bb.jpg",
+"preview": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview211/v4/26/97/fb/2697fb36-8ef2-9d18-0a2e-6545947b4445/mzaf_9032202105098805603.plus.aac.p.m4a",
+"link": "https://music.apple.com/us/album/diamonds/1444320940?i=1444321282",
+"year": "2012"
 },
 {
 "id": "s1445043157",
@@ -1399,8 +1623,16 @@
 "art": "https://is1-ssl.mzstatic.com/image/thumb/Music115/v4/bb/69/07/bb6907de-8ad4-970b-3311-121320e1bf9c/19UMGIM03691.rgb.jpg/600x600bb.jpg",
 "preview": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview221/v4/d5/c8/f3/d5c8f31b-1c8f-93ed-e78b-8c0bce3e8b66/mzaf_14456154925680073521.plus.aac.p.m4a",
 "link": "https://music.apple.com/us/album/7-rings/1450333975?i=1450334168",
-"year": "2019",
-"kr": true
+"year": "2019"
+},
+{
+"id": "s1450334169",
+"name": "thank u, next",
+"artist": "Ariana Grande",
+"art": "https://is1-ssl.mzstatic.com/image/thumb/Music115/v4/bb/69/07/bb6907de-8ad4-970b-3311-121320e1bf9c/19UMGIM03691.rgb.jpg/600x600bb.jpg",
+"preview": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview221/v4/89/96/16/8996169e-2309-a298-f6f0-e7c52fe8e176/mzaf_590631660224715451.plus.aac.p.m4a",
+"link": "https://music.apple.com/us/album/thank-u-next/1450333975?i=1450334169",
+"year": "2018"
 },
 {
 "id": "s1450695739",
@@ -1621,6 +1853,24 @@
 "year": "2019"
 },
 {
+"id": "s1468058171",
+"name": "Cruel Summer",
+"artist": "Taylor Swift",
+"art": "https://is1-ssl.mzstatic.com/image/thumb/Music125/v4/49/3d/ab/493dab54-f920-9043-6181-80993b8116c9/19UMGIM53909.rgb.jpg/600x600bb.jpg",
+"preview": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview221/v4/44/af/81/44af8168-9609-1b85-5048-ada08dceacf3/mzaf_1341699644335558812.plus.aac.p.m4a",
+"link": "https://music.apple.com/us/album/cruel-summer/1468058165?i=1468058171",
+"year": "2019"
+},
+{
+"id": "s1468166468",
+"name": "Old Town Road",
+"artist": "Lil Nas X",
+"art": "https://is1-ssl.mzstatic.com/image/thumb/Music124/v4/07/d4/c3/07d4c33e-b793-d78f-bb1b-52f1e224da88/886447788264.jpg/600x600bb.jpg",
+"preview": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview221/v4/32/9c/42/329c4214-8cce-5382-aa92-fe87e013f3d5/mzaf_14962210134357559640.plus.aac.p.m4a",
+"link": "https://music.apple.com/us/album/old-town-road/1468166325?i=1468166468",
+"year": "2018"
+},
+{
 "id": "s1468910018",
 "name": "Señorita",
 "artist": "Shawn Mendes & Camila Cabello",
@@ -1648,6 +1898,15 @@
 "year": "2019",
 "altArtist": "Kevin Oh",
 "kr": true
+},
+{
+"id": "s1475930045",
+"name": "Dance Monkey",
+"artist": "Tones And I",
+"art": "https://is1-ssl.mzstatic.com/image/thumb/Music115/v4/87/ed/42/87ed4279-d8d7-840f-90b5-2bffe34699ef/075679839237.jpg/600x600bb.jpg",
+"preview": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview211/v4/43/1a/32/431a3203-7e62-c7b1-0377-824aded16096/mzaf_7471896698419931094.plus.aac.p.m4a",
+"link": "https://music.apple.com/us/album/dance-monkey/1475930038?i=1475930045",
+"year": "2019"
 },
 {
 "id": "s1477010071",
@@ -1698,6 +1957,15 @@
 "art": "https://is1-ssl.mzstatic.com/image/thumb/Music116/v4/41/ee/66/41ee66fa-f8dd-7e82-155a-3a1b360dc562/190295322175.jpg/600x600bb.jpg",
 "preview": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview221/v4/24/3d/34/243d3413-a0fc-b229-f54a-1715ebd3a9ca/mzaf_11578996572221800393.plus.aac.p.m4a",
 "link": "https://music.apple.com/us/album/dont-start-now/1484636581?i=1484636829",
+"year": "2019"
+},
+{
+"id": "s1485802967",
+"name": "Watermelon Sugar",
+"artist": "Harry Styles",
+"art": "https://is1-ssl.mzstatic.com/image/thumb/Music115/v4/2b/c4/c9/2bc4c9d4-3bc6-ab13-3f71-df0b89b173de/886448022213.jpg/600x600bb.jpg",
+"preview": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview211/v4/8d/2b/cf/8d2bcff6-d284-7c4e-d6e3-9d70d019236a/mzaf_13222308322329291378.plus.aac.p.m4a",
+"link": "https://music.apple.com/us/album/watermelon-sugar/1485802965?i=1485802967",
 "year": "2019"
 },
 {
@@ -1797,8 +2065,7 @@
 "art": "https://is1-ssl.mzstatic.com/image/thumb/Music115/v4/d2/21/4e/d2214ea9-97ff-46ef-ac45-7fca6fb73839/20UMGIM03126.rgb.jpg/600x600bb.jpg",
 "preview": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview211/v4/2c/ba/a8/2cbaa8bb-c55a-5be6-5dc8-8fdc4ce52ba2/mzaf_11048956195616316263.plus.aac.p.m4a",
 "link": "https://music.apple.com/us/album/intentions-feat-quavo/1496639180?i=1496639586",
-"year": "2020",
-"kr": true
+"year": "2020"
 },
 {
 "id": "s1497419784",
@@ -1868,14 +2135,22 @@
 "year": "2021"
 },
 {
+"id": "s1508562516",
+"name": "Heat Waves",
+"artist": "Glass Animals",
+"art": "https://is1-ssl.mzstatic.com/image/thumb/Music115/v4/da/8b/77/da8b7731-6f4f-eacf-5e74-8b23389eefa1/20UMGIM03371.rgb.jpg/600x600bb.jpg",
+"preview": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview221/v4/a3/4c/b9/a34cb911-40fc-5f0c-e862-14bd171a77aa/mzaf_384792072030970151.plus.aac.p.m4a",
+"link": "https://music.apple.com/us/album/heat-waves/1508562310?i=1508562516",
+"year": "2020"
+},
+{
 "id": "s1511562950",
 "name": "Stuck with U",
 "artist": "Ariana Grande & Justin Bieber",
 "art": "https://is1-ssl.mzstatic.com/image/thumb/Music115/v4/56/ee/ec/56eeecfb-a5f3-ced0-fa69-4eda0e474aec/20UMGIM34924.rgb.jpg/600x600bb.jpg",
 "preview": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview211/v4/cc/fd/79/ccfd79fc-5a33-094a-4022-7b7a08f97395/mzaf_16948304895316565766.plus.aac.p.m4a",
 "link": "https://music.apple.com/us/album/stuck-with-u/1511562938?i=1511562950",
-"year": "2020",
-"kr": true
+"year": "2020"
 },
 {
 "id": "s1511885178",
@@ -2001,6 +2276,15 @@
 "art": "https://is1-ssl.mzstatic.com/image/thumb/Music221/v4/c8/fc/40/c8fc4073-75e0-7b42-6eed-117d1ed86ca5/20UMGIM74696.rgb.jpg/600x600bb.jpg",
 "preview": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview221/v4/83/62/97/836297c4-070b-49e1-9c1b-9fdb93e76cc2/mzaf_11435268448817755315.plus.aac.p.m4a",
 "link": "https://music.apple.com/us/album/holy-feat-chance-the-rapper/1531508505?i=1531508507",
+"year": "2020"
+},
+{
+"id": "s1533894669",
+"name": "How You Like That",
+"artist": "BLACKPINK",
+"art": "https://is1-ssl.mzstatic.com/image/thumb/Music125/v4/c3/64/46/c364465f-6271-8aae-93a8-b9979d2befe5/20UMGIM82075.rgb.jpg/600x600bb.jpg",
+"preview": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview211/v4/8f/b2/b1/8fb2b1a2-2498-9490-82f8-0226abfa9dc9/mzaf_9379484322617408629.plus.aac.p.m4a",
+"link": "https://music.apple.com/us/album/how-you-like-that/1533894050?i=1533894669",
 "year": "2020",
 "kr": true
 },
@@ -2022,8 +2306,7 @@
 "art": "https://is1-ssl.mzstatic.com/image/thumb/Music114/v4/b9/d9/e1/b9d9e1cf-c187-5d03-a2ca-2565bd4f1e5d/20UMGIM83529.rgb.jpg/600x600bb.jpg",
 "preview": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview221/v4/1e/d9/f7/1ed9f7d2-9142-4b9e-41e2-97123c9471df/mzaf_5259856961839464677.plus.aac.p.m4a",
 "link": "https://music.apple.com/us/album/lonely/1535542270?i=1535542271",
-"year": "2020",
-"kr": true
+"year": "2020"
 },
 {
 "id": "s1537342219",
@@ -2123,14 +2406,22 @@
 "year": "2011"
 },
 {
+"id": "s1544494392",
+"name": "Hello",
+"artist": "Adele",
+"art": "https://is1-ssl.mzstatic.com/image/thumb/Music116/v4/08/8c/24/088c2405-2e33-801b-5c38-e967f2c01e69/191404113974.png/600x600bb.jpg",
+"preview": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview211/v4/10/7e/9d/107e9dc0-c13b-eace-2486-84a3c694b075/mzaf_6267923862748965591.plus.aac.p.m4a",
+"link": "https://music.apple.com/us/album/hello/1544494115?i=1544494392",
+"year": "2015"
+},
+{
 "id": "s1544839502",
 "name": "Anyone",
 "artist": "Justin Bieber",
 "art": "https://is1-ssl.mzstatic.com/image/thumb/Music125/v4/93/87/70/93877029-1647-a13b-add3-4fade3a7e94c/20UM1IM14507.rgb.jpg/600x600bb.jpg",
 "preview": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview221/v4/b9/37/ee/b937eedf-90ef-e70f-1666-312f7086cc13/mzaf_11719232617520991432.plus.aac.p.m4a",
 "link": "https://music.apple.com/us/album/anyone/1544839500?i=1544839502",
-"year": "2021",
-"kr": true
+"year": "2021"
 },
 {
 "id": "s1545382976",
@@ -2183,6 +2474,16 @@
 "kr": true
 },
 {
+"id": "s1555390083",
+"name": "What is Love?",
+"artist": "TWICE",
+"art": "https://is1-ssl.mzstatic.com/image/thumb/Music125/v4/7e/41/69/7e4169e8-8358-27ff-66b4-1564ec800abd/00602508875137_Cover.jpg/600x600bb.jpg",
+"preview": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview211/v4/11/29/e2/1129e2b9-2d59-c3bf-9242-982aa012cb95/mzaf_2107069738025586373.plus.aac.p.m4a",
+"link": "https://music.apple.com/us/album/what-is-love/1555390082?i=1555390083",
+"year": "2018",
+"kr": true
+},
+{
 "id": "s1555390187",
 "name": "FANCY",
 "artist": "TWICE",
@@ -2203,14 +2504,23 @@
 "kr": true
 },
 {
+"id": "s1555405145",
+"name": "LIKEY",
+"artist": "TWICE",
+"art": "https://is1-ssl.mzstatic.com/image/thumb/Music124/v4/74/34/1a/74341afc-0e1c-80d5-1d8c-5bfc37d13aef/00602508875021_Cover.jpg/600x600bb.jpg",
+"preview": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview211/v4/fc/b6/c0/fcb6c058-ee1a-e877-34dd-8a52ebfbd6ca/mzaf_5127382153846928459.plus.aac.p.m4a",
+"link": "https://music.apple.com/us/album/likey/1555405141?i=1555405145",
+"year": "2017",
+"kr": true
+},
+{
 "id": "s1556175649",
 "name": "As I Am",
 "artist": "Justin Bieber",
 "art": "https://is1-ssl.mzstatic.com/image/thumb/Music124/v4/f5/7a/9e/f57a9e6a-31c8-0784-dfbd-4a0120bfd4af/21UMGIM17517.rgb.jpg/600x600bb.jpg",
 "preview": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview211/v4/c3/3a/02/c33a0201-6683-ae0e-7517-24b33f3a38b9/mzaf_13288089581074293504.plus.aac.p.m4a",
 "link": "https://music.apple.com/us/album/as-i-am-feat-khalid/1556175419?i=1556175649",
-"year": "2021",
-"kr": true
+"year": "2021"
 },
 {
 "id": "s1556175655",
@@ -2219,8 +2529,7 @@
 "art": "https://is1-ssl.mzstatic.com/image/thumb/Music124/v4/f5/7a/9e/f57a9e6a-31c8-0784-dfbd-4a0120bfd4af/21UMGIM17517.rgb.jpg/600x600bb.jpg",
 "preview": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview221/v4/81/e5/be/81e5bee5-7496-9898-40f5-8074237a681d/mzaf_13416389483171575605.plus.aac.p.m4a",
 "link": "https://music.apple.com/us/album/off-my-face/1556175419?i=1556175655",
-"year": "2021",
-"kr": true
+"year": "2021"
 },
 {
 "id": "s1556175852",
@@ -2229,8 +2538,7 @@
 "art": "https://is1-ssl.mzstatic.com/image/thumb/Music124/v4/f5/7a/9e/f57a9e6a-31c8-0784-dfbd-4a0120bfd4af/21UMGIM17517.rgb.jpg/600x600bb.jpg",
 "preview": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview211/v4/51/cd/9f/51cd9f46-869b-ecec-c523-161d5bd7ce15/mzaf_11971956107966947364.plus.aac.p.m4a",
 "link": "https://music.apple.com/us/album/hold-on/1556175419?i=1556175852",
-"year": "2021",
-"kr": true
+"year": "2021"
 },
 {
 "id": "s1556175854",
@@ -2239,8 +2547,7 @@
 "art": "https://is1-ssl.mzstatic.com/image/thumb/Music124/v4/f5/7a/9e/f57a9e6a-31c8-0784-dfbd-4a0120bfd4af/21UMGIM17517.rgb.jpg/600x600bb.jpg",
 "preview": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview221/v4/26/5e/56/265e5608-89e3-57bb-1a75-76cd713c6c9e/mzaf_6189811643293728539.plus.aac.p.m4a",
 "link": "https://music.apple.com/us/album/ghost/1556175419?i=1556175854",
-"year": "2021",
-"kr": true
+"year": "2021"
 },
 {
 "id": "s1556706159",
@@ -2281,6 +2588,18 @@
 "year": "1987"
 },
 {
+"id": "s1560113134",
+"name": "라일락",
+"artist": "아이유",
+"art": "https://is1-ssl.mzstatic.com/image/thumb/Music125/v4/35/9f/83/359f83b3-1423-3153-1641-98e948b7fc65/cover_-_EDAM_5_LILAC.jpg/600x600bb.jpg",
+"preview": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview221/v4/be/62/d2/be62d240-fe27-0514-9e20-b29645cc3dcb/mzaf_8930037822844249227.plus.aac.p.m4a",
+"link": "https://music.apple.com/us/album/lilac/1560113132?i=1560113134",
+"year": "2021",
+"alt": "Lilac",
+"altArtist": "IU",
+"kr": true
+},
+{
 "id": "s1560735480",
 "name": "drivers license",
 "artist": "Olivia Rodrigo",
@@ -2288,6 +2607,16 @@
 "preview": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview221/v4/36/62/61/366261be-0996-d73d-de6f-03417867c800/mzaf_8201528327761821135.plus.aac.p.m4a",
 "link": "https://music.apple.com/us/album/drivers-license/1560734944?i=1560735480",
 "year": "2021"
+},
+{
+"id": "s1561143399",
+"name": "ASAP",
+"artist": "STAYC",
+"art": "https://is1-ssl.mzstatic.com/image/thumb/Music125/v4/ff/f0/44/fff044b5-8d7c-b728-76be-5b214c5fecf0/STAYC_STAYDOM_JPG.jpg/600x600bb.jpg",
+"preview": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview211/v4/d0/b6/ff/d0b6ffe9-97d4-07c6-46ad-61e22e9428ac/mzaf_7296089137293118693.plus.aac.p.m4a",
+"link": "https://music.apple.com/us/album/asap/1561143398?i=1561143399",
+"year": "2021",
+"kr": true
 },
 {
 "id": "s1561646170",
@@ -2324,6 +2653,17 @@
 "preview": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview211/v4/ab/98/9f/ab989fad-aa1b-06b6-a35a-47c9195fb425/mzaf_9522994336672865496.plus.aac.p.m4a",
 "link": "https://music.apple.com/us/album/higher-power/1564098693?i=1564099110",
 "year": "2021"
+},
+{
+"id": "s1565510602",
+"name": "맛",
+"artist": "NCT DREAM",
+"art": "https://is1-ssl.mzstatic.com/image/thumb/Music125/v4/14/97/ec/1497ec04-8807-2477-7be4-2b98797f6875/NCTD_01_Hot_Sauce_DC-F_0429.jpg/600x600bb.jpg",
+"preview": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview221/v4/9b/9d/ef/9b9def3d-c54c-427e-b134-c8c2a454156f/mzaf_1531642508895635545.plus.aac.p.m4a",
+"link": "https://music.apple.com/us/album/hot-sauce/1565510601?i=1565510602",
+"year": "2021",
+"alt": "Hot Sauce",
+"kr": true
 },
 {
 "id": "s1567326688",
@@ -2661,6 +3001,15 @@
 "kr": true
 },
 {
+"id": "s1582277652",
+"name": "good 4 u",
+"artist": "Olivia Rodrigo",
+"art": "https://is1-ssl.mzstatic.com/image/thumb/Music115/v4/76/46/48/76464884-0e9c-1951-a3f6-ce02f74c2b19/21UMGIM26093.rgb.jpg/600x600bb.jpg",
+"preview": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview211/v4/9f/bd/f1/9fbdf1ce-12d9-7440-1c1c-3fed40567619/mzaf_7303839465958373073.plus.aac.p.m4a",
+"link": "https://music.apple.com/us/album/good-4-u/1582277315?i=1582277652",
+"year": "2021"
+},
+{
 "id": "s1582745047",
 "name": "Crazy",
 "artist": "케빈오 & 프라이머리",
@@ -2727,6 +3076,15 @@
 "alt": "Love Always Run Away",
 "altArtist": "Lim Young Woong",
 "kr": true
+},
+{
+"id": "s1590036021",
+"name": "Easy On Me",
+"artist": "Adele",
+"art": "https://is1-ssl.mzstatic.com/image/thumb/Music115/v4/73/6d/7c/736d7cfb-c79d-c9a9-4170-5e71d008dea1/886449666430.jpg/600x600bb.jpg",
+"preview": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview221/v4/4c/08/30/4c08305e-0556-30a1-d1ba-2f916b56d62c/mzaf_10419822985277809788.plus.aac.p.m4a",
+"link": "https://music.apple.com/us/album/easy-on-me/1590035691?i=1590036021",
+"year": "2021"
 },
 {
 "id": "s1590959809",
@@ -2813,6 +3171,17 @@
 "link": "https://music.apple.com/us/album/dynamite/1596532185?i=1596532400",
 "year": "2020",
 "altArtist": "BTS",
+"kr": true
+},
+{
+"id": "s1597404252",
+"name": "ELEVEN",
+"artist": "아이브",
+"art": "https://is1-ssl.mzstatic.com/image/thumb/Music116/v4/d3/63/4a/d3634a37-8dd2-8fc6-d138-895b3d237611/IVE_OnlineCover_fix.jpg/600x600bb.jpg",
+"preview": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview221/v4/73/fb/20/73fb20dc-06ba-e335-0f41-12c236cf4a6a/mzaf_8112463022445538098.plus.aac.p.m4a",
+"link": "https://music.apple.com/us/album/eleven/1597404250?i=1597404252",
+"year": "2021",
+"altArtist": "IVE",
 "kr": true
 },
 {
@@ -2966,6 +3335,16 @@
 "preview": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview211/v4/90/10/36/90103671-770c-185a-c2a4-6bbb9c1279a9/mzaf_11907204074161378674.plus.aac.p.m4a",
 "link": "https://music.apple.com/us/album/in-the-morning/1608247024?i=1608247025",
 "year": "2021",
+"kr": true
+},
+{
+"id": "s1608248898",
+"name": "DALLA DALLA",
+"artist": "ITZY",
+"art": "https://is1-ssl.mzstatic.com/image/thumb/Music126/v4/b5/83/3f/b5833f11-e5e1-3f65-81f0-a69c5fe09499/192641939532_Cover.jpg/600x600bb.jpg",
+"preview": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview221/v4/89/3b/c7/893bc7ab-5373-d783-1ab8-0b7778c77f35/mzaf_4127347645145551946.plus.aac.p.m4a",
+"link": "https://music.apple.com/us/album/dalla-dalla/1608248892?i=1608248898",
+"year": "2019",
 "kr": true
 },
 {
@@ -3127,6 +3506,17 @@
 "year": "2022"
 },
 {
+"id": "s1616762366",
+"name": "봄여름가을겨울 (Still Life)",
+"artist": "BIGBANG",
+"art": "https://is1-ssl.mzstatic.com/image/thumb/Music122/v4/f6/67/3a/f6673a7c-e2bc-8084-f8b6-523cad1ab277/BIGBANG_Still_Life.jpg/600x600bb.jpg",
+"preview": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview221/v4/40/d5/da/40d5da18-331e-484d-a56b-2e4fd13a9937/mzaf_7739282137672006658.plus.aac.p.m4a",
+"link": "https://music.apple.com/us/album/still-life/1616762362?i=1616762366",
+"year": "2022",
+"alt": "Still Life",
+"kr": true
+},
+{
 "id": "s1616804152",
 "name": "LOVE DIVE",
 "artist": "아이브",
@@ -3159,6 +3549,18 @@
 "kr": true
 },
 {
+"id": "s1619747166",
+"name": "죽일 놈",
+"artist": "다이나믹 듀오",
+"art": "https://is1-ssl.mzstatic.com/image/thumb/Music122/v4/ff/34/4f/ff344f3d-31b0-6c99-c28e-f3e241bf0a27/8809603545916_Cover.jpg/600x600bb.jpg",
+"preview": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview211/v4/56/32/7f/56327fd6-26c9-84be-3da5-2a455777c448/mzaf_15105544489924064809.plus.aac.p.m4a",
+"link": "https://music.apple.com/us/album/guilty/1619746921?i=1619747166",
+"year": "2009",
+"alt": "Guilty",
+"altArtist": "Dynamicduo",
+"kr": true
+},
+{
 "id": "s1620419734",
 "name": "Something in the Orange",
 "artist": "Zach Bryan",
@@ -3166,6 +3568,17 @@
 "preview": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview221/v4/32/b3/f1/32b3f1e5-33f9-2783-7011-89faa0e4c707/mzaf_15798803351390194915.plus.aac.p.m4a",
 "link": "https://music.apple.com/us/album/something-in-the-orange/1620419728?i=1620419734",
 "year": "2022"
+},
+{
+"id": "s1621089608",
+"name": "FEARLESS",
+"artist": "르세라핌",
+"art": "https://is1-ssl.mzstatic.com/image/thumb/Music221/v4/77/c9/7f/77c97fcc-e72d-13e9-2e41-d5c23ceb5e43/196922016622_Cover.jpg/600x600bb.jpg",
+"preview": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview221/v4/2e/e8/40/2ee84088-b80c-28bf-c277-9eaeaae0a8d5/mzaf_10950096593083239512.plus.aac.p.m4a",
+"link": "https://music.apple.com/us/album/fearless/1621089349?i=1621089608",
+"year": "2022",
+"altArtist": "LE SSERAFIM",
+"kr": true
 },
 {
 "id": "s1621817894",
@@ -3208,6 +3621,17 @@
 "year": "2011",
 "alt": "A Passionate Goodbye",
 "altArtist": "Yoo Hee Yeol",
+"kr": true
+},
+{
+"id": "s1623110533",
+"name": "좋은 사람",
+"artist": "토이",
+"art": "https://is1-ssl.mzstatic.com/image/thumb/Music112/v4/01/ee/75/01ee7590-d7e5-3fc6-1e4d-5100d4276cd1/cover_KM0015175_1.jpg/600x600bb.jpg",
+"preview": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview211/v4/49/34/c9/4934c909-ed2c-9c2e-06aa-3948fff6c37a/mzaf_16781071417335320320.plus.aac.p.m4a",
+"link": "https://music.apple.com/us/album/%EC%A2%8B%EC%9D%80-%EC%82%AC%EB%9E%8C-feat-%EA%B9%80%ED%98%95%EC%A4%91/1623110530?i=1623110533",
+"year": "2001",
+"altArtist": "Toy",
 "kr": true
 },
 {
@@ -3257,6 +3681,18 @@
 "preview": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview221/v4/19/a6/6e/19a66e39-2899-580a-01b2-b98ec2548fc3/mzaf_11618962128913212399.plus.aac.p.m4a",
 "link": "https://music.apple.com/us/album/sneakers/1627524248?i=1627524250",
 "year": "2022",
+"kr": true
+},
+{
+"id": "s1627574672",
+"name": "피 땀 눈물",
+"artist": "방탄소년단",
+"art": "https://is1-ssl.mzstatic.com/image/thumb/Music122/v4/f7/68/9c/f7689ce3-6d41-60cd-62d2-57a91ddf5b9d/196922067341_Cover.jpg/600x600bb.jpg",
+"preview": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview211/v4/54/b9/0b/54b90b2c-327f-3317-7536-aa73f5dea106/mzaf_672151335337863434.plus.aac.p.m4a",
+"link": "https://music.apple.com/us/album/blood-sweat-tears/1627573936?i=1627574672",
+"year": "2016",
+"alt": "Blood Sweat & Tears",
+"altArtist": "BTS",
 "kr": true
 },
 {
@@ -3614,6 +4050,18 @@
 "kr": true
 },
 {
+"id": "s1652239678",
+"name": "감사",
+"artist": "김동률",
+"art": "https://is1-ssl.mzstatic.com/image/thumb/Music122/v4/58/e4/c9/58e4c9ee-d597-c374-970b-2e9445143b6f/8806163322568_cover.jpg/600x600bb.jpg",
+"preview": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview221/v4/c9/80/f9/c980f961-9585-8fe6-28a9-4b0bda69386e/mzaf_4404823048216883037.plus.aac.p.m4a",
+"link": "https://music.apple.com/us/album/thanks/1652239671?i=1652239678",
+"year": "2007",
+"alt": "Thanks",
+"altArtist": "Kim Dong Ryul",
+"kr": true
+},
+{
 "id": "s1652508871",
 "name": "Hot In It",
 "artist": "Tiësto",
@@ -3664,6 +4112,17 @@
 "year": "2012",
 "alt": "Johnny",
 "altArtist": "Primary",
+"kr": true
+},
+{
+"id": "s1659052638",
+"name": "Sugar Rush Ride",
+"artist": "투모로우바이투게더",
+"art": "https://is1-ssl.mzstatic.com/image/thumb/Music113/v4/ff/0b/bd/ff0bbd47-a6db-0a59-2d58-fee9f1e89f68/196922264849_Cover.jpg/600x600bb.jpg",
+"preview": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview211/v4/1b/5f/41/1b5f41a2-ca62-45f4-073a-f4159ca38998/mzaf_10714123989841007440.plus.aac.p.m4a",
+"link": "https://music.apple.com/us/album/sugar-rush-ride/1659052466?i=1659052638",
+"year": "2023",
+"altArtist": "TOMORROW X TOGETHER",
 "kr": true
 },
 {
@@ -3800,6 +4259,39 @@
 "kr": true
 },
 {
+"id": "s1681324047",
+"name": "손오공",
+"artist": "세븐틴",
+"art": "https://is1-ssl.mzstatic.com/image/thumb/Music116/v4/d1/66/eb/d166eb7e-7210-b3ff-be39-638cd37bfc89/196922401282_Cover.jpg/600x600bb.jpg",
+"preview": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview211/v4/76/9c/dd/769cdd57-1dc9-aff1-8af2-de134b7e0498/mzaf_9327909714451142276.plus.aac.p.m4a",
+"link": "https://music.apple.com/us/album/super/1681324004?i=1681324047",
+"year": "2023",
+"alt": "Super",
+"altArtist": "SEVENTEEN",
+"kr": true
+},
+{
+"id": "s1682502472",
+"name": "UNFORGIVEN",
+"artist": "르세라핌 & Nile Rodgers",
+"art": "https://is1-ssl.mzstatic.com/image/thumb/Music211/v4/27/13/c3/2713c389-4f01-b5e7-59f5-3204b37cb594/196922444470_Cover.jpg/600x600bb.jpg",
+"preview": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview211/v4/fd/05/0c/fd050c13-7a38-55fd-3d97-ca5f976915b1/mzaf_9965317674295586639.plus.aac.p.m4a",
+"link": "https://music.apple.com/us/album/unforgiven/1682502020?i=1682502472",
+"year": "2023",
+"altArtist": "LE SSERAFIM & Nile Rodgers",
+"kr": true
+},
+{
+"id": "s1685400184",
+"name": "Spicy",
+"artist": "aespa",
+"art": "https://is1-ssl.mzstatic.com/image/thumb/Music116/v4/af/2c/6d/af2c6d62-0ebc-2dff-17b3-8eeb2b3986a0/888735943621.jpg/600x600bb.jpg",
+"preview": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview211/v4/d1/c1/14/d1c11426-0640-3175-6150-d5a3624215bb/mzaf_10974603736747457612.plus.aac.p.m4a",
+"link": "https://music.apple.com/us/album/spicy/1685399618?i=1685400184",
+"year": "2023",
+"kr": true
+},
+{
 "id": "s1686489691",
 "name": "S-Class",
 "artist": "Stray Kids",
@@ -3807,6 +4299,17 @@
 "preview": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview221/v4/90/f5/66/90f56683-00f0-b3d0-ed97-f04cf2cb49a5/mzaf_12039515172804921382.plus.aac.p.m4a",
 "link": "https://music.apple.com/us/album/s-class/1686489462?i=1686489691",
 "year": "2023",
+"kr": true
+},
+{
+"id": "s1687303943",
+"name": "Bite Me",
+"artist": "엔하이픈",
+"art": "https://is1-ssl.mzstatic.com/image/thumb/Music116/v4/1c/89/10/1c891026-08a1-bbcd-e18e-b5acfe0bd2c7/196922402876_Cover.jpg/600x600bb.jpg",
+"preview": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview221/v4/e8/9f/e3/e89fe360-6090-7678-0960-cb0b026c19ad/mzaf_9495917859370982012.plus.aac.p.m4a",
+"link": "https://music.apple.com/us/album/bite-me/1687303688?i=1687303943",
+"year": "2023",
+"altArtist": "ENHYPEN",
 "kr": true
 },
 {
@@ -3881,6 +4384,15 @@
 "kr": true
 },
 {
+"id": "s1691699836",
+"name": "Lose Control",
+"artist": "Teddy Swims",
+"art": "https://is1-ssl.mzstatic.com/image/thumb/Music126/v4/36/19/66/36196640-1561-dc5e-c6bc-1e5f4befa583/093624856771.jpg/600x600bb.jpg",
+"preview": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview221/v4/9f/65/d6/9f65d67d-db40-d7da-c954-9a23d28dfe1a/mzaf_7625794503195542708.plus.aac.p.m4a",
+"link": "https://music.apple.com/us/album/lose-control/1691699589?i=1691699836",
+"year": "2005"
+},
+{
 "id": "s1692686518",
 "name": "Super Shy",
 "artist": "뉴진스",
@@ -3910,6 +4422,28 @@
 "preview": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview116/v4/b3/53/67/b353675d-5de0-4c12-d95c-03516e37efe7/mzaf_386025975938717011.plus.aac.p.m4a",
 "link": "https://music.apple.com/us/album/house-i-used-to-call-home/1693431114?i=1693431115",
 "year": "2021"
+},
+{
+"id": "s1694484118",
+"name": "In Bloom",
+"artist": "제로베이스원",
+"art": "https://is1-ssl.mzstatic.com/image/thumb/Music126/v4/88/54/86/88548618-63ed-4bf1-65dd-51fb0d4f2d57/888272119350_Cover.jpg/600x600bb.jpg",
+"preview": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview221/v4/b2/b4/31/b2b43189-00e6-1168-419c-a36ca503ab03/mzaf_15090784475278809828.plus.aac.p.m4a",
+"link": "https://music.apple.com/us/album/in-bloom/1694484106?i=1694484118",
+"year": "2023",
+"altArtist": "ZEROBASEONE",
+"kr": true
+},
+{
+"id": "s1695951900",
+"name": "ETA",
+"artist": "뉴진스",
+"art": "https://is1-ssl.mzstatic.com/image/thumb/Music116/v4/d3/4b/7e/d34b7e1e-af3b-43b6-2949-7a8c652a1bc9/196922462726_Cover.jpg/600x600bb.jpg",
+"preview": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview211/v4/fb/eb/dc/fbebdc04-d035-0b34-6df7-7c7e73e1c5ce/mzaf_1666920854414573023.plus.aac.p.m4a",
+"link": "https://music.apple.com/us/album/eta/1695951888?i=1695951900",
+"year": "2023",
+"altArtist": "NewJeans",
+"kr": true
 },
 {
 "id": "s1696262237",
@@ -4084,6 +4618,16 @@
 "kr": true
 },
 {
+"id": "s1698682668",
+"name": "So Hot",
+"artist": "Wonder Girls",
+"art": "https://is1-ssl.mzstatic.com/image/thumb/Music116/v4/8e/c7/12/8ec71207-3464-4350-9106-8da1088b1b02/8804775030291_Cover.jpg/600x600bb.jpg",
+"preview": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview211/v4/df/b7/d6/dfb7d6cf-fbb4-2e82-20de-237e36dc7358/mzaf_7809754123802118378.plus.aac.p.m4a",
+"link": "https://music.apple.com/us/album/so-hot/1698682666?i=1698682668",
+"year": "2008",
+"kr": true
+},
+{
 "id": "s1698697000",
 "name": "Tell Me",
 "artist": "Wonder Girls",
@@ -4150,6 +4694,16 @@
 "kr": true
 },
 {
+"id": "s1710644832",
+"name": "LALALALA",
+"artist": "Stray Kids",
+"art": "https://is1-ssl.mzstatic.com/image/thumb/Music126/v4/36/cc/6d/36cc6d5f-1be5-188e-ce54-80f57b023791/8809928950532_Cover.jpg/600x600bb.jpg",
+"preview": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview221/v4/71/4a/51/714a51c6-61f3-cf49-7b3e-f15fe4670b76/mzaf_10284733538239035379.plus.aac.p.m4a",
+"link": "https://music.apple.com/us/album/lalalala/1710644819?i=1710644832",
+"year": "2023",
+"kr": true
+},
+{
 "id": "s1713145119",
 "name": "Bravo, My Life!",
 "artist": "에릭남",
@@ -4182,6 +4736,16 @@
 "kr": true
 },
 {
+"id": "s1715939931",
+"name": "Drama",
+"artist": "aespa",
+"art": "https://is1-ssl.mzstatic.com/image/thumb/Music116/v4/f7/f0/5c/f7f05ce4-e5a4-900d-e087-1dd9668b2b34/888735945939.jpg/600x600bb.jpg",
+"preview": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview221/v4/1f/dc/9b/1fdc9b25-04dd-515c-b5da-8dc132ed39b6/mzaf_5682330302212897053.plus.aac.p.m4a",
+"link": "https://music.apple.com/us/album/drama/1715939930?i=1715939931",
+"year": "2023",
+"kr": true
+},
+{
 "id": "s1717383449",
 "name": "생각을 멈추다 보면",
 "artist": "최유리",
@@ -4191,6 +4755,18 @@
 "year": "2023",
 "alt": "When I stop thinking",
 "altArtist": "Choi Yu Ree",
+"kr": true
+},
+{
+"id": "s1719210399",
+"name": "그런 사람 또 없습니다",
+"artist": "이승철",
+"art": "https://is1-ssl.mzstatic.com/image/thumb/Music116/v4/2a/b6/03/2ab6039b-5924-e386-7e2c-a02612950494/8809691055946_cover.jpg/600x600bb.jpg",
+"preview": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview211/v4/47/72/81/477281d8-e8bd-73f1-b124-330010c0d2cf/mzaf_15606325276653194004.plus.aac.p.m4a",
+"link": "https://music.apple.com/us/album/no-one-else-like-that/1719210391?i=1719210399",
+"year": "2009",
+"alt": "No One Else Like That",
+"altArtist": "Lee Seung Chul",
 "kr": true
 },
 {
@@ -4214,6 +4790,38 @@
 "link": "https://music.apple.com/us/album/x-butterfly/1723425290?i=1723425291",
 "year": "2020",
 "altArtist": "Wonstein",
+"kr": true
+},
+{
+"id": "s1723932648",
+"name": "첫 만남은 계획대로 되지 않아",
+"artist": "투어스",
+"art": "https://is1-ssl.mzstatic.com/image/thumb/Music211/v4/17/bb/d4/17bbd45f-fee7-a9dd-ff01-e7b174cc1462/196922759543_Cover.jpg/600x600bb.jpg",
+"preview": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview211/v4/ac/8d/97/ac8d9717-2bbf-b1bf-b2e9-476feea6a480/mzaf_11615065500455071115.plus.aac.p.m4a",
+"link": "https://music.apple.com/us/album/plot-twist/1723932647?i=1723932648",
+"year": "2024",
+"alt": "plot twist",
+"altArtist": "TWS",
+"kr": true
+},
+{
+"id": "s1724488124",
+"name": "Beautiful Things",
+"artist": "Benson Boone",
+"art": "https://is1-ssl.mzstatic.com/image/thumb/Music116/v4/54/f4/92/54f49210-e260-b519-ebbd-f4f40ee710cd/054391342751.jpg/600x600bb.jpg",
+"preview": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview211/v4/4d/d5/00/4dd5006f-ee02-c3f1-94db-0ed4b8dd68f1/mzaf_14250561294796027079.plus.aac.p.m4a",
+"link": "https://music.apple.com/us/album/beautiful-things/1724488123?i=1724488124",
+"year": "2024"
+},
+{
+"id": "s1726888402",
+"name": "Love wins all",
+"artist": "아이유",
+"art": "https://is1-ssl.mzstatic.com/image/thumb/Music126/v4/e3/56/1e/e3561eb5-de12-790d-569b-53fa22e6b491/cover_KM0019422_1.jpg/600x600bb.jpg",
+"preview": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview221/v4/94/79/f5/9479f56a-ac54-6449-3603-0645090bb3c1/mzaf_7391528050042328078.plus.aac.p.m4a",
+"link": "https://music.apple.com/us/album/love-wins-all/1726888401?i=1726888402",
+"year": "2024",
+"altArtist": "IU",
 "kr": true
 },
 {
@@ -4248,6 +4856,26 @@
 "preview": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview211/v4/28/26/23/28262389-cd6a-fa54-800c-894dca4d9d24/mzaf_9743444971669570142.plus.aac.p.m4a",
 "link": "https://music.apple.com/us/album/everybodys-changing-remastered-2024/1729802956?i=1729803660",
 "year": "2024"
+},
+{
+"id": "s1732319018",
+"name": "HAPPY",
+"artist": "DAY6",
+"art": "https://is1-ssl.mzstatic.com/image/thumb/Music211/v4/9e/e8/6e/9ee86ed8-4dcf-ac99-e49a-95fb2151b4ac/8809928951515_Cover.jpg/600x600bb.jpg",
+"preview": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview221/v4/83/3e/6b/833e6baa-3767-5f1d-e651-8b27fc4c9a25/mzaf_6192446484966640638.plus.aac.p.m4a",
+"link": "https://music.apple.com/us/album/happy/1732319005?i=1732319018",
+"year": "2024",
+"kr": true
+},
+{
+"id": "s1732393370",
+"name": "WAY 4 LUV",
+"artist": "PLAVE",
+"art": "https://is1-ssl.mzstatic.com/image/thumb/Music122/v4/97/09/40/970940a4-afc8-42a3-5fd1-ee003507fde6/Final_134-1_album_jacket_image.jpg/600x600bb.jpg",
+"preview": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview221/v4/55/0b/9a/550b9ad4-17f9-c17b-979c-68ada0ab2811/mzaf_3573603930208239944.plus.aac.p.m4a",
+"link": "https://music.apple.com/us/album/way-4-luv/1732393368?i=1732393370",
+"year": "2024",
+"kr": true
 },
 {
 "id": "s1733432325",
@@ -4335,6 +4963,15 @@
 "year": "2020",
 "alt": "‎Good Night Good Dream",
 "kr": true
+},
+{
+"id": "s1739659142",
+"name": "BIRDS OF A FEATHER",
+"artist": "Billie Eilish",
+"art": "https://is1-ssl.mzstatic.com/image/thumb/Music211/v4/92/9f/69/929f69f1-9977-3a44-d674-11f70c852d1b/24UMGIM36186.rgb.jpg/600x600bb.jpg",
+"preview": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview211/v4/34/31/d3/3431d34e-847f-5d66-df83-0bce688d997e/mzaf_18106743962423782018.plus.aac.p.m4a",
+"link": "https://music.apple.com/us/album/birds-of-a-feather/1739659134?i=1739659142",
+"year": "2024"
 },
 {
 "id": "s1744448416",
@@ -4453,8 +5090,7 @@
 "art": "https://is1-ssl.mzstatic.com/image/thumb/Music221/v4/11/ae/f2/11aef294-f57c-bab9-c9fc-529162984e62/24UMGIM85348.rgb.jpg/600x600bb.jpg",
 "preview": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview211/v4/07/6a/99/076a99ed-b946-431b-6f1f-54fa187ca5bd/mzaf_8102882277995122875.plus.aac.p.m4a",
 "link": "https://music.apple.com/us/album/die-with-a-smile/1762656724?i=1762656732",
-"year": "2024",
-"kr": true
+"year": "2024"
 },
 {
 "id": "s1764114948",
@@ -4497,6 +5133,17 @@
 "preview": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview211/v4/9f/5f/16/9f5f16e8-d618-4e3a-e5b6-51db6c1b3d39/mzaf_12373228950058833361.plus.aac.p.m4a",
 "link": "https://music.apple.com/us/album/make-a-wish-birthday-song/1767750882?i=1767751461",
 "year": "2020",
+"kr": true
+},
+{
+"id": "s1769572156",
+"name": "내 이름 맑음",
+"artist": "QWER",
+"art": "https://is1-ssl.mzstatic.com/image/thumb/Music211/v4/15/00/62/150062e8-fd58-5dc2-bfea-f0e502e0957a/cover_KM0020310_1.jpg/600x600bb.jpg",
+"preview": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview211/v4/c5/e7/73/c5e77306-097a-0af7-0936-bff54a77ebc7/mzaf_5185468725080186784.plus.aac.p.m4a",
+"link": "https://music.apple.com/us/album/my-name-is-malguem/1769572152?i=1769572156",
+"year": "2024",
+"alt": "My Name is Malguem",
 "kr": true
 },
 {
@@ -4563,6 +5210,17 @@
 "kr": true
 },
 {
+"id": "s1772790089",
+"name": "Cherish (My Love)",
+"artist": "아일릿",
+"art": "https://is1-ssl.mzstatic.com/image/thumb/Music221/v4/e9/20/73/e9207332-1b22-18d0-5d1b-daaf370a4317/198704136962_Cover.jpg/600x600bb.jpg",
+"preview": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview221/v4/ff/c5/9d/ffc59d63-bd5d-0b93-4592-2dd7d797de8e/mzaf_7002868842246643213.plus.aac.p.m4a",
+"link": "https://music.apple.com/us/album/cherish-my-love/1772790085?i=1772790089",
+"year": "2024",
+"altArtist": "ILLIT",
+"kr": true
+},
+{
 "id": "s1773262055",
 "name": "DRIP",
 "artist": "BABYMONSTER",
@@ -4590,6 +5248,18 @@
 "preview": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview211/v4/f6/cc/58/f6cc5863-c60a-caac-e7f8-bd66b414a917/mzaf_8631809138360097160.plus.aac.p.m4a",
 "link": "https://music.apple.com/us/album/supernova/1773694541?i=1773694544",
 "year": "2024",
+"kr": true
+},
+{
+"id": "s1773943442",
+"name": "나는 반딧불",
+"artist": "황가람",
+"art": "https://is1-ssl.mzstatic.com/image/thumb/Music211/v4/e6/1c/6d/e61c6d78-daa6-e319-78ae-660c4caee9df/cover_KM0020476_1.jpg/600x600bb.jpg",
+"preview": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview221/v4/68/5e/28/685e283d-59cf-0d5b-deec-a8fad9dec25f/mzaf_3645653479767884618.plus.aac.p.m4a",
+"link": "https://music.apple.com/us/album/im-firefly/1773943441?i=1773943442",
+"year": "2024",
+"alt": "I'm Firefly",
+"altArtist": "Hwang Karam",
 "kr": true
 },
 {
@@ -4654,6 +5324,18 @@
 "kr": true
 },
 {
+"id": "s1785637238",
+"name": "오늘만 I LOVE YOU",
+"artist": "보이넥스트도어",
+"art": "https://is1-ssl.mzstatic.com/image/thumb/Music221/v4/8c/03/16/8c03163b-065d-5f3c-ba55-73c4603a3c05/198704289064_Cover.jpg/600x600bb.jpg",
+"preview": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview221/v4/b0/29/da/b029da0d-f3cd-231a-dabc-0704776df26f/mzaf_4183191705776683622.plus.aac.p.m4a",
+"link": "https://music.apple.com/us/album/if-i-say-i-love-you/1785637094?i=1785637238",
+"year": "2025",
+"alt": "IF I SAY, I LOVE YOU",
+"altArtist": "BOYNEXTDOOR",
+"kr": true
+},
+{
 "id": "s1787989435",
 "name": "좋니",
 "artist": "윤종신",
@@ -4663,6 +5345,28 @@
 "year": "2017",
 "alt": "Like it",
 "altArtist": "Yoon Jong Shin",
+"kr": true
+},
+{
+"id": "s1792408956",
+"name": "같은 시간 속의 너",
+"artist": "나얼",
+"art": "https://is1-ssl.mzstatic.com/image/thumb/Music211/v4/b6/19/82/b619828e-65cd-d3b3-d291-a49a1ec5adff/191953416021.jpg/600x600bb.jpg",
+"preview": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview211/v4/42/f8/b1/42f8b18d-5a0c-1d2f-dbcf-de6a5ae70560/mzaf_13938337459659209697.plus.aac.p.m4a",
+"link": "https://music.apple.com/us/album/living-in-the-same-time/1792408953?i=1792408956",
+"year": "2015",
+"alt": "Living in the same time",
+"altArtist": "NAUL",
+"kr": true
+},
+{
+"id": "s1795471747",
+"name": "I DO ME",
+"artist": "KiiiKiii",
+"art": "https://is1-ssl.mzstatic.com/image/thumb/Music221/v4/7a/ce/99/7ace990a-c596-8988-4917-7687b24c2574/199066585641.jpg/600x600bb.jpg",
+"preview": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview221/v4/8e/57/4e/8e574e26-8147-8430-6ace-93a8eb7a01d6/mzaf_5228116227050500579.plus.aac.p.m4a",
+"link": "https://music.apple.com/us/album/i-do-me/1795471738?i=1795471747",
+"year": "2025",
 "kr": true
 },
 {
@@ -4731,6 +5435,16 @@
 "kr": true
 },
 {
+"id": "s1802621240",
+"name": "TOMBOY",
+"artist": "i-dle",
+"art": "https://is1-ssl.mzstatic.com/image/thumb/Music211/v4/4c/da/91/4cda91b0-6fa2-805e-fd1a-e89bf87bb969/8804775250422.jpg/600x600bb.jpg",
+"preview": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview211/v4/da/37/14/da3714a4-b9cd-78ea-590e-bae5af9f3856/mzaf_9300426931010299319.plus.aac.p.m4a",
+"link": "https://music.apple.com/us/album/tomboy/1802620780?i=1802621240",
+"year": "2022",
+"kr": true
+},
+{
 "id": "s1804588310",
 "name": "내곁에서 떠나가지 말아요",
 "artist": "빛과 소금",
@@ -4761,6 +5475,18 @@
 "link": "https://music.apple.com/us/album/%EC%B2%98%EC%9D%8C-%EB%8A%90%EB%82%8C-%EA%B7%B8%EB%8C%80%EB%A1%9C/1804625773?i=1804625777",
 "year": "1989",
 "altArtist": "Lee Sora",
+"kr": true
+},
+{
+"id": "s1804662496",
+"name": "이 노래가 클럽에서 나온다면",
+"artist": "우디",
+"art": "https://is1-ssl.mzstatic.com/image/thumb/Music221/v4/ff/d3/20/ffd320e7-75bf-703c-67c2-adb56b0cbce7/cover_KM0021221_1.jpg/600x600bb.jpg",
+"preview": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview221/v4/bc/fe/77/bcfe7783-f9b1-8142-96ab-c29c939b71fc/mzaf_12090851017727458170.plus.aac.p.m4a",
+"link": "https://music.apple.com/us/album/fire-up/1804662494?i=1804662496",
+"year": "2019",
+"alt": "Fire up",
+"altArtist": "Woody",
 "kr": true
 },
 {
@@ -5123,8 +5849,7 @@
 "art": "https://is1-ssl.mzstatic.com/image/thumb/Music115/v4/cf/f5/19/cff5191f-a668-2c7f-f73a-fe51f519b577/dj.yrzoirxd.jpg/600x600bb.jpg",
 "preview": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview221/v4/8e/e6/16/8ee616f8-be3d-8733-66d4-aac382df17d8/mzaf_4565011465364563889.plus.aac.p.m4a",
 "link": "https://music.apple.com/us/album/hero/190173909?i=190174911",
-"year": "1993",
-"kr": true
+"year": "1993"
 },
 {
 "id": "s191447544",
@@ -5160,8 +5885,7 @@
 "art": "https://is1-ssl.mzstatic.com/image/thumb/Music115/v4/ee/49/ac/ee49accc-78bd-bcdb-1aff-c40c1ac3ccc4/074643959520.jpg/600x600bb.jpg",
 "preview": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview221/v4/59/d0/df/59d0df1f-b9b0-c1f0-d27e-ad59ee9fe1fa/mzaf_15629855503092199047.plus.aac.p.m4a",
 "link": "https://music.apple.com/us/album/wake-me-up-before-you-go-go/193084944?i=193084947",
-"year": "1984",
-"kr": true
+"year": "1984"
 },
 {
 "id": "s201274644",
@@ -5179,8 +5903,7 @@
 "art": "https://is1-ssl.mzstatic.com/image/thumb/Music114/v4/eb/4a/f9/eb4af984-fc68-56ab-7b89-1d070c04e1dd/5099765318524.jpg/600x600bb.jpg",
 "preview": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview221/v4/0a/59/f2/0a59f205-382d-f0a0-32ac-e7a61ad840d0/mzaf_7929677222644259686.plus.aac.p.m4a",
 "link": "https://music.apple.com/us/album/last-christmas-single-version/202117886?i=202117984",
-"year": "1984",
-"kr": true
+"year": "1984"
 },
 {
 "id": "s202272624",
@@ -5237,6 +5960,24 @@
 "year": "1974",
 "altArtist": "Barry Manilow",
 "kr": true
+},
+{
+"id": "s269573303",
+"name": "Thriller",
+"artist": "Michael Jackson",
+"art": "https://is1-ssl.mzstatic.com/image/thumb/Music115/v4/32/4f/fd/324ffda2-9e51-8f6a-0c2d-c6fd2b41ac55/074643811224.jpg/600x600bb.jpg",
+"preview": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview221/v4/58/8c/cb/588ccb9a-ab79-4a38-43b5-d4c24ea42859/mzaf_2083607504726567992.plus.aac.p.m4a",
+"link": "https://music.apple.com/us/album/thriller/269572838?i=269573303",
+"year": "1982"
+},
+{
+"id": "s269573341",
+"name": "Beat It",
+"artist": "Michael Jackson",
+"art": "https://is1-ssl.mzstatic.com/image/thumb/Music115/v4/32/4f/fd/324ffda2-9e51-8f6a-0c2d-c6fd2b41ac55/074643811224.jpg/600x600bb.jpg",
+"preview": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview211/v4/88/cd/46/88cd46bd-dba7-1dc2-a63b-e8c111ac4fc3/mzaf_4042555053237612653.plus.aac.p.m4a",
+"link": "https://music.apple.com/us/album/beat-it/269572838?i=269573341",
+"year": "1982"
 },
 {
 "id": "s269573364",
@@ -5365,6 +6106,18 @@
 "year": "1998",
 "alt": "Speed Up Losers",
 "altArtist": "Crying Nut",
+"kr": true
+},
+{
+"id": "s311455760",
+"name": "여행을 떠나요",
+"artist": "조용필",
+"art": "https://is1-ssl.mzstatic.com/image/thumb/Music124/v4/fe/bc/63/febc63c1-bd8c-d8e8-1e68-5c3f687e0c41/mzi.psrvdlqn.jpg/600x600bb.jpg",
+"preview": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview211/v4/40/61/7b/40617b9d-178a-d09f-8d06-d3f70d61c3cb/mzaf_1968372622389244878.plus.aac.p.m4a",
+"link": "https://music.apple.com/us/album/lets-go-travel/311455722?i=311455760",
+"year": "1985",
+"alt": "Let's go travel",
+"altArtist": "Cho Yong-pil",
 "kr": true
 },
 {
@@ -5514,6 +6267,15 @@
 "year": "2012"
 },
 {
+"id": "s573962551",
+"name": "Locked Out of Heaven",
+"artist": "Bruno Mars",
+"art": "https://is1-ssl.mzstatic.com/image/thumb/Music115/v4/e0/a4/7c/e0a47c6f-005a-9f9f-ce29-8e858e2bcfcb/075679957283.jpg/600x600bb.jpg",
+"preview": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview221/v4/d5/05/04/d5050434-1278-6b8e-9cd8-6261ea319fd1/mzaf_9746689865251353718.plus.aac.p.m4a",
+"link": "https://music.apple.com/us/album/locked-out-of-heaven/573962245?i=573962551",
+"year": "2012"
+},
+{
 "id": "s576655095",
 "name": "Just the Way You Are",
 "artist": "Bruno Mars",
@@ -5529,8 +6291,7 @@
 "art": "https://is1-ssl.mzstatic.com/image/thumb/Music124/v4/c6/b7/27/c6b727f7-3a32-6b43-cee2-05bb71daf1cf/dj.itfmdeif.jpg/600x600bb.jpg",
 "preview": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview211/v4/df/93/49/df93491d-65a6-bb2d-eb03-9ad3b3d62438/mzaf_10792594730801509593.plus.aac.p.m4a",
 "link": "https://music.apple.com/us/album/all-i-want-for-christmas-is-you/585972750?i=585972803",
-"year": "1994",
-"kr": true
+"year": "1994"
 },
 {
 "id": "s617154366",
@@ -5606,8 +6367,7 @@
 "art": "https://is1-ssl.mzstatic.com/image/thumb/Music211/v4/7e/e6/82/7ee682bd-1b17-6adc-be63-b5af1bdff369/26UMGIM51126.rgb.jpg/600x600bb.jpg",
 "preview": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview211/v4/02/41/f3/0241f307-2ec2-f817-3953-78df5f80f63d/mzaf_525670659940588152.plus.aac.p.m4a",
 "link": "https://music.apple.com/us/album/hate-that-i-made-you-love-me/1895420989?i=6763656876",
-"year": "2026",
-"kr": true
+"year": "2026"
 },
 {
 "id": "s6766741789",
@@ -5693,6 +6453,15 @@
 "kr": true
 },
 {
+"id": "s6781076300",
+"name": "Don't Stop Me Now",
+"artist": "Queen",
+"art": "https://is1-ssl.mzstatic.com/image/thumb/Music221/v4/b0/28/a7/b028a7a4-9e6f-62fb-bce2-103a633449a9/602527717678.jpg/600x600bb.jpg",
+"preview": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview211/v4/31/40/50/3140509d-9cef-c30d-e43a-a378e4a54f7e/mzaf_11975090620603363209.plus.aac.p.m4a",
+"link": "https://music.apple.com/us/album/dont-stop-me-now/6781076099?i=6781076300",
+"year": "1978"
+},
+{
 "id": "s6781080934",
 "name": "Bohemian Rhapsody",
 "artist": "Queen",
@@ -5700,6 +6469,24 @@
 "preview": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview211/v4/bb/b7/14/bbb714e5-8d2f-dc88-8773-67b19d71178b/mzaf_6782698911866218823.plus.aac.p.m4a",
 "link": "https://music.apple.com/us/album/bohemian-rhapsody/6781080933?i=6781080934",
 "year": "1975"
+},
+{
+"id": "s6781080935",
+"name": "Another One Bites The Dust",
+"artist": "Queen",
+"art": "https://is1-ssl.mzstatic.com/image/thumb/Music221/v4/15/c7/55/15c755bc-7603-3ce3-e243-e59f1f9863ea/602527724171.jpg/600x600bb.jpg",
+"preview": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview221/v4/41/04/34/4104349e-3e76-51b3-5d3f-7231e2a3514e/mzaf_8134590047693791951.plus.aac.p.m4a",
+"link": "https://music.apple.com/us/album/another-one-bites-the-dust/6781080933?i=6781080935",
+"year": "1980"
+},
+{
+"id": "s6781081101",
+"name": "We Will Rock You",
+"artist": "Queen",
+"art": "https://is1-ssl.mzstatic.com/image/thumb/Music221/v4/15/c7/55/15c755bc-7603-3ce3-e243-e59f1f9863ea/602527724171.jpg/600x600bb.jpg",
+"preview": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview221/v4/00/d6/93/00d69397-069a-bdf9-0d26-f57938f7a3e3/mzaf_10850117933157782438.plus.aac.p.m4a",
+"link": "https://music.apple.com/us/album/we-will-rock-you/6781080933?i=6781081101",
+"year": "1977"
 },
 {
 "id": "s6781521710",
@@ -6069,6 +6856,15 @@
 "year": "2004"
 },
 {
+"id": "s716192601",
+"name": "Teenage Dream",
+"artist": "Katy Perry",
+"art": "https://is1-ssl.mzstatic.com/image/thumb/Music116/v4/c8/d3/42/c8d342af-26d9-3ec2-c511-e1eaf860e299/13UABIM57787.rgb.jpg/600x600bb.jpg",
+"preview": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview211/v4/5d/1a/ef/5d1aefa2-4683-4c6d-5d69-c8c8fb5dcc81/mzaf_3081418224702484801.plus.aac.p.m4a",
+"link": "https://music.apple.com/us/album/teenage-dream/716192216?i=716192601",
+"year": "2010"
+},
+{
 "id": "s716192625",
 "name": "Firework",
 "artist": "Katy Perry",
@@ -6085,6 +6881,24 @@
 "preview": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview221/v4/db/22/f2/db22f256-aa1b-9d19-dbb5-f1f0d77fe0a0/mzaf_2336585480409775230.plus.aac.p.m4a",
 "link": "https://music.apple.com/us/album/underneath-the-tree/720861443?i=720861445",
 "year": "2013"
+},
+{
+"id": "s725818406",
+"name": "Angels",
+"artist": "Robbie Williams",
+"art": "https://is1-ssl.mzstatic.com/image/thumb/Music124/v4/cf/86/e7/cf86e787-2177-6366-a5c3-2180c3031015/13ULAIM49472.rgb.jpg/600x600bb.jpg",
+"preview": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview221/v4/65/3b/08/653b0800-b1ac-f311-99df-2eef8734a74a/mzaf_9241683199220794890.plus.aac.p.m4a",
+"link": "https://music.apple.com/us/album/angels/725818043?i=725818406",
+"year": "1997"
+},
+{
+"id": "s738196409",
+"name": "Stand By Me",
+"artist": "Ben E. King",
+"art": "https://is1-ssl.mzstatic.com/image/thumb/Music125/v4/46/75/80/467580f9-1f8d-5c80-ac48-34e0f1a56816/081227297060.jpg/600x600bb.jpg",
+"preview": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview211/v4/18/ad/fb/18adfbac-3fbd-756c-d259-6daf41f902f2/mzaf_12768986125082088263.plus.aac.p.m4a",
+"link": "https://music.apple.com/us/album/stand-by-me/738196400?i=738196409",
+"year": "1960"
 },
 {
 "id": "s738883462",
@@ -6212,6 +7026,18 @@
 "kr": true
 },
 {
+"id": "s854915055",
+"name": "소원을 말해봐 (Genie)",
+"artist": "소녀시대",
+"art": "https://is1-ssl.mzstatic.com/image/thumb/Music125/v4/02/5f/0c/025f0c9a-6346-ed15-e7c3-055c442ac580/asset.jpg/600x600bb.jpg",
+"preview": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview211/v4/4b/17/62/4b17625d-23d5-fbd4-f6f4-0ea5143d64bf/mzaf_17129596999481410519.plus.aac.p.m4a",
+"link": "https://music.apple.com/us/album/genie/854915051?i=854915055",
+"year": "2009",
+"alt": "Genie",
+"altArtist": "Girls' Generation",
+"kr": true
+},
+{
 "id": "s854916106",
 "name": "Ring Ding Dong",
 "artist": "SHINee",
@@ -6231,6 +7057,15 @@
 "year": "2008",
 "alt": "Replay",
 "kr": true
+},
+{
+"id": "s858518134",
+"name": "Thinking Out Loud",
+"artist": "Ed Sheeran",
+"art": "https://is1-ssl.mzstatic.com/image/thumb/Music2/v4/b0/75/ec/b075ec42-a102-cde1-132b-9cddbc0d3496/825646285891.jpg/600x600bb.jpg",
+"preview": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview221/v4/f6/62/98/f66298a2-4748-ea57-b3aa-b480be5ba7b3/mzaf_5238907531352690638.plus.aac.p.m4a",
+"link": "https://music.apple.com/us/album/thinking-out-loud/858518077?i=858518134",
+"year": "2014"
 },
 {
 "id": "s863835363",
@@ -6303,6 +7138,16 @@
 "kr": true
 },
 {
+"id": "s905856943",
+"name": "첫 사랑니 (Rum Pum Pum Pum)",
+"artist": "f(x)",
+"art": "https://is1-ssl.mzstatic.com/image/thumb/Music125/v4/90/05/84/9005841d-8b2a-a266-af60-309f31ba40d8/f_x_02_web.jpg/600x600bb.jpg",
+"preview": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview221/v4/61/0e/99/610e99e5-765b-4780-f628-4614938c3374/mzaf_1615245337210423573.plus.aac.p.m4a",
+"link": "https://music.apple.com/us/album/%EC%B2%AB-%EC%82%AC%EB%9E%91%EB%8B%88-rum-pum-pum-pum/905856933?i=905856943",
+"year": "2013",
+"kr": true
+},
+{
 "id": "s913803072",
 "name": "Love Options",
 "artist": "베스티",
@@ -6321,6 +7166,15 @@
 "preview": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview221/v4/f6/ae/38/f6ae3840-e2c4-ff25-2546-cebe08431326/mzaf_15724118202843096992.plus.aac.p.m4a",
 "link": "https://music.apple.com/us/album/night-changes/914556567?i=914556579",
 "year": "2014"
+},
+{
+"id": "s937107838",
+"name": "Respect",
+"artist": "Aretha Franklin",
+"art": "https://is1-ssl.mzstatic.com/image/thumb/Music124/v4/d1/31/ee/d131eec4-614c-d661-b580-3dc32b8547e8/603497896622.jpg/600x600bb.jpg",
+"preview": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview211/v4/99/74/40/997440f5-f543-165d-321a-5a64245a6c1c/mzaf_7740075940996149397.plus.aac.p.m4a",
+"link": "https://music.apple.com/us/album/respect/937107826?i=937107838",
+"year": "1967"
 },
 {
 "id": "s942517540",

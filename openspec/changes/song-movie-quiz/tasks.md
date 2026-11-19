@@ -12,3 +12,6 @@
 - [x] 4.3 Sara checked sound on her iPhone (2026-11-18): "sounds okay"
 ## 5. Space for six tiles
 - [x] 5.1 No "Syncing…" / plain "Synced." banner under the header (the header pill already shows it); banners stay for real news (items backed up or loaded, errors)
+## 6. Bigger pools (2026-11-19, Sara asked for 700 songs / 500 movies)
+- [x] 6.1 Songs 626 → 713: 105 more favourites in `songs-classics.csv` (46 global, 59 Korean). Fixed Korean tagging: a song on Korea's chart no longer counts as Korean by itself (Bieber, Ariana Grande, Wham! had been tagged Korean); "Revisited" versions skipped. Split now 393 Korean / 320 global.
+- [x] 6.2 Movies 345 → 512: bigger groups (English 300, Korean 90, animated 90, 2023+ 50). All 177 new posters checked by eye; left out American History X, American Psycho, Fifty Shades of Grey, Pieta (not family-friendly), Memoir of a Murderer (every picture shows a title) and five concert / making-of films.

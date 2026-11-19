@@ -299,3 +299,141 @@ tech:Pokémon#symbol,Pokémon,0
 tech:Adobe Inc.#symbol,Adobe,1
 tech:HP Inc.#symbol,HP,0
 tech:Cisco#symbol,Cisco,1
+car:Porsche#part,Porsche,1
+car:Ferrari#part,Ferrari,1
+car:Peugeot#part,Peugeot,1
+car:Volvo Cars#part,Volvo,1
+car:Mini (marque)#part,MINI,1
+car:Bentley#part,Bentley,1
+car:Alfa Romeo#part,Alfa Romeo,1
+car:Shell plc#part,Shell,1
+car:Mobil#part,Mobil,1
+car:Michelin#part,Michelin,1
+car:Pirelli#part,Pirelli,1
+car:Bridgestone#part,Bridgestone,1
+car:Hankook Tire#part,Hankook,1
+car:Enterprise Rent-A-Car#part,Enterprise,1
+car:Lincoln Motor Company#part,Lincoln,1
+car:Vespa#part,Vespa,1
+tech:Sony#part,Sony,1
+tech:Intel#part,Intel,1
+tech:IBM#part,IBM,1
+tech:Dell#part,Dell,1
+tech:Lenovo#part,Lenovo,1
+tech:Nintendo#part,Nintendo,1
+tech:Nokia#part,Nokia,1
+tech:Canon Inc.#part,Canon,1
+tech:Nikon#part,Nikon,1
+tech:Panasonic#part,Panasonic,1
+tech:Philips#part,Philips,1
+tech:Toshiba#part,Toshiba,1
+tech:Logitech#part,Logitech,1
+tech:Bose Corporation#part,Bose,1
+tech:Kodak#part,Kodak,1
+tech:Yahoo!#part,Yahoo!,1
+tech:eBay#part,eBay,1
+tech:Hulu#part,Hulu,1
+tech:Disney+#part,Disney+,1
+tech:Reddit#part,Reddit,1
+tech:Discord#part,Discord,1
+tech:Duolingo#part,Duolingo,1
+tech:Zoom Video Communications#part,Zoom,1
+tech:Visa Inc.#part,Visa,1
+tech:American Express#part,American Express,1
+tech:Verizon#part,Verizon,1
+tech:Garmin#part,Garmin,1
+tech:Fujifilm#part,Fujifilm,1
+tech:Sega#part,Sega,1
+tech:Expedia#part,Expedia,1
+tech:Booking.com#part,Booking.com,1
+tech:Lyft#part,Lyft,1
+tech:Venmo#part,Venmo,1
+tech:Xerox#part,Xerox,1
+tech:Boeing#part,Boeing,1
+tech:Airbus#part,Airbus,1
+tech:NASA#part,NASA,1
+tech:SpaceX#part,SpaceX,1
+tech:Fortnite#part,Fortnite,1
+tech:Oracle Corporation#part,Oracle,1
+tech:Qualcomm#part,Qualcomm,1
+tech:Siemens#part,Siemens,1
+tech:Dyson (company)#part,Dyson,1
+tech:Polaroid Corporation#part,Polaroid,1
+tech:Max (streaming service)#part,HBO Max,1
+tech:Xfinity#part,Xfinity,1
+tech:Tripadvisor#part,Tripadvisor,1
+tech:Zillow#part,Zillow,1
+tech:Coinbase#part,Coinbase,1
+tech:GitHub#part,GitHub,1
+tech:Blizzard Entertainment#part,Blizzard,1
+tech:Epic Games#part,Epic Games,1
+tech:Temu#part,Temu,1
+tech:AliExpress#part,AliExpress,1
+tech:Waze#part,Waze,1
+tech:OpenAI#part,OpenAI,1
+kbrand:Samsung#part,삼성,1
+food:Pepsi#part,Pepsi,1
+food:Red Bull#part,Red Bull,1
+food:Wendy's#part,Wendy's,1
+food:Taco Bell#part,Taco Bell,1
+food:Chick-fil-A#part,Chick-fil-A,1
+food:Krispy Kreme#part,Krispy Kreme,1
+food:Baskin-Robbins#part,Baskin-Robbins,1
+food:Pringles#part,Pringles,1
+food:Kellogg's#part,Kellogg's,1
+food:Nestlé#part,Nestlé,1
+food:Haribo#part,Haribo,1
+food:Kinder (brand)#part,Kinder,1
+food:Toblerone#part,Toblerone,1
+food:Häagen-Dazs#part,Häagen-Dazs,1
+food:7 Up#part,7 Up,1
+food:Shake Shack#part,Shake Shack,1
+food:In-N-Out Burger#part,In-N-Out,1
+food:Panera Bread#part,Panera,1
+food:Applebee's#part,Applebee's,1
+food:Dasani#part,Dasani,1
+food:Aquafina#part,Aquafina,1
+food:Powerade#part,Powerade,1
+food:Snapple#part,Snapple,1
+food:Campbell Soup Company#part,Campbell's,1
+food:Nescafé#part,Nescafé,1
+food:Reese's Peanut Butter Cups#part,Reese's,1
+food:Cheerios#part,Cheerios,1
+food:Kikkoman#part,Kikkoman,1
+food:Yakult#part,Yakult,1
+food:Cinnabon#part,Cinnabon,1
+food:Jollibee#part,Jollibee,1
+food:Hard Rock Cafe#part,Hard Rock Cafe,1
+food:TGI Fridays#part,TGI Fridays,1
+food:Perrier#part,Perrier,1
+food:Mentos#part,Mentos,1
+food:Magnum (ice cream)#part,Magnum,1
+food:Ritz Crackers#part,Ritz,1
+food:Smucker's#part,Smucker's,1
+kbrand:Kia#part,기아,1
+kbrand:KBS#part,KBS,1
+kbrand:Munhwa Broadcasting Corporation#part,MBC,1
+kbrand:JTBC#part,JTBC,1
+kbrand:TvN (South Korean TV channel)#part,tvN,1
+kbrand:Coupang#part,쿠팡,1
+kbrand:CU (store)#part,CU,1
+kbrand:GS25#part,GS25,1
+kbrand:E-Mart#part,이마트,1
+kbrand:Hana Bank#part,하나은행,1
+kbrand:KT Corporation#part,KT,1
+kbrand:Jeju Air#part,제주항공,1
+kbrand:Korail#part,코레일,1
+kbrand:Korea Train Express#part,KTX,1
+kbrand:Seoul Metro#part,서울교통공사,1
+kbrand:HYBE Corporation#part,HYBE,1
+kbrand:SM Entertainment#part,SM 엔터테인먼트,1
+kbrand:YG Entertainment#part,YG 엔터테인먼트,1
+kbrand:Nexon#part,넥슨,1
+kbrand:NCSoft#part,엔씨소프트,1
+kbrand:POSCO#part,포스코,1
+kbrand:SK Group#part,SK,1
+kbrand:CJ Group#part,CJ,1
+kbrand:Mnet (TV channel)#part,Mnet,1
+kbrand:Binggrae#part,빙그레,1
+kbrand:Compose Coffee#part,컴포즈커피,1
+kretail:Homeplus#part,홈플러스,1
