@@ -1501,5 +1501,5 @@ a.q-credit { text-decoration: none; color: #4a2fc0; font-weight: 650; }
 .tip-out { padding: 20px 20px 22px; border-radius: 20px; }
 .tip-row { color: rgba(255,255,255,.82); font: 500 17px var(--sans); text-shadow: none; }
 .tip-row b { color: #fff; font-size: 28px; }
-.tip-row.total { margin-top: 14px; color: #fff; font-size: 19px; font-weight: 600; }
+.tip-row.total { margin-top: 14px; padding-top: 14px; border-top: 1px solid rgba(255,255,255,.55); color: #fff; font-size: 19px; font-weight: 600; }
 .tip-row.total b { font-size: 46px; line-height: 1.05; }
