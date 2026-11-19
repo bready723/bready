@@ -114,7 +114,7 @@
 {
 "id": "d014",
 "name": "Jessica Alba",
-"file": "d014.jpg",
+"file": "d014c.jpg",
 "alt": "제시카 알바",
 "source": "commons",
 "credit": "Kevin Paul",
@@ -1195,7 +1195,7 @@
 {
 "id": "d127",
 "name": "Jimmy Kimmel",
-"file": "d127.jpg",
+"file": "d127c.jpg",
 "alt": "지미 키멀",
 "source": "commons",
 "credit": "Erin Scott",
@@ -2585,7 +2585,7 @@
 {
 "id": "d274",
 "name": "박나래",
-"file": "d274.jpg",
+"file": "d274c.jpg",
 "alt": "Park Na-rae",
 "source": "commons",
 "credit": "tenasia10",
@@ -5258,7 +5258,7 @@
 {
 "id": "nq31176292",
 "name": "송가인",
-"file": "nq31176292.jpg",
+"file": "nq31176292c.jpg",
 "source": "commons",
 "credit": "NewsInStar",
 "license": "CC BY 3.0",
@@ -6646,7 +6646,7 @@
 {
 "id": "nq440910",
 "name": "Ken Jeong",
-"file": "nq440910.jpg",
+"file": "nq440910c.jpg",
 "source": "commons",
 "credit": "Gage Skidmore",
 "license": "CC BY-SA 3.0",
@@ -11479,7 +11479,7 @@
 {
 "id": "nq6820702",
 "name": "송은이",
-"file": "nq6820702.jpg",
+"file": "nq6820702c.jpg",
 "source": "commons",
 "credit": "tenasia10",
 "license": "CC BY 3.0",
@@ -11769,7 +11769,7 @@
 {
 "id": "nq43651062",
 "name": "이국종",
-"file": "nq43651062.jpg",
+"file": "nq43651062c.jpg",
 "source": "commons",
 "credit": "경기도 뉴스포털",
 "license": "KOGL Type 1",
@@ -12414,7 +12414,7 @@
 {
 "id": "nq445017",
 "name": "Ke Huy Quan",
-"file": "nq445017.jpg",
+"file": "nq445017c.jpg",
 "source": "commons",
 "credit": "John Manard",
 "license": "CC BY-SA 4.0",
@@ -12666,7 +12666,7 @@
 {
 "id": "nq40321",
 "name": "Dave Chappelle",
-"file": "nq40321.jpg",
+"file": "nq40321c.jpg",
 "source": "commons",
 "credit": "John Bauld from Toronto, Canada",
 "license": "CC BY 2.0",
@@ -14021,5 +14021,14 @@
 "credit": "https://www.flickr.com/photos/ukgov/",
 "license": "OGL 3",
 "url": "https://commons.wikimedia.org/wiki/File:David_Attenborough_in_2025.jpg"
+},
+{
+"id": "nq1279993",
+"name": "Ebon Moss-Bachrach",
+"file": "nq1279993.jpg",
+"source": "commons",
+"credit": "Gage Skidmore",
+"license": "CC BY-SA 3.0",
+"url": "https://commons.wikimedia.org/wiki/File:Ebon_Moss-Bachrach_by_Gage_Skidmore.jpg"
 }
 ]

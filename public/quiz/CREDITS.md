@@ -245,6 +245,7 @@ Photos from Wikimedia Commons, used under the licence shown. Each was resized to
 | Dwayne Johnson | Harald Krichel | CC BY-SA 4.0 | [file page](https://commons.wikimedia.org/wiki/File:Dwayne_Johnson-1809_(cropped).jpg) |
 | Dwight D. Eisenhower | White House | Public domain | [file page](https://commons.wikimedia.org/wiki/File:Dwight_D._Eisenhower,_official_photo_portrait,_May_29,_1959.jpg) |
 | Dwyane Wade | Flickr user Keith Allison | CC BY-SA 2.0 | [file page](https://commons.wikimedia.org/wiki/File:Dwyane_Wade_e1.jpg) |
+| Ebon Moss-Bachrach | Gage Skidmore | CC BY-SA 3.0 | [file page](https://commons.wikimedia.org/wiki/File:Ebon_Moss-Bachrach_by_Gage_Skidmore.jpg) |
 | Ed Sheeran | Harald Krichel | CC BY-SA 3.0 | [file page](https://commons.wikimedia.org/wiki/File:Ed_Sheeran-6886_(cropped).jpg) |
 | Eddie Murphy | David Shankbone | Public domain | [file page](https://commons.wikimedia.org/wiki/File:Eddie_Murphy_by_David_Shankbone.jpg) |
 | Eddie Redmayne | Montclair Film | CC BY 2.0 | [file page](https://commons.wikimedia.org/wiki/File:Eddie_Redmayne_MFF_Portrait.jpg) |
