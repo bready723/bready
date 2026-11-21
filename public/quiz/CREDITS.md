@@ -1217,6 +1217,7 @@ Photos from Wikimedia Commons, used under the licence shown. Each was resized to
 | 감우성 | WIP | CC BY 3.0 | [file page](https://commons.wikimedia.org/wiki/File:%EA%B0%90%EC%9A%B0%EC%84%B1.png) |
 | 강다니엘 | K-POPIT 케이팝잇 | CC BY 3.0 | [file page](https://commons.wikimedia.org/wiki/File:KANG_DANIEL_220719.jpg) |
 | 강동원 | Moritania (안주) | CC BY 4.0 | [file page](https://commons.wikimedia.org/wiki/File:140802_%EA%B5%B0%EB%8F%84_%EB%B6%80%EC%82%B0_%EB%AC%B4%EB%8C%80%EC%9D%B8%EC%82%AC_%EA%B0%95%EB%8F%99%EC%9B%90.jpg) |
+| 강민경 | KIYOUNG KIM | CC BY 2.0 | [file page](https://commons.wikimedia.org/wiki/File:Kang_Min-kyung_at_the_beverage_promotions_176.jpg) |
 | 강타 | scene PLAYBILL | CC BY 3.0 | [file page](https://commons.wikimedia.org/wiki/File:%EC%94%AC%ED%94%8C%EB%A0%88%EC%9D%B4%EB%B9%8C_8%EC%9B%94%ED%98%B8_%EA%B0%95%ED%83%80.jpg) |
 | 강하늘 | HeyDay | CC BY 4.0 | [file page](https://commons.wikimedia.org/wiki/File:Kang_Ha-neul_at_Midnight_Runners_VIP_premiere_in_August_2017.jpg) |
 | 강형욱 | 보더로운생활 | CC BY 3.0 | [file page](https://commons.wikimedia.org/wiki/File:%EA%B0%95%ED%98%95%EC%9A%B1.jpg) |
@@ -1224,16 +1225,22 @@ Photos from Wikimedia Commons, used under the licence shown. Each was resized to
 | 개코 | Explicit | CC BY-SA 4.0 | [file page](https://commons.wikimedia.org/wiki/File:181013_%EC%9D%B4%ED%83%9C%EC%9B%90_%EC%A7%80%EA%B5%AC%EC%B4%8C_%EC%B6%95%EC%A0%9C_%EC%B0%A9%ED%95%9C%EC%BD%98%EC%84%9C%ED%8A%B8_%EA%B0%9C%EC%BD%94.jpg) |
 | 고경표 | mang2goon | CC BY-SA 4.0 | [file page](https://commons.wikimedia.org/wiki/File:Go_Kyung-pyo_at_the_43rd_Dragon_Film_Awards_B.png) |
 | 고두심 | acrofan.com | CC BY-SA 3.0 | [file page](https://commons.wikimedia.org/wiki/File:Go_Du-sim_from_acrofan.jpg) |
+| 고민시 | Marie Claire Korea | CC BY 3.0 | [file page](https://commons.wikimedia.org/wiki/File:%EA%B3%A0%EB%AF%BC%EC%8B%9C%EC%99%80_%ED%95%A8%EA%BB%98%ED%95%9C_%EB%B7%B0%ED%8B%B0%ED%99%94%EB%B3%B4_02.png) |
 | 고소영 | TV10 | CC BY 3.0 | [file page](https://commons.wikimedia.org/wiki/File:Ko_So-young_in_October_2023.png) |
 | 고아라 | Marie Claire Korea | CC BY 3.0 | [file page](https://commons.wikimedia.org/wiki/File:Go_Ara_in_December_2020.png) |
 | 고윤정 | K-POPit 티비텐 | CC BY 4.0 | [file page](https://commons.wikimedia.org/wiki/File:Go_Youn-jung_in_May_2026.png) |
+| 고진영 | LG전자 | CC BY 2.0 | [file page](https://commons.wikimedia.org/wiki/File:Ko_Jin-young_(cropped).jpg) |
 | 고현정 | K-POPIT 케이팝잇 | CC BY 3.0 | [file page](https://commons.wikimedia.org/wiki/File:Ko_Hyun-jung_2023.png) |
 | 공유 | Marie Claire Korea | CC BY 3.0 | [file page](https://commons.wikimedia.org/wiki/File:Gong_yoo.png) |
 | 공효진 | SSG BLOG (Shinsegye official) | CC BY 4.0 | [file page](https://commons.wikimedia.org/wiki/File:Gong_Hyo_Jin_(Sep_2016).png) |
+| 곽튜브 | 침착맨 원본 박물관 | CC BY 3.0 | [file page](https://commons.wikimedia.org/wiki/File:%EA%B3%BD%ED%8A%9C%EB%B8%8C.jpg) |
+| 구자철 | 대한민국 국군 Republic of Korea Armed Forces | CC BY-SA 2.0 | [file page](https://commons.wikimedia.org/wiki/File:2012.8.16_%EA%B3%B5%EA%B5%B0,_%EA%B5%AC%EC%9E%90%EC%B2%A0_%EC%84%A0%EC%88%98_%ED%99%8D%EB%B3%B4%EB%8C%80%EC%82%AC%EB%A1%9C_%EC%9C%84%EC%B4%89_Rep.of_Korea_Airforce_(7799743422).jpg) |
 | 구하라 | HeyDay | CC BY 4.0 | [file page](https://commons.wikimedia.org/wiki/File:170807_%EA%B5%AC%ED%95%98%EB%9D%BC_(cropped).jpg) |
 | 구혜선 | 뉴스인스타 | CC BY 3.0 | [file page](https://commons.wikimedia.org/wiki/File:180531_%EC%9C%A0%EB%8B%88%ED%81%B4%EB%A1%9C_%EB%A6%AC%EC%A1%B0%ED%8A%B8%EC%9B%A8%EC%96%B4_%EC%BB%AC%EB%A0%89%EC%85%98_%EA%B5%AC%ED%98%9C%EC%84%A0.jpg) |
 | 권상우 | SBS Radio (Korea) | CC BY 3.0 | [file page](https://commons.wikimedia.org/wiki/File:Kwon_Sang-woo_in_2023.jpg) |
+| 권은비 | TV10 | CC BY 4.0 | [file page](https://commons.wikimedia.org/wiki/File:Kwon_Eun-bi_in_May_2026.png) |
 | 규현 | 디스패치 | CC BY 3.0 | [file page](https://commons.wikimedia.org/wiki/File:190919_%EA%B7%9C%ED%98%84_(2)_(cropped).jpg) |
+| 기성용 | Explicit | CC BY-SA 4.0 | [file page](https://commons.wikimedia.org/wiki/File:240609_FC_%EC%84%9C%EC%9A%B8_%ED%8C%AC%EC%82%AC%EC%9D%B8%ED%9A%8C_(%EA%B8%B0%EC%84%B1%EC%9A%A9).jpg) |
 | 기안84 | 뉴스인스타 | CC BY 3.0 | [file page](https://commons.wikimedia.org/wiki/File:190102_%EA%B8%B0%EC%95%8884_(1).jpg) |
 | 김건희 | The White House | Public domain | [file page](https://commons.wikimedia.org/wiki/File:Kim_Keon-hee_2023.jpg) |
 | 김고은 | John Sears | CC BY-SA 4.0 | [file page](https://commons.wikimedia.org/wiki/File:Kim_Go-eun_at_the_2024_Toronto_International_Film_Festival_(cropped).jpg) |
@@ -1249,12 +1256,14 @@ Photos from Wikimedia Commons, used under the licence shown. Each was resized to
 | 김명민 | K-POPIT 케이팝잇 | CC BY 3.0 | [file page](https://commons.wikimedia.org/wiki/File:%EA%B9%80%EB%AA%85%EB%AF%BC(Kim_Myung-min).jpg) |
 | 김무열 | K-POPit 티비텐 | CC BY 4.0 | [file page](https://commons.wikimedia.org/wiki/File:Kim_Mu-yeol_in_June_2026.png) |
 | 김민종 | 티비텐 | CC BY 3.0 | [file page](https://commons.wikimedia.org/wiki/File:Kim_Min-jong_at_Asia_Model_Festival,_30_October_2025_02.png) |
+| 김민하 | K-POPIT 케이팝잇 | CC BY 3.0 | [file page](https://commons.wikimedia.org/wiki/File:Kim_Min-ha_in_October_2024.png) |
 | 김병만 | 박경은의 잼있게 살기 from 경향신문 | CC BY 4.0 | [file page](https://commons.wikimedia.org/wiki/File:120620_%EA%B9%80%EB%B3%91%EB%A7%8C.jpg) |
 | 김상중 | CNTV | CC BY 3.0 | [file page](https://commons.wikimedia.org/wiki/File:Kim_Sang-jong_in_2017.jpg) |
 | 김서형 | 월드비전 World Vision Korea | CC BY 3.0 | [file page](https://commons.wikimedia.org/wiki/File:Kim_Seo-hyung_in_October_2022.png) |
 | 김선아 | K-POPIT 케이팝잇 | CC BY 3.0 | [file page](https://commons.wikimedia.org/wiki/File:Kim_Sun-ah_in_July_2024_01.png) |
 | 김선호 | @_TV10 | CC BY 4.0 | [file page](https://commons.wikimedia.org/wiki/File:Kim_Seon-ho_Bottega_2026_A.jpg) |
 | 김성주 | acrofan.com | CC BY-SA 3.0 | [file page](https://commons.wikimedia.org/wiki/File:Kim_Sung-joo_(South_Korean_television_presenter)_from_acrofan.jpg) |
+| 김성철 | 스토리제이컴퍼니 | CC BY 3.0 | [file page](https://commons.wikimedia.org/wiki/File:Kim_Sung-cheol_in_Oct_2020.jpg) |
 | 김세정 | K-POPIT 케이팝잇 | CC BY 3.0 | [file page](https://commons.wikimedia.org/wiki/File:Kim_Sejeong_in_June_2025.png) |
 | 김소현 | TV10 | CC BY 4.0 | [file page](https://commons.wikimedia.org/wiki/File:Kim_So-hyun_in_October_2025.png) |
 | 김수미 | WomanSense TV | CC BY 3.0 | [file page](https://commons.wikimedia.org/wiki/File:(%EC%9A%B0%EB%A8%BC%EC%84%BC%EC%8A%A4_%EC%8A%A4%ED%83%80)_2018%EB%85%84_8%EC%9B%94%ED%98%B8_%EA%B9%80%EC%88%98%EB%AF%B8.jpg) |
@@ -1264,21 +1273,28 @@ Photos from Wikimedia Commons, used under the licence shown. Each was resized to
 | 김아중 | 세이브더칠드런 | CC BY 3.0 | [file page](https://commons.wikimedia.org/wiki/File:Kim_Ah-joong_in_April_2020.png) |
 | 김연경 | 매맞는고참 | CC BY 4.0 | [file page](https://commons.wikimedia.org/wiki/File:%EC%9B%94%EB%93%9C%EA%B7%B8%EB%9E%91%ED%94%84%EB%A6%AC2_(8)_(cropped).jpg) |
 | 김연아 | Republic of Korea from Seoul, Republic of Korea | CC BY-SA 2.0 | [file page](https://commons.wikimedia.org/wiki/File:PyeongChang_2018_Torch_20170417_03_(33274089633)_(cropped).jpg) |
+| 김연자 | duckleavepics | CC BY 4.0 | [file page](https://commons.wikimedia.org/wiki/File:171129_MBN_%ED%9E%88%EC%96%B4%EB%A1%9C%EC%BD%98%EC%84%9C%ED%8A%B8_%EA%B9%80%EC%97%B0%EC%9E%90_(%EC%84%A0%EC%83%9D%EB%8B%98)_%EC%A7%81%EC%B0%8D_04.jpg) |
+| 김영대 | Marie Claire Korea | CC BY 3.0 | [file page](https://commons.wikimedia.org/wiki/File:210625_%EA%B9%80%EC%98%81%EB%8C%80.jpg) |
 | 김영삼 | 대한민국 국가기록원 | KOGL Type 1 | [file page](https://commons.wikimedia.org/wiki/File:Kim_Young-sam_presidential_portrait.jpg) |
 | 김완선 | Korea.net / Korean Culture and Information Service (Jeon Han) | CC BY-SA 2.0 | [file page](https://commons.wikimedia.org/wiki/File:Kim_Wan_Sun_Korea_KPOP_World_Festival_18_(cropped).jpg) |
 | 김우빈 | K-POPIT 케이팝잇 | CC BY 4.0 | [file page](https://commons.wikimedia.org/wiki/File:Kim_Woo-bin_in_2026.png) |
 | 김유정 | TV10 | CC BY 4.0 | [file page](https://commons.wikimedia.org/wiki/File:Kim_Yoo-jung_in_October_2025_02.png) |
 | 김윤석 | tenasia10 | CC BY 3.0 | [file page](https://commons.wikimedia.org/wiki/File:(TV10)_%EA%B9%80%EC%9C%A4%EC%84%9D_%EB%AC%B4%EB%A6%8E_%EB%8B%B4%EC%9A%94_%EC%84%B1%ED%9D%AC%EB%A1%B1_%EB%B0%9C%EC%96%B8_%EA%B3%B5%EA%B0%9C_%EC%82%AC%EA%B3%BC_(%EC%98%81%ED%99%94_%EB%8B%B9%EC%8B%A0,_%EA%B1%B0%EA%B8%B0_%EC%9E%88%EC%96%B4%EC%A4%84%EB%9E%98%EC%9A%94_%EC%96%B8%EB%A1%A0%EC%8B%9C%EC%82%AC%ED%9A%8C)_%EA%B9%80%EC%9C%A4%EC%84%9D_58s.jpg) |
 | 김윤진 | 롯데엔터테인먼트 | CC BY 3.0 | [file page](https://commons.wikimedia.org/wiki/File:Kim_Yun-Jin_%EA%B9%80%EC%9C%A4%EC%A7%84_2022.png) |
+| 김은숙 | 리플레이REplay TV | CC BY 3.0 | [file page](https://commons.wikimedia.org/wiki/File:Kim_Eun_sook_2016.png) |
 | 김장훈 | LG전자 | CC BY 2.0 | [file page](https://commons.wikimedia.org/wiki/File:Kim_Jang-hoon.jpg) |
 | 김재중 | 뉴스인스타 | CC BY 3.0 | [file page](https://commons.wikimedia.org/wiki/File:180611_%EA%B9%80%EC%9E%AC%EC%A4%91.jpg) |
 | 김정은 | Владимир Смирнов / ТАСС | CC BY 4.0 | [file page](https://commons.wikimedia.org/wiki/File:Kim_Jong-un_and_Vladimir_Putin_(2023-09-13)_12_(cropped).jpg) |
 | 김제동 | 박경은의 잼있게 살기 | CC BY 4.0 | [file page](https://commons.wikimedia.org/wiki/File:120223_%EA%B9%80%EC%A0%9C%EB%8F%99.jpg) |
 | 김종국 | Vernon Chan from Kuala Lumpur, Malaysia | CC BY 2.0 | [file page](https://commons.wikimedia.org/wiki/File:Kim_Jong_Kook_at_Malaysia_for_Running_Man_Fan_Meeting_Asian_Tour_2014.jpg) |
 | 김종민 | 뉴스인스타 | CC BY 3.0 | [file page](https://commons.wikimedia.org/wiki/File:180430_%EA%B9%80%EC%A2%85%EB%AF%BC.jpg) |
+| 김주령 | Marie Claire Korea | CC BY 3.0 | [file page](https://commons.wikimedia.org/wiki/File:Kim_Joo-ryoung_in_March_2024.png) |
 | 김주혁 | K-POPIT 케이팝잇 | CC BY 3.0 | [file page](https://commons.wikimedia.org/wiki/File:161216_%EA%B9%80%EC%A3%BC%ED%98%81_(1).jpg) |
+| 김주형 | Bryan Berlin | CC BY-SA 4.0 | [file page](https://commons.wikimedia.org/wiki/File:Tom_Kim_Travelers-009_(cropped).jpg) |
+| 김준현 | LG전자 | CC BY 2.0 | [file page](https://commons.wikimedia.org/wiki/File:%EA%B9%80%EC%A4%80%ED%98%84_(%EA%B0%9C%EA%B7%B8%EB%A7%A8).jpg) |
 | 김지원 | K-POPIT 케이팝잇 TV10 | CC BY 3.0 | [file page](https://commons.wikimedia.org/wiki/File:Kim_Jiwon_%EA%B9%80%EC%A7%80%EC%9B%90_Airport_Departure_May_2025.png) |
 | 김창완 | Trainholic | CC BY-SA 4.0 | [file page](https://commons.wikimedia.org/wiki/File:Kim_Chang-wan_(cropped).jpg) |
+| 김채원 | David Lee from Redmond, WA, USA | CC BY 4.0 | [file page](https://commons.wikimedia.org/wiki/File:Easy_Crazy_Hot_Tour_in_Seattle_-_le_sserafim_(54797154470).jpg) |
 | 김태리 | 티비텐 (TV10) | CC BY 3.0 | [file page](https://commons.wikimedia.org/wiki/File:KIM_TAERI_(%EA%B9%80%ED%83%9C%EB%A6%AC)_-_PRADA_-_2025.04.21_-_P3.jpg) |
 | 김태희 | Story J Company | CC BY 3.0 | [file page](https://commons.wikimedia.org/wiki/File:Kim_Tae-hee_Bodyfriend_BTS_-_3.png) |
 | 김하성 | Minda Haas Kuhlmann | CC BY 4.0 | [file page](https://commons.wikimedia.org/wiki/File:Ha-seong_Kim-25.jpg) |
@@ -1293,16 +1309,23 @@ Photos from Wikimedia Commons, used under the licence shown. Each was resized to
 | 김희철 | K-POPIT 케이팝잇 | CC BY 3.0 | [file page](https://commons.wikimedia.org/wiki/File:11%EC%9B%94_9%EC%9D%BC_%EC%B1%84%EB%84%90A_%27%EC%8B%B1%EB%8D%B0%EB%A0%90%EB%9D%BC%27_%EC%A0%9C%EC%9E%91%EB%B0%9C%ED%91%9C%ED%9A%8C_%ED%98%84%EC%9E%A5.jpg) |
 | 나문희 | 롯데엔터테인먼트 | CC BY 3.0 | [file page](https://commons.wikimedia.org/wiki/File:Na_Moon-hee_in_February_2024.png) |
 | 나연 | TV10 | CC BY 3.0 | [file page](https://commons.wikimedia.org/wiki/File:Nayeon_in_November_2025.png) |
+| 나홍진 | Gabriel Hutchinson | CC BY-SA 4.0 | [file page](https://commons.wikimedia.org/wiki/File:Na_Hong-jin_at_the_2026_Cannes_Film_Festival_(cropped).jpg) |
+| 남궁민 | Marie Claire Korea | CC BY 3.0 | [file page](https://commons.wikimedia.org/wiki/File:Namkoong_Min_2025.png) |
 | 남주혁 | beautypl | CC BY 3.0 | [file page](https://commons.wikimedia.org/wiki/File:2017_%EB%82%A8%EC%A3%BC%ED%98%81_01.png) |
 | 남지현 | bikerepairshop | CC BY 4.0 | [file page](https://commons.wikimedia.org/wiki/File:Nam_Ji-hyeon_(actress,_born_1995)_at_HugDown_Celebration,_on_Dec_11,_2014.png) |
 | 노무현 | 대한민국 국가기록원 | KOGL Type 1 | [file page](https://commons.wikimedia.org/wiki/File:Roh_Moo-hyun_presidential_portrait.jpg) |
+| 노윤서 | PlayIN | CC BY 3.0 | [file page](https://commons.wikimedia.org/wiki/File:Noh_Yoon-seo_%EB%85%B8%EC%9C%A4%EC%84%9C_in_2022.jpg) |
 | 노홍철 | Park Dae ung | CC BY 4.0 | [file page](https://commons.wikimedia.org/wiki/File:140807_%EB%85%B8%ED%99%8D%EC%B2%A0_01.jpg) |
 | 닝닝 | 티비텐 TV10 | CC BY 4.0 | [file page](https://commons.wikimedia.org/wiki/File:Ningning_at_Seoul_Discovery_Expedition_event_on_March_11,_2026_02.jpg) |
 | 다니엘 | Marie Claire Korea | CC BY-SA 4.0 | [file page](https://commons.wikimedia.org/wiki/File:Danielle_Marsh_for_Marie_Claire_Korea_April_2024_F.png) |
 | 다현 | https://www.youtube.com/@_TV10/videos | CC BY 3.0 | [file page](https://commons.wikimedia.org/wiki/File:Dahyun_at_press_conference_for_You_Are_the_Apple_of_My_Eye_02_(cropped).png) |
 | 대성 | GOM | CC BY 4.0 | [file page](https://commons.wikimedia.org/wiki/File:Daesung_-_MADE_THE_MOVIE_Premiere.jpg) |
+| 데프콘 | zzal TV 고다쿠 | CC BY 3.0 | [file page](https://commons.wikimedia.org/wiki/File:(GO%EB%8B%A4%EC%BF%A0)_%EA%B3%A0%EB%8B%A4%EC%BF%A0%EC%97%90_%EB%B0%94%EB%9D%BC%EB%8A%94_%EA%B2%83%EC%9D%80_(%EC%8B%9C%EC%A6%8C2_%EC%B5%9C%EC%A2%85%ED%9A%8C)_1m48s.jpg) |
+| 도겸 | Seventeen | CC BY 3.0 | [file page](https://commons.wikimedia.org/wiki/File:DK_Follow_240330.jpg) |
 | 딘 | Jae Chung (JDZ) | CC BY-SA 3.0 | [file page](https://commons.wikimedia.org/wiki/File:DEAN,_Joombas_Music_Group_artist.png) |
 | 라미란 | tenasia10 | CC BY 3.0 | [file page](https://commons.wikimedia.org/wiki/File:Ra_Mi-ran_in_2017.jpg) |
+| 레이 | K-POPIT 케이팝잇 | CC BY 3.0 | [file page](https://commons.wikimedia.org/wiki/File:Ive%27s_Rei_@_OPENING_PROJECTxSATUR_PhotoCall,_12_June_2025_03.png) |
+| 로꼬 | Explicit | CC BY-SA 4.0 | [file page](https://commons.wikimedia.org/wiki/File:220521_%EB%8D%94%ED%81%AC%EB%9D%BC%EC%9D%B4%EA%B7%B8%EB%9D%BC%EC%9A%B4%EB%93%9C_%EB%A1%9C%EA%BC%AC.jpg) |
 | 로운 | K-POPIT 케이팝잇 | CC BY 3.0 | [file page](https://commons.wikimedia.org/wiki/File:231214_Rowoon.jpg) |
 | 로제 | TV10 | CC BY 3.0 | [file page](https://commons.wikimedia.org/wiki/File:Blackpink_Ros%C3%A9_Rimowa_1.jpg) |
 | 류승룡 | 티비텐 TV10 | CC BY 3.0 | [file page](https://commons.wikimedia.org/wiki/File:Ryu_Seung-ryong_in_2025.png) |
@@ -1315,11 +1338,13 @@ Photos from Wikimedia Commons, used under the licence shown. Each was resized to
 | 모모 | 티비텐 | CC BY 3.0 | [file page](https://commons.wikimedia.org/wiki/File:TWICE_MOMO_April_2024.jpg) |
 | 문가영 | K-POPIT 케이팝잇 | CC BY 4.0 | [file page](https://commons.wikimedia.org/wiki/File:Moon_Ga-young_in_July_2026.png) |
 | 문근영 | K-POPIT 케이팝잇 | CC BY 3.0 | [file page](https://commons.wikimedia.org/wiki/File:Moon_Geun-young_in_October_2024.png) |
+| 문세윤 | Ten Asia | CC BY 4.0 | [file page](https://commons.wikimedia.org/wiki/File:Moon_Se-yoon,_2026.jpg) |
 | 문소리 | SBS Radio 에라오 | CC BY 3.0 | [file page](https://commons.wikimedia.org/wiki/File:Moon_So-ri.png) |
 | 문재인 | Government of the Republic of Korea | KOGL Type 1 | [file page](https://commons.wikimedia.org/wiki/File:President_Moon_Jae_In.jpg) |
 | 문채원 | 뉴스인스타 | CC BY 3.0 | [file page](https://commons.wikimedia.org/wiki/File:180813_%EB%AC%B8%EC%B1%84%EC%9B%90_(3).png) |
 | 미나 | David Lee from Redmond, WA, USA | CC BY 4.0 | [file page](https://commons.wikimedia.org/wiki/File:Twice_in_Seattle_2026_-_TWICE._Mina_(55044093787).jpg) |
 | 민규 | TV Ten | CC BY 3.0 | [file page](https://commons.wikimedia.org/wiki/File:Mingyu_Bvlgari_240314.png) |
+| 민니 | K-POPIT 케이팝잇 | CC BY 4.0 | [file page](https://commons.wikimedia.org/wiki/File:30072026_I-DLE_MINNIE_Airport_Departure_1.jpg) |
 | 민지 | OLensglobal | CC BY 3.0 | [file page](https://commons.wikimedia.org/wiki/File:Minji_Olens_2024_FW_2.jpg) |
 | 민현 | Marie Claire Korea | CC BY 3.0 | [file page](https://commons.wikimedia.org/wiki/File:Hwang_Minhyun_%ED%99%A9%EB%AF%BC%ED%98%84_2023_03.jpg) |
 | 민호 | Marie Claire Korea | CC BY 3.0 | [file page](https://commons.wikimedia.org/wiki/File:Minho_for_Marie_Claire_Magazine_August_Issue_2021_05.png) |
@@ -1353,31 +1378,41 @@ Photos from Wikimedia Commons, used under the licence shown. Each was resized to
 | 박해수 | Marie Claire Korea | CC BY 3.0 | [file page](https://commons.wikimedia.org/wiki/File:20221012_Park_Hae-soo_(%EB%B0%95%ED%95%B4%EC%88%98)_BIFF_Asia_Star_Awards_(1)_cropped.jpg) |
 | 박해일 | 디스패치 | CC BY 3.0 | [file page](https://commons.wikimedia.org/wiki/File:%EB%B0%95%ED%95%B4%EC%9D%BC.jpg) |
 | 박해진 | Viu Indonesia | CC BY 3.0 | [file page](https://commons.wikimedia.org/wiki/File:%EB%B0%95%ED%95%B4%EC%A7%84(Park_Hae_Jin).jpg) |
+| 박현빈 | 여니수니 | CC BY 2.0 kr | [file page](https://commons.wikimedia.org/wiki/File:Park_Hyun-Bin.jpg) |
 | 박형식 | 무릎팍타짱 CJH | CC BY 3.0 | [file page](https://commons.wikimedia.org/wiki/File:20230425_Park_Hyung-sik_%EB%B0%95%ED%98%95%EC%8B%9D.jpg) |
 | 박효신 | 달덩이 | CC BY 2.0 kr | [file page](https://commons.wikimedia.org/wiki/File:Park_Hyo-Shin18.jpg) |
 | 반기문 | World Economic Forum | CC BY-SA 2.0 | [file page](https://commons.wikimedia.org/wiki/File:Ban_Ki-moon_1-2.jpg) |
 | 방시혁 | Metropolitan City of Busan | KOGL Type 1 | [file page](https://commons.wikimedia.org/wiki/File:Bang_Si-hyuk_on_24_June_2022.jpg) |
 | 방찬 | K-POPIT 케이팝잇 | CC BY 4.0 | [file page](https://commons.wikimedia.org/wiki/File:Bang_Chan_of_Stray_Kids,_February_23,_2026_(1).png) |
 | 배두나 | Elena Ternovaja | CC BY-SA 3.0 | [file page](https://commons.wikimedia.org/wiki/File:Bae_Doona_at_Berlinale_2026.jpg) |
+| 백예린 | YERINBAEKMOM | CC BY 4.0 | [file page](https://commons.wikimedia.org/wiki/File:Baek_Ye-rin_performing_%22Sugar%22_on_July_10,_2014.jpg) |
 | 백종원 | 밥상위의 국가대표 우리돼지 한돈 | CC BY 3.0 | [file page](https://commons.wikimedia.org/wiki/File:%EB%B0%B1%EC%A2%85%EC%9B%90_%ED%95%9C%EB%8F%88_%EC%B6%94%EC%B6%9C.png) |
 | 백지영 | 디스패치 | CC BY 3.0 | [file page](https://commons.wikimedia.org/wiki/File:190328_%EB%B0%B1%EC%A7%80%EC%98%81.jpg) |
 | 백현 | DonutB_56 | CC BY 4.0 | [file page](https://commons.wikimedia.org/wiki/File:%ED%95%98%EC%96%80%EB%A8%B8%EB%A6%AC_%EB%B0%B1%ED%98%84_3.jpg) |
 | 범규 | K-POPIT 케이팝잇 | CC BY 3.0 | [file page](https://commons.wikimedia.org/wiki/File:Choi_Beom-gyu_at_a_Dior_event_in_2025_02.jpg) |
+| 벤 | Uekara mariko | CC BY 3.0 | [file page](https://commons.wikimedia.org/wiki/File:150521_%EB%B2%A4(Ben)_-_%EC%9D%B8%EC%97%B0_%EA%B3%BC%EC%B2%9C_%EB%A0%9B%EC%B8%A0%EB%9F%B0%ED%8C%8C%ED%81%AC_%EB%9D%BC%EC%9D%B4%EB%B8%8C_%EC%BD%98%EC%84%9C%ED%8A%B8_%EC%A7%81%EC%BA%A0.jpg) |
 | 변요한 | Explicit | CC BY-SA 4.0 | [file page](https://commons.wikimedia.org/wiki/File:181027_%EB%B3%80%EC%9A%94%ED%95%9C_%EC%98%AC%EB%A6%AC%EB%B8%8C%EC%98%81_%EB%AA%85%EB%8F%99%EB%B3%B8%EC%A0%90_%ED%8C%AC%EC%8B%B8%EC%9D%B8%ED%9A%8C_03.jpg) |
 | 변우석 | K-POPIT 케이팝잇 | CC BY 3.0 | [file page](https://commons.wikimedia.org/wiki/File:20261030_Byeon_Woo-seok.png) |
 | 보아 | Dispatch | CC BY 3.0 | [file page](https://commons.wikimedia.org/wiki/File:BoA_at_Incheon_Airport_on_May_15,_2019_(2).png) |
 | 봉준호 | Kevin Paul | CC BY 4.0 | [file page](https://commons.wikimedia.org/wiki/File:Bong_Joon_Ho_-_Okja.jpg) |
 | 뷔 | TV10 | CC BY 4.0 | [file page](https://commons.wikimedia.org/wiki/File:V_at_W_Korea_Breast_Cancer_Campaign,_15_October_2025.png) |
 | 비 | TV10 | CC BY 4.0 | [file page](https://commons.wikimedia.org/wiki/File:Rain_(entertainer)_in_March_2026.png) |
+| 비비 | David Lee | CC BY 4.0 | [file page](https://commons.wikimedia.org/wiki/File:BIBI_in_June_2025_(cropped).jpg) |
+| 비와이 | f2.8 | CC BY 4.0 | [file page](https://commons.wikimedia.org/wiki/File:20161119_%EB%B9%84%EC%99%80%EC%9D%B4_%EB%A9%9C%EB%A1%A0%EB%AE%A4%EC%A7%81%EC%96%B4%EC%9B%8C%EB%93%9C_(2).jpg) |
+| 빈지노 | NewsInStar | CC BY 3.0 | [file page](https://commons.wikimedia.org/wiki/File:190521_%EB%B9%88%EC%A7%80%EB%85%B8X%ED%99%8D%EC%A2%85%ED%98%84,_%EA%B0%90%ED%83%84%EB%82%98%EC%98%A4%EB%8A%94_%EB%A9%8B%EC%A7%90_%27%EB%B0%94%EC%9D%B4%EB%A0%88%EB%8F%84(BYREDO)%27_%ED%94%8C%EB%9E%98%EA%B7%B8%EC%8B%AD_%EC%8A%A4%ED%86%A0%EC%96%B4_%EC%98%A4%ED%94%88_%EA%B8%B0%EB%85%90%ED%96%89%EC%82%AC_36s.jpg) |
 | 사나 | David Lee from Redmond, WA, USA | CC BY 4.0 | [file page](https://commons.wikimedia.org/wiki/File:Twice_in_Seattle_2026_-_TWICE._Sana_(55044987426)_(cropped).jpg) |
+| 사쿠라 | 티비텐 | CC BY 3.0 | [file page](https://commons.wikimedia.org/wiki/File:20241018_Le_Sserafim%27s_Sakura_Miyawaki_03.jpg) |
 | 산다라박 | K-POPIT 케이팝잇 | CC BY 3.0 | [file page](https://commons.wikimedia.org/wiki/File:Sandara_Park_Airport_Departure_2022_2_(cropped).jpg) |
 | 서강준 | 티비텐 TV10 | CC BY 3.0 | [file page](https://commons.wikimedia.org/wiki/File:20250523_%EC%84%9C%EA%B0%95%EC%A4%80_SEO_KANG-JUN.jpg) |
 | 서예지 | K-POPIT 케이팝잇 | CC BY 3.0 | [file page](https://commons.wikimedia.org/wiki/File:Seo_Yea-ji_in_August_2024.png) |
 | 서인국 | Marie Claire Korea | CC BY 3.0 | [file page](https://commons.wikimedia.org/wiki/File:Seo_In-Guk_210601.png) |
 | 서태지 | acrofan.com | CC BY-SA 3.0 | [file page](https://commons.wikimedia.org/wiki/File:Seo_Taiji_on_October_20,_2014_(2).jpg) |
 | 서현 | SparkleS805 | CC BY 4.0 | [file page](https://commons.wikimedia.org/wiki/File:Seohyun_at_Incheon_International_Airport_in_February_2019_(1).jpg) |
+| 서현진 | 티비텐 TV10 | CC BY 3.0 | [file page](https://commons.wikimedia.org/wiki/File:Seo_Hyun-Jin_20251218.png) |
+| 선동열 | Gwangju Munhwa Broadcasting Corporation (official YouTube account) Verification: | CC BY 3.0 | [file page](https://commons.wikimedia.org/wiki/File:%EC%84%A0%EB%8F%99%EC%97%B4_(KIA_%ED%83%80%EC%9D%B4%EA%B1%B0%EC%A6%88_%EA%B0%90%EB%8F%85).jpg) |
 | 선미 | 티비텐 | CC BY 3.0 | [file page](https://commons.wikimedia.org/wiki/File:Lee_Sunmi_%EC%9D%B4%EC%84%A0%EB%AF%B8_2024_06.jpg) |
 | 설경구 | Republic of Korea | CC BY-SA 4.0 | [file page](https://commons.wikimedia.org/wiki/File:Sol_Kyung-gu.jpg) |
+| 설인아 | K-POPIT 케이팝잇 | CC BY 3.0 | [file page](https://commons.wikimedia.org/wiki/File:Seol_In-ah_in_September_2024.png) |
 | 성동일 | 디스패치 | CC BY 3.0 | [file page](https://commons.wikimedia.org/wiki/File:Sung_Dong-il_in_2019.jpg) |
 | 성룡 | Segolene Liger | CC BY-SA 4.0 | [file page](https://commons.wikimedia.org/wiki/File:Jackie_Chan_-_2025_Locarno_Film_Festival.jpg) |
 | 성유리 | 디스패치 | CC BY 3.0 | [file page](https://commons.wikimedia.org/wiki/File:190510_%EC%84%B1%EC%9C%A0%EB%A6%AC_(1).jpg) |
@@ -1385,6 +1420,7 @@ Photos from Wikimedia Commons, used under the licence shown. Each was resized to
 | 소지섭 | Marie Claire Korea | CC BY 3.0 | [file page](https://commons.wikimedia.org/wiki/File:So_Ji-sub_in_May_2025.png) |
 | 손담비 | acrofan.com | CC BY-SA 3.0 | [file page](https://commons.wikimedia.org/wiki/File:Son_Dambi_from_acrofan.jpg) |
 | 손석구 | Marie Claire Korea | CC BY 3.0 | [file page](https://commons.wikimedia.org/wiki/File:20220801_Son_Seok-koo_%EC%86%90%EC%84%9D%EA%B5%AC_Marie_Claire_Korea_(1).jpg) |
+| 손석희 | Trainholic | CC BY-SA 4.0 | [file page](https://commons.wikimedia.org/wiki/File:Sohn_Suk-hee_20170509.jpg) |
 | 손연재 | Korea.net / Korean Culture and Information Service (Jeon Han) | CC BY-SA 2.0 | [file page](https://commons.wikimedia.org/wiki/File:Incheon_AsianGames_Gymnastics_Rhythmic_15.jpg) |
 | 손예진 | 티비텐 TV10 | CC BY 4.0 | [file page](https://commons.wikimedia.org/wiki/File:Son_Ye-jin_at_the_2025_Blue_Dragon_Film_Awards_3.png) |
 | 손현주 | K-POPIT 케이팝잇10 | CC BY 3.0 | [file page](https://commons.wikimedia.org/wiki/File:Sun_Hyun-joo_in_2017.jpg) |
@@ -1408,12 +1444,16 @@ Photos from Wikimedia Commons, used under the licence shown. Each was resized to
 | 슈가 | Dispatch | CC BY 3.0 | [file page](https://commons.wikimedia.org/wiki/File:Min_Yoon-gi_May_2018.jpg) |
 | 슈화 | K6ka | CC BY-SA 4.0 | [file page](https://commons.wikimedia.org/wiki/File:Shuhua_Yeh_portrait_at_TIFF_2026.jpg) |
 | 슬기 | SeulRene 'IS' LOVE❤️ | CC BY 4.0 | [file page](https://commons.wikimedia.org/wiki/File:Kang_Seul-gi_at_Coca-Cola_Event_on_January_18,_2020_03.jpg) |
+| 승관 | Seventeen | CC BY 3.0 | [file page](https://commons.wikimedia.org/wiki/File:Seungkwan_Caratland_2025.jpg) |
+| 승민 | K-POPIT 케이팝잇 | CC BY 4.0 | [file page](https://commons.wikimedia.org/wiki/File:Seungmin_of_Stray_Kids,_October_15,_2025.png) |
+| 시우민 | 티비텐 | CC BY 3.0 | [file page](https://commons.wikimedia.org/wiki/File:Xiumin_at_Billboard_K_POWER_100_on_August_27,_2024.png) |
 | 신구 | K-POPIT 케이팝잇 TV10 | CC BY 3.0 | [file page](https://commons.wikimedia.org/wiki/File:Shin_Goo_in_October_2024.png) |
 | 신동엽 | dispatchsns | CC BY 3.0 | [file page](https://commons.wikimedia.org/wiki/File:180503_%EC%8B%A0%EB%8F%99%EC%97%BD.png) |
 | 신민아 | Marie Claire Korea | CC BY 3.0 | [file page](https://commons.wikimedia.org/wiki/File:Shin_Min-a_in_August_2022.jpg) |
 | 신봉선 | SBS 라디오 공식 계정 에라오입니다 | CC BY 3.0 | [file page](https://commons.wikimedia.org/wiki/File:190822_%EC%8B%A0%EB%B4%89%EC%84%A0_02.png) |
 | 신세경 | 티비텐 TV10 | CC BY 4.0 | [file page](https://commons.wikimedia.org/wiki/File:2026-05-08_Baeksang_Arts_Awards_red_carpet_03_(cropped).jpg) |
 | 신승훈 | acrofan.com | CC BY-SA 3.0 | [file page](https://commons.wikimedia.org/wiki/File:Shin_Seung-hun_from_acrofan.jpg) |
+| 신유나 | 티비텐 TV10 | CC BY 3.0 | [file page](https://commons.wikimedia.org/wiki/File:Yuna_at_Incheon_Airport_on_September_22,_2025.jpg) |
 | 신유빈 | KTTL 한국프로탁구리그 (한국실업탁구연맹) | CC BY 3.0 | [file page](https://commons.wikimedia.org/wiki/File:%EC%8B%A0%EC%9C%A0%EB%B9%88_%EC%84%A0%EC%88%98.jpg) |
 | 신지 | 어떠신지?!? | CC BY 4.0 | [file page](https://commons.wikimedia.org/wiki/File:Shin-ji_in_September_2025.png) |
 | 신하균 | dramax iHQ | CC BY 3.0 | [file page](https://commons.wikimedia.org/wiki/File:Shin_Ha-kyun_in_Mar_2021.jpg) |
@@ -1427,36 +1467,46 @@ Photos from Wikimedia Commons, used under the licence shown. Each was resized to
 | 안세영 | KOCIS(Korean Culture and Information Service) Official Photographer : Kim Sunjoo | CC BY-SA 2.0 | [file page](https://commons.wikimedia.org/wiki/File:Hangzhou_AsianGames_Team_Korea_05_(An_Se-young).jpg) |
 | 안소희 | NINE STARS | CC BY 3.0 | [file page](https://commons.wikimedia.org/wiki/File:20180830%E2%80%94Ahn_So-hee_%EC%95%88%EC%86%8C%ED%9D%AC,_Chanel_event,_Seongsu-dong,_Seoul,_South_Korea,_screenshot_(00m41s).jpg) |
 | 안유진 | 조선팔도 | CC BY 3.0 | [file page](https://commons.wikimedia.org/wiki/File:181029_IZ*ONE_Yujin_02.png) |
+| 안은진 | K-POPIT 케이팝잇 | CC BY 4.0 | [file page](https://commons.wikimedia.org/wiki/File:Ahn_Eun-jin_in_October_2026.png) |
 | 안재욱 | 뉴스인스타 | CC BY 3.0 | [file page](https://commons.wikimedia.org/wiki/File:180430_%EC%95%88%EC%9E%AC%EC%9A%B1.jpg) |
 | 안재현 | 디스패치 | CC BY 3.0 | [file page](https://commons.wikimedia.org/wiki/File:%E2%80%9C%EC%9E%98%EC%83%9D%EA%B9%80_%EB%81%9D%ED%8C%90%EC%99%95%E2%80%9D%E2%80%A6%EC%95%88%EC%9E%AC%ED%98%84,_%ED%95%98%EC%96%80_%EB%B1%80%ED%8C%8C%EC%9D%B4%EC%96%B4_%EB%B9%84%EC%A3%BC%EC%96%BC.jpg) |
 | 안정환 | 안정환 19 | CC BY 3.0 | [file page](https://commons.wikimedia.org/wiki/File:Ahn_Jung-hwan_in_November_2021.png) |
 | 안중근 | Unknown authorUnknown author | Public domain | [file page](https://commons.wikimedia.org/wiki/File:An_Jung-geun.JPG) |
 | 안효섭 | K-POPIT 케이팝잇 | CC BY 3.0 | [file page](https://commons.wikimedia.org/wiki/File:20240514_Ahn_Hyo-seop_%EC%95%88%ED%9A%A8%EC%84%AD_03.jpg) |
 | 양동근 | acrofan.com | CC BY-SA 3.0 | [file page](https://commons.wikimedia.org/wiki/File:Yang_Dong-geun_from_acrofan.jpg) |
+| 양세찬 | acrofan.com | CC BY-SA 3.0 | [file page](https://commons.wikimedia.org/wiki/File:%ED%95%9C%EA%B5%AD%EB%8B%8C%ED%85%90%EB%8F%84_%EC%8A%88%ED%8D%BC_%EB%A7%88%EB%A6%AC%EC%98%A4_%EC%BA%A0%ED%8E%98%EC%9D%B8_%EC%9D%B4%EB%B2%A4%ED%8A%B8_%ED%98%84%EC%9E%A5_(%EC%96%91%EC%84%B8%EC%B0%AC).jpg) |
 | 양세형 | K-POPIT 케이팝잇 | CC BY 3.0 | [file page](https://commons.wikimedia.org/wiki/File:Yangsehyungin2020.png) |
+| 양용은 | Shot Clock Masters | CC0 | [file page](https://commons.wikimedia.org/wiki/File:Y._E._Yang_-_2016.jpg) |
 | 양현석 | K-POPIT 케이팝잇 | CC BY 3.0 | [file page](https://commons.wikimedia.org/wiki/File:161110_%EC%96%91%ED%98%84%EC%84%9D.png) |
 | 엄기준 | 티비텐 | CC BY 3.0 | [file page](https://commons.wikimedia.org/wiki/File:Um_Ki-joon_in_March_2024.png) |
 | 엄정화 | 티비텐 | CC BY 3.0 | [file page](https://commons.wikimedia.org/wiki/File:Uhm_Junghwa_Kolon_Sports_50th_Anniversary_Event_1.jpg) |
+| 엄지원 | KIYOUNG KIM | CC BY 2.0 | [file page](https://commons.wikimedia.org/wiki/File:Uhm_Ji-Won_aht_the_2010_Metrocity_fashion_show_%26_party_017_(cropped).jpg) |
 | 엄태웅 | Moritania | CC BY 4.0 | [file page](https://commons.wikimedia.org/wiki/File:Uhm_Tae-woong_at_BIFF_2013_02.jpg) |
 | 에드워드 리 | Larry D. Moore | CC BY 4.0 | [file page](https://commons.wikimedia.org/wiki/File:Edward_Lee_2018.jpg) |
 | 에릭 | josungsoo | CC BY 4.0 | [file page](https://commons.wikimedia.org/wiki/File:130718_eric_MNET_20%27S_CHOICE.jpg) |
 | 에일리 | Kevin Paul | CC BY 4.0 | [file page](https://commons.wikimedia.org/wiki/File:Ailee_at_Korea_Expo_Los_Angeles_2026-1.jpg) |
 | 여진구 | 침착맨 플러스 | CC BY 3.0 | [file page](https://commons.wikimedia.org/wiki/File:Yeo_Jin-goo_in_July_2024.png) |
+| 연상호 | John Sears | CC BY-SA 4.0 | [file page](https://commons.wikimedia.org/wiki/File:Yeon_Sang-ho_at_2025_Toronto_International_Film_Festival_5.jpg) |
 | 연정훈 | acrofan.com | CC BY-SA 3.0 | [file page](https://commons.wikimedia.org/wiki/File:Yeon_Jeong-hun_from_acrofan_-_cropped_01.jpg) |
 | 연준 | 티비텐 TV10 | CC BY 3.0 | [file page](https://commons.wikimedia.org/wiki/File:Yeonjun_250625.jpg) |
 | 염정아 | K-POPIT 케이팝잇 | CC BY 3.0 | [file page](https://commons.wikimedia.org/wiki/File:Yum_Jung-ah_in_June_2023.png) |
 | 염혜란 | Republic of Korea | CC BY-SA 4.0 | [file page](https://commons.wikimedia.org/wiki/File:Yeom_Hye-ran.jpg) |
 | 영탁 | SBS Radio 에라오 | CC BY 3.0 | [file page](https://commons.wikimedia.org/wiki/File:%EC%98%81%ED%83%81_SBS_%EB%9D%BC%EB%94%94%EC%98%A4.jpg) |
 | 예리 | K-POPIT 케이팝잇 | CC BY 3.0 | [file page](https://commons.wikimedia.org/wiki/File:240511_Red_Velvet_Yeri.jpg) |
+| 오나라 | K-POPIT 케이팝잇 TV10 | CC BY 3.0 | [file page](https://commons.wikimedia.org/wiki/File:Oh_Na-ra_%EC%98%A4%EB%82%98%EB%9D%BC_2022.jpg) |
 | 오세훈 | Jinho.Jung | CC BY-SA 2.0 | [file page](https://commons.wikimedia.org/wiki/File:Oh_Se-Hoon.jpg) |
 | 오연수 | Silkn_Korea | CC BY 3.0 | [file page](https://commons.wikimedia.org/wiki/File:%EC%98%A4%EC%97%B0%EC%88%98%EC%9D%98_%EC%95%84%EB%A6%84%EB%8B%A4%EC%9A%B4_%EC%8B%9C%EA%B0%84.jpg) |
+| 오영수 | Yein Journal 예인저널 | CC BY 3.0 | [file page](https://commons.wikimedia.org/wiki/File:O_Yeong-su_ambassador_for_Korean_performance_tourism-2022-07-26.png) |
 | 오윤아 | TV10 | CC BY 4.0 | [file page](https://commons.wikimedia.org/wiki/File:Oh_Yoon-ah_in_April_2026.png) |
+| 오은영 | SBS Radio 에라오 | CC BY 3.0 | [file page](https://commons.wikimedia.org/wiki/File:%EC%98%A4%EC%9D%80%EC%98%81.jpg) |
 | 오정세 | K-POPIT 케이팝잇 | CC BY 3.0 | [file page](https://commons.wikimedia.org/wiki/File:Oh_Jung-se_in_November_2024.png) |
 | 옥주현 | scene PLAYBILL | CC BY 3.0 | [file page](https://commons.wikimedia.org/wiki/File:(%EC%94%AC%ED%94%8CTV)_%EC%94%AC%ED%94%8C%EB%A0%88%EC%9D%B4%EB%B9%8C_6%EC%9B%94%ED%98%B8_COVER_STORY_%27%EB%A7%88%ED%83%80%ED%95%98%EB%A6%AC%27%EC%98%A5%EC%A3%BC%ED%98%84_(2).jpg) |
 | 옥택연 | mang2goon | CC BY 3.0 | [file page](https://commons.wikimedia.org/wiki/File:221125_Ok_Taec-yeon.jpg) |
 | 온유 | Marie Claire Korea | CC BY 3.0 | [file page](https://commons.wikimedia.org/wiki/File:Onew_for_Marie_Claire_Magazine_August_Issue_2021_03.png) |
 | 우기 | K-POPIT 케이팝잇 | CC BY 3.0 | [file page](https://commons.wikimedia.org/wiki/File:20230630_Song_Yu-qi.jpg) |
 | 우도환 | Explicit | CC BY-SA 4.0 | [file page](https://commons.wikimedia.org/wiki/File:181007_%EC%9A%B0%EB%8F%84%ED%99%98_%ED%98%84%EB%8C%80%EB%B0%B1%ED%99%94%EC%A0%90_%ED%8C%90%EA%B5%90%EC%A0%90_%ED%8C%AC%EC%8B%B8%EC%9D%B8%ED%9A%8C_6.jpg) |
+| 우상혁 | Athletics Federation of India | CC BY-SA 4.0 | [file page](https://commons.wikimedia.org/wiki/File:WOO_SANGHYEOK_Of_Korea_Won_Gold_(cropped).jpg) |
+| 우즈 | 디스패치 | CC BY 3.0 | [file page](https://commons.wikimedia.org/wiki/File:191018_X1_Cho_Seung-youn_at_Seoul_Fashion_Week_SS_2020.png) |
 | 원빈 | acrofan.com | CC BY-SA 3.0 | [file page](https://commons.wikimedia.org/wiki/File:Won_Bin_from_acrofan.jpg) |
 | 원슈타인 | GROOVL1N | CC BY 3.0 | [file page](https://commons.wikimedia.org/wiki/File:Wonstein_(%EC%9B%90%EC%8A%88%ED%83%80%EC%9D%B8)_210601.jpg) |
 | 웬디 | 오늘의 소녀 | CC BY 4.0 | [file page](https://commons.wikimedia.org/wiki/File:Wendy_Son_at_Dream_Concert_on_May_12,_2018.jpg) |
@@ -1465,6 +1515,8 @@ Photos from Wikimedia Commons, used under the licence shown. Each was resized to
 | 유관순 | Unknown authorUnknown author | Public domain | [file page](https://commons.wikimedia.org/wiki/File:Ryu_Gwan-sun.jpg) |
 | 유노윤호 | K-POPIT 케이팝잇 | CC BY 3.0 | [file page](https://commons.wikimedia.org/wiki/File:20230818_YUNHO_(%EC%9C%A0%EB%85%B8%EC%9C%A4%ED%98%B8).jpg) |
 | 유리 | sublimitas viii | CC BY-SA 4.0 | [file page](https://commons.wikimedia.org/wiki/File:260426_YURI_@_THE_WASP_(Theatre)_Final_performance_as_Carla.jpg) |
+| 유병재 | SJUN | CC BY 3.0 | [file page](https://commons.wikimedia.org/wiki/File:20171028_%EC%B2%AD%EC%B6%98%EC%95%84%EB%A0%88%EB%82%98_%EC%9C%A0%EB%B3%91%EC%9E%AC_%EB%B0%80%EC%B0%A9_%EA%B3%A0%EB%AF%BC%EC%83%81%EB%8B%B4_44s.png) |
+| 유세윤 | dispatchsns | CC BY 3.0 | [file page](https://commons.wikimedia.org/wiki/File:JTBC_%27SKY_%EB%A8%B8%EC%8A%AC%27_%EC%A0%9C%EC%9E%91%EB%B0%9C%ED%91%9C%ED%9A%8C_%EC%9C%A0%EC%84%B8%EC%9C%A4.jpg) |
 | 유승호 | K-POPIT 케이팝잇 | CC BY 3.0 | [file page](https://commons.wikimedia.org/wiki/File:%EC%9C%A0%EC%8A%B9%ED%98%B8_%ED%8D%BC%EC%8A%A4%ED%8A%B8%EB%B8%8C%EB%9E%9C%EB%93%9C%EB%8C%80%EC%83%81_2024.jpg) |
 | 유아인 | ANJU | CC BY 4.0 | [file page](https://commons.wikimedia.org/wiki/File:Yoo_Ah-In_at_BIFF_Open_Talk.jpg) |
 | 유연석 | 三立娛樂星聞 | CC BY 3.0 | [file page](https://commons.wikimedia.org/wiki/File:20260303_Yoo_Yeon-seok.png) |
@@ -1491,6 +1543,8 @@ Photos from Wikimedia Commons, used under the licence shown. Each was resized to
 | 이광수 | Republic of Korea | CC BY-SA 4.0 | [file page](https://commons.wikimedia.org/wiki/File:Lee_Kwang-soo_2026.jpg) |
 | 이국종 | 경기도 뉴스포털 | KOGL Type 1 | [file page](https://commons.wikimedia.org/wiki/File:Lee_Guk-jong_2019-06-18.jpg) |
 | 이나영 | 티비텐 TV10 | CC BY 3.0 | [file page](https://commons.wikimedia.org/wiki/File:Lee_Na-young_20260126.png) |
+| 이낙연 | Maryland GovPics | CC BY 2.0 | [file page](https://commons.wikimedia.org/wiki/File:South_Korean_Prime_Minister_Lee_-_2017_(36235112603)_(cropped).jpg) |
+| 이대호 | WiiWii | CC BY 4.0 | [file page](https://commons.wikimedia.org/wiki/File:2017_03_27_%ED%94%84%EB%A1%9C%EC%95%BC%EA%B5%AC_%EB%AF%B8%EB%94%94%EC%96%B4%EB%8D%B0%EC%9D%B4_1_(10).jpg) |
 | 이덕화 | Kinocine | CC BY-SA 4.0 | [file page](https://commons.wikimedia.org/wiki/File:LEEDUKHWA3.jpg) |
 | 이도현 | K-POPIT 케이팝잇 | CC BY 3.0 | [file page](https://commons.wikimedia.org/wiki/File:230315_Lee_Do-hyun_(%EC%9D%B4%EB%8F%84%ED%98%84).jpg) |
 | 이동건 | 디스패치 | CC BY 3.0 | [file page](https://commons.wikimedia.org/wiki/File:191010_%EC%9D%B4%EB%8F%99%EA%B1%B4_(1).jpg) |
@@ -1507,6 +1561,7 @@ Photos from Wikimedia Commons, used under the licence shown. Each was resized to
 | 이보영 | 10Asia | CC BY 3.0 | [file page](https://commons.wikimedia.org/wiki/File:Lee_Bo-young_2017.jpg) |
 | 이상민 | Dmost Entertainment | CC BY 3.0 | [file page](https://commons.wikimedia.org/wiki/File:%EC%9D%B4%EC%83%81%EB%AF%BC_%EA%B4%91%EA%B3%A0%EC%B4%AC%EC%98%81_%ED%98%84%EC%9E%A5_21s.jpg) |
 | 이상화 | Republic of Korea | CC BY-SA 2.0 | [file page](https://commons.wikimedia.org/wiki/File:Korea_Lee_Sanghwa_Gold_Medal_Ceremony_02.jpg) |
+| 이서 | K-POPIT 케이팝잇 | CC BY 4.0 | [file page](https://commons.wikimedia.org/wiki/File:Leeseo_of_Ive,_March_19,_2026_(3).png) |
 | 이서진 | dispatchsns | CC BY 3.0 | [file page](https://commons.wikimedia.org/wiki/File:20180711_%EC%9D%B4%EC%84%9C%EC%A7%84.jpg) |
 | 이선균 | Kinocine | CC BY-SA 4.0 | [file page](https://commons.wikimedia.org/wiki/File:Lee_Seon-gun_in_Oct_2018.png) |
 | 이선빈 | TV10 | CC BY 4.0 | [file page](https://commons.wikimedia.org/wiki/File:Lee_Sun-bin_in_November_2025.png) |
@@ -1518,6 +1573,7 @@ Photos from Wikimedia Commons, used under the licence shown. Each was resized to
 | 이수근 | K-POPIT 케이팝잇 | CC BY 3.0 | [file page](https://commons.wikimedia.org/wiki/File:Lee_soo_geun.jpg) |
 | 이수만 | K-POPIT 케이팝잇 | CC BY 3.0 | [file page](https://commons.wikimedia.org/wiki/File:Lee_Soo-man_in_2024.jpg) |
 | 이수현 | Strawberry Kiss | CC BY 4.0 | [file page](https://commons.wikimedia.org/wiki/File:141221_SBS_%EC%96%B4%EC%9B%8C%EC%A6%88_%EC%88%98%ED%98%84.jpg) |
+| 이순신 | Unknown, War Memorial of Korea | KOGL Type 1 | [file page](https://commons.wikimedia.org/wiki/File:Bust_of_Yi_Sun-sin_01.jpg) |
 | 이순재 | 루이언일세 | CC BY 3.0 | [file page](https://commons.wikimedia.org/wiki/File:Lee_Soon-jae_in_January_2023.png) |
 | 이승기 | 프로스펙스 | CC BY 3.0 | [file page](https://commons.wikimedia.org/wiki/File:LeeSeunggi4.jpg) |
 | 이승철 | acrofan.com | CC BY-SA 3.0 | [file page](https://commons.wikimedia.org/wiki/File:Lee_Seung-cheol_from_acrofan.jpg) |
@@ -1530,6 +1586,8 @@ Photos from Wikimedia Commons, used under the licence shown. Each was resized to
 | 이영지 | TV10 | CC BY 4.0 | [file page](https://commons.wikimedia.org/wiki/File:Lee_Young-ji_in_February_2026.png) |
 | 이영표 | Lord Bob | CC0 | [file page](https://commons.wikimedia.org/wiki/File:Leeyoungpyo.jpg) |
 | 이요원 | 티비텐 | CC BY 3.0 | [file page](https://commons.wikimedia.org/wiki/File:Lee_Yo-won_in_October_2025.png) |
+| 이유미 | K-POPIT 케이팝잇 | CC BY 3.0 | [file page](https://commons.wikimedia.org/wiki/File:241104_Lee_You_Mi_(%EC%9D%B4%EC%9C%A0%EB%AF%B8).png) |
+| 이은지 | 티비텐 | CC BY 3.0 | [file page](https://commons.wikimedia.org/wiki/File:Lee_Eun-ji_in_May_2024.png) |
 | 이재명 | Republic of Korea from Seoul, Republic of Korea | CC BY-SA 2.0 | [file page](https://commons.wikimedia.org/wiki/File:President_Lee_Jae-myung_2025_(cropped).jpg) |
 | 이재용 | KBS | CC BY 3.0 | [file page](https://commons.wikimedia.org/wiki/File:Lee_Jae-yong_in_2016.jpg) |
 | 이재욱 | K-POPIT 케이팝잇 | CC BY 3.0 | [file page](https://commons.wikimedia.org/wiki/File:Lee_Jae-wook_at_Chanel_Coco_Crush_Photocall_event.jpg) |
@@ -1539,14 +1597,19 @@ Photos from Wikimedia Commons, used under the licence shown. Each was resized to
 | 이정후 | Trainholic | CC BY-SA 3.0 | [file page](https://commons.wikimedia.org/wiki/File:Kiwoom_Heroes_Lee_Jeong-Hoo_(2019).jpg) |
 | 이제훈 | TV10 | CC BY 4.0 | [file page](https://commons.wikimedia.org/wiki/File:Lee_Je-hoon_in_November_2025.png) |
 | 이종석 | K-POPit 티비텐 | CC BY 3.0 | [file page](https://commons.wikimedia.org/wiki/File:Lee_Jong-suk_20251023.png) |
+| 이주빈 | TV10 | CC BY 4.0 | [file page](https://commons.wikimedia.org/wiki/File:Lee_Joo-bin_in_April_2026.png) |
 | 이준기 | Viu Indonesia | CC BY 3.0 | [file page](https://commons.wikimedia.org/wiki/File:2022_Again_My_Life_Lee_Joon-gi_%EC%9D%B4%EC%A4%80%EA%B8%B0_(2).jpg) |
+| 이준석 | 고려 | CC BY 4.0 | [file page](https://commons.wikimedia.org/wiki/File:Lee_Jun-seok,_Leader_of_the_People%27s_Power,_attended_a_campaign_hosted_by_chungnam_Province_Chapter_at_the_Sinbu_Cultural_Park_in_Cheonan,_Chungcheongnam-do_on_July_2,_2021_(3).jpg) |
 | 이준혁 | 티비텐 TV10 | CC BY 3.0 | [file page](https://commons.wikimedia.org/wiki/File:Lee_Joon-hyuk_2025(1).png) |
 | 이준호 | K-POPIT 케이팝잇 | CC BY 3.0 | [file page](https://commons.wikimedia.org/wiki/File:Lee_Junho_in_January_2025_02.png) |
 | 이찬원 | SBS Radio 에라오 | CC BY 3.0 | [file page](https://commons.wikimedia.org/wiki/File:%EA%B0%80%EC%88%98_%EC%9D%B4%EC%B0%AC%EC%9B%90.jpg) |
+| 이창동 | Harald Krichel | CC BY-SA 4.0 | [file page](https://commons.wikimedia.org/wiki/File:Lee_Chang-dong-2538.jpg) |
 | 이하늬 | 티비텐 | CC BY 3.0 | [file page](https://commons.wikimedia.org/wiki/File:%EC%9D%B4%ED%95%98%EB%8A%AC_%EC%97%98%EB%A5%B4_%EC%8A%A4%ED%83%80%EC%9D%BC_%EC%96%B4%EC%9B%8C%EC%A6%88_2024_(1).jpg) |
 | 이하이 | SBS Radio | CC BY 3.0 | [file page](https://commons.wikimedia.org/wiki/File:LeeHi_2021_(derived).jpg) |
+| 이해리 | http://dkyouholic.tistory.com/ | CC BY 4.0 | [file page](https://commons.wikimedia.org/wiki/File:170114_%EB%B9%84%EB%B0%9C%EB%94%94%ED%8C%8C%ED%81%AC_%EB%9D%BC%EC%9D%B4%EB%94%A9_%EC%BD%98%EC%84%9C%ED%8A%B8_-_%EB%8B%A4%EB%B9%84%EC%B9%98_%EC%A7%81%EC%B0%8D_01.jpg) |
 | 이효리 | Marie Claire Korea | CC BY 3.0 | [file page](https://commons.wikimedia.org/wiki/File:(Marie_Claire_Korea)_Feel_The_Soul_-_%EC%9D%B4%ED%9A%A8%EB%A6%AC_(4).jpg) |
 | 이휘재 | K-POPIT 케이팝잇 | CC BY 3.0 | [file page](https://commons.wikimedia.org/wiki/File:(TV10)_%EA%B0%9C%EA%B7%B8%EB%A7%A8_%EC%9D%B4%ED%9C%98%EC%9E%AC,_%EC%9D%B4%EB%8F%99%EC%9C%A4%EA%B3%BC_%ED%95%A8%EA%BB%98%ED%95%98%EB%8A%94_%EC%97%B0%EC%98%88%EC%9D%B8%EC%95%BC%EA%B5%AC_%ED%98%84%EC%9E%A5!_%EC%9D%B4%ED%9C%98%EC%9E%AC_48s.jpg) |
+| 이희준 | BH Entertainment | CC BY 3.0 | [file page](https://commons.wikimedia.org/wiki/File:Lee_Hee-joon_02.jpg) |
 | 임수정 | 디스패치 | CC BY 3.0 | [file page](https://commons.wikimedia.org/wiki/File:%EC%98%81%ED%99%94_%27%EB%8B%B9%EC%8B%A0%EC%9D%98_%EB%B6%80%ED%83%81%27_%EC%96%B8%EB%A1%A0%EC%8B%9C%EC%82%AC%ED%9A%8C_%EC%9E%84%EC%88%98%EC%A0%95_(2).jpg) |
 | 임시완 | K-POPIT 케이팝잇 | CC BY 3.0 | [file page](https://commons.wikimedia.org/wiki/File:241209_Yim_Siwan_(%EC%9E%84%EC%8B%9C%EC%99%84).png) |
 | 임영웅 | 구전녹용 | CC BY 3.0 | [file page](https://commons.wikimedia.org/wiki/File:Lim_Young-woong_in_an_ad_for_%EA%B5%AC%EC%A0%84%EB%85%B9%EC%9A%A9_(June_2020)_(cropped).jpg) |
@@ -1557,12 +1620,15 @@ Photos from Wikimedia Commons, used under the licence shown. Each was resized to
 | 장도연 | TV10 | CC BY 4.0 | [file page](https://commons.wikimedia.org/wiki/File:Jang_Do-yeon_in_December_2025.png) |
 | 장동건 | 디스패치 / Dispatch | CC BY 3.0 | [file page](https://commons.wikimedia.org/wiki/File:%EC%98%81%ED%99%94_%277%EB%85%84%EC%9D%98_%EB%B0%A4%27_%EC%A0%9C%EC%9E%91%EB%B3%B4%EA%B3%A0%ED%9A%8C_%EC%9E%A5%EB%8F%99%EA%B1%B4.jpg) |
 | 장미란 | acrofan.com | CC BY-SA 3.0 | [file page](https://commons.wikimedia.org/wiki/File:Jang_Mi-Ran_from_acrofan.jpg) |
+| 장민호 | Deerholic | CC BY-SA 4.0 | [file page](https://commons.wikimedia.org/wiki/File:%EC%8B%A0%EC%82%AC%EB%8B%A8_%EC%9E%A5%EB%AF%BC%ED%98%B8.jpg) |
 | 장성규 | 뉴스페이스 | CC BY 3.0 | [file page](https://commons.wikimedia.org/wiki/File:2019_%EB%89%B4%EC%8A%A4%ED%8E%98%EC%9D%B4%EC%8A%A4_5%ED%99%94_%EC%9E%A5%EC%84%B1%EA%B7%9C_01.jpg) |
 | 장원영 | Ten Asia | CC BY 4.0 | [file page](https://commons.wikimedia.org/wiki/File:051226_Jang_Won-young_airport_departure_(2).jpg) |
 | 장혁 | tenasia10 | CC BY 3.0 | [file page](https://commons.wikimedia.org/wiki/File:Jang-hyuk_in_2017_2.jpg) |
 | 재민 | NINE STARS | CC BY 3.0 | [file page](https://commons.wikimedia.org/wiki/File:Na_Jae-min_the_25th_DREAM_CONCERT.png) |
 | 잭슨 | Narasi | CC BY 3.0 | [file page](https://commons.wikimedia.org/wiki/File:Jackson_Wang_interviewed_for_POVJOV_02.png) |
+| 전미도 | TV10 | CC BY 4.0 | [file page](https://commons.wikimedia.org/wiki/File:Jeon_Mi-do_in_December_2025.png) |
 | 전소미 | K-POPIT 케이팝잇 | CC BY 3.0 | [file page](https://commons.wikimedia.org/wiki/File:20230720_Jeon_Somi_(%EC%A0%84%EC%86%8C%EB%AF%B8).jpg) |
+| 전소민 | SJ | CC BY 4.0 | [file page](https://commons.wikimedia.org/wiki/File:2017_%EC%95%84%EC%8B%9C%EC%95%84_%EB%AA%A8%EB%8D%B8_%ED%8E%98%EC%8A%A4%ED%8B%B0%EB%B2%8C_%EB%A0%88%EB%93%9C%EC%B9%B4%ED%8E%AB_(69).jpg) |
 | 전소연 | News in Star | CC BY 3.0 | [file page](https://commons.wikimedia.org/wiki/File:0226_(%EC%97%AC%EC%9E%90)%EC%95%84%EC%9D%B4%EB%93%A4_%EC%86%8C%EC%97%B0_%ED%8F%AC%EC%BB%A4%EC%8A%A4%26%EC%84%B8%EB%A1%9C%EC%BA%A0,_2nd_%EB%AF%B8%EB%8B%88%EC%95%A8%EB%B2%94_%27I_made%27_%EC%87%BC%EC%BC%80%EC%9D%B4%EC%8A%A4_%ED%8F%AC%ED%86%A0%ED%83%80%EC%9E%84_(derived).jpg) |
 | 전여빈 | TV10 | CC BY 3.0 | [file page](https://commons.wikimedia.org/wiki/File:Jeon_Yeo-been_in_November_2024.png) |
 | 전인권 | Trainholic | CC BY-SA 4.0 | [file page](https://commons.wikimedia.org/wiki/File:Jeon_In_Gwon_2019.jpg) |
@@ -1573,6 +1639,7 @@ Photos from Wikimedia Commons, used under the licence shown. Each was resized to
 | 정국 | K-POPIT 케이팝잇 | CC BY 4.0 | [file page](https://commons.wikimedia.org/wiki/File:Jung_Kook_of_BTS,_February_12,_2026_(1).png) |
 | 정동원 | SBS Radio 에라오 | CC BY 3.0 | [file page](https://commons.wikimedia.org/wiki/File:%EA%B0%80%EC%88%98_%EC%A0%95%EB%8F%99%EC%9B%90.jpg) |
 | 정려원 | World Vision Korea | CC BY 3.0 | [file page](https://commons.wikimedia.org/wiki/File:Jung_Ryeo-won_in_January_2023.png) |
+| 정몽준 | Kinocine PARKJAEHWAN | CC BY-SA 4.0 | [file page](https://commons.wikimedia.org/wiki/File:Chung_Mong-joon_(3x4_cropped).jpg) |
 | 정소민 | K-POPIT 케이팝잇 | CC BY 3.0 | [file page](https://commons.wikimedia.org/wiki/File:Jung_So-min_in_March_2025.png) |
 | 정수정 | K-POPIT 케이팝잇 | CC BY 4.0 | [file page](https://commons.wikimedia.org/wiki/File:Krystal_in_2026.png) |
 | 정연 | 티비텐 | CC BY 3.0 | [file page](https://commons.wikimedia.org/wiki/File:TWICE_Jeongyeon_VETERAN_2_September_2024.jpg) |
@@ -1587,6 +1654,7 @@ Photos from Wikimedia Commons, used under the licence shown. Each was resized to
 | 정주영 | Technical Sergeant Renee` Sitler | Public domain | [file page](https://commons.wikimedia.org/wiki/File:Chung_Ju-yung.jpg) |
 | 정준하 | Park Dae ung | CC BY 4.0 | [file page](https://commons.wikimedia.org/wiki/File:140807_%EC%A0%95%EC%A4%80%ED%95%98.jpg) |
 | 정준호 | 뉴스인스타 | CC BY 3.0 | [file page](https://commons.wikimedia.org/wiki/File:190930_%EC%A0%95%EC%A4%80%ED%98%B8_(2).jpg) |
+| 정찬성 | acrofan.com | CC BY-SA 3.0 | [file page](https://commons.wikimedia.org/wiki/File:Jung_Chan-Sung_from_acrofan_(2).jpg) |
 | 정한 | Seventeen | CC BY 3.0 | [file page](https://commons.wikimedia.org/wiki/File:Jeonghan_Follow_240330.jpg) |
 | 정해인 | K-POPIT 케이팝잇 | CC BY 3.0 | [file page](https://commons.wikimedia.org/wiki/File:Jung_Hae-in_20260827.png) |
 | 정형돈 | acrofan.com | CC BY-SA 3.0 | [file page](https://commons.wikimedia.org/wiki/File:Jeong_Hyeong-don_from_acrofan.jpg) |
@@ -1596,6 +1664,7 @@ Photos from Wikimedia Commons, used under the licence shown. Each was resized to
 | 제시카 | 티비텐 | CC BY 3.0 | [file page](https://commons.wikimedia.org/wiki/File:Jessica_Jung_W_Korea_October_2024.jpg) |
 | 제이홉 | TV10 | CC BY 4.0 | [file page](https://commons.wikimedia.org/wiki/File:J-Hope_at_W_Korea_Breast_Cancer_Campaign,_15_October_2025.png) |
 | 조국 | 대한민국 청와대 | KOGL Type 1 | [file page](https://commons.wikimedia.org/wiki/File:Jo_Guk_(2017-05).jpg) |
+| 조규성 | Nori Picture | CC BY 4.0 | [file page](https://commons.wikimedia.org/wiki/File:191130_%EB%B6%80%EC%82%B0%EC%95%84%EC%9D%B4%ED%8C%8C%ED%81%AC_VS_FC%EC%95%88%EC%96%91_%ED%94%8C%EB%A0%88%EC%9D%B4%EC%98%A4%ED%94%84,_%EC%A1%B0%EA%B7%9C%EC%84%B1_2.jpg) |
 | 조미연 | K-POPIT 케이팝잇 | CC BY 3.0 | [file page](https://commons.wikimedia.org/wiki/File:(G)I-DLE_Airport_Departure_2024_Miyeon_waving_hands.png) |
 | 조성모 | acrofan.com | CC BY-SA 3.0 | [file page](https://commons.wikimedia.org/wiki/File:Jo_Sungmo_from_acrofan.jpg) |
 | 조수미 | Korea.net / Korean Culture and Information Service (Jeon Han) | CC BY-SA 2.0 | [file page](https://commons.wikimedia.org/wiki/File:Sumi_Jo_(cropped).jpg) |
@@ -1606,6 +1675,7 @@ Photos from Wikimedia Commons, used under the licence shown. Each was resized to
 | 조정석 | K-POPIT 케이팝잇 | CC BY 4.0 | [file page](https://commons.wikimedia.org/wiki/File:Jo_Jung-suk_in_June_2026.png) |
 | 존박 | acrofan.com | CC BY-SA 3.0 | [file page](https://commons.wikimedia.org/wiki/File:John_Park_from_acrofan.jpg) |
 | 종현 | Anju | CC BY 4.0 | [file page](https://commons.wikimedia.org/wiki/File:Jonghyun_at_a_fansigning_in_Busan,_in_June_2016_01.jpg) |
+| 주우재 | Dispatch | CC BY 3.0 | [file page](https://commons.wikimedia.org/wiki/File:190102_%EC%A3%BC%EC%9A%B0%EC%9E%AC_MBN_%27%EC%B5%9C%EA%B3%A0%EC%9D%98_%EC%B9%98%ED%82%A8%27_%EC%A0%9C%EC%9E%91%EB%B0%9C%ED%91%9C%ED%9A%8C_%EC%A7%81%EC%BA%A0_02.png) |
 | 주원 | CNTV | CC BY 3.0 | [file page](https://commons.wikimedia.org/wiki/File:Joo_Won_in_May_2017.jpg) |
 | 주지훈 | TV10 | CC BY 3.0 | [file page](https://commons.wikimedia.org/wiki/File:Ju_Ji-hoon_in_February_2025.png) |
 | 지드래곤 | K-POPIT 케이팝잇 | CC BY 3.0 | [file page](https://commons.wikimedia.org/wiki/File:G-Dragon_in_February_2025.png) |
@@ -1619,6 +1689,7 @@ Photos from Wikimedia Commons, used under the licence shown. Each was resized to
 | 지코 | Bonnielou2013 | CC BY-SA 4.0 | [file page](https://commons.wikimedia.org/wiki/File:Zico_2017_Monster_5_(cropped).jpg) |
 | 지효 | https://www.youtube.com/@_TV10 | CC BY 3.0 | [file page](https://commons.wikimedia.org/wiki/File:Jihyo_at_Gucci_Ancora_on_05032024_(cropped).png) |
 | 진 | TV 10 | CC BY 3.0 | [file page](https://commons.wikimedia.org/wiki/File:BTS_Jin_at_Maison_Fred,_13_March_2025_04.png) |
+| 진선규 | SBS Radio 에라오 | CC BY 3.0 | [file page](https://commons.wikimedia.org/wiki/File:Jin_Seon-kyu_in_2019.png) |
 | 진세연 | 뉴스인스타 | CC BY 3.0 | [file page](https://commons.wikimedia.org/wiki/File:191212_%EC%A7%84%EC%84%B8%EC%97%B0_(2).jpg) |
 | 쯔위 | 티비텐 | CC BY 3.0 | [file page](https://commons.wikimedia.org/wiki/File:20240305_Chou_Tzuyu_%E5%91%A8%E5%AD%90%E7%91%9C_02.jpg) |
 | 차범근 | Nationaal Archief, Den Haag, Rijksfotoarchief: Fotocollectie Algemeen Nederlands | CC BY-SA 3.0 nl | [file page](https://commons.wikimedia.org/wiki/File:Cha_Bum_Kun.jpg) |
@@ -1628,8 +1699,11 @@ Photos from Wikimedia Commons, used under the licence shown. Each was resized to
 | 차준환 | Trainholic | CC BY-SA 4.0 | [file page](https://commons.wikimedia.org/wiki/File:Cha_Jun-hwan_at_2025_Winter_Asian_Games_(cropped).jpg) |
 | 차태현 | 달빛마차 (MoonLight_iu@Twitter) | CC BY 4.0 | [file page](https://commons.wikimedia.org/wiki/File:KBS_%22The_Producers%22_press_conference,_11_May_2015_06.jpg) |
 | 찬열 | ggbye1127 | CC BY 4.0 | [file page](https://commons.wikimedia.org/wiki/File:Chanyeol_at_a_Dynamic_Duo_concert_on_December_8,_2019.jpg) |
+| 창모 | SBS Radio | CC BY 3.0 | [file page](https://commons.wikimedia.org/wiki/File:CHANGMO_200715.png) |
+| 채령 | K-POPIT 케이팝잇 | CC BY 3.0 | [file page](https://commons.wikimedia.org/wiki/File:241023_ITZY_Chaeryeong.jpg) |
 | 채시라 | KIYOUNG KIM from Seoul, South Korea | CC BY 2.0 | [file page](https://commons.wikimedia.org/wiki/File:Chae_Shi-ra,_2012_(cropped).jpg) |
 | 채영 | 시간은금! | CC BY 4.0 | [file page](https://commons.wikimedia.org/wiki/File:Chaeyoung_at_Gaon_Awards_red_carpet_on_January_23,_2019.jpg) |
+| 채종협 | K-POPIT 케이팝잇 | CC BY 3.0 | [file page](https://commons.wikimedia.org/wiki/File:Chae_Jong-hyeop_%EC%B1%84%EC%A2%85%ED%98%91_-_Departure_from_Gimpo_Airport_on_April_16,_2024_(4).jpg) |
 | 천우희 | Harald Krichel | CC BY-SA 4.0 | [file page](https://commons.wikimedia.org/wiki/File:Chun_Woo-Hee-9494.jpg) |
 | 청하 | Marie Claire Korea | CC BY 3.0 | [file page](https://commons.wikimedia.org/wiki/File:Chung_Ha_in_March_2025.png) |
 | 첸 | 티비텐 | CC BY 3.0 | [file page](https://commons.wikimedia.org/wiki/File:Chen_at_Billboard_K_POWER_100_on_August_27,_2024.png) |
@@ -1641,7 +1715,11 @@ Photos from Wikimedia Commons, used under the licence shown. Each was resized to
 | 최수종 | 뉴스인스타 | CC BY 3.0 | [file page](https://commons.wikimedia.org/wiki/File:Choi_Soo-joong_at_Sep_2018.png) |
 | 최시원 | K-POPIT 케이팝잇 | CC BY 3.0 | [file page](https://commons.wikimedia.org/wiki/File:240813_Choi_Si-won.png) |
 | 최예나 | 티비텐 (TV10) | CC BY 3.0 | [file page](https://commons.wikimedia.org/wiki/File:CHOI_YENA_(%EC%B5%9C%EC%98%88%EB%82%98)_%E2%80%93_2024.09.30_%E2%80%93_P1.jpg) |
+| 최자 | Explicit | CC BY-SA 4.0 | [file page](https://commons.wikimedia.org/wiki/File:181013_%EC%9D%B4%ED%83%9C%EC%9B%90_%EC%A7%80%EA%B5%AC%EC%B4%8C_%EC%B6%95%EC%A0%9C_%EC%B0%A9%ED%95%9C%EC%BD%98%EC%84%9C%ED%8A%B8_%EC%B5%9C%EC%9E%90.jpg) |
+| 최정훈 | Explicit | CC BY-SA 4.0 | [file page](https://commons.wikimedia.org/wiki/File:2018_%EC%9D%B8%EB%94%94%EC%8A%A4%EB%95%85%EC%8A%A4_%ED%8C%8C%EC%9D%B4%EB%84%90_%EC%BD%98%EC%84%9C%ED%8A%B8_%EC%9E%94%EB%82%98%EB%B9%84_%EC%B5%9C%EC%A0%95%ED%9B%88_1.jpg) |
 | 최지우 | K-POPIT 케이팝잇 | CC BY 3.0 | [file page](https://commons.wikimedia.org/wiki/File:Choi_Ji-woo_in_April_2024.png) |
+| 최태원 | Republic of Korea | CC BY-SA 2.0 | [file page](https://commons.wikimedia.org/wiki/File:Korea_Portuguese_Business_Forum_01_(cropped).jpg) |
+| 추미애 | 델리민주 [더불어민주당] | CC BY 4.0 | [file page](https://commons.wikimedia.org/wiki/File:Choo_Mi-ae%27s_Portrait_(2026.5).png) |
 | 추성훈 | Pabian | CC BY-SA 4.0 | [file page](https://commons.wikimedia.org/wiki/File:%EC%B6%94%EC%84%B1%ED%9B%88.jpg) |
 | 추신수 | Keith Allison | CC BY-SA 2.0 | [file page](https://commons.wikimedia.org/wiki/File:Choo_Shin-Soo.jpg) |
 | 추영우 | K-POPIT 케이팝잇 TV10 | CC BY 3.0 | [file page](https://commons.wikimedia.org/wiki/File:250509_Choo_Young-Woo_(%EC%B6%94%EC%98%81%EC%9A%B0).png) |
@@ -1667,9 +1745,11 @@ Photos from Wikimedia Commons, used under the licence shown. Each was resized to
 | 한가인 | BH Entertainment | CC BY 3.0 | [file page](https://commons.wikimedia.org/wiki/File:Han_Ga-in,_2018_(cropped).jpg) |
 | 한강 | John Sears | CC BY-SA 4.0 | [file page](https://commons.wikimedia.org/wiki/File:Han_Kang,_2024_Nobel_Prize_Laureate_in_Literature_(cropped).jpg) |
 | 한고은 | 디스패치 | CC BY 3.0 | [file page](https://commons.wikimedia.org/wiki/File:%ED%95%9C%EA%B3%A0%EC%9D%80,_%EB%AF%B8%EC%86%8C%EA%B0%80_%EC%95%84%EB%A6%84%EB%8B%A4%EC%9B%8C~_(1).jpg) |
+| 한덕수 | 제주특별자치도청 정책기획관 | KOGL Type 1 | [file page](https://commons.wikimedia.org/wiki/File:Prime_Minister_of_South_Korea_HAN_Duck-soo_20240516.jpg) |
 | 한동훈 | U.S. Department of Justice - International | Public domain | [file page](https://commons.wikimedia.org/wiki/File:Han_Dong-hoon_2022.jpg) |
 | 한석규 | 디스패치 | CC BY 3.0 | [file page](https://commons.wikimedia.org/wiki/File:%EC%98%81%ED%99%94_%27%EC%9A%B0%EC%83%81%27_%EC%A0%9C%EC%9E%91%EB%B3%B4%EA%B3%A0%ED%9A%8C_%ED%95%9C%EC%84%9D%EA%B7%9C.jpg) |
 | 한소희 | 티비텐 (TV10) | CC BY 3.0 | [file page](https://commons.wikimedia.org/wiki/File:HAN_SO_HEE_(%ED%95%9C%EC%86%8C%ED%9D%AC)_-_2025.07.11_-_P2.jpg) |
+| 한승연 | K-POPIT 케이팝잇 | CC BY 3.0 | [file page](https://commons.wikimedia.org/wiki/File:Han_Seung-yeon_in_February_2024.png) |
 | 한예슬 | 디스패치 | CC BY 3.0 | [file page](https://commons.wikimedia.org/wiki/File:190905_%EB%B0%9C%EB%A0%8C%ED%8B%B0%EB%85%B8_%ED%8F%AC%ED%86%A0%EC%9B%94_%ED%95%9C%EC%98%88%EC%8A%AC.jpg) |
 | 한지민 | Dispatch | CC BY 3.0 | [file page](https://commons.wikimedia.org/wiki/File:190520_MBC_%27%EB%B4%84%EB%B0%A4%27_%EC%A0%9C%EC%9E%91%EB%B0%9C%ED%91%9C%ED%9A%8C_%ED%95%9C%EC%A7%80%EB%AF%BC_(1).jpg) |
 | 한지혜 | 디스패치 | CC BY 3.0 | [file page](https://commons.wikimedia.org/wiki/File:Han_Ji-hye_in_2019.jpg) |
@@ -1678,17 +1758,24 @@ Photos from Wikimedia Commons, used under the licence shown. Each was resized to
 | 한효주 | 티비텐 | CC BY 3.0 | [file page](https://commons.wikimedia.org/wiki/File:Han_Hyo-joo_in_July_2024.jpg) |
 | 해린 | K-POPIT 케이팝잇 | CC BY 3.0 | [file page](https://commons.wikimedia.org/wiki/File:20230905_Haerin_(NewJeans).jpg) |
 | 해찬 | K-POPIT 케이팝잇 | CC BY 3.0 | [file page](https://commons.wikimedia.org/wiki/File:20231006_Haechan_(NCT).jpg) |
+| 허윤진 | 티비텐 | CC BY 4.0 | [file page](https://commons.wikimedia.org/wiki/File:260110_Le_Sserafim%27s_Huh_Yunjin_at_GDA_2026_01.jpg) |
+| 허재 | Galehorn | CC BY 4.0 | [file page](https://commons.wikimedia.org/wiki/File:2010-%ED%94%84%EB%A1%9C%EB%86%8D%EA%B5%AC-KCC-vs-SK_02.jpg) |
 | 헤이즈 | seono의 BOL4 story | CC BY 4.0 | [file page](https://commons.wikimedia.org/wiki/File:Heize_at_Zion.T_X_Heize_Concert_on_April_21,_2018_(4)_(cropped).jpg) |
 | 현빈 | John Sears | CC BY-SA 4.0 | [file page](https://commons.wikimedia.org/wiki/File:Hyun_Bin_at_the_2024_Toronto_International_Film_Festival_2_(cropped).jpg) |
 | 현아 | K-POPIT 케이팝잇 | CC BY 3.0 | [file page](https://commons.wikimedia.org/wiki/File:20230720_Kim_HyunA_in_July_2023_01_(cropped).png) |
+| 현주엽 | 고려대학교 | CC BY 3.0 | [file page](https://commons.wikimedia.org/wiki/File:%ED%98%84%EC%A3%BC%EC%97%BD_%EA%B3%A0%EB%A0%A4%EB%8C%80_%EA%B8%B0%EB%B6%80%EC%8B%9D.jpg) |
 | 혜리 | TV10 | CC BY 3.0 | [file page](https://commons.wikimedia.org/wiki/File:Hyeri_in_July_2025.png) |
 | 혜인 | K-POPIT 케이팝잇 | CC BY 3.0 | [file page](https://commons.wikimedia.org/wiki/File:Hyein_(NewJeans)_220819.jpg) |
 | 홍명보 | Republic of Korea | CC BY-SA 2.0 | [file page](https://commons.wikimedia.org/wiki/File:Hong_Myung-Bo.jpg) |
 | 홍석천 | The Korea Times | CC BY 3.0 | [file page](https://commons.wikimedia.org/wiki/File:Hong_Seok-cheon,_2025.jpg) |
+| 홍은채 | K-POPIT 케이팝잇 | CC BY 3.0 | [file page](https://commons.wikimedia.org/wiki/File:221013_Hong_Eun_Chae_(LE_SSERAFIM)_Airport_Departure.jpg) |
+| 홍준표 | 광주광역시 | KOGL Type 1 | [file page](https://commons.wikimedia.org/wiki/File:Hong_Joon-pyo_20221125.jpg) |
+| 홍진경 | TV10 | CC BY 4.0 | [file page](https://commons.wikimedia.org/wiki/File:Hong_Jin-kyung_in_January_2026.png) |
 | 홍진영 | lean on me | CC BY 4.0 | [file page](https://commons.wikimedia.org/wiki/File:170526_%EC%95%88%EC%82%B0_%EA%B7%BC%EB%A1%9C%EC%9E%90_%EB%AE%A4%EC%A7%81%ED%8E%98%EC%8A%A4%ED%8B%B0%EB%B2%8C_%ED%99%8D%EC%A7%84%EC%98%81_%EC%A7%81%EC%B0%8D_(3).jpg) |
 | 화사 | TV10 | CC BY 4.0 | [file page](https://commons.wikimedia.org/wiki/File:Hwasa_in_January_2026.png) |
 | 황동혁 | 이런 경향 | CC BY 3.0 | [file page](https://commons.wikimedia.org/wiki/File:20140114_Hwang_Dong-hyuk.jpg) |
 | 황선우 | OSEN SPORTS | CC BY 3.0 | [file page](https://commons.wikimedia.org/wiki/File:%ED%99%A9%EC%84%A0%EC%9A%B0_%EC%88%98%EC%98%81_%EC%84%A0%EC%88%98.jpg) |
+| 황인범 | Explicit | CC BY-SA 4.0 | [file page](https://commons.wikimedia.org/wiki/File:240611_%EB%8C%80%ED%95%9C%EB%AF%BC%EA%B5%AD_vs_%EC%A4%91%EA%B5%AD_(%ED%99%A9%EC%9D%B8%EB%B2%94).jpg) |
 | 황인엽 | K-POPIT 케이팝잇 | CC BY 4.0 | [file page](https://commons.wikimedia.org/wiki/File:Hwang_In-youp_in_June_2026.png) |
 | 황정민 | Republic of Korea | CC BY-SA 4.0 | [file page](https://commons.wikimedia.org/wiki/File:Hwang_Jung-min_in_July_2026_(cropped).jpg) |
 | 황정음 | 티비텐 | CC BY 3.0 | [file page](https://commons.wikimedia.org/wiki/File:Hwang_Jung-eum_in_March_2024.png) |

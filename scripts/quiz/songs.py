@@ -47,7 +47,7 @@ for st in ('us', 'kr'):
     for r in feed['results']:
         ids.setdefault(r['id'], st)
 # 2. all-time favourites
-BAD = re.compile(r'karaoke|revisited|instrumental|inst\.|live|remix|cover|tribute|sped up|slowed|acoustic|unplugged|dub\)|club\)|main pass|junior.s|jump cut|louder|keep me|holy priest|(chinese|japanese|actors?|extended|edm|orchestra) ver|edition', re.I)
+BAD = re.compile(r'karaoke|revisited|instrumental|inst\.|\(inst\)|piano by|live|remix|cover|tribute|sped up|slowed|acoustic|unplugged|dub\)|club\)|main pass|junior.s|jump cut|louder|keep me|holy priest|(chinese|japanese|actors?|extended|edm|orchestra) ver|edition', re.I)
 ODD = re.compile(r'version|ver\.|mix|edit\b|remaster|bonus', re.I)  # allowed, but the plain original comes first
 # The Korean store's search answers nothing, so Korean favourites are searched in the US
 # store (which understands Korean words but answers in English) and the candidates are
@@ -104,7 +104,9 @@ for sid in allid:
 # hand fixes after checking the list (2026-11-19): K-pop acts the store files under Pop,
 # and a Western singer whose Korean-store name is written in Hangul
 KOREAN_ARTISTS = {'ALLDAY PROJECT', 'MEOVV'}
-NOT_KOREAN = {'Lady Gaga', 'Leona Lewis', 'Sting'}
+# Western acts the Korean store writes in Hangul (루이 암스트롱, 프랭크 시나트라 …) are not Korean songs
+NOT_KOREAN = {'Lady Gaga', 'Leona Lewis', 'Sting', 'Louis Armstrong', 'Barry Manilow', 'Andrea Bocelli', 'Idina Menzel', 'Chuck Mangione',
+              'Kenny Loggins', 'Tom Hanks', 'Frank Sinatra', 'back number'}
 # country acts the store files under another genre
 COUNTRY_ARTISTS = {'Morgan Wallen', 'Zach Bryan', 'Ella Langley', 'Cody Johnson', 'Kane Brown x blackbear', 'Chris Stapleton', 'Dolly Parton', 'Whiskey Myers'}
 POP_OK = {'Taylor Swift'}  # country-pop crossover hits stay
