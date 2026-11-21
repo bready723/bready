@@ -26,7 +26,7 @@ export default defineConfig({
           {
             urlPattern: ({ url }) => url.pathname.startsWith('/bready/quiz/'),
             handler: 'CacheFirst',
-            options: { cacheName: 'quiz-photos', expiration: { maxEntries: 1600 } },
+            options: { cacheName: 'quiz-photos', expiration: { maxEntries: 2000 } },
           },
           {
             // 190 country flags for the Flag → Country quiz, cached as they are shown

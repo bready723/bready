@@ -50,16 +50,24 @@ def top(n, **q):
 # from the poster review (2026-11-18): pictures that still show the title get the next
 # textless picture; posters too adult for a family game are left out
 # (second review 2026-11-19, pool to 500)
-NEXT_PICTURE = {157350: 'Divergent', 200085: 'The Flu', 933131: 'Badland Hunters', 507089: "Five Nights at Freddy's"}
+NEXT_PICTURE = {157350: 'Divergent', 200085: 'The Flu', 933131: 'Badland Hunters', 507089: "Five Nights at Freddy's",
+               # third review 2026-11-21 (1990-2015 Hollywood batch)
+               956: 'Mission: Impossible III', 11321: 'Seven Pounds', 644: 'A.I. Artificial Intelligence'}
 LEAVE_OUT = {1280: '3-Iron', 22536: 'Thirst', 933260: 'The Substance',
-             73: 'American History X', 1359: 'American Psycho', 216015: 'Fifty Shades of Grey', 123377: 'Pieta', 432836: 'Memoir of a Murderer (every picture shows a title)',
+             73: 'American History X', 1359: 'American Psycho', 216015: 'Fifty Shades of Grey', 123377: 'Pieta', 345: 'Eyes Wide Shut',
+             # every textless picture still shows the title (2026-11-21)
+             95: 'Armageddon', 65: '8 Mile', 82700: 'After Earth', 2454: 'Narnia: Prince Caspian', 432836: 'Memoir of a Murderer (every picture shows a title)',
              # concert / making-of films: not something to guess from a picture
              740996: 'BLACKPINK: Light Up the Sky', 611291: 'Bring the Soul', 568300: 'BTS World Tour', 1412113: 'Squid Game: Making Season 2', 553512: 'Burn the Stage'}
+CLASSIC_N = int(os.environ.get('CLASSIC_N', '420'))
 groups = [
     ('en', top(300, with_original_language='en', without_genres='16')),
     ('ko', top(90, with_original_language='ko')),
     ('anim', top(90, with_genres='16')),
     ('new', top(50, **{'primary_release_date.gte': '2023-01-01', 'with_original_language': 'en'})),
+    # Sara 2026-11-21: ~200 more Hollywood favourites from 1990-2015 (familiar, not the newest)
+    ('classic', top(CLASSIC_N, with_original_language='en', without_genres='16',
+                    **{'primary_release_date.gte': '1990-01-01', 'primary_release_date.lte': '2015-12-31'})),
 ]
 movies, seen, skipped = [], set(), []
 for g, rows in groups:

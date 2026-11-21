@@ -47,7 +47,7 @@ for st in ('us', 'kr'):
     for r in feed['results']:
         ids.setdefault(r['id'], st)
 # 2. all-time favourites
-BAD = re.compile(r'karaoke|revisited|instrumental|inst\.|live|remix|cover|tribute|sped up|slowed|acoustic ver|(chinese|japanese|actors?|extended|edm|orchestra) ver|edition', re.I)
+BAD = re.compile(r'karaoke|revisited|instrumental|inst\.|live|remix|cover|tribute|sped up|slowed|acoustic|unplugged|dub\)|club\)|main pass|junior.s|jump cut|louder|keep me|holy priest|(chinese|japanese|actors?|extended|edm|orchestra) ver|edition', re.I)
 ODD = re.compile(r'version|ver\.|mix|edit\b|remaster|bonus', re.I)  # allowed, but the plain original comes first
 # The Korean store's search answers nothing, so Korean favourites are searched in the US
 # store (which understands Korean words but answers in English) and the candidates are
@@ -59,7 +59,7 @@ for row in csv.DictReader(open(os.path.join(HERE, 'songs-classics.csv'), encodin
     row['artist'], row['title'] = row['artists'][0], row['title'].split('|')[0]
     q = urllib.parse.urlencode({'term': f"{row['artist']} {row['title']}", 'country': 'us', 'entity': 'song', 'limit': 15})
     res = [r for r in get('https://itunes.apple.com/search?' + q, 3.2).get('results', [])
-           if not BAD.search(r.get('trackName', '') + ' ' + r.get('collectionName', ''))]
+           if not BAD.search(r.get('trackName', '') + ' ' + r.get('collectionName', '') + ' ' + r.get('artistName', ''))]
     res.sort(key=lambda r: (r.get('trackExplicitness') == 'explicit', not r.get('previewUrl'), bool(ODD.search(r.get('trackName', '')))))
     if row['store'] == 'kr':
         kr_wait.append((row, [(str(r['trackId']), r.get('artistName'), r.get('trackName')) for r in res[:6]])); continue
@@ -104,33 +104,42 @@ for sid in allid:
 # hand fixes after checking the list (2026-11-19): K-pop acts the store files under Pop,
 # and a Western singer whose Korean-store name is written in Hangul
 KOREAN_ARTISTS = {'ALLDAY PROJECT', 'MEOVV'}
-NOT_KOREAN = {'Lady Gaga'}
-songs, seen, dropped = [], set(), {'explicit': 0, 'no preview': 0, 'not found': 0, 'duplicate': 0}
+NOT_KOREAN = {'Lady Gaga', 'Leona Lewis', 'Sting'}
+# country acts the store files under another genre
+COUNTRY_ARTISTS = {'Morgan Wallen', 'Zach Bryan', 'Ella Langley', 'Cody Johnson', 'Kane Brown x blackbear', 'Chris Stapleton', 'Dolly Parton', 'Whiskey Myers'}
+POP_OK = {'Taylor Swift'}  # country-pop crossover hits stay
+first_artist = lambda r: r.get('artistName', '').split(' & ')[0].split(',')[0]
+songs, seen, dropped = [], set(), {'explicit': 0, 'country': 0, 'no preview': 0, 'not found': 0, 'duplicate': 0}
 for sid in allid:
     us, kr = info['us'].get(sid), info['kr'].get(sid)
     base = us or kr
     if not base: dropped['not found'] += 1; continue
     if base.get('trackExplicitness') == 'explicit': dropped['explicit'] += 1; continue
+    # Sara 2026-11-21: no country music
+    if ('Country' in (us or {}).get('primaryGenreName', '') + (kr or {}).get('primaryGenreName', '') or first_artist(base) in COUNTRY_ARTISTS) and first_artist(base) not in POP_OK:
+        dropped['country'] += 1; continue
     pv = (us or {}).get('previewUrl') or (kr or {}).get('previewUrl')
     if not pv: dropped['no preview'] += 1; continue
     korean = (sid in krset or base.get('artistId') in kr_artists or 'K-Pop' in ((us or {}).get('primaryGenreName', ''), (kr or {}).get('primaryGenreName', ''))
               or bool(kr and HANGUL.search(kr.get('artistName', '') + kr.get('trackName', '')))
               or bool(HANGUL.search(base.get('artistName', '') + base.get('trackName', ''))))
-    clean = lambda s: re.sub(r'\s*[\(\[][^\)\]]*(feat|with |from |remaster|version|bonus track|ver\.|radio edit|single)[^\)\]]*[\)\]]|\s+-\s+(\d{4} )?remaster(ed)?.*$', '', s or '', flags=re.I).strip()
+    clean = lambda s: re.sub(r'\s*[\(\[][^\)\]]*(feat|with |from |remaster|version|bonus track|ver\.|radio edit|single|official|mix\b)[^\)\]]*[\)\]]|\s*\{[^}]*\}|\s+-\s+(\d{4} )?remaster(ed)?.*$', '', s or '', flags=re.I).strip()
     first = base.get('artistName', '').split(' & ')[0].split(',')[0]
     if first in NOT_KOREAN: korean = False
     if first in KOREAN_ARTISTS: korean = True
     main = kr if korean and kr else base
     other = base if main is kr else kr
-    name, artist = clean(main['trackName']), main['artistName']
-    key = norm(name) + '|' + norm(artist.split(',')[0].split('&')[0])
+    # a trailing [...] note is never part of the title ('[Gabry Ponte Ice Pop Radio]', '[The Official ... Song]')
+    tail = lambda t: re.sub(r'(\s*\[[^\]]*\])+\s*$', '', re.sub(r'\s*\{[^}]*\}', '', t or ''))
+    name, artist = clean(tail(main['trackName'])), main['artistName']
+    key = norm(name) + '|' + norm(re.split(r',|&| featuring | feat\. ', artist)[0])
     if key in seen: dropped['duplicate'] += 1; continue
     seen.add(key)
     e = {'id': 's' + sid, 'name': name, 'artist': artist,
          'art': re.sub(r'/\d+x\d+bb\.', '/600x600bb.', base['artworkUrl100']),
          'preview': pv, 'link': re.sub(r'[?&]uo=\d+', '', base['trackViewUrl']).split('&')[0], 'year': (base.get('releaseDate') or '')[:4]}
     if other:
-        oname, oartist = clean(other['trackName']), other['artistName']
+        oname, oartist = clean(tail(other['trackName'])), other['artistName']
         if norm(oname) != norm(name): e['alt'] = oname
         if norm(oartist) != norm(artist): e['altArtist'] = oartist
     if korean: e['kr'] = True
