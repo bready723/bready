@@ -1514,3 +1514,42 @@ a.q-credit { text-decoration: none; color: #4a2fc0; font-weight: 650; }
 }
 .inspire-banner .eyebrow { color: rgba(255,255,255,.65); }
 .inspire-banner .line { color: #fff; }
+
+/* ============================================================
+   Tablet / iPad (2026-11-21): use the whole screen instead of a
+   480px phone strip. The quiz fills edge to edge with bigger
+   pictures and type; the other tabs widen but keep a readable
+   column. Phones (< 700px wide) are unchanged.
+   ============================================================ */
+@media (min-width: 700px) {
+  .app, .tabbar, .fab-anchor { max-width: none; }
+  .sheet { max-width: 620px; border-radius: 26px 26px 0 0; }
+  .screen:not(.quiz) { padding-left: max(32px, calc((100% - 760px) / 2)); padding-right: max(32px, calc((100% - 760px) / 2)); }
+  .appbar { padding-left: 32px; padding-right: 32px; }
+
+  .quiz { padding-left: 32px; padding-right: 32px; }
+  .q-tiles { gap: 16px; }
+  .q-hub { gap: 14px; }
+  .q-tile-title { font-size: 22px; }
+  .q-tile-chip { font-size: 14px; }
+  .q-btn { font-size: 19px; padding: 19px 22px; border-radius: 22px; }
+  .q-btn.big { font-size: 22px; padding: 22px; }
+  .q-name-main { font-size: 40px; }
+  .q-name-alt, .q-name-sub { font-size: 19px; }
+  .q-eyebrow { font-size: 14px; }
+  .q-play { gap: 14px; }
+
+  .w-play { gap: 18px; }
+  .w-ask { padding: 30px 24px 32px; }
+  .w-country { font-size: 52px; }
+  .w-flag { width: min(100%, 520px); border-radius: 14px; }
+  .w-choices { grid-template-columns: 1fr 1fr; gap: 14px; }
+  .w-choice { min-height: 84px; font-size: 22px; padding: 16px 22px; border-radius: 20px; }
+
+  .q-end { max-width: 760px; width: 100%; margin: 0 auto; }
+}
+/* iPad held sideways: six quiz tiles in three columns */
+@media (min-width: 700px) and (min-aspect-ratio: 1 / 1) {
+  .q-tiles { grid-template-columns: 1fr 1fr 1fr; }
+  .w-flag { width: min(100%, 420px); }
+}
