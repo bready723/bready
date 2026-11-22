@@ -4,6 +4,7 @@ import {
   HISTORY_KEY, LOGO_HISTORY_KEY, renameAll, bestLabel, sampleArt, HISTORY_MAX, loadHistory, addResult, saveHistory, summarize, isNewBest, playedLabel,
   NAME_MAX, DEFAULT_NAME, cleanName, nameOf, recentNames, renameLast, bestRow, loadName, saveName,
   pickMixed, subLine, SONG_HISTORY_KEY, MOVIE_HISTORY_KEY, SONG_SECONDS,
+  eraOf, choosePool, pickerFor, loadPoolChoice, savePoolChoice,
 } from './quiz.js'
 
 // a tiny deterministic random source: cycles through the given values
@@ -330,5 +331,54 @@ describe('Guess the Song / Guess the Movie', () => {
 
   it('each game keeps its own scoreboard', () => {
     expect(new Set([HISTORY_KEY, LOGO_HISTORY_KEY, SONG_HISTORY_KEY, MOVIE_HISTORY_KEY]).size).toBe(4)
+  })
+})
+
+describe('choosing the pool', () => {
+  const pool = [
+    { id: 'a', kr: true, year: '1995' }, { id: 'b', kr: true, year: '2005' }, { id: 'c', kr: true, year: '2019' },
+    { id: 'd', year: '1984' }, { id: 'e', year: '2008' }, { id: 'f', year: '2015' }, { id: 'g', year: '1975' },
+    { id: 'h', rare: true }, { id: 'i', kr: true, rare: true },
+  ]
+  const ids = (l) => l.map((x) => x.id).join('')
+  it('puts a song in the period it was a hit', () => {
+    expect([eraOf('1975'), eraOf('1980'), eraOf(1999), eraOf('2000'), eraOf('2009'), eraOf('2010'), eraOf('2025')])
+      .toEqual(['old', '80s', '80s', '00s', '00s', '10s', '10s'])
+    expect(eraOf('')).toBe(null)
+    expect(eraOf(undefined)).toBe(null)
+  })
+  it('filters by Korean / not Korean and by period, never drawing rare faces', () => {
+    expect(ids(choosePool(pool))).toBe('abcdefg')
+    expect(ids(choosePool(pool, { group: 'kr' }))).toBe('abc')
+    expect(ids(choosePool(pool, { group: 'world' }))).toBe('defg')
+    expect(ids(choosePool(pool, { group: 'mix', era: '80s' }))).toBe('ad')
+    expect(ids(choosePool(pool, { group: 'world', era: '00s' }))).toBe('e')
+    expect(ids(choosePool(pool, { group: 'kr', era: '10s' }))).toBe('c')
+  })
+  it('a mix is drawn half and half; one group plainly', () => {
+    expect(pickerFor('mix')).toBe(pickMixed)
+    expect(pickerFor('kr')).toBe(pickRound)
+    expect(pickerFor('world')).toBe(pickRound)
+  })
+  it('remembers the last choice per game and survives bad data', () => {
+    const m = new Map()
+    const st = { getItem: (k) => (m.has(k) ? m.get(k) : null), setItem: (k, v) => m.set(k, String(v)) }
+    expect(loadPoolChoice('song', st)).toEqual({ group: 'mix', era: 'all' })
+    expect(savePoolChoice('song', { group: 'kr', era: '00s' }, st)).toBe(true)
+    expect(loadPoolChoice('song', st)).toEqual({ group: 'kr', era: '00s' })
+    expect(loadPoolChoice('face', st)).toEqual({ group: 'mix', era: 'all' })
+    st.setItem('bready.quiz.pool.face', '{"group":"martian","era":"1700s"}')
+    expect(loadPoolChoice('face', st)).toEqual({ group: 'mix', era: 'all' })
+    st.setItem('bready.quiz.pool.face', '{oops')
+    expect(loadPoolChoice('face', st)).toEqual({ group: 'mix', era: 'all' })
+    expect(savePoolChoice('face', {}, null)).toBe(false)
+    expect(savePoolChoice('face', {}, { setItem: () => { throw new Error('full') } })).toBe(false)
+  })
+})
+
+describe('subLine for K-pop faces', () => {
+  it('shows the group under a member', () => {
+    expect(subLine({ name: '제니', alt: 'Jennie', group: 'BLACKPINK' })).toBe('BLACKPINK')
+    expect(subLine({ name: 'Someone' })).toBe('')
   })
 })

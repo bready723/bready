@@ -334,7 +334,7 @@ export default function FaceGame({ pool, dir = 'quiz', storeKey, kind = 'face', 
               <div className="q-name" key={'n' + s.index}>
                 <p className="q-name-main">{item.name}</p>
                 {item.alt && <p className="q-name-alt">{item.alt}</p>}
-                {(song || kind === 'movie') && sub && <p className="q-name-sub">{sub}</p>}
+                {(song || kind === 'movie' || item.group) && sub && <p className="q-name-sub">{sub}</p>}
               </div>
             )}
             {revealed && credit && (item.link

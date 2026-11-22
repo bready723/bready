@@ -1,0 +1,7 @@
+- [x] 1.1 Fame scores (scripts/quiz/fame.py → scripts/quiz/fame.json)
+- [x] 1.2 Tag faces: kr, group, rare (scripts/quiz/tag-people.py)
+- [x] 2.1 Chart songs with hit years (songs-charts.csv, songs-korean-oldies.csv, songs.py)
+- [x] 3.1 choosePool / eraOf / pickerFor / load+savePoolChoice with tests
+- [x] 3.2 Picker screen, group line on reveal, iPad sizes
+- [ ] 4.1 K-pop group photos and missing members (download was rate-limited; second step)
+- [ ] 4.2 Sara plays on her phone

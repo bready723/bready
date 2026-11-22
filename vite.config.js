@@ -15,6 +15,8 @@ export default defineConfig({
       // so tell the plugin not to auto-inject its own registration script too.
       injectRegister: null,
       workbox: {
+        // the face, song and movie lists make the main bundle ~2.3 MB; keep it in the offline copy
+        maximumFileSizeToCacheInBytes: 4 * 1024 * 1024,
         clientsClaim: true,
         skipWaiting: true,
         cleanupOutdatedCaches: true,

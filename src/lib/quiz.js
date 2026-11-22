@@ -86,8 +86,9 @@ export function creditLine(person, label = 'Photo') {
   return `${label}: ${person.credit || 'Wikimedia Commons'} · ${person.license}`
 }
 
-// the small line under a revealed song or movie: "Artist · 2019"
+// the small line under a revealed song or movie: "Artist · 2019"; under a K-pop face: its group
 export function subLine(item) {
+  if (item.group) return item.group
   const who = item.artist && item.altArtist ? `${item.artist} (${item.altArtist})` : item.artist
   return [who, item.year].filter(Boolean).join(' · ')
 }
@@ -217,4 +218,48 @@ export function playedLabel(at, now = new Date()) {
   if (diff === 1) return `Yesterday ${time}`
   const opts = { month: 'short', day: 'numeric', ...(d.getFullYear() !== now.getFullYear() ? { year: 'numeric' } : {}) }
   return d.toLocaleDateString('en-US', opts)
+}
+
+// ---- choosing the pool (Sara, 2026-11-22) ----
+// Who Is This? and Guess the Song can be played as a mix, Korean only, or not Korean;
+// songs can also be narrowed to the period they were a hit.
+export const GROUPS = ['mix', 'kr', 'world']
+export const ERAS = ['all', '80s', '00s', '10s']
+
+export function eraOf(year) {
+  const y = parseInt(year, 10)
+  if (!y) return null
+  if (y < 1980) return 'old'
+  if (y < 2000) return '80s'
+  if (y < 2010) return '00s'
+  return '10s'
+}
+
+// `rare` marks faces too little known for the game (kept in the file, never drawn)
+export function choosePool(pool, { group = 'mix', era = 'all' } = {}) {
+  return pool.filter((x) => !x.rare
+    && (group === 'mix' || (group === 'kr') === !!x.kr)
+    && (era === 'all' || eraOf(x.year) === era))
+}
+
+// a mix is half Korean, half not; a single group is drawn plainly
+export const pickerFor = (group) => (group === 'mix' ? pickMixed : pickRound)
+
+const poolKey = (kind) => `bready.quiz.pool.${kind}`
+export function loadPoolChoice(kind, store = defaultStore()) {
+  try {
+    const v = JSON.parse(store?.getItem(poolKey(kind)) || '{}')
+    return { group: GROUPS.includes(v.group) ? v.group : 'mix', era: ERAS.includes(v.era) ? v.era : 'all' }
+  } catch {
+    return { group: 'mix', era: 'all' }
+  }
+}
+export function savePoolChoice(kind, choice, store = defaultStore()) {
+  try {
+    if (!store) return false
+    store.setItem(poolKey(kind), JSON.stringify(choice))
+    return true
+  } catch {
+    return false
+  }
 }

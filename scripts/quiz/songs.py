@@ -35,36 +35,48 @@ def get(url, pause):
 norm = lambda s: re.sub(r'[^0-9a-z가-힣]', '', (s or '').lower())
 def same(a, b):
     a, b = norm(a), norm(b)
+    if min(len(a), len(b)) <= 2: return a == b  # '비' must not match '바비킴'
     return bool(a and b) and (a in b or b in a)
 
 ids = {}  # trackId -> store it came from ('us' / 'kr')
 krset = set()  # ids known to be Korean songs (Korean favourites)
 # The Korea chart also lists global hits (Bieber, Ariana Grande), so a chart song counts as
 # Korean only when its name or genre says so (checked below), never just for charting there.
-# 1. recent charts
-for st in ('us', 'kr'):
-    feed = get(f'https://rss.marketingtools.apple.com/api/v2/{st}/music/most-played/100/songs.json', 1)['feed']
-    for r in feed['results']:
-        ids.setdefault(r['id'], st)
+# 1. (2026-11-22) the weekly "most played" store charts are no longer used: Sara found too many
+# unfamiliar songs. Songs now come from year-end hit charts, favourites and playlists only.
+hit_year = {}  # trackId -> the year the song was a hit (chart year), used for the period filter
 # 2. all-time favourites
-BAD = re.compile(r'karaoke|revisited|instrumental|inst\.|\(inst\)|piano by|live|remix|cover|tribute|sped up|slowed|acoustic|unplugged|dub\)|club\)|main pass|junior.s|jump cut|louder|keep me|holy priest|(chinese|japanese|actors?|extended|edm|orchestra) ver|edition', re.I)
+BAD = re.compile(r're-?recorded|karaoke|revisited|instrumental|inst\.|\(inst\)|piano by|live|remix|cover|tribute|sped up|slowed|acoustic|unplugged|dub\)|club\)|main pass|junior.s|jump cut|louder|keep me|holy priest|(chinese|japanese|actors?|extended|edm|orchestra) ver|edition', re.I)
 ODD = re.compile(r'version|ver\.|mix|edit\b|remaster|bonus', re.I)  # allowed, but the plain original comes first
 # The Korean store's search answers nothing, so Korean favourites are searched in the US
 # store (which understands Korean words but answers in English) and the candidates are
 # checked against their Korean-store names in one batched lookup.
 missing, kr_wait = [], []
-for row in csv.DictReader(open(os.path.join(HERE, 'songs-classics.csv'), encoding='utf-8')):
+# songs-charts.csv: Billboard year-end top 12 (1980-2025) and Korea's Circle/Gaon chart
+# number ones (2010-2025), both from Wikipedia; songs-korean-oldies.csv: Korean hits before 2010
+# (no official chart then). Both carry the hit year.
+def rows():
+    for f in ('songs-classics.csv', 'songs-charts.csv', 'songs-korean-oldies.csv'):
+        yield from csv.DictReader(open(os.path.join(HERE, f), encoding='utf-8'))
+def found(sid, row):
+    if row.get('year'):
+        hit_year[sid] = min(hit_year.get(sid, 9999), int(row['year']))
+for row in rows():
     # artist / title may list other spellings after '|': 싸이|PSY, 강남스타일|Gangnam Style
     row['artists'], row['titles'] = row['artist'].split('|'), [t.split(' (')[0] for t in row['title'].split('|')]
     row['artist'], row['title'] = row['artists'][0], row['title'].split('|')[0]
     q = urllib.parse.urlencode({'term': f"{row['artist']} {row['title']}", 'country': 'us', 'entity': 'song', 'limit': 15})
-    res = [r for r in get('https://itunes.apple.com/search?' + q, 3.2).get('results', [])
-           if not BAD.search(r.get('trackName', '') + ' ' + r.get('collectionName', '') + ' ' + r.get('artistName', ''))]
+    res = get('https://itunes.apple.com/search?' + q, 3.2).get('results', [])
+    # chart rows give an English artist and a Korean|English title: try the English title too
+    if row['store'] == 'kr' and len(row['titles']) > 1 and not any(same(r.get('artistName'), a) for r in res for a in row['artists']):
+        q2 = urllib.parse.urlencode({'term': f"{row['artist']} {row['titles'][-1]}", 'country': 'us', 'entity': 'song', 'limit': 15})
+        res = res + get('https://itunes.apple.com/search?' + q2, 3.2).get('results', [])
+    res = [r for r in res if not BAD.search(r.get('trackName', '') + ' ' + r.get('collectionName', '') + ' ' + r.get('artistName', ''))]
     res.sort(key=lambda r: (r.get('trackExplicitness') == 'explicit', not r.get('previewUrl'), bool(ODD.search(r.get('trackName', '')))))
     if row['store'] == 'kr':
         kr_wait.append((row, [(str(r['trackId']), r.get('artistName'), r.get('trackName')) for r in res[:6]])); continue
     ok = [r for r in res if same(r.get('artistName'), row['artist']) and same(r.get('trackName'), row['title'].split(' (')[0])]
-    if ok: ids.setdefault(str(ok[0]['trackId']), 'us')
+    if ok: ids.setdefault(str(ok[0]['trackId']), 'us'); found(str(ok[0]['trackId']), row)
     else: missing.append(f"{row['artist']} - {row['title']}")
 cand = sorted({c for _, cs in kr_wait for c, _, _ in cs}); krinfo = {}
 for i in range(0, len(cand), 150):
@@ -77,7 +89,7 @@ for row, cs in kr_wait:
     anyof = lambda x, names: any(same(x, n) for n in names)
     who = lambda c, ua: anyof(ua, row['artists']) or (c in krinfo and anyof(krinfo[c].get('artistName'), row['artists']))
     hit = next((c for c, ua, ut in cs if who(c, ua) and (anyof(ut, row['titles']) or (c in krinfo and anyof(krinfo[c].get('trackName'), row['titles'])))), None)
-    if hit: ids.setdefault(hit, 'kr'); krset.add(hit)
+    if hit: ids.setdefault(hit, 'kr'); krset.add(hit); found(hit, row)
     else: missing.append(f"{row['artist']} - {row['title']}")
 # 3. playlists (saved page html)
 for path in sys.argv[2:]:
@@ -111,7 +123,7 @@ NOT_KOREAN = {'Lady Gaga', 'Leona Lewis', 'Sting', 'Louis Armstrong', 'Barry Man
 COUNTRY_ARTISTS = {'Morgan Wallen', 'Zach Bryan', 'Ella Langley', 'Cody Johnson', 'Kane Brown x blackbear', 'Chris Stapleton', 'Dolly Parton', 'Whiskey Myers'}
 POP_OK = {'Taylor Swift'}  # country-pop crossover hits stay
 first_artist = lambda r: r.get('artistName', '').split(' & ')[0].split(',')[0]
-songs, seen, dropped = [], set(), {'explicit': 0, 'country': 0, 'no preview': 0, 'not found': 0, 'duplicate': 0}
+songs, seen, by_key, dropped = [], set(), {}, {'explicit': 0, 'country': 0, 'no preview': 0, 'not found': 0, 'duplicate': 0}
 for sid in allid:
     us, kr = info['us'].get(sid), info['kr'].get(sid)
     base = us or kr
@@ -135,18 +147,30 @@ for sid in allid:
     tail = lambda t: re.sub(r'(\s*\[[^\]]*\])+\s*$', '', re.sub(r'\s*\{[^}]*\}', '', t or ''))
     name, artist = clean(tail(main['trackName'])), main['artistName']
     key = norm(name) + '|' + norm(re.split(r',|&| featuring | feat\. ', artist)[0])
-    if key in seen: dropped['duplicate'] += 1; continue
+    if key in seen:
+        dropped['duplicate'] += 1
+        if sid in hit_year:  # the same song found twice: keep the chart (hit) year
+            prev = by_key[key]
+            if not prev['hasHit'] or hit_year[sid] < int(prev['e']['year']): prev['e']['year'], prev['hasHit'] = str(hit_year[sid]), True
+        continue
     seen.add(key)
     e = {'id': 's' + sid, 'name': name, 'artist': artist,
          'art': re.sub(r'/\d+x\d+bb\.', '/600x600bb.', base['artworkUrl100']),
-         'preview': pv, 'link': re.sub(r'[?&]uo=\d+', '', base['trackViewUrl']).split('&')[0], 'year': (base.get('releaseDate') or '')[:4]}
+         'preview': pv, 'link': re.sub(r'[?&]uo=\d+', '', base['trackViewUrl']).split('&')[0], 'year': str(hit_year.get(sid) or (base.get('releaseDate') or '')[:4])}
     if other:
         oname, oartist = clean(tail(other['trackName'])), other['artistName']
         if norm(oname) != norm(name): e['alt'] = oname
         if norm(oartist) != norm(artist): e['altArtist'] = oartist
     if korean: e['kr'] = True
-    songs.append(e)
+    songs.append(e); by_key[key] = {'e': e, 'hasHit': sid in hit_year}
 
+# classics whose store copy is a later re-release: the year they were a hit
+YEAR_FIX = {('Frank Sinatra', 'Fly Me to the Moon'): 1964, ('Village People', 'Y.M.C.A.'): 1978,
+            ('Kylie Minogue', "Can't Get You out of My Head"): 2001}
+for e in songs:
+    if (e['artist'], e['name']) in YEAR_FIX: e['year'] = str(YEAR_FIX[(e['artist'], e['name'])])
+old = [f"{e['artist']} - {e['name']} ({e['year']})" for e in songs if not any(e['id'] == 's' + k for k in hit_year) and not e.get('kr') and e['year'] >= '2000']
+open(os.path.join(work, 'no-hit-year.txt'), 'w').write('\n'.join(old))
 json.dump(songs, open(os.path.join(REPO, 'src', 'lib', 'songs.json'), 'w'), ensure_ascii=False, indent=0)
 kr_n = sum(1 for s in songs if s.get('kr'))
 print(f'songs {len(songs)} (Korean {kr_n}, global {len(songs) - kr_n}) | dropped {dropped}')

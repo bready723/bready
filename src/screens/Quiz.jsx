@@ -6,7 +6,8 @@ import movies from '../lib/movies.json'
 import bank from '../lib/world-bank.json'
 import {
   HISTORY_KEY, LOGO_HISTORY_KEY, SONG_HISTORY_KEY, MOVIE_HISTORY_KEY, SONG_SECONDS,
-  loadHistory, bestLabel, sampleArt, photoUrl, pickMixed,
+  loadHistory, bestLabel, sampleArt, photoUrl, ROUND_SIZE,
+  choosePool, pickerFor, loadPoolChoice, savePoolChoice,
 } from '../lib/quiz.js'
 import { historyKey, flagUrl } from '../lib/world.js'
 import { Backdrop } from '../components/QuizParts.jsx'
@@ -46,6 +47,47 @@ function GlobeArt() {
   )
 }
 
+// Before Who Is This? and Guess the Song: which faces / songs to play with
+const GROUP_LABEL = { face: { mix: 'Mix', kr: 'Korean', world: 'Not Korean' }, song: { mix: 'Mix', kr: 'Korean', world: 'Pop' } }
+const ERA_LABEL = { all: 'All', '80s': '80s–90s', '00s': '2000s', '10s': '2010s–now' }
+
+function Seg({ label, options, value, onChange }) {
+  return (
+    <div className="q-seg-wrap">
+      <p className="q-eyebrow">{label}</p>
+      <div className="q-seg" role="radiogroup" aria-label={label}>
+        {Object.entries(options).map(([k, text]) => (
+          <button key={k} role="radio" aria-checked={value === k} className={value === k ? 'on' : ''} onClick={() => onChange(k)}>
+            {text}
+          </button>
+        ))}
+      </div>
+    </div>
+  )
+}
+
+function PoolPicker({ kind, title, pool, onStart, onBack }) {
+  const [choice, setChoice] = useState(() => loadPoolChoice(kind))
+  const set = (patch) => setChoice((c) => { const next = { ...c, ...patch }; savePoolChoice(kind, next); return next })
+  const n = choosePool(pool, kind === 'song' ? choice : { group: choice.group }).length
+  const what = kind === 'song' ? 'songs' : 'faces'
+  return (
+    <main className="screen quiz">
+      <Backdrop />
+      <section className="glass q-pick" key="pick">
+        <h2 className="q-pick-title">{title}</h2>
+        <Seg label={kind === 'song' ? 'Songs' : 'Faces'} options={GROUP_LABEL[kind]} value={choice.group} onChange={(group) => set({ group })} />
+        {kind === 'song' && <Seg label="Period" options={ERA_LABEL} value={choice.era} onChange={(era) => set({ era })} />}
+        <p className="q-pick-count">{n.toLocaleString()} {what}{n > 0 && n < ROUND_SIZE ? ` · a short game of ${n}` : ''}</p>
+        <div className="q-row">
+          <button className="q-btn glassy" disabled={!n} onClick={() => onStart(choice)}>Start</button>
+          <button className="q-btn stop" onClick={onBack}>Back</button>
+        </div>
+      </section>
+    </main>
+  )
+}
+
 function Stack({ srcs, kind }) {
   return (
     <div className={`q-tile-stack ${kind}`} aria-hidden="true">
@@ -59,7 +101,8 @@ function Stack({ srcs, kind }) {
 }
 
 export default function Quiz() {
-  const [open, setOpen] = useState(null) // 'face' | 'logo' | 'capital' | 'flag' | 'song' | 'movie'
+  const [open, setOpen] = useState(null) // 'face' | 'logo' | 'capital' | 'flag' | 'song' | 'movie' | 'pick-face' | 'pick-song'
+  const [choice, setChoice] = useState(null) // the pool picked for Who Is This? / Guess the Song
   const back = useCallback(() => setOpen(null), [])
   const root = useRef(null)
   const hub = useRef(null)
@@ -68,16 +111,32 @@ export default function Quiz() {
 
   // a fresh picture stack every time the hub shows
   const art = useMemo(() => ({
-    face: sampleArt(people).map((p) => photoUrl(p, BASE)),
+    face: sampleArt(choosePool(people)).map((p) => photoUrl(p, BASE)),
     logo: sampleArt(logos).map((p) => photoUrl(p, BASE, 'logos')),
     flag: sampleArt(bank).map((c) => flagUrl(c, BASE)),
     song: sampleArt(songs).map((x) => x.art),
     movie: sampleArt(movies).map((x) => x.art),
   }), [open]) // eslint-disable-line react-hooks/exhaustive-deps
 
-  if (open === 'face') return <FaceGame pool={people} storeKey={HISTORY_KEY} onExit={back} />
+  if (open === 'pick-face' || open === 'pick-song') {
+    const kind = open.slice(5)
+    return (
+      <PoolPicker
+        kind={kind} title={kind === 'face' ? 'Who Is This?' : 'Guess the Song'} pool={kind === 'face' ? people : songs}
+        onStart={(c) => { if (kind === 'song') unlockAudio(); setChoice(c); setOpen(kind) }}
+        onBack={back}
+      />
+    )
+  }
+  if (open === 'face') {
+    const c = { group: choice?.group || 'mix' }
+    return <FaceGame pool={choosePool(people, c)} pick={pickerFor(c.group)} storeKey={HISTORY_KEY} onExit={back} />
+  }
   if (open === 'logo') return <FaceGame pool={logos} dir="logos" storeKey={LOGO_HISTORY_KEY} kind="logo" onExit={back} />
-  if (open === 'song') return <FaceGame pool={songs} storeKey={SONG_HISTORY_KEY} kind="song" pick={pickMixed} seconds={SONG_SECONDS} onExit={back} />
+  if (open === 'song') {
+    const c = choice || { group: 'mix', era: 'all' }
+    return <FaceGame pool={choosePool(songs, c)} storeKey={SONG_HISTORY_KEY} kind="song" pick={pickerFor(c.group)} seconds={SONG_SECONDS} onExit={back} />
+  }
   if (open === 'movie') return <FaceGame pool={movies} storeKey={MOVIE_HISTORY_KEY} kind="movie" onExit={back} />
   if (open === 'capital' || open === 'flag') return <WorldQuiz kind={open} onExit={back} />
 
@@ -101,7 +160,7 @@ export default function Quiz() {
               <button
                 key={t.id}
                 className={`glass q-tile t-${t.id}`}
-                onClick={() => { if (t.id === 'song') unlockAudio(); setOpen(t.id) }}
+                onClick={() => { if (t.id === 'song') unlockAudio(); setOpen(t.id === 'face' || t.id === 'song' ? 'pick-' + t.id : t.id) }}
                 disabled={t.off}
                 aria-label={`${t.label || t.title}, ${chip}`}
               >
