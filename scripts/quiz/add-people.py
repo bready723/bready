@@ -21,6 +21,12 @@ src = open(os.path.join(os.path.dirname(os.path.abspath(__file__)), 'build-pool.
 helpers = src[src.index('def save('):src.index('deck = json.load')]
 credits = src[src.index("json.dump(people, open(os.path.join(repo, 'src'"):src.index('print(json.dumps({k:')]
 exec(helpers)  # save, STEPS, std_thumb, fetch
+# Wikimedia answers 429 to quick bursts of image downloads: wait between photos
+PAUSE = float(os.environ.get('PHOTO_PAUSE', '0'))
+_fetch = fetch
+def fetch(url):
+    time.sleep(PAUSE)
+    return _fetch(url)
 
 people_p = os.path.join(repo, 'src', 'lib', 'people.json')
 people = json.load(open(people_p))

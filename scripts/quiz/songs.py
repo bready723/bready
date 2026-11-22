@@ -46,13 +46,13 @@ krset = set()  # ids known to be Korean songs (Korean favourites)
 # unfamiliar songs. Songs now come from year-end hit charts, favourites and playlists only.
 hit_year = {}  # trackId -> the year the song was a hit (chart year), used for the period filter
 # 2. all-time favourites
-BAD = re.compile(r're-?recorded|karaoke|revisited|instrumental|inst\.|\(inst\)|piano by|live|remix|cover|tribute|sped up|slowed|acoustic|unplugged|dub\)|club\)|main pass|junior.s|jump cut|louder|keep me|holy priest|(chinese|japanese|actors?|extended|edm|orchestra) ver|edition', re.I)
+BAD = re.compile(r're-?recorded|junior-m\b|karaoke|revisited|instrumental|inst\.|\(inst\)|piano by|live|remix|cover|tribute|sped up|slowed|acoustic|unplugged|dub\)|club\)|main pass|junior.s|jump cut|louder|keep me|holy priest|(chinese|japanese|actors?|extended|edm|orchestra) ver|edition', re.I)
 ODD = re.compile(r'version|ver\.|mix|edit\b|remaster|bonus', re.I)  # allowed, but the plain original comes first
 # The Korean store's search answers nothing, so Korean favourites are searched in the US
 # store (which understands Korean words but answers in English) and the candidates are
 # checked against their Korean-store names in one batched lookup.
 missing, kr_wait = [], []
-# songs-charts.csv: Billboard year-end top 12 (1980-2025) and Korea's Circle/Gaon chart
+# songs-charts.csv: Billboard year-end top 12 (1980-2025; top 30 for 2000-2009) and Korea's Circle/Gaon chart
 # number ones (2010-2025), both from Wikipedia; songs-korean-oldies.csv: Korean hits before 2010
 # (no official chart then). Both carry the hit year.
 def rows():
@@ -118,7 +118,8 @@ for sid in allid:
 KOREAN_ARTISTS = {'ALLDAY PROJECT', 'MEOVV'}
 # Western acts the Korean store writes in Hangul (루이 암스트롱, 프랭크 시나트라 …) are not Korean songs
 NOT_KOREAN = {'Lady Gaga', 'Leona Lewis', 'Sting', 'Louis Armstrong', 'Barry Manilow', 'Andrea Bocelli', 'Idina Menzel', 'Chuck Mangione',
-              'Kenny Loggins', 'Tom Hanks', 'Frank Sinatra', 'back number'}
+              'Kenny Loggins', 'Tom Hanks', 'Frank Sinatra', 'back number', 'Robert Palmer', 'Vangelis', 'Eddie Murphy',
+              'Jon Bon Jovi', 'Tiffany'}
 # country acts the store files under another genre
 COUNTRY_ARTISTS = {'Morgan Wallen', 'Zach Bryan', 'Ella Langley', 'Cody Johnson', 'Kane Brown x blackbear', 'Chris Stapleton', 'Dolly Parton', 'Whiskey Myers'}
 POP_OK = {'Taylor Swift'}  # country-pop crossover hits stay
