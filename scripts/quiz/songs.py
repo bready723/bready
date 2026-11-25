@@ -44,6 +44,7 @@ krset = set()  # ids known to be Korean songs (Korean favourites)
 # Korean only when its name or genre says so (checked below), never just for charting there.
 # 1. (2026-11-22) the weekly "most played" store charts are no longer used: Sara found too many
 # unfamiliar songs. Songs now come from year-end hit charts, favourites and playlists only.
+fav = set()  # trackIds from Sara's playlist: half of each round is drawn from these (2026-11-25)
 hit_year = {}  # trackId -> the year the song was a hit (chart year), used for the period filter
 # 2. all-time favourites
 BAD = re.compile(r're-?recorded|junior-m\b|karaoke|revisited|instrumental|inst\.|\(inst\)|piano by|live|remix|cover|tribute|sped up|slowed|acoustic|unplugged|dub\)|club\)|main pass|junior.s|jump cut|louder|keep me|holy priest|(chinese|japanese|actors?|extended|edm|orchestra) ver|edition', re.I)
@@ -95,7 +96,7 @@ for row, cs in kr_wait:
 for path in sys.argv[2:]:
     h = open(path, encoding='utf-8').read()
     for sid in re.findall(r'"kind":"song","identifiers":\{"storeAdamID":"(\d+)"', h):
-        ids.setdefault(sid, 'us')
+        ids.setdefault(sid, 'us'); fav.add(sid)
 
 # 4. look every id up in both stores
 info = {'us': {}, 'kr': {}}
@@ -164,6 +165,7 @@ for sid in allid:
     key = norm(name) + '|' + norm(re.split(r',|&| featuring | feat\. ', artist)[0])
     if key in seen:
         dropped['duplicate'] += 1
+        if sid in fav: by_key[key]['e']['fav'] = True
         if sid in hit_year:  # the same song found twice: keep the chart (hit) year
             prev = by_key[key]
             if not prev['hasHit'] or hit_year[sid] < int(prev['e']['year']): prev['e']['year'], prev['hasHit'] = str(hit_year[sid]), True
@@ -177,6 +179,7 @@ for sid in allid:
         if norm(oname) != norm(name): e['alt'] = oname
         if norm(oartist) != norm(artist): e['altArtist'] = oartist
     if korean: e['kr'] = True
+    if sid in fav: e['fav'] = True
     songs.append(e); by_key[key] = {'e': e, 'hasHit': sid in hit_year}
 
 # classics whose store copy is a later re-release: the year they were a hit

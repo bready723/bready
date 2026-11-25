@@ -245,6 +245,22 @@ export function choosePool(pool, { group = 'mix', era = 'all' } = {}) {
 // a mix is half Korean, half not; a single group is drawn plainly
 export const pickerFor = (group) => (group === 'mix' ? pickMixed : pickRound)
 
+// Guess the Song (Sara 2026-11-25): half of each round comes from her own playlist
+// (songs marked `fav`), the other half from the rest; each half is drawn with `pick`, so a
+// mix stays half Korean. At most a third of the favourites play in one round, so a period
+// with only a few of them (Korean 80s) does not repeat the same songs every game.
+// When the others run short the favourites fill the round.
+export function withFavs(pick) {
+  return (pool, n = ROUND_SIZE, rng = Math.random) => {
+    const favs = pool.filter((x) => x.fav)
+    const rest = pool.filter((x) => !x.fav)
+    const half = Math.ceil(n / 2)
+    const a = pick(favs, Math.min(favs.length, Math.max(Math.min(half, Math.ceil(favs.length / 3)), n - rest.length)), rng)
+    const b = pick(rest, n - a.length, rng)
+    return shuffle([...a, ...b], rng).slice(0, n)
+  }
+}
+
 const poolKey = (kind) => `bready.quiz.pool.${kind}`
 export function loadPoolChoice(kind, store = defaultStore()) {
   try {

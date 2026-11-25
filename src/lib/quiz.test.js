@@ -3,7 +3,7 @@ import {
   ROUND_SIZE, SECONDS, shuffle, pickRound, scoreOf, initialState, quizReducer, photoUrl, creditLine,
   HISTORY_KEY, LOGO_HISTORY_KEY, renameAll, bestLabel, sampleArt, HISTORY_MAX, loadHistory, addResult, saveHistory, summarize, isNewBest, playedLabel,
   NAME_MAX, DEFAULT_NAME, cleanName, nameOf, recentNames, renameLast, bestRow, loadName, saveName,
-  pickMixed, subLine, SONG_HISTORY_KEY, MOVIE_HISTORY_KEY, SONG_SECONDS,
+  pickMixed, withFavs, subLine, SONG_HISTORY_KEY, MOVIE_HISTORY_KEY, SONG_SECONDS,
   eraOf, choosePool, pickerFor, loadPoolChoice, savePoolChoice,
 } from './quiz.js'
 
@@ -380,5 +380,29 @@ describe('subLine for K-pop faces', () => {
   it('shows the group under a member', () => {
     expect(subLine({ name: '제니', alt: 'Jennie', group: 'BLACKPINK' })).toBe('BLACKPINK')
     expect(subLine({ name: 'Someone' })).toBe('')
+  })
+})
+
+describe('withFavs (half of each song round from the playlist)', () => {
+  const mk = (n, extra) => Array.from({ length: n }, (_, i) => ({ id: `${extra.fav ? 'f' : 'o'}${extra.kr ? 'k' : 'w'}${i}`, ...extra }))
+  const pool = [...mk(30, { fav: true, kr: true }), ...mk(30, { fav: true }), ...mk(30, { kr: true }), ...mk(30, {})]
+  it('draws half favourites, half others, no repeats', () => {
+    const r = withFavs(pickRound)(pool, 20)
+    expect(r).toHaveLength(20)
+    expect(new Set(r.map((x) => x.id)).size).toBe(20)
+    expect(r.filter((x) => x.fav)).toHaveLength(10)
+  })
+  it('keeps a mix half Korean inside each half', () => {
+    const r = withFavs(pickMixed)(pool, 20)
+    expect(r.filter((x) => x.fav && x.kr)).toHaveLength(5)
+    expect(r.filter((x) => !x.fav && x.kr)).toHaveLength(5)
+  })
+  it('fills from the other side when one runs short', () => {
+    expect(withFavs(pickRound)([...mk(3, { fav: true }), ...mk(40, {})], 20).filter((x) => x.fav)).toHaveLength(1)
+    expect(withFavs(pickRound)([...mk(9, { fav: true }), ...mk(40, {})], 20).filter((x) => x.fav)).toHaveLength(3)
+    expect(withFavs(pickRound)([...mk(9, { fav: true }), ...mk(5, {})], 20)).toHaveLength(14)
+    expect(withFavs(pickRound)([...mk(40, { fav: true }), ...mk(4, {})], 20).filter((x) => !x.fav)).toHaveLength(4)
+    expect(withFavs(pickRound)(mk(5, {}), 20)).toHaveLength(5)
+    expect(withFavs(pickMixed)([], 20)).toEqual([])
   })
 })

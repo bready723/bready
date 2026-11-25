@@ -7,7 +7,7 @@ import bank from '../lib/world-bank.json'
 import {
   HISTORY_KEY, LOGO_HISTORY_KEY, SONG_HISTORY_KEY, MOVIE_HISTORY_KEY, SONG_SECONDS,
   loadHistory, bestLabel, sampleArt, photoUrl, ROUND_SIZE,
-  choosePool, pickerFor, loadPoolChoice, savePoolChoice,
+  choosePool, pickerFor, withFavs, loadPoolChoice, savePoolChoice,
 } from '../lib/quiz.js'
 import { historyKey, flagUrl } from '../lib/world.js'
 import { Backdrop } from '../components/QuizParts.jsx'
@@ -135,7 +135,7 @@ export default function Quiz() {
   if (open === 'logo') return <FaceGame pool={logos} dir="logos" storeKey={LOGO_HISTORY_KEY} kind="logo" onExit={back} />
   if (open === 'song') {
     const c = choice || { group: 'mix', era: 'all' }
-    return <FaceGame pool={choosePool(songs, c)} storeKey={SONG_HISTORY_KEY} kind="song" pick={pickerFor(c.group)} seconds={SONG_SECONDS} onExit={back} />
+    return <FaceGame pool={choosePool(songs, c)} storeKey={SONG_HISTORY_KEY} kind="song" pick={withFavs(pickerFor(c.group))} seconds={SONG_SECONDS} onExit={back} />
   }
   if (open === 'movie') return <FaceGame pool={movies} storeKey={MOVIE_HISTORY_KEY} kind="movie" onExit={back} />
   if (open === 'capital' || open === 'flag') return <WorldQuiz kind={open} onExit={back} />
