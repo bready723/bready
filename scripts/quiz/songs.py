@@ -119,10 +119,18 @@ KOREAN_ARTISTS = {'ALLDAY PROJECT', 'MEOVV'}
 # Western acts the Korean store writes in Hangul (루이 암스트롱, 프랭크 시나트라 …) are not Korean songs
 NOT_KOREAN = {'Lady Gaga', 'Leona Lewis', 'Sting', 'Louis Armstrong', 'Barry Manilow', 'Andrea Bocelli', 'Idina Menzel', 'Chuck Mangione',
               'Kenny Loggins', 'Tom Hanks', 'Frank Sinatra', 'back number', 'Robert Palmer', 'Vangelis', 'Eddie Murphy',
-              'Jon Bon Jovi', 'Tiffany'}
+              'Jon Bon Jovi', 'Tiffany', 'The Kid LAROI'}
 # country acts the store files under another genre
 COUNTRY_ARTISTS = {'Morgan Wallen', 'Zach Bryan', 'Ella Langley', 'Cody Johnson', 'Kane Brown x blackbear', 'Chris Stapleton', 'Dolly Parton', 'Whiskey Myers'}
 POP_OK = {'Taylor Swift'}  # country-pop crossover hits stay
+# Sara 2026-11-25: no 트로트. The store tags trot as 'Trot'/'트로트' but also files most trot
+# singers under K-Pop, so trot singers are listed by name too. Some 80s pop hits carry the
+# store's Trot tag (빙글빙글, 고추잠자리 …): those singers stay.
+TROT_ARTISTS = {'김연자', '태진아', '장윤정', '이찬원', '영탁', '나훈아', '홍진영', '설운도', '주현미', '박상철', '김수희',
+                '송대관', '박현빈', '진성', '송가인', '현철', '송가인', '김용임', '금잔디', '조항조', '오승근', '하춘화', '이미자', '남진'}
+TROT_SONGS = {('임영웅', '이제 나만 믿어요'), ('임영웅', '별빛 같은 나의 사랑아')}  # his ballads stay
+TROT_TAG_OK = {'나미', '이광조', '박혜성', '정수라', '조용필', '김흥국'}
+clean_t = lambda r: re.sub(r'\s*[\(\[].*$', '', r.get('trackName', '')).strip()
 first_artist = lambda r: r.get('artistName', '').split(' & ')[0].split(',')[0]
 songs, seen, by_key, dropped = [], set(), {}, {'explicit': 0, 'country': 0, 'no preview': 0, 'not found': 0, 'duplicate': 0}
 for sid in allid:
@@ -133,6 +141,12 @@ for sid in allid:
     # Sara 2026-11-21: no country music
     if ('Country' in (us or {}).get('primaryGenreName', '') + (kr or {}).get('primaryGenreName', '') or first_artist(base) in COUNTRY_ARTISTS) and first_artist(base) not in POP_OK:
         dropped['country'] += 1; continue
+    genres = (us or {}).get('primaryGenreName', '') + (kr or {}).get('primaryGenreName', '')
+    kname = lambda r: (r or {}).get('artistName', '').split(' & ')[0].split(',')[0]
+    if (kname(kr) in TROT_ARTISTS or kname(us) in TROT_ARTISTS
+            or any((kname(r), clean_t(r)) in TROT_SONGS for r in (us, kr) if r)
+            or (('Trot' in genres or '트로트' in genres) and not ({kname(us), kname(kr)} & TROT_TAG_OK))):
+        dropped['trot'] = dropped.get('trot', 0) + 1; continue
     pv = (us or {}).get('previewUrl') or (kr or {}).get('previewUrl')
     if not pv: dropped['no preview'] += 1; continue
     korean = (sid in krset or base.get('artistId') in kr_artists or 'K-Pop' in ((us or {}).get('primaryGenreName', ''), (kr or {}).get('primaryGenreName', ''))
